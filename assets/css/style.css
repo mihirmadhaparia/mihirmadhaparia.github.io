@@ -101,3 +101,13 @@ footer {
     color: white;
     margin-top: 20px;
 }
+
+/* Smooth Page Transitions */
+body {
+    opacity: 0;
+    transition: opacity 0.5s ease-in-out;
+}
+
+body.loaded {
+    opacity: 1;
+}
