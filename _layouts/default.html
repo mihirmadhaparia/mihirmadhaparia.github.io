@@ -22,14 +22,16 @@
         </div>
     </header>
 
-    <main class="container">
-        {% if page.url == "/" %}
-            <div class="homepage-img">
-                <img src="{{ '/assets/images/HeadshotPortrait.jpg' | relative_url }}" alt="Mihir Madhaparia">
-            </div>
-        {% endif %}
-        {{ content }}
-    </main>
+    <div class="homepage-container">
+        <div class="homepage-img">
+            <img src="{{ site.baseurl }}/assets/images/HeadshotPortrait.jpg" alt="Mihir Madhaparia">
+        </div>
+        <div class="homepage-text">
+            <h1>Mihir Madhaparia</h1>
+            <p>Welcome to my personal website! I am a dedicated engineer...</p>
+        </div>
+    </div>
+
 
     <footer>
         <p>&copy; {{ site.time | date: '%Y' }} {{ site.title }}</p>
