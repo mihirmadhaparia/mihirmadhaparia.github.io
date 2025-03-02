@@ -49,7 +49,7 @@ nav {
 
 /* Navigation Links */
 nav a {
-    color: #FFD700; /* Bright Gold */
+    color: #79c478; /* Bright Gold */
     text-decoration: none;
     padding: 15px 20px;
     display: inline-block;
@@ -82,7 +82,7 @@ nav a:hover::after {
 
 /* Buttons */
 button {
-    background: #FFD700; /* Gold */
+    background: #79c478; /* Gold */
     color: #0A192F; /* Navy Blue */
     padding: 10px 20px;
     border: none;
@@ -93,7 +93,7 @@ button {
 }
 
 button:hover {
-    background: #FFC107; /* Slightly Brighter Gold */
+    background: #79c478; /* Slightly Brighter Gold */
 }
 
 /* Sections */
@@ -113,12 +113,11 @@ button:hover {
 
 /* Links */
 a {
-    color: #FFD700; /* Gold */
+    color: #79c478; /* Gold */
 }
 
 a:hover {
-    color: #FFEA70; /* Lighter Gold */
-    text-decoration: underline;
+    color: #79c478; /* Lighter Gold */
 }
 
 /* Footer */
