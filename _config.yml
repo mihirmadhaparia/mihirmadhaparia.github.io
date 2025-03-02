@@ -1,6 +1,6 @@
-title: Mihir Madhaparia
+title: "Mihir Madhaparia"
 logo: /assets/images/HeadshotPortrait_1.jpg
-description: text
+description: "Personal website showcasing my education, work experience, and research."
 theme: jekyll-theme-cayman
 baseurl: ""  # Leave this empty unless using a subdirectory
 url: "https://mihirmadhaparia.github.io"  # Your GitHub Pages URL
@@ -9,10 +9,12 @@ url: "https://mihirmadhaparia.github.io"  # Your GitHub Pages URL
 nav_links:
   - title: "Home"
     url: "/"
-  - title: "Projects"
-    url: "/projects"
-  - title: "About"
-    url: "/about"
+  - title: "Education"
+    url: "/education"
+  - title: "Work Experience"
+    url: "/work-experience"
+  - title: "Contact"
+    url: "/contact"
 
 # Plugins (optional)
 plugins:
