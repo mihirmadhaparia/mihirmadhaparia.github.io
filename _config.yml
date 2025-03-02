@@ -5,19 +5,6 @@ theme: jekyll-theme-cayman
 baseurl: "/"  # Leave this empty unless using a subdirectory
 url: "mihirmadhaparia.github.io"  # Your GitHub Pages URL
 
-# Navigation links
-nav_links:
-  - title: "Home"
-    url: "/"
-  - title: "Education"
-    url: "/education"
-  - title: "Work Experience"
-    url: "/work-experience"
-  - title: "Projects"
-    url: "/projects"
-  - title: "Contact"
-    url: "/contact"
-
 # Plugins (optional)
 plugins:
   - jekyll-seo-tag  # For SEO enhancements
