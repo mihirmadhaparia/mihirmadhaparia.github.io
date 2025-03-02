@@ -81,28 +81,30 @@ body {
     border-radius: 10px;
 }
 
-/* Homepage Image - Rectangular, Left Aligned, and Properly Sized */
+/* Homepage Container */
 .homepage-container {
     display: flex;
     align-items: center;
     gap: 20px;
-    max-width: 800px; /* Ensures content doesn't stretch too wide */
-    margin: auto; /* Centers content */
+    margin: 0 auto;
+    max-width: 1000px;  /* Keeps the container centered with a max width */
+    padding: 20px;
 }
 
-.homepage-img {
-    width: 150px;  /* Adjust width */
-    height: auto;  /* Maintain aspect ratio */
-    max-height: 220px; /* Limit height */
-    border-radius: 10px;
-    object-fit: cover;
+/* Homepage Image */
+.homepage-img img {
+    width: 120px;  /* Image width */
+    height: 180px; /* Image height for rectangular portrait */
+    object-fit: cover;  /* Ensures image is cropped if necessary */
+    border-radius: 8px;
     box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
 }
 
+/* Homepage Text */
 .homepage-text {
     flex: 1;
+    max-width: 700px;  /* Ensures text stays within a readable width */
 }
-
 
 /* Footer */
 footer {
