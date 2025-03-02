@@ -1,6 +1,6 @@
 ---
-title: Work Experience
 layout: default
+title: "Work Experience"
 ---
 
 # Work Experience 💼
