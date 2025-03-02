@@ -1,6 +1,6 @@
 ---
-title: Contact
 layout: default
+title: "Contact"
 ---
 
 # Contact 📬
