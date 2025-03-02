@@ -74,16 +74,19 @@ body {
     border-radius: 10px;
 }
 
-/* Homepage Image - Rectangular & Left Aligned */
+/* Homepage Image - Rectangular, Left Aligned, and Properly Sized */
 .homepage-container {
     display: flex;
     align-items: center;
     gap: 20px;
+    max-width: 800px; /* Ensures content doesn't stretch too wide */
+    margin: auto; /* Centers content */
 }
 
 .homepage-img {
-    width: 180px;  /* Adjust as needed */
-    height: 250px; /* Portrait aspect ratio */
+    width: 150px;  /* Adjust width */
+    height: auto;  /* Maintain aspect ratio */
+    max-height: 220px; /* Limit height */
     border-radius: 10px;
     object-fit: cover;
     box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
@@ -92,6 +95,7 @@ body {
 .homepage-text {
     flex: 1;
 }
+
 
 /* Footer */
 footer {
