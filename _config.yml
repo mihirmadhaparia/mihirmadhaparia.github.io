@@ -3,7 +3,7 @@ logo: /assets/images/"HeadshotPortrait.jpg"
 description: "Personal website showcasing my education, work experience, and research."
 theme: jekyll-theme-cayman
 baseurl: "/"  # Leave this empty unless using a subdirectory
-url: "https://www.mihirmadhaparia.com"  # Your GitHub Pages URL
+url: "mihirmadhaparia.github.io"  # Your GitHub Pages URL
 
 # Navigation links
 nav_links:
