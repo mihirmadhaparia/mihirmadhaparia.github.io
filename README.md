@@ -63,7 +63,7 @@ Born and raised in Kenya, I am a first-generation college student currently purs
 
 ## Contact Information
 - **Email:** madha020@umn.edu
-- **LinkedIn:** [linkedin.com/in/mihir-madhaparia](#)
-- **GitHub:** [github.com/mihir-madhaparia](#)
+- **LinkedIn:** [linkedin.com/in/mihirmadhaparia](https://www.linkedin.com/in/mihirmadhaparia/)
+- **GitHub:** [github.com/mihir-madhaparia](https://github.com/mihirmadhaparia)
 
 ---
