@@ -20,3 +20,82 @@ html {
     scroll-behavior: smooth;
     scroll-padding-top: 80px; /* Adjust this value based on your header height */
 }
+
+/* General Styles */
+body {
+    background-color: #0A192F; /* Deep Navy Blue */
+    color: #E5E5E5; /* Light Gray for readability */
+    font-family: 'Arial', sans-serif;
+}
+
+/* Navigation Bar */
+nav {
+    background: rgba(10, 25, 47, 0.9); /* Slightly Transparent Navy */
+    padding: 15px;
+    position: fixed;
+    width: 100%;
+    top: 0;
+    z-index: 1000;
+    transition: background 0.3s ease-in-out;
+}
+
+nav a {
+    color: #FFD700; /* Bright Gold */
+    text-decoration: none;
+    padding: 10px 15px;
+    transition: color 0.3s ease-in-out;
+}
+
+nav a:hover {
+    color: #FFEA70; /* Lighter Gold for hover effect */
+}
+
+/* Buttons */
+button {
+    background: #FFD700; /* Gold */
+    color: #0A192F; /* Navy Blue */
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: all 0.3s ease-in-out;
+}
+
+button:hover {
+    background: #FFC107; /* Slightly Brighter Gold */
+}
+
+/* Sections */
+.section {
+    padding: 50px;
+    margin-top: 20px;
+    border-radius: 10px;
+}
+
+/* Alternating Background for Sections */
+.section:nth-child(odd) {
+    background: #112240; /* Darker Navy */
+}
+.section:nth-child(even) {
+    background: #0A192F; /* Slightly Lighter Navy */
+}
+
+/* Links */
+a {
+    color: #FFD700; /* Gold */
+}
+
+a:hover {
+    color: #FFEA70; /* Lighter Gold */
+    text-decoration: underline;
+}
+
+/* Footer */
+footer {
+    background: #112240;
+    color: #E5E5E5;
+    text-align: center;
+    padding: 15px;
+    margin-top: 20px;
+}
