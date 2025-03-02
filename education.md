@@ -1,6 +1,6 @@
 ---
-title: Education
 layout: default
+title: "Education"
 ---
 
 # Education 🎓
