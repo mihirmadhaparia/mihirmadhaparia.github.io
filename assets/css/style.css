@@ -16,6 +16,13 @@
     margin: 20px auto;
 }
 
+/* Main content */
+.content {
+    padding: 80px 20px;
+    max-width: 800px;
+    margin: auto;
+}
+
 html {
     scroll-behavior: smooth;
     scroll-padding-top: 80px; /* Adjust this value based on your header height */
