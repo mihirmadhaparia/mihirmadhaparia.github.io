@@ -45,10 +45,8 @@ Born and raised in Kenya, I am a first-generation college student currently purs
 ### Engineers Without Borders - UMN (Malawi Project)  
 ![EWB team in Malawi in January, 2023](assets/images/ewbteamj23.jpg)
 
-<video controls width="600">
-  <source src="assets/videos/EAvideo1.mp4" type="video/mp4">
-  Your browser does not support the video tag.
-</video>
+<iframe src="https://drive.google.com/file/d/1RnbMXfTiYPPIkiVAcxxdpy5RfMIcrQ28/preview" 
+        width="640" height="360" allow="autoplay"></iframe>
 
 *This prototype utilizes thermal and massaging mechanisms to improve vein dilation for peripheral intravenous (PIV) access, particularly in pediatric and small-vein cases.*
 
