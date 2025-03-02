@@ -1,7 +1,7 @@
 title: Mihir Madhaparia
 logo: /assets/images/HeadshotPortrait_1.jpg
 description: text
-theme: jekyll-theme-cayman
+theme: jekyll-theme-minimal
 baseurl: ""  # Leave this empty unless using a subdirectory
 url: "https://mihirmadhaparia.github.io"  # Your GitHub Pages URL
 
