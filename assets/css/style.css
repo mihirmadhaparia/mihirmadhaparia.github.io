@@ -1,1 +1,17 @@
+/* Limit image size */
+.content img {
+    max-width: 80%; /* Adjust width to fit nicely */
+    height: auto; /* Maintain aspect ratio */
+    display: block;
+    margin: 20px auto; /* Center images */
+    border-radius: 10px; /* Optional: rounded corners */
+}
 
+/* Limit iframe (videos) size */
+.content iframe {
+    max-width: 80%;
+    height: auto;
+    aspect-ratio: 16/9; /* Keeps proper video ratio */
+    display: block;
+    margin: 20px auto;
+}
