@@ -1,6 +1,6 @@
-# Mihir Madhaparia
+# Mihir Madhaparia {#about}
 
-## About Me {#about}
+## About Me 
 I am a dedicated and innovative engineer with a passion for medical technology, bioprinting, and applied research. With a strong background in mechanical engineering, materials science, and biomedical device development, I strive to bridge the gap between technology and healthcare to improve patient outcomes. My work spans research, product development, and leadership in various engineering disciplines.
 
 Born and raised in Kenya, I am a first-generation college student currently pursuing my academic and professional journey in the United States. My experiences have shaped my commitment to innovation and problem-solving, particularly in the medical device industry.
