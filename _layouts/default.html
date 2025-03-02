@@ -7,22 +7,41 @@
     <link rel="stylesheet" href="{{ '/assets/css/style.css' | relative_url }}">
 </head>
 <body>
-    <header>
-        <nav>
-            <ul>
-                {% for link in site.nav_links %}
-                <li><a href="{{ link.url | relative_url }}">{{ link.title }}</a></li>
-                {% endfor %}
-            </ul>
-        </nav>
+    <header class="navbar">
+        <div class="nav-container">
+            <a href="/" class="logo">
+                <img id="nav-image" src="{{ '/assets/images/HeadshotPortrait.jpg' | relative_url }}" alt="Mihir Madhaparia">
+            </a>
+            <nav>
+                <ul>
+                    {% for link in site.nav_links %}
+                    <li><a href="{{ link.url | relative_url }}">{{ link.title }}</a></li>
+                    {% endfor %}
+                </ul>
+            </nav>
+        </div>
     </header>
 
     <main class="container">
+        {% if page.url == "/" %}
+            <div class="homepage-img">
+                <img src="{{ '/assets/images/HeadshotPortrait.jpg' | relative_url }}" alt="Mihir Madhaparia">
+            </div>
+        {% endif %}
         {{ content }}
     </main>
 
     <footer>
         <p>&copy; {{ site.time | date: '%Y' }} {{ site.title }}</p>
     </footer>
+
+    <script>
+        // Hide navbar image on homepage
+        document.addEventListener("DOMContentLoaded", function() {
+            if (window.location.pathname === "/") {
+                document.getElementById("nav-image").style.display = "none";
+            }
+        });
+    </script>
 </body>
 </html>
