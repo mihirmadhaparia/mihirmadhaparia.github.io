@@ -2,3 +2,19 @@ title: Mihir Madhaparia
 # logo: /assets/images/HeadshotPortrait_1.jpg
 description: text
 theme: jekyll-theme-cayman
+baseurl: ""  # Leave this empty unless using a subdirectory
+url: "https://mihirmadhaparia.github.io"  # Your GitHub Pages URL
+
+# Navigation links
+nav_links:
+  - title: "Home"
+    url: "/"
+  - title: "Projects"
+    url: "/projects"
+  - title: "About"
+    url: "/about"
+
+# Plugins (optional)
+plugins:
+  - jekyll-seo-tag  # For SEO enhancements
+  - jekyll-sitemap  # To generate a sitemap.xml
