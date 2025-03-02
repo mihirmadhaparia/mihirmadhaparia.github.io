@@ -13,6 +13,8 @@ nav_links:
     url: "/education"
   - title: "Work Experience"
     url: "/work-experience"
+  - title: "Projects"
+    url: "/projects"
   - title: "Contact"
     url: "/contact"
 
