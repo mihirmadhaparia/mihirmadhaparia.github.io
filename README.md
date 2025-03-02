@@ -51,7 +51,7 @@ Born and raised in Kenya, I am a first-generation college student currently purs
 *This prototype utilizes thermal and massaging mechanisms to improve vein dilation for peripheral intravenous (PIV) access, particularly in pediatric and small-vein cases.*
 
 ### Bioprinting Scaffold Research  
-![3D Printed Scaffold](assets/images/scaffold.jpg)
+![3D Printed Scaffold](assets/images/scaffold.HEIC)
 
 *Demonstration of bioprinting scaffolds optimized for neural and tissue regeneration.*
 
