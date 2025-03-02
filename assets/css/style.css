@@ -81,23 +81,31 @@ body {
     border-radius: 10px;
 }
 
-/* Homepage Container */
+/* Homepage Layout */
 .homepage-container {
     display: flex;
     align-items: center;
+    justify-content: center;
     gap: 20px;
+    max-width: 1000px;
     margin: 0 auto;
-    max-width: 1000px;  /* Keeps the container centered with a max width */
-    padding: 20px;
+    padding: 40px 20px;
 }
 
-/* Homepage Image */
-.homepage-img img {
-    width: 120px;  /* Image width */
-    height: 180px; /* Image height for rectangular portrait */
-    object-fit: cover;  /* Ensures image is cropped if necessary */
-    border-radius: 8px;
-    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
+/* Image Container - Limit its size */
+.homepage-img-container {
+    width: 150px;  /* Fixed width */
+    height: 220px; /* Fixed height for a rectangular portrait */
+    overflow: hidden;  /* Prevent image from overflowing */
+    border-radius: 8px;  /* Optional: rounded corners */
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);  /* Optional: image shadow */
+}
+
+/* Image Styles */
+.homepage-img {
+    width: 100%;  /* Make image fill container width */
+    height: 100%; /* Ensure it fills container height */
+    object-fit: cover; /* Maintain aspect ratio and crop if needed */
 }
 
 /* Homepage Text */
