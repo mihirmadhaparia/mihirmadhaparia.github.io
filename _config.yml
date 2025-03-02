@@ -2,8 +2,8 @@ title: "Mihir Madhaparia"
 logo: /assets/images/"HeadshotPortrait.jpg"
 description: "Personal website showcasing my education, work experience, and research."
 theme: jekyll-theme-cayman
-baseurl: "mihirmadhaparia.github.io"  # Leave this empty unless using a subdirectory
-url: "https://mihirmadhaparia.github.io"  # Your GitHub Pages URL
+baseurl: "/"  # Leave this empty unless using a subdirectory
+url: "https://mihirmadhaparia.com"  # Your GitHub Pages URL
 
 # Navigation links
 nav_links:
