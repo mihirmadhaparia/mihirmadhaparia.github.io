@@ -207,25 +207,36 @@ footer {
     height: 100%;
     overflow: hidden;
     display: flex;
+    flex-direction: column;
     align-items: center;
     justify-content: center;
 }
 
-/* Gallery Track for Smooth Scrolling */
+/* Gallery Track for Vertical Scrolling */
 .gallery-track {
     display: flex;
-    flex-direction: row;
-    width: max-content;
+    flex-direction: column;
+    width: 100%;
+    height: 100%;
+    overflow-y: hidden;
     gap: 10px;
+    position: relative;
 }
 
 /* Gallery Items */
 .gallery-item {
-    max-width: 100%;
-    max-height: 80%;
+    width: 100%;
+    max-height: 200px;
     object-fit: contain;
     cursor: pointer;
     transition: transform 0.3s ease-in-out;
+}
+
+.gallery-item img,
+.gallery-item iframe {
+    width: 100%;
+    height: auto;
+    border-radius: 8px;
 }
 
 .gallery-item:hover {
