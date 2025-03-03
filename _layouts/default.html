@@ -44,6 +44,75 @@
             }
         });
     </script>
+
+    <!-- Gallery Panel (Right Side) -->
+    <aside class="gallery-panel">
+        <div class="gallery-container">
+            <div class="gallery-items">
+                <img src="{{ '/assets/images/ewbteamj23.jpg' | relative_url }}" alt="EWB team in Malawi, January 2023" class="gallery-item" data-desc="Fieldwork in Malawi implementing community-driven water sanitation solutions.">
+                <img src="{{ '/assets/images/scaffold.HEIC' | relative_url }}" alt="3D Printed Scaffold" class="gallery-item" data-desc="Demonstration of bioprinting scaffolds optimized for neural regeneration.">
+                <iframe src="https://drive.google.com/file/d/1RnbMXfTiYPPIkiVAcxxdpy5RfMIcrQ28/preview" class="gallery-item" data-desc="Thermal massaging tourniquet prototype for vein dilation." allow="autoplay"></iframe>
+            </div>
+        </div>
+    </aside>
+
+    <!-- Fullscreen Gallery Modal -->
+    <div id="gallery-modal" class="modal">
+        <span class="close">&times;</span>
+        <div class="modal-content">
+            <img id="modal-image" class="modal-media">
+            <iframe id="modal-video" class="modal-media" allow="autoplay"></iframe>
+            <p id="modal-desc"></p>
+        </div>
+    </div>
+
+    <!-- JavaScript for Gallery Functionality -->
+    <script>
+        let currentIndex = 0;
+        const items = document.querySelectorAll('.gallery-item');
+        const modal = document.getElementById("gallery-modal");
+        const modalImg = document.getElementById("modal-image");
+        const modalVideo = document.getElementById("modal-video");
+        const modalDesc = document.getElementById("modal-desc");
+        const closeBtn = document.querySelector(".close");
+
+        function showNextItem() {
+            items.forEach(item => item.style.display = "none");
+            items[currentIndex].style.display = "block";
+            currentIndex = (currentIndex + 1) % items.length;
+        }
+        setInterval(showNextItem, 4000); // Change image every 4 seconds
+        showNextItem();
+
+        items.forEach(item => {
+            item.addEventListener("click", function() {
+                modal.style.display = "block";
+                modalDesc.innerText = item.getAttribute("data-desc");
+
+                if (item.tagName === "IMG") {
+                    modalImg.style.display = "block";
+                    modalVideo.style.display = "none";
+                    modalImg.src = item.src;
+                } else if (item.tagName === "IFRAME") {
+                    modalVideo.style.display = "block";
+                    modalImg.style.display = "none";
+                    modalVideo.src = item.src;
+                }
+            });
+        });
+
+        closeBtn.addEventListener("click", function() {
+            modal.style.display = "none";
+            modalVideo.src = ""; // Stop video playback
+        });
+
+        window.addEventListener("click", function(event) {
+            if (event.target === modal) {
+                modal.style.display = "none";
+                modalVideo.src = "";
+            }
+        });
+    </script>
     
 </body>
 </html>
