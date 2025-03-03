@@ -26,7 +26,7 @@
 
 html {
     scroll-behavior: smooth;
-    scroll-padding-top: 90px; /* Adjust this value based on your header height */
+    scroll-padding-top: 95px; /* Adjust this value based on your header height */
 }
 
 /* General Styles */
@@ -105,7 +105,7 @@ button {
 }
 
 button:hover {
-    background: #68a17a; /* Slightly Brighter Sage Green */
+    background: #232b23; /* Slightly Brighter Sage Green */
 }
 
 /* Sections */
