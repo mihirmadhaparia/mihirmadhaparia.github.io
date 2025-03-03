@@ -41,20 +41,3 @@ As a **Research Assistant**, I am pioneering **3D bioprinting techniques** for *
 As the **President** of Engineers Without Borders (**2024 - Present**), I oversee **project planning, execution, and fundraising** for **three major engineering initiatives**. Working with **Rotary Clubs and international NGOs**, I secured over **$340,000 in funding** for water and sanitation projects in **East Africa**. Previously, as **Project Lead for the East Africa Project (2022 - 2024)**, I led efforts to implement **sustainable water access solutions** for rural communities, drafting contractual agreements with local partners and managing international collaborations.
 
 ---
-
-## Gallery {#gallery}
-
-### **Engineers Without Borders - UMN (Malawi Project)**  
-![EWB team in Malawi in January, 2023](assets/images/ewbteamj23.jpg)
-
-<iframe src="https://drive.google.com/file/d/1RnbMXfTiYPPIkiVAcxxdpy5RfMIcrQ28/preview" 
-        width="640" height="360" allow="autoplay"></iframe>
-
-*Fieldwork in Malawi implementing community-driven water sanitation solutions.*
-
-### **Bioprinting Scaffold Research**  
-![3D Printed Scaffold](assets/images/scaffold.jpg)
-
-*Demonstration of bioprinting scaffolds optimized for **neural regeneration**.*
-
----
