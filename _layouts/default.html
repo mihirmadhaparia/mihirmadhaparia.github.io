@@ -23,23 +23,6 @@
         {{ content }}
     </div>
 
-    <script>
-        let lastScrollTop = 0;
-        const navbar = document.querySelector("nav");
-    
-        window.addEventListener("scroll", function () {
-            let scrollTop = window.scrollY || document.documentElement.scrollTop;
-            
-            if (scrollTop > lastScrollTop) {
-                navbar.classList.add("hidden-nav"); // Hide on scroll down
-            } else {
-                navbar.classList.remove("hidden-nav"); // Show on scroll up
-            }
-            
-            lastScrollTop = scrollTop;
-        });
-    </script>
-
     <!-- Navigation Bar shrink scroller -->
     <script>
         window.addEventListener("scroll", function() {
