@@ -1,15 +1,12 @@
 # Mihir Madhaparia {#about}
 
-<div class="section" id="about">
 ## About Me 
 I am a dedicated and innovative engineer with a passion for medical technology, bioprinting, and applied research. With a strong background in mechanical engineering, materials science, and biomedical device development, I strive to bridge the gap between technology and healthcare to improve patient outcomes. My work spans research, product development, and leadership in various engineering disciplines.
 
 Born and raised in Kenya, I am a first-generation college student currently pursuing my academic and professional journey in the United States. My experiences have shaped my commitment to innovation and problem-solving, particularly in the medical device industry.
-</div>
 
 ---
 
-<div class="section" id="work">
 ## Work Experience {#work}
 ### SwiftZip LLC (2024 - Present)
 - Stakeholder and contributor to the commercialization of an innovative medical device developed at the Bakken Medical Device Center.
@@ -17,20 +14,16 @@ Born and raised in Kenya, I am a first-generation college student currently purs
 ### Hennepin County Medical Center
 - Conducted clinical research focused on emergency medicine and patient care optimization.
 - Assisted in the development of new protocols aimed at improving patient outcomes and workflow efficiencies.
-</div>
 
 ---
 
-<div class="section" id="education">
 ## Education {#education}
 **University of Minnesota**
 - Bachelor of Science in Mechanical Engineering (Expected Graduation: 2025)
 - Relevant coursework: Biomaterials, Biomechanics, Finite Element Analysis, Robotics, and Computational Modeling
-</div>
 
 ---
 
-<div class="section" id="projects">
 ## Projects {#projects}
 ### Research Experience  
 
@@ -45,12 +38,10 @@ Born and raised in Kenya, I am a first-generation college student currently purs
 - Conducted tensile testing on 3D-printed materials and developed in vivo simulation test methods.
 - Researched custom polymer compositions to enhance injection molding performance and dimensional tolerancing.
 - Contributed to the authorship of Consumer & Product Requirement Documentation for market realization.
-</div>
 
 ---
 
 
-<div class="section" id="gallery">
 ## Gallery {#gallery}
 ### Engineers Without Borders - UMN (Malawi Project)  
 ![EWB team in Malawi in January, 2023](assets/images/ewbteamj23.jpg)
@@ -64,13 +55,10 @@ Born and raised in Kenya, I am a first-generation college student currently purs
 ![3D Printed Scaffold](assets/images/scaffold.HEIC)
 
 *Demonstration of bioprinting scaffolds optimized for neural and tissue regeneration.*
-</div>
 
 ---
 
-<div class="section" id="contact">
 ## Contact {#contact}
 - **Email:** mihirmadhaparia@gmail.com  
 - **LinkedIn:** [linkedin.com/in/mihirmadhaparia](https://www.linkedin.com/in/mihirmadhaparia/)  
 - **GitHub:** [github.com/mihir-madhaparia](https://github.com/mihirmadhaparia)  
-</div>
