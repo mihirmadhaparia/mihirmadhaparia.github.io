@@ -26,7 +26,7 @@
 
 html {
     scroll-behavior: smooth;
-    scroll-padding-top: 80px; /* Adjust this value based on your header height */
+    scroll-padding-top: 90px; /* Adjust this value based on your header height */
 }
 
 /* General Styles */
