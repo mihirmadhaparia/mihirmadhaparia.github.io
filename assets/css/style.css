@@ -138,7 +138,7 @@ footer {
     display: flex;
     flex-direction: column;
     align-items: center;
-    padding: 20px;
+    padding: 100px 20px 20px; /* Increased top padding to push content lower */
     box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);
 }
 
@@ -161,7 +161,7 @@ footer {
 /* Contact Info */
 .contact-info {
     text-align: center;
-    margin-top: 150px;
+    margin-top: 10px;
 }
 
 .contact-info p {
@@ -180,6 +180,6 @@ footer {
 
 /* Adjust Main Content to Avoid Overlapping Sidebar */
 .content {
-    margin-left: 300px; /* Push content to the right */
-    padding: 40px;
+    margin-left: 270px; /* Push content to the right */
+    padding: 20px;
 }
