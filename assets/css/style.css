@@ -117,7 +117,7 @@ button:hover {
 
 /* Alternating Background for Sections */
 .section:nth-child(odd) {
-    background: #e8ded5; /* Off-White */
+    background: #f5eae1; /* Off-White */
 }
 .section:nth-child(even) {
     background: #ddedd8; /* Light Sage Green */
