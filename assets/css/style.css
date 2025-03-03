@@ -108,21 +108,6 @@ button:hover {
     background: #8dba9f; /* Slightly Brighter Sage Green */
 }
 
-/* Sections */
-.section {
-    padding: 60px 20px;
-    margin-top: 20px;
-    border-radius: 10px;
-}
-
-/* Alternating Background for Sections */
-.section:nth-child(odd) {
-    background: #f5eae1; /* Off-White */
-}
-.section:nth-child(even) {
-    background: #ddedd8; /* Light Sage Green */
-}
-
 /* Links */
 a {
     color: #4B5D4B; /* Soft Sage Green */
