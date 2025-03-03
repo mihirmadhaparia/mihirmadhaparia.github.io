@@ -67,7 +67,7 @@ nav a {
 }
 
 nav.shrink a {
-    font-size: 16px; /* Shrink text when navbar minimizes */
+    font-size: 15px; /* Shrink text when navbar minimizes */
 }
 
 /* Gradient Underline Effect */
@@ -77,9 +77,9 @@ nav a::after {
     left: 0;
     bottom: -4px;
     width: 0;
-    height: 4px;
+    height: 6px;
     background: linear-gradient(90deg, red, orange);
-    transition: width right 0.3s ease-in-out, left 0.3s ease-in-out;
+    transition: width 0.3s ease-in-out, left 0.3s ease-in-out;
 }
 
 nav a:hover::after {
@@ -95,7 +95,7 @@ nav a:not(:hover)::after {
 /* Buttons */
 button {
     background: #688774; /* Light Sage Green */
-    color: #e8ded5; /* Dark Sage Green */
+    color: #e8ded5;
     padding: 10px 20px;
     border: none;
     border-radius: 5px;
@@ -105,7 +105,7 @@ button {
 }
 
 button:hover {
-    background: #232b23; /* Slightly Brighter Sage Green */
+    background: #8dba9f; /* Slightly Brighter Sage Green */
 }
 
 /* Sections */
