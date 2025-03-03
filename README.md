@@ -58,8 +58,3 @@ As the **President** of Engineers Without Borders (**2024 - Present**), I overse
 *Demonstration of bioprinting scaffolds optimized for **neural regeneration**.*
 
 ---
-
-## Contact {#contact}
-- **Email:** mihirmadhaparia@gmail.com  
-- **LinkedIn:** [linkedin.com/in/mihirmadhaparia](https://www.linkedin.com/in/mihirmadhaparia/)  
-- **GitHub:** [github.com/mihir-madhaparia](https://github.com/mihirmadhaparia)
