@@ -44,13 +44,19 @@
         });
     </script>
 
-    <!-- Gallery Panel (Right Side) -->
+    <!-- Right-Side Gallery Panel -->
     <aside class="gallery-panel">
         <div class="gallery-container">
             <div class="gallery-track">
-                <img src="{{ '/assets/images/ewbteamj23.jpg' | relative_url }}" alt="EWB team in Malawi, January 2023" class="gallery-item" data-desc="Fieldwork in Malawi implementing community-driven water sanitation solutions.">
-                <img src="{{ '/assets/images/scaffold.HEIC' | relative_url }}" alt="3D Printed Scaffold" class="gallery-item" data-desc="Demonstration of bioprinting scaffolds optimized for neural regeneration.">
-                <iframe src="https://drive.google.com/file/d/1RnbMXfTiYPPIkiVAcxxdpy5RfMIcrQ28/preview" class="gallery-item" data-desc="Thermal massaging tourniquet prototype for vein dilation." allow="autoplay"></iframe>
+                <div class="gallery-item" data-desc="Fieldwork in Malawi implementing community-driven water sanitation solutions.">
+                    <img src="{{ '/assets/images/ewbteamj23.jpg' | relative_url }}" alt="EWB team in Malawi, January 2023">
+                </div>
+                <div class="gallery-item" data-desc="Demonstration of bioprinting scaffolds optimized for neural regeneration.">
+                    <img src="{{ '/assets/images/scaffold.HEIC' | relative_url }}" alt="3D Printed Scaffold">
+                </div>
+                <div class="gallery-item" data-desc="Thermal massaging tourniquet prototype for vein dilation.">
+                    <iframe src="https://drive.google.com/file/d/1RnbMXfTiYPPIkiVAcxxdpy5RfMIcrQ28/preview" allow="autoplay"></iframe>
+                </div>
             </div>
         </div>
     </aside>
@@ -65,7 +71,7 @@
         </div>
     </div>
 
-    <!-- JavaScript for Gallery Functionality -->
+    <!-- JavaScript for Vertical Scrolling Gallery -->
     <script>
         document.addEventListener("DOMContentLoaded", function () {
             const modal = document.getElementById("gallery-modal");
@@ -76,23 +82,19 @@
             const galleryTrack = document.querySelector(".gallery-track");
             const galleryItems = document.querySelectorAll(".gallery-item");
 
-            let currentIndex = 0;
             let autoScroll;
+            let scrollSpeed = 1; // Speed of upward scrolling
 
-            // Prevent modal from opening on page load
-            modal.style.display = "none";
-
-            function updateCarousel() {
+            function startScrolling() {
                 if (galleryItems.length > 2) {
-                    let scrollAmount = galleryItems[currentIndex].offsetWidth + 10;
-                    galleryTrack.scrollBy({ left: scrollAmount, behavior: "smooth" });
-                    currentIndex = (currentIndex + 1) % galleryItems.length;
-                }
-            }
+                    autoScroll = setInterval(() => {
+                        galleryTrack.scrollBy({ top: scrollSpeed, behavior: "smooth" });
 
-            function startAutoScroll() {
-                if (galleryItems.length > 2) {
-                    autoScroll = setInterval(updateCarousel, 4000); // Scroll every 4 seconds
+                        // Reset scroll when reaching the bottom
+                        if (galleryTrack.scrollTop + galleryTrack.clientHeight >= galleryTrack.scrollHeight) {
+                            galleryTrack.scrollTo({ top: 0, behavior: "smooth" });
+                        }
+                    }, 50);
                 }
             }
 
@@ -101,14 +103,16 @@
                     modal.style.display = "block";
                     modalDesc.innerText = item.getAttribute("data-desc");
 
-                    if (item.tagName === "IMG") {
+                    let media = item.querySelector("img") || item.querySelector("iframe");
+
+                    if (media.tagName === "IMG") {
                         modalImg.style.display = "block";
                         modalVideo.style.display = "none";
-                        modalImg.src = item.src;
-                    } else if (item.tagName === "IFRAME") {
+                        modalImg.src = media.src;
+                    } else if (media.tagName === "IFRAME") {
                         modalVideo.style.display = "block";
                         modalImg.style.display = "none";
-                        modalVideo.src = item.src;
+                        modalVideo.src = media.src;
                     }
                 });
             });
@@ -125,7 +129,7 @@
                 }
             });
 
-            startAutoScroll();
+            startScrolling();
         });
     </script>
     
