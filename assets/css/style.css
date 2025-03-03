@@ -180,15 +180,6 @@ footer {
 
 /* Adjust Main Content to Avoid Overlapping Sidebar */
 .content {
-    margin-left: 300px; /* Push content further to the right */
+    margin-left: 270px; /* Push content to the right */
     padding: 20px;
-}
-
-/* Navigation Bar Title */
-.nav-title {
-    font-size: 20px;
-    font-weight: bold;
-    color: #F1EDE2; /* White-Beige Font */
-    margin-left: 20px;
-    display: inline-block;
 }
