@@ -125,3 +125,61 @@ footer {
     padding: 15px;
     margin-top: 20px;
 }
+
+/* Sidebar for Profile & Contact */
+.sidebar {
+    position: fixed;
+    left: 0;
+    top: 0;
+    width: 250px;
+    height: 100vh;
+    background-color: #2F3E2F; /* Dark Sage Green */
+    color: #F1EDE2; /* White-Beige Font */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 20px;
+    box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);
+}
+
+/* Profile Picture */
+.profile-pic {
+    width: 150px;
+    height: 150px;
+    border-radius: 50%;
+    object-fit: cover;
+    margin-bottom: 15px;
+}
+
+/* Name Styling */
+.name {
+    font-size: 22px;
+    font-weight: bold;
+    text-align: center;
+}
+
+/* Contact Info */
+.contact-info {
+    text-align: center;
+    margin-top: 10px;
+}
+
+.contact-info p {
+    font-size: 14px;
+    margin: 5px 0;
+}
+
+.contact-info a {
+    color: #A8D5BA; /* Light Sage Green */
+    text-decoration: none;
+}
+
+.contact-info a:hover {
+    text-decoration: underline;
+}
+
+/* Adjust Main Content to Avoid Overlapping Sidebar */
+.content {
+    margin-left: 270px; /* Push content to the right */
+    padding: 20px;
+}
