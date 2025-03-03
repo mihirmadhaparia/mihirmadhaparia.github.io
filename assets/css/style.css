@@ -75,11 +75,11 @@ nav a::after {
     content: "";
     position: absolute;
     left: 0;
-    bottom: -5px;
+    bottom: -4px;
     width: 0;
-    height: 3px;
-    background: linear-gradient(90deg, red, blue);
-    transition: width 0.3s ease-in-out, left 0.3s ease-in-out;
+    height: 4px;
+    background: linear-gradient(90deg, red, orange);
+    transition: width right 0.3s ease-in-out, left 0.3s ease-in-out;
 }
 
 nav a:hover::after {
