@@ -161,7 +161,7 @@ footer {
 /* Contact Info */
 .contact-info {
     text-align: center;
-    margin-top: 10px;
+    margin-top: 150px;
 }
 
 .contact-info p {
@@ -180,6 +180,6 @@ footer {
 
 /* Adjust Main Content to Avoid Overlapping Sidebar */
 .content {
-    margin-left: 270px; /* Push content to the right */
-    padding: 20px;
+    margin-left: 300px; /* Push content to the right */
+    padding: 40px;
 }
