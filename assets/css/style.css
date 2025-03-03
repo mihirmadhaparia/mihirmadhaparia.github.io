@@ -41,34 +41,44 @@ nav {
     position: fixed;
     top: 0;
     width: 100%;
-    background: #4B5D4B; /* Sage Green background */
-    padding: 15px 0;
+    background: #2F3E2F; /* Dark Sage Green background */
+    padding: 20px 0; /* Larger padding at the top */
     text-align: center;
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* Subtle shadow for elevation */
-    transition: top 0.3s ease-in-out;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    transition: all 0.3s ease-in-out;
     z-index: 1000;
+}
+
+/* Minimized Navigation on Scroll */
+nav.shrink {
+    padding: 8px 0; /* Reduce padding to make it smaller */
+    background: #2F3E2F; /* Keep it opaque */
 }
 
 /* Navigation Links */
 nav a {
-    color: #232b23; /* Dark Sage Green */
+    color: #F1EDE2; /* White-Beige font */
     text-decoration: none;
     padding: 15px 20px;
     display: inline-block;
     font-size: 20px;
     position: relative;
-    transition: color 0.3s ease-in-out;
+    transition: color 0.3s ease-in-out, font-size 0.3s ease-in-out;
+}
+
+nav.shrink a {
+    font-size: 16px; /* Shrink text when navbar minimizes */
 }
 
 /* Gradient Underline Effect */
 nav a::after {
     content: "";
     position: absolute;
-    left: 50%;
+    left: 0;
     bottom: -5px;
     width: 0;
     height: 3px;
-    background: linear-gradient(90deg, #88b399, #232b23); /* Soft gradient from sage to darker green */
+    background: linear-gradient(90deg, red, blue);
     transition: width 0.3s ease-in-out, left 0.3s ease-in-out;
 }
 
@@ -77,9 +87,9 @@ nav a:hover::after {
     left: 0;
 }
 
-/* Hide Navigation on Scroll Down, Show on Scroll Up */
-.hidden-nav {
-    top: -80px; /* Move navbar out of view */
+nav a:not(:hover)::after {
+    width: 0;
+    left: 100%;
 }
 
 /* Buttons */
@@ -119,7 +129,7 @@ a {
 }
 
 a:hover {
-    color: #232b23; /* dark Sage Green on hover */
+    color: #232b23; /* Dark Sage Green on hover */
 }
 
 /* Footer */
