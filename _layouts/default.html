@@ -40,6 +40,18 @@
         });
     </script>
 
+    <!-- Navigation Bar shrink scroller -->
+    <script>
+        window.addEventListener("scroll", function() {
+            let nav = document.querySelector("nav");
+            if (window.scrollY === 0) {
+                nav.classList.remove("shrink"); // Full size when at the top
+            } else {
+                nav.classList.add("shrink"); // Minimized when scrolling
+            }
+        });
+    </script>
+    
 </body>
 </html>
 
