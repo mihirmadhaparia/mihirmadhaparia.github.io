@@ -19,8 +19,9 @@
 /* Main content */
 .content {
     padding: 80px 20px;
-    max-width: 800px;
+    max-width: 900px;
     margin: auto;
+    color: #4B5D4B; /* Dark Sage Green for text */
 }
 
 html {
@@ -30,8 +31,8 @@ html {
 
 /* General Styles */
 body {
-    background-color: #0A192F; /* Deep Navy Blue */
-    color: #E5E5E5; /* Light Gray for readability */
+    background-color: #F5F5F5; /* Off-White Background */
+    color: #4B5D4B; /* Dark Sage Green Text */
     font-family: 'Arial', sans-serif;
 }
 
@@ -40,20 +41,21 @@ nav {
     position: fixed;
     top: 0;
     width: 100%;
-    background: rgba(10, 25, 47, 0.9); /* Slightly transparent navy */
+    background: #F1F6F1; /* Light Sage Green background */
     padding: 15px 0;
     text-align: center;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* Subtle shadow for elevation */
     transition: top 0.3s ease-in-out;
     z-index: 1000;
 }
 
 /* Navigation Links */
 nav a {
-    color: #79c478; /* Bright Gold */
+    color: #7F9B7F; /* Soft Sage Green */
     text-decoration: none;
     padding: 15px 20px;
     display: inline-block;
-    font-size: 18px;
+    font-size: 20px;
     position: relative;
     transition: color 0.3s ease-in-out;
 }
@@ -66,7 +68,7 @@ nav a::after {
     bottom: -5px;
     width: 0;
     height: 3px;
-    background: linear-gradient(90deg, cyan, lime);
+    background: linear-gradient(90deg, #A8D5BA, #6D8B4D); /* Soft gradient from sage to darker green */
     transition: width 0.3s ease-in-out, left 0.3s ease-in-out;
 }
 
@@ -82,8 +84,8 @@ nav a:hover::after {
 
 /* Buttons */
 button {
-    background: #79c478; /* Gold */
-    color: #0A192F; /* Navy Blue */
+    background: #A8D5BA; /* Light Sage Green */
+    color: #4B5D4B; /* Dark Sage Green */
     padding: 10px 20px;
     border: none;
     border-radius: 5px;
@@ -93,37 +95,37 @@ button {
 }
 
 button:hover {
-    background: #79c478; /* Slightly Brighter Gold */
+    background: #8DCEA1; /* Slightly Brighter Sage Green */
 }
 
 /* Sections */
 .section {
-    padding: 50px;
+    padding: 60px 20px;
     margin-top: 20px;
     border-radius: 10px;
 }
 
 /* Alternating Background for Sections */
 .section:nth-child(odd) {
-    background: #112240; /* Darker Navy */
+    background: #F5F5F5; /* Off-White */
 }
 .section:nth-child(even) {
-    background: #0A192F; /* Slightly Lighter Navy */
+    background: #A8D5BA; /* Light Sage Green */
 }
 
 /* Links */
 a {
-    color: #79c478; /* Gold */
+    color: #7F9B7F; /* Soft Sage Green */
 }
 
 a:hover {
-    color: #79c478; /* Lighter Gold */
+    color: #A8D5BA; /* Light Sage Green on hover */
 }
 
 /* Footer */
 footer {
-    background: #112240;
-    color: #E5E5E5;
+    background: #F1F6F1; /* Light Sage Green */
+    color: #4B5D4B; /* Dark Sage Green */
     text-align: center;
     padding: 15px;
     margin-top: 20px;
