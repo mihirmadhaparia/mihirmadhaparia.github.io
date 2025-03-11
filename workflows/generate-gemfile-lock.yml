@@ -1,0 +1,28 @@
+name: Generate Gemfile.lock
+
+on:
+  push:
+    branches:
+      - main # Or your default branch
+
+jobs:
+  generate:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Set up Ruby
+        uses: ruby/setup-ruby@v1
+        with:
+          ruby-version: 3.0 # Or the ruby version github pages uses.
+          bundler-cache: true # runs 'bundle install' and caches installed gems
+
+      - name: Commit Gemfile.lock
+        run: |
+          git config --global user.email "your-email@example.com"
+          git config --global user.name "Your Name"
+          git add Gemfile.lock
+          git commit -m "Generate Gemfile.lock" || echo "No changes to commit"
+          git push
