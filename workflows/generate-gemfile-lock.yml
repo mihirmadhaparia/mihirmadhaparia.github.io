@@ -19,6 +19,9 @@ jobs:
           ruby-version: 3.0 # Or the ruby version github pages uses.
           bundler-cache: true # runs 'bundle install' and caches installed gems
 
+      - name: Force Gemfile.lock creation if needed
+        run: bundle lock --update --bundler
+
       - name: Commit Gemfile.lock
         run: |
           git config --global user.email "mihirmadhaparia@gmail.com"
