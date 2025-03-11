@@ -1,8 +1,3 @@
----
-layout: default
-title: "Mihir Madhaparia"
----
-
 ## About Me {#about}
 <section>
 I am a **dedicated and innovative engineer** with a passion for **medical technology, bioprinting, and applied research**. My expertise lies at the intersection of **mechanical engineering, materials science, and biomedical device development**, where I strive to bridge the gap between **technology and healthcare** to enhance patient outcomes. 
