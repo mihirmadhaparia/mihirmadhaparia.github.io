@@ -109,7 +109,7 @@ nav a::after {
     width: 0;
     height: 6px;
     background: linear-gradient(90deg, red, orange);
-    transition: right width 0.3s ease-in-out, left 0.3s ease-in-out;
+    transition: width 0.3s ease-in-out, left 0.3s ease-in-out;
 }
 
 nav a:hover::after {
