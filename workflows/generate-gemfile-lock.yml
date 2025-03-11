@@ -13,14 +13,25 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v3
 
+      - name: Debug: List files in workspace
+        run: ls -al # Add this to see the files and folders
+
       - name: Set up Ruby
         uses: ruby/setup-ruby@v1
         with:
           ruby-version: 3.0 # Or the ruby version github pages uses.
-          bundler-cache: true # runs 'bundle install' and caches installed gems
+          bundler-cache: true
+
+      - name: Debug: Check Ruby and Bundler versions
+        run: |
+          ruby -v
+          bundle -v
 
       - name: Force Gemfile.lock creation if needed
         run: bundle lock --update --bundler
+
+      - name: Debug: Check if Gemfile.lock was created
+        run: ls -al Gemfile.lock || echo "Gemfile.lock not found"
 
       - name: Commit Gemfile.lock
         run: |
