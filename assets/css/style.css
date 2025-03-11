@@ -37,12 +37,13 @@ body {
     font-family: 'Arial', sans-serif;
 }
 
-/* Section Styling */
+/* Section Styling (Card-like with subtle shadow and alternating colors) */
 .content section {
     padding: 50px;
     margin-bottom: 50px;
-    border-bottom: 2px solid #A8D5BA;
     border-radius: 10px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    transition: background-color 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
 }
 
 /* Alternating Background Colors */
