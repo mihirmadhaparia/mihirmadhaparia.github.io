@@ -19,7 +19,6 @@ Born and raised in Kenya, I am a first-generation college student currently adva
 ### University of Minnesota – Twin Cities, College of Science & Engineering
 - Master of Science in Mechanical Engineering (Expected December 2025)
 - Bachelor of Mechanical Engineering, Minor in Computer Science (January 2021 - December 2024)
-- Relevant coursework: Biomaterials, Biomechanics, Finite Element Analysis, Robotics, Computational Modeling
 
 ---
 
