@@ -7,6 +7,6 @@ url: "mihirmadhaparia.github.io"  # Your GitHub Pages URL
 
 # Plugins (optional)
 plugins:
-  - jekyll-seo-tag  # For SEO enhancements
-  - jekyll-sitemap  # To generate a sitemap.xml
+  - jekyll-seo-tag # For SEO enhancements
+  - jekyll-sitemap # To generate a sitemap.xml
   - jekyll-markdown-filter # Liquid markdown understanding
