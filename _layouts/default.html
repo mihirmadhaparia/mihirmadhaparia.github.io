@@ -8,7 +8,6 @@
 </head>
 <body>
 
-    <!-- Sidebar for Profile & Contact -->
     <aside class="sidebar">
         <img src="{{ '/assets/images/HeadshotPortrait.jpg' | relative_url }}" alt="Mihir Madhaparia" class="profile-pic">
         <h1 class="name">Mihir Madhaparia</h1>
@@ -19,7 +18,6 @@
         </div>
     </aside>
     
-    <!-- Navigation Bar -->
     <nav>
         <a href="#about">About</a>
         <a href="#education">Education</a>
@@ -29,24 +27,21 @@
         <a href="#awards">Awards</a>
     </nav>
 
-    <!-- Main Content -->
     <div class="content">
         {{ content }}
     </div>
 
-    <!-- Navigation Bar shrink scroller -->
     <script>
         window.addEventListener("scroll", function() {
             let nav = document.querySelector("nav");
             if (window.scrollY === 0) {
-                nav.classList.remove("shrink"); // Full size when at the top
+                nav.classList.remove("shrink");
             } else {
-                nav.classList.add("shrink"); // Minimized when scrolling
+                nav.classList.add("shrink");
             }
         });
     </script>
 
-    <!-- Right-Side Gallery Panel -->
     <aside class="gallery-panel">
         <div class="gallery-container">
             <div class="gallery-track">
@@ -60,26 +55,19 @@
         </div>
     </aside>
 
-    <!-- JavaScript for Vertical Scrolling Gallery -->
     <script>
         document.addEventListener("DOMContentLoaded", function () {
-            const modal = document.getElementById("gallery-modal");
-            const modalImg = document.getElementById("modal-image");
-            const modalVideo = document.getElementById("modal-video");
-            const modalDesc = document.getElementById("modal-desc");
-            const closeBtn = document.querySelector(".close");
             const galleryTrack = document.querySelector(".gallery-track");
             const galleryItems = document.querySelectorAll(".gallery-item");
 
             let autoScroll;
-            let scrollSpeed = 1; // Speed of upward scrolling
+            let scrollSpeed = 1;
 
             function startScrolling() {
                 if (galleryItems.length > 2) {
                     autoScroll = setInterval(() => {
                         galleryTrack.scrollBy({ top: scrollSpeed, behavior: "smooth" });
 
-                        // Reset scroll when reaching the bottom
                         if (galleryTrack.scrollTop + galleryTrack.clientHeight >= galleryTrack.scrollHeight) {
                             galleryTrack.scrollTo({ top: 0, behavior: "smooth" });
                         }
@@ -87,41 +75,9 @@
                 }
             }
 
-            galleryItems.forEach(item => {
-                item.addEventListener("click", function () {
-                    modal.style.display = "block";
-                    modalDesc.innerText = item.getAttribute("data-desc");
-
-                    let media = item.querySelector("img") || item.querySelector("iframe");
-
-                    if (media.tagName === "IMG") {
-                        modalImg.style.display = "block";
-                        modalVideo.style.display = "none";
-                        modalImg.src = media.src;
-                    } else if (media.tagName === "IFRAME") {
-                        modalVideo.style.display = "block";
-                        modalImg.style.display = "none";
-                        modalVideo.src = media.src;
-                    }
-                });
-            });
-
-            closeBtn.addEventListener("click", function () {
-                modal.style.display = "none";
-                modalVideo.src = ""; // Stop video playback
-            });
-
-            window.addEventListener("click", function (event) {
-                if (event.target === modal) {
-                    modal.style.display = "none";
-                    modalVideo.src = "";
-                }
-            });
-
             startScrolling();
         });
     </script>
     
 </body>
 </html>
-
