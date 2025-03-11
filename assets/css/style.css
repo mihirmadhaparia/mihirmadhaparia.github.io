@@ -43,16 +43,17 @@ body {
     margin-bottom: 50px;
     border-radius: 10px;
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    background-color: #ffffff; /* Default background color for clarity */
     transition: background-color 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
 }
 
 /* Alternating Background Colors */
 .content section:nth-child(odd) {
-    background-color: #F1F6F1;
+    background-color: #F1F6F1;  /* Lighter color for odd sections */
 }
 
 .content section:nth-child(even) {
-    background-color: #E8EDEB;
+    background-color: #E8EDEB;  /* Slightly darker color for even sections */
 }
 
 /* Section Headings with Fancy Underlines */
