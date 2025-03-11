@@ -4,6 +4,7 @@ description: "Personal website showcasing my education, work experience, and res
 theme: jekyll-theme-cayman
 baseurl: "/"  # Leave this empty unless using a subdirectory
 url: "mihirmadhaparia.github.io"  # Your GitHub Pages URL
+markdown: kramdown
 
 # Plugins (optional)
 plugins:
