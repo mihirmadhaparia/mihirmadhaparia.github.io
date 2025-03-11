@@ -145,7 +145,7 @@ nav a:not(:hover)::after {
 
 .profile-pic {
     width: 175px; /* Adjust width as needed */
-    height: 350px; /* Adjust height as needed */
+    height: 300px; /* Adjust height as needed */
     object-fit: cover;
     margin-bottom: 15px;
 }
