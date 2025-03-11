@@ -21,8 +21,8 @@ jobs:
 
       - name: Commit Gemfile.lock
         run: |
-          git config --global user.email "your-email@example.com"
-          git config --global user.name "Your Name"
+          git config --global user.email "mihirmadhaparia@gmail.com"
+          git config --global user.name "Mihir Madhaparia"
           git add Gemfile.lock
           git commit -m "Generate Gemfile.lock" || echo "No changes to commit"
           git push
