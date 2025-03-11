@@ -1,9 +1,9 @@
 /* Limit image size */
 .content img {
-    max-width: 80%; /* Adjust width to fit nicely */
-    height: auto; /* Maintain aspect ratio */
+    max-width: 80%;
+    height: auto;
     display: block;
-    margin: 20px auto; /* Center images */
+    margin: 20px auto;
     border-radius: 10px;
 }
 
@@ -22,7 +22,7 @@
     max-width: 900px;
     margin: auto;
     color: #232b23;
-    margin-left: 290px; /* Push content to the right */
+    margin-left: 290px;
 }
 
 html {
@@ -35,6 +35,30 @@ body {
     background-color: #F5F5F5;
     color: #232b23;
     font-family: 'Arial', sans-serif;
+}
+
+/* Section Styling */
+.content section {
+    padding: 50px;
+    margin-bottom: 50px;
+    border-bottom: 2px solid #A8D5BA;
+    border-radius: 10px;
+}
+
+/* Alternating Background Colors */
+.content section:nth-child(odd) {
+    background-color: #F1F6F1;
+}
+
+.content section:nth-child(even) {
+    background-color: #E8EDEB;
+}
+
+/* Section Headings with Fancy Underlines */
+.content h2 {
+    border-bottom: 4px solid #A8D5BA;
+    display: inline-block;
+    padding-bottom: 5px;
 }
 
 /* Sticky Navigation Bar */
@@ -76,7 +100,7 @@ nav a::after {
     bottom: -4px;
     width: 0;
     height: 6px;
-    background: linear-gradient(90deg, red, orange);
+    background: linear-gradient(90deg, red, blue);
     transition: width 0.3s ease-in-out, left 0.3s ease-in-out;
 }
 
