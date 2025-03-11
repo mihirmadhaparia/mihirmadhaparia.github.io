@@ -4,14 +4,14 @@
     height: auto; /* Maintain aspect ratio */
     display: block;
     margin: 20px auto; /* Center images */
-    border-radius: 10px; /* Optional: rounded corners */
+    border-radius: 10px;
 }
 
 /* Limit iframe (videos) size */
 .content iframe {
     max-width: 80%;
     height: auto;
-    aspect-ratio: 16/9; /* Keeps proper video ratio */
+    aspect-ratio: 16/9;
     display: block;
     margin: 20px auto;
 }
@@ -21,18 +21,19 @@
     padding: 80px 20px;
     max-width: 900px;
     margin: auto;
-    color: #232b23; /* Dark Sage Green for text */
+    color: #232b23;
+    margin-left: 290px; /* Push content to the right */
 }
 
 html {
     scroll-behavior: smooth;
-    scroll-padding-top: 95px; /* Adjust this value based on your header height */
+    scroll-padding-top: 95px;
 }
 
 /* General Styles */
 body {
-    background-color: #F5F5F5; /* Off-White Background */
-    color: #232b23; /* Dark Sage Green Text */
+    background-color: #F5F5F5;
+    color: #232b23;
     font-family: 'Arial', sans-serif;
 }
 
@@ -41,23 +42,20 @@ nav {
     position: fixed;
     top: 0;
     width: 100%;
-    background: #2F3E2F; /* Dark Sage Green background */
-    padding: 20px 0; /* Larger padding at the top */
+    background: #2F3E2F;
+    padding: 20px 0;
     text-align: center;
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
     transition: all 0.3s ease-in-out;
     z-index: 1000;
 }
 
-/* Minimized Navigation on Scroll */
 nav.shrink {
-    padding: 8px 0; /* Reduce padding to make it smaller */
-    background: #2F3E2F; /* Keep it opaque */
+    padding: 8px 0;
 }
 
-/* Navigation Links */
 nav a {
-    color: #F1EDE2; /* White-Beige font */
+    color: #F1EDE2;
     text-decoration: none;
     padding: 15px 20px;
     display: inline-block;
@@ -67,63 +65,7 @@ nav a {
 }
 
 nav.shrink a {
-    font-size: 15px; /* Shrink text when navbar minimizes */
-}
-
-/* Gradient Underline Effect */
-nav a::after {
-    content: "";
-    position: absolute;
-    left: 0;
-    bottom: -4px;
-    width: 0;
-    height: 6px;
-    background: linear-gradient(90deg, red, orange);
-    transition: width 0.3s ease-in-out, left 0.3s ease-in-out;
-}
-
-nav a:hover::after {
-    width: 100%;
-    left: 0;
-}
-
-nav a:not(:hover)::after {
-    width: 0;
-    left: 100%;
-}
-
-/* Buttons */
-button {
-    background: #688774; /* Light Sage Green */
-    color: #e8ded5;
-    padding: 10px 20px;
-    border: none;
-    border-radius: 5px;
-    font-size: 16px;
-    cursor: pointer;
-    transition: all 0.3s ease-in-out;
-}
-
-button:hover {
-    background: #8dba9f; /* Slightly Brighter Sage Green */
-}
-
-/* Links */
-a {
-    color: #4B5D4B; /* Soft Sage Green */
-}
-
-a:hover {
-    color: #b3e6c7; /* bright Sage Green on hover */
-}
-
-/* Footer */
-footer {
-    background: #F1F6F1; /* Light Sage Green */
-    color: #232b23; /* Dark Sage Green */
-    text-align: center;
-    padding: 15px;
-    margin-top: 20px;
+    font-size: 15px;
 }
 
 /* Sidebar for Profile & Contact */
@@ -133,16 +75,15 @@ footer {
     top: 0;
     width: 250px;
     height: 100vh;
-    background-color: #2F3E2F; /* Dark Sage Green */
-    color: #F1EDE2; /* White-Beige Font */
+    background-color: #2F3E2F;
+    color: #F1EDE2;
     display: flex;
     flex-direction: column;
     align-items: center;
-    padding: 100px 20px 20px; /* Increased top padding to push content lower */
+    padding: 100px 20px 20px;
     box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);
 }
 
-/* Profile Picture */
 .profile-pic {
     width: 150px;
     height: 150px;
@@ -151,14 +92,12 @@ footer {
     margin-bottom: 15px;
 }
 
-/* Name Styling */
 .name {
     font-size: 22px;
     font-weight: bold;
     text-align: center;
 }
 
-/* Contact Info */
 .contact-info {
     text-align: center;
     margin-top: 10px;
@@ -170,18 +109,12 @@ footer {
 }
 
 .contact-info a {
-    color: #A8D5BA; /* Light Sage Green */
+    color: #A8D5BA;
     text-decoration: none;
 }
 
 .contact-info a:hover {
     text-decoration: underline;
-}
-
-/* Adjust Main Content to Avoid Overlapping Sidebar */
-.content {
-    margin-left: 290px; /* Push content to the right */
-    padding: 20px;
 }
 
 /* Right Sidebar (Gallery Panel) */
@@ -191,8 +124,8 @@ footer {
     top: 0;
     width: 250px;
     height: 100vh;
-    background-color: #2F3E2F; /* Dark Sage Green */
-    color: #F1EDE2; /* White-Beige Font */
+    background-color: #2F3E2F;
+    color: #F1EDE2;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -201,7 +134,6 @@ footer {
     overflow: hidden;
 }
 
-/* Gallery Container */
 .gallery-container {
     width: 100%;
     height: 100%;
@@ -212,7 +144,6 @@ footer {
     justify-content: center;
 }
 
-/* Gallery Track for Vertical Scrolling */
 .gallery-track {
     display: flex;
     flex-direction: column;
@@ -223,13 +154,13 @@ footer {
     position: relative;
 }
 
-/* Gallery Items */
 .gallery-item {
     width: 100%;
     max-height: 200px;
     object-fit: contain;
     cursor: pointer;
     transition: transform 0.3s ease-in-out;
+    position: relative;
 }
 
 .gallery-item img,
@@ -241,4 +172,24 @@ footer {
 
 .gallery-item:hover {
     transform: scale(1.05);
+}
+
+/* Image Description on Hover */
+.gallery-item::after {
+    content: attr(data-desc);
+    position: absolute;
+    bottom: 10px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: rgba(0, 0, 0, 0.7);
+    color: white;
+    padding: 5px 10px;
+    font-size: 12px;
+    border-radius: 5px;
+    opacity: 0;
+    transition: opacity 0.3s ease-in-out;
+}
+
+.gallery-item:hover::after {
+    opacity: 1;
 }
