@@ -6,19 +6,19 @@ Born and raised in Kenya, I am a first-generation college student currently adva
 
 ---
 
-## Skills {#skills}
-
-* **Computer-Aided Design Software**: ANSYS, AutoCAD, Autodesk Fusion, Civil3D, PTC Creo, Tekla Structures, SOLIDWORKS, Siemens NX, EPANET
-* **Programming Languages**: MATLAB, JavaScript, Java, Python, C/C++, R, HTML
-* **Other Software Packages**: MTS Elite, Power BI, PTC Windchill, Materialise Mimics, Minitab, ImageJ, Microsoft Suite
-
----
-
 ## Education {#education}
 
 ### University of Minnesota – Twin Cities, College of Science & Engineering
 - Master of Science in Mechanical Engineering (Expected December 2025)
 - Bachelor of Mechanical Engineering, Minor in Computer Science (January 2021 - December 2024)
+
+---
+
+## Skills {#skills}
+
+* **Computer-Aided Design Software**: ANSYS, AutoCAD, Autodesk Fusion, Civil3D, PTC Creo, Tekla Structures, SOLIDWORKS, Siemens NX, EPANET
+* **Programming Languages**: MATLAB, JavaScript, Java, Python, C/C++, R, HTML
+* **Other Software Packages**: MTS Elite, Power BI, PTC Windchill, Materialise Mimics, Minitab, ImageJ, Microsoft Suite
 
 ---
 
