@@ -30,37 +30,48 @@ html {
     scroll-padding-top: 95px;
 }
 
-/* General Styles */
+/* Overall Website Background */
 body {
-    background-color: #F5F5F5;
-    color: #232b23;
-    font-family: 'Arial', sans-serif;
+    background-color: #D4E8D3; /* Light green background */
+    color: #2F3E2F; /* Dark green text for contrast */
+    font-family: Arial, sans-serif;
 }
 
-/* Section Styling (Card-like with subtle shadow and alternating colors) */
-.content section {
-    padding: 50px;
-    margin-bottom: 50px;
-    border-radius: 10px;
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-    background-color: #ffffff; /* Default background color for clarity */
-    transition: background-color 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+/* Styling for Information Boxes */
+.section-box {
+    background-color: #F5F3E5; /* Light beige background */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Subtle shadow for depth */
+    border-radius: 10px; /* Rounded corners */
+    padding: 20px;
+    margin: 20px 0;
+    transition: transform 0.3s ease; /* Smooth scaling effect */
 }
 
-/* Alternating Background Colors */
-.content section:nth-child(odd) {
-    background-color: #F1F6F1;  /* Lighter color for odd sections */
+.section-box:hover {
+    transform: translateY(-5px); /* Slightly lift the box on hover */
 }
 
-.content section:nth-child(even) {
-    background-color: #E8EDEB;  /* Slightly darker color for even sections */
+/* Header Styling for Sections */
+h2, h3 {
+    font-size: 1.8em;
+    color: #2F3E2F;
 }
 
-/* Section Headings with Fancy Underlines */
-.content h2 {
-    border-bottom: 4px solid #A8D5BA;
-    display: inline-block;
-    padding-bottom: 5px;
+/* Additional Styling for Text and Links */
+p, li {
+    font-size: 1.1em;
+    line-height: 1.6;
+    margin: 10px 0;
+}
+
+a {
+    color: #4CAF50; /* Green links */
+    text-decoration: none;
+}
+
+a:hover {
+    text-decoration: underline;
+    color: #3B9E3B; /* Darker green on hover */
 }
 
 /* Sticky Navigation Bar */
@@ -133,8 +144,8 @@ nav a:not(:hover)::after {
 }
 
 .profile-pic {
-    width: 150px; /* Adjust width as needed */
-    height: 100px; /* Adjust height as needed */
+    width: 200px; /* Adjust width as needed */
+    height: 450px; /* Adjust height as needed */
     object-fit: cover;
     margin-bottom: 15px;
 }
