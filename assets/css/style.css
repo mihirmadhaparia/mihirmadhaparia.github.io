@@ -37,37 +37,30 @@ body {
     font-family: Arial, sans-serif;
 }
 
-/* Styling for Information Boxes */
-.section-box {
-    background-color: #F5F3E5; /* Light beige background */
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Subtle shadow for depth */
-    border-radius: 10px; /* Rounded corners */
-    padding: 20px;
-    margin: 20px 0;
-    transition: transform 0.3s ease; /* Smooth scaling effect */
+/* END OF MAIN WEBSITE GENERAL ITEMS */
+
+/* Styling for section boxes */
+.experience-box {
+    border-radius: 12px;
+    box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.2);
+    padding: 15px;
+    margin: 15px 0;
+    background-color: #f9f9f9;
+    border-left: 5px solid #00ff99; /* Neon green accent */
 }
 
-.section-box:hover {
-    transform: translateY(-5px); /* Slightly lift the box on hover */
+/* Styling for headings */
+.section-heading {
+    background-color: #00ff99;
+    color: black;
+    padding: 8px 12px;
+    font-size: 1.2em;
+    font-weight: bold;
+    display: inline-block;
+    border-radius: 4px;
 }
 
-/* Header Styling for Sections */
-h2, h3 {
-    font-size: 1.8em;
-    color: #2F3E2F;
-}
-
-/* Additional Styling for Text and Links */
-p, li {
-    font-size: 1.1em;
-    line-height: 1.6;
-    margin: 10px 0;
-}
-
-a {
-    color: #4CAF50; /* Green links */
-    text-decoration: none;
-}
+/* END OF SECTION BOX ITEMS */
 
 /* Sticky Navigation Bar */
 nav {
@@ -120,6 +113,8 @@ nav.shrink a {
     font-size: 15px;
 }
 
+/* END OF MAIN TOP NAV BAR ITEMS */
+
 /* Sidebar for Profile & Contact */
 .sidebar {
     position: fixed;
@@ -167,6 +162,8 @@ nav.shrink a {
 .contact-info a:hover {
     text-decoration: underline;
 }
+
+/* END OF LEFT BAR ITEMS */
 
 /* Right Sidebar (Gallery Panel) */
 .gallery-panel {
@@ -244,3 +241,5 @@ nav.shrink a {
 .gallery-item:hover::after {
     opacity: 1;
 }
+
+/* END OF RIGHT GALLERY BAR */
