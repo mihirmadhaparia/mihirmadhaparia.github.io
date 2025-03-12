@@ -3,8 +3,11 @@ logo: /assets/images/"HeadshotPortrait.jpg"
 description: "Personal website showcasing my education, work experience, and research."
 theme: jekyll-theme-cayman
 baseurl: "/"  # Leave this empty unless using a subdirectory
-url: "mihirmadhaparia.github.io"  # Your GitHub Pages URL
+url: "https://mihirmadhaparia.github.io"  # Your GitHub Pages URL
 markdown: kramdown
+
+kramdown:
+  input: GFM # Use GitHub Flavored Markdown
 
 # Plugins (optional)
 plugins:
