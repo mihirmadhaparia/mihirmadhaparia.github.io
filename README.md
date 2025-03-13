@@ -201,8 +201,8 @@
     <div class="gallery-content">
         <h2>Gallery</h2>
         <p>Click the tab to close</p>
-        <img src="assets/images/sample1.jpg" alt="Project Image 1">
-        <img src="assets/images/sample2.jpg" alt="Project Image 2">
+        <img src="assets/images/ewbteamj23.jpg" alt="Project Image from Malawi Project trip in January 2023">
+        <img src="assets/images/scaffold.jpg" alt="Printing scaffolding structures for spinal cord cell printing">
         <video controls>
             <source src="assets/videos/sample.mp4" type="video/mp4">
             Your browser does not support the video tag.
