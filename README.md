@@ -193,7 +193,10 @@
             </div>
         </section>
     </div>
+<!-- Gallery Button -->
 <div id="galleryTab" class="gallery-tab">Gallery</div>
+
+<!-- Gallery Panel -->
 <div id="galleryPanel" class="gallery-panel">
     <div class="gallery-content">
         <h2>Gallery</h2>
@@ -206,11 +209,13 @@
         </video>
     </div>
 </div>
+
 <script>
 document.addEventListener("DOMContentLoaded", function () {
     const galleryTab = document.getElementById("galleryTab");
     const galleryPanel = document.getElementById("galleryPanel");
-    
+
+    // Toggle the gallery panel open/close when the gallery tab is clicked
     galleryTab.addEventListener("click", function () {
         if (galleryPanel.classList.contains("open")) {
             galleryPanel.classList.remove("open");
@@ -219,7 +224,7 @@ document.addEventListener("DOMContentLoaded", function () {
         } else {
             galleryPanel.classList.add("open");
             document.body.classList.add("gallery-open");
-            galleryTab.style.right = "300px";
+            galleryTab.style.right = "300px";  // Shift tab when panel opens
         }
     });
 });
