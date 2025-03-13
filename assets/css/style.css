@@ -242,4 +242,81 @@ nav.shrink a {
     opacity: 1;
 }
 
-/* END OF RIGHT GALLERY BAR */
+/* Custom Scrollbar */
+::-webkit-scrollbar {
+    width: 10px;
+    background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+    background-color: darksage;
+    border-radius: 5px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background-color: #6B8E72;
+}
+
+/* Hide scrollbar when not scrolling */
+::-webkit-scrollbar {
+    opacity: 0;
+    transition: opacity 0.5s;
+}
+
+body:hover::-webkit-scrollbar {
+    opacity: 1;
+}
+
+/* Gallery Panel */
+.gallery-tab {
+    position: fixed;
+    right: 0;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 50px;
+    height: 120px;
+    background-color: rgba(32, 32, 32, 0.9);
+    color: white;
+    font-weight: bold;
+    writing-mode: vertical-rl;
+    text-orientation: upright;
+    text-align: center;
+    cursor: pointer;
+    line-height: 40px;
+    transition: right 0.4s ease-in-out;
+}
+
+.gallery-tab:hover {
+    background-color: rgba(64, 64, 64, 0.9);
+}
+
+.gallery-panel {
+    position: fixed;
+    top: 0;
+    right: -300px;
+    width: 300px;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.8);
+    color: white;
+    overflow-y: auto;
+    transition: right 0.4s ease-in-out;
+}
+
+/* Open state */
+.gallery-panel.open {
+    right: 0;
+}
+
+body.gallery-open .gallery-tab {
+    right: 300px; /* Push tab when gallery is open */
+}
+
+/* Ensure gallery panel does not have its own scrollbar */
+.gallery-panel::-webkit-scrollbar {
+    display: none;
+}
+
+/* Push main scrollbar left when gallery opens */
+body.gallery-open ::-webkit-scrollbar {
+    margin-right: 300px;
+}
