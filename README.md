@@ -193,5 +193,36 @@
             </div>
         </section>
     </div>
+<div id="galleryTab" class="gallery-tab">Gallery</div>
+<div id="galleryPanel" class="gallery-panel">
+    <div class="gallery-content">
+        <h2>Gallery</h2>
+        <p>Click the tab to close</p>
+        <img src="assets/images/sample1.jpg" alt="Project Image 1">
+        <img src="assets/images/sample2.jpg" alt="Project Image 2">
+        <video controls>
+            <source src="assets/videos/sample.mp4" type="video/mp4">
+            Your browser does not support the video tag.
+        </video>
+    </div>
+</div>
+<script>
+document.addEventListener("DOMContentLoaded", function () {
+    const galleryTab = document.getElementById("galleryTab");
+    const galleryPanel = document.getElementById("galleryPanel");
+    
+    galleryTab.addEventListener("click", function () {
+        if (galleryPanel.classList.contains("open")) {
+            galleryPanel.classList.remove("open");
+            galleryTab.style.right = "0";
+            document.body.classList.remove("gallery-open");
+        } else {
+            galleryPanel.classList.add("open");
+            document.body.classList.add("gallery-open");
+            galleryTab.style.right = "300px";
+        }
+    });
+});
+</script>
 </body>
 </html>
