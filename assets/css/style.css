@@ -168,22 +168,16 @@ nav.shrink a {
 /* Custom Scrollbar for the whole webpage */
 ::-webkit-scrollbar {
     width: 10px;
-    background: transparent;
+    background: #2F3E2F;
 }
 
 ::-webkit-scrollbar-thumb {
-    background-color: transparent;
+    background-color: #6B8E72;
     border-radius: 5px;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-    background-color: #6B8E72;
-}
-
-/* Hide scrollbar when not scrolling */
-::-webkit-scrollbar {
-    opacity: 0;
-    transition: opacity 0.5s;
+    background-color: #57735d;
 }
 
 body::-webkit-scrollbar {
