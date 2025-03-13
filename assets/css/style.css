@@ -244,8 +244,6 @@ nav.shrink a {
 
 /* END OF RIGHT GALLERY BAR */
 
-/* Updated scrollbar styling to match website aesthetic */
-
 /* Custom Scrollbar */
 ::-webkit-scrollbar {
     width: 10px; /* Set width for vertical scroll bar */
@@ -258,6 +256,11 @@ nav.shrink a {
 ::-webkit-scrollbar-thumb {
     background: linear-gradient(to bottom, #00ff99, #2F3E2F); /* Neon green to dark green gradient */
     border-radius: 5px; /* Rounded edges for a modern look */
+}
+
+/* Ensure scrollbar is above the gallery panel */
+.gallery-panel {
+    z-index: 1001; /* Higher than the scrollbar */
 }
 
 ::-webkit-scrollbar-thumb:hover {
