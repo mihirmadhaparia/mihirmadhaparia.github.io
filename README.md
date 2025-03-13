@@ -204,7 +204,7 @@
         <img src="assets/images/ewbteamj23.jpg" alt="Project Image from Malawi Project trip in January 2023">
         <img src="assets/images/scaffold.jpg" alt="Printing scaffolding structures for spinal cord cell printing">
         <video controls>
-            <source src="assets/videos/sample.mp4" type="video/mp4">
+            <source src="https://drive.google.com/uc?export=download&id=1RnbMXfTiYPPIkiVAcxxdpy5RfMIcrQ28" type="video/mp4">
             Your browser does not support the video tag.
         </video>
     </div>
