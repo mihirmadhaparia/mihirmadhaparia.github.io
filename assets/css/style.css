@@ -172,7 +172,7 @@ nav.shrink a {
 }
 
 ::-webkit-scrollbar-thumb {
-    background-color: darksage;
+    background-color: transparent;
     border-radius: 5px;
 }
 
@@ -186,7 +186,7 @@ nav.shrink a {
     transition: opacity 0.5s;
 }
 
-body:hover::-webkit-scrollbar {
+body::-webkit-scrollbar {
     opacity: 1;
 }
 
