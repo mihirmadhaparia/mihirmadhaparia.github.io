@@ -41,43 +41,6 @@
             }
         });
     </script>
-
-    <aside class="gallery-panel">
-        <div class="gallery-container">
-            <div class="gallery-track">
-                <div class="gallery-item" data-desc="Demonstration of bioprinting scaffolds optimized for neural regeneration.">
-                    <img src="{{ '/assets/images/scaffold.jpg' | relative_url }}" alt="3D Printed Scaffold">
-                </div>
-                <div class="gallery-item" data-desc="Project travel video from Malawi 2023 assessment trip.">
-                    <iframe src="https://drive.google.com/file/d/1RnbMXfTiYPPIkiVAcxxdpy5RfMIcrQ28/preview" allow="autoplay"></iframe>
-                </div>
-            </div>
-        </div>
-    </aside>
-
-    <script>
-        document.addEventListener("DOMContentLoaded", function () {
-            const galleryTrack = document.querySelector(".gallery-track");
-            const galleryItems = document.querySelectorAll(".gallery-item");
-
-            let autoScroll;
-            let scrollSpeed = 1;
-
-            function startScrolling() {
-                if (galleryItems.length > 2) {
-                    autoScroll = setInterval(() => {
-                        galleryTrack.scrollBy({ top: scrollSpeed, behavior: "smooth" });
-
-                        if (galleryTrack.scrollTop + galleryTrack.clientHeight >= galleryTrack.scrollHeight) {
-                            galleryTrack.scrollTo({ top: 0, behavior: "smooth" });
-                        }
-                    }, 50);
-                }
-            }
-
-            startScrolling();
-        });
-    </script>
     
 </body>
 </html>
