@@ -187,7 +187,7 @@ body::-webkit-scrollbar {
 /* Gallery Tab Styles */
 .gallery-tab {
     position: fixed;
-    right: 0;
+    right: 300px; /* Move left so it's not covered */
     top: 50%;
     transform: translateY(-50%) rotate(90deg); /* Rotate text */
     transform-origin: right center; /* Ensure correct rotation */
@@ -196,9 +196,10 @@ body::-webkit-scrollbar {
     padding: 10px 15px; /* Padding for text */
     font-size: 14px; /* Smaller text */
     font-weight: normal;
-    border-radius: 15px; /* Rounded corners */
+    border-radius: 15px -15px -15px 15px; /* Flush with panel */
     cursor: pointer;
     transition: right 0.4s ease-in-out;
+    white-space: nowrap; /* Prevents breaking text */
 }
 
 .gallery-tab:hover {
@@ -212,7 +213,7 @@ body::-webkit-scrollbar {
     right: -300px;
     width: 300px;
     height: 100vh;
-    background-color: rgba(0, 0, 0, 0.8);
+    background-color: #2F3E2F;
     color: white;
     overflow-y: auto;
     transition: right 0.4s ease-in-out;
