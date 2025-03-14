@@ -193,37 +193,5 @@
             </div>
         </section>
     </div>
-<!-- Gallery Button -->
-<div id="galleryTab" class="gallery-tab">Photos & Videos</div>
-
-<!-- Gallery Panel -->
-<div id="galleryPanel" class="gallery-panel">
-    <div class="gallery-content">
-        <h2>Photos & Videos</h2>
-        <img src="assets/images/ewbteamj23.jpg" alt="Project Image from Malawi Project trip in January 2023">
-        <img src="assets/images/scaffold.jpg" alt="Printing scaffolding structures for spinal cord cell printing">
-        <iframe src="https://drive.google.com/file/d/1-C_rA7DmJm7eiOw2siUFHhjyCUY3oQ0S/preview" width="640" height="480"></iframe>
-    </div>
-</div>
-
-<script>
-document.addEventListener("DOMContentLoaded", function () {
-    const galleryTab = document.getElementById("galleryTab");
-    const galleryPanel = document.getElementById("galleryPanel");
-
-    // Toggle the gallery panel open/close when the gallery tab is clicked
-    galleryTab.addEventListener("click", function () {
-        if (galleryPanel.classList.contains("open")) {
-            galleryPanel.classList.remove("open");
-            galleryTab.style.right = "0";
-            document.body.classList.remove("gallery-open");
-        } else {
-            galleryPanel.classList.add("open");
-            document.body.classList.add("gallery-open");
-            galleryTab.style.right = "300px";  // Shift tab when panel opens
-        }
-    });
-});
-</script>
 </body>
 </html>
