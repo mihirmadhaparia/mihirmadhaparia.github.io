@@ -184,40 +184,66 @@ body::-webkit-scrollbar {
     opacity: 1;
 }
 
-/* Gallery Container */
-.gallery-carousel {
+/* Floating Gallery Box */
+.gallery-container {
     position: fixed;
-    right: 10px;  /* Adjust for placement */
+    right: 10px;  /* Adjusted for neat positioning */
     top: 50%;
     transform: translateY(-50%);
-    width: 80px;  /* Keep it small */
+    width: 100px;  /* Enclosing box width */
+    height: 300px; /* Box height */
+    background-color: #2F3E2F; /* Dark green */
+    border-radius: 20px;
+    padding: 10px;
     display: flex;
     flex-direction: column;
     align-items: center;
-    gap: 10px;
+    justify-content: center;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
     overflow: hidden;
 }
 
-/* Gallery Items */
-.gallery-carousel a img {
-    width: 50px;  /* Small size */
+/* Vertical "Gallery" Label */
+.gallery-label {
+    position: absolute;
+    left: -15px;
+    top: 50%;
+    transform: translateY(-50%) rotate(90deg);
+    transform-origin: left center;
+    font-size: 20px;
+    font-weight: bold;
+    color: #D4E8D3; /* Light green */
+}
+
+/* Gallery Carousel (Inside Floating Box) */
+.gallery-carousel {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    overflow: hidden;
+    height: 260px;  /* Adjusted height */
+    width: 100%;
+    animation: scrollUp 20s linear infinite; /* Slowed scrolling */
+}
+
+/* Images & Videos in Carousel */
+.gallery-carousel a img, 
+.gallery-carousel a iframe {
+    width: 50px;  /* Small default size */
     height: auto;
     border-radius: 8px;
     transition: transform 0.3s ease-in-out;
 }
 
-/* MacBook Dock Effect on Hover */
-.gallery-carousel a:hover img {
-    transform: scale(2);  /* Enlarge smoothly */
+/* MacBook Dock Hover Effect */
+.gallery-carousel a:hover img,
+.gallery-carousel a:hover iframe {
+    transform: scale(2);  /* Enlarges smoothly */
     z-index: 10;
 }
 
-/* Automatic Scrolling Animation */
+/* Slower Scrolling Animation */
 @keyframes scrollUp {
     0% { transform: translateY(100%); }
     100% { transform: translateY(-100%); }
-}
-
-.gallery-carousel {
-    animation: scrollUp 30s linear infinite;
 }
