@@ -194,13 +194,12 @@
         </section>
     </div>
 <!-- Gallery Button -->
-<div id="galleryTab" class="gallery-tab">Gallery</div>
+<div id="galleryTab" class="gallery-tab">Photos & Videos</div>
 
 <!-- Gallery Panel -->
 <div id="galleryPanel" class="gallery-panel">
     <div class="gallery-content">
-        <h2>Gallery</h2>
-        <p>Click the tab to close</p>
+        <h2>Photos & Videos</h2>
         <img src="assets/images/ewbteamj23.jpg" alt="Project Image from Malawi Project trip in January 2023">
         <img src="assets/images/scaffold.jpg" alt="Printing scaffolding structures for spinal cord cell printing">
         <video controls>
