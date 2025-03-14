@@ -197,7 +197,6 @@ body::-webkit-scrollbar {
     padding: 10px;
     display: flex;
     flex-direction: column;
-    justify-content: left;
     align-items: right;
     overflow: hidden;
     box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.3);
