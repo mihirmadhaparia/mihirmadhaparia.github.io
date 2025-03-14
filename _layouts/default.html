@@ -42,23 +42,18 @@
         });
     </script>
 
-    <!-- Gallery Panel -->
-    <div id="gallery-panel">
-        <h2>Gallery</h2>
-        <img src="assets/images/ewbteamj23.jpg" alt="Project Image from Malawi Project trip in January 2023">
-        <img src="assets/images/scaffold.jpg" alt="Printing scaffolding structures for spinal cord cell printing">
-        <iframe src="https://drive.google.com/file/d/1-C_rA7DmJm7eiOw2siUFHhjyCUY3oQ0S/preview" width="640" height="480"></iframe>
+    <!-- Gallery Carousel -->
+    <div class="gallery-carousel">
+        <a href="assets/images/ewbteamj23.jpg" target="_blank">
+            <img src="assets/images/ewbteamj23.jpg" alt="Malawi Project trip - January 2023">
+        </a>
+        <a href="assets/images/scaffold.jpg" target="_blank">
+            <img src="assets/images/scaffold.jpg" alt="Printing scaffolding structures">
+        </a>
+        <a href="https://drive.google.com/file/d/1-C_rA7DmJm7eiOw2siUFHhjyCUY3oQ0S/preview" target="_blank">
+            <iframe src="https://drive.google.com/file/d/1-C_rA7DmJm7eiOw2siUFHhjyCUY3oQ0S/preview" width="640" height="480"></iframe>
+        </a>
     </div>
     
-    <!-- Gallery Toggle Tab -->
-    <div id="gallery-tab">Gallery</div>
-    
-    <!-- JavaScript for Panel Toggle -->
-    <script>
-    document.getElementById("gallery-tab").addEventListener("click", function() {
-        var panel = document.getElementById("gallery-panel");
-        panel.classList.toggle("open");
-    });
-    </script>
 </body>
 </html>
