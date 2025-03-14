@@ -184,66 +184,69 @@ body::-webkit-scrollbar {
     opacity: 1;
 }
 
-/* Floating Gallery Box */
+/* Gallery Container */
 .gallery-container {
     position: fixed;
-    right: 10px;  /* Adjusted for neat positioning */
+    right: 0;
     top: 50%;
     transform: translateY(-50%);
-    width: 100px;  /* Enclosing box width */
-    height: 300px; /* Box height */
+    width: 20vw; /* Adjust width as needed */
+    height: 80vh; /* Adjust height as needed */
     background-color: #2F3E2F; /* Dark green */
-    border-radius: 20px;
+    border-radius: 15px;
     padding: 10px;
     display: flex;
     flex-direction: column;
-    align-items: center;
     justify-content: center;
-    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
+    align-items: center;
     overflow: hidden;
+    box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.3);
 }
 
-/* Vertical "Gallery" Label */
+/* Gallery Label */
 .gallery-label {
-    position: absolute;
-    left: -15px;
-    top: 50%;
-    transform: translateY(-50%) rotate(90deg);
-    transform-origin: left center;
-    font-size: 20px;
+    writing-mode: vertical-rl;
+    text-orientation: upright;
+    font-size: 2rem;
     font-weight: bold;
     color: #D4E8D3; /* Light green */
+    margin-bottom: 10px;
 }
 
-/* Gallery Carousel (Inside Floating Box) */
-.gallery-carousel {
+/* Scrolling Gallery */
+.gallery-scroll {
+    overflow: hidden;
     display: flex;
     flex-direction: column;
     gap: 10px;
-    overflow: hidden;
-    height: 260px;  /* Adjusted height */
-    width: 100%;
-    animation: scrollUp 20s linear infinite; /* Slowed scrolling */
+    animation: scrollGallery 15s linear infinite; /* Slower speed */
 }
 
-/* Images & Videos in Carousel */
-.gallery-carousel a img, 
-.gallery-carousel a iframe {
-    width: 50px;  /* Small default size */
+/* Individual Images & Hover Effect */
+.gallery-scroll img, .video-thumbnail {
+    width: 50px; /* Small size */
     height: auto;
-    border-radius: 8px;
     transition: transform 0.3s ease-in-out;
 }
 
-/* MacBook Dock Hover Effect */
-.gallery-carousel a:hover img,
-.gallery-carousel a:hover iframe {
-    transform: scale(2);  /* Enlarges smoothly */
+.gallery-scroll img:hover, .video-thumbnail:hover {
+    transform: scale(1.8); /* Expand on hover */
     z-index: 10;
 }
 
-/* Slower Scrolling Animation */
-@keyframes scrollUp {
-    0% { transform: translateY(100%); }
-    100% { transform: translateY(-100%); }
+/* Video Thumbnail */
+.video-thumbnail {
+    width: 50px; 
+    height: 50px; /* Adjust height to match images */
+    border-radius: 5px;
+}
+
+/* Scrolling Animation */
+@keyframes scrollGallery {
+    from {
+        transform: translateY(100%);
+    }
+    to {
+        transform: translateY(-100%);
+    }
 }
