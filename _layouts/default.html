@@ -41,6 +41,24 @@
             }
         });
     </script>
+
+    <!-- Gallery Panel -->
+    <div id="gallery-panel">
+        <h2>Gallery</h2>
+        <img src="assets/images/sample1.jpg" alt="Sample Image 1">
+        <img src="assets/images/sample2.jpg" alt="Sample Image 2">
+        <img src="assets/images/sample3.jpg" alt="Sample Image 3">
+    </div>
     
+    <!-- Gallery Toggle Tab -->
+    <div id="gallery-tab">Gallery</div>
+    
+    <!-- JavaScript for Panel Toggle -->
+    <script>
+    document.getElementById("gallery-tab").addEventListener("click", function() {
+        var panel = document.getElementById("gallery-panel");
+        panel.classList.toggle("open");
+    });
+    </script>
 </body>
 </html>
