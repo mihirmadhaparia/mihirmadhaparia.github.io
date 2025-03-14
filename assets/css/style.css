@@ -72,7 +72,7 @@ nav {
     text-align: center;
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
     transition: all 0.3s ease-in-out;
-    z-index: 1000;
+    z-index: 500;
 }
 
 nav.shrink {
@@ -126,8 +126,8 @@ nav.shrink a {
     color: #D4E8D3; /* Light green */
     padding: 20px;
     text-align: center;
-    z-index: 10;
-    box-shadow: 4px 0 10px rgba(0, 0, 0, 0.2);
+    z-index: 1000;
+    box-shadow: none;
 }
 
 /* Profile Picture */
