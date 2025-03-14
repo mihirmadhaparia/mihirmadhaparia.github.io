@@ -189,16 +189,14 @@ body::-webkit-scrollbar {
     position: fixed;
     right: 0;
     top: 50%;
-    transform: translateY(-50%);
-    width: 50px;
-    height: 120px;
+    transform: translateY(-50%) rotate(90deg); /* Rotate text */
+    transform-origin: right center; /* Ensure correct rotation */
     background-color: #2F3E2F;
     color: white;
-    font-weight: bold;
-    writing-mode: vertical-rl;
-    text-orientation: upright;
-    text-align: center;
-    line-height: 50px;
+    padding: 10px 15px; /* Padding for text */
+    font-size: 14px; /* Smaller text */
+    font-weight: normal;
+    border-radius: 15px; /* Rounded corners */
     cursor: pointer;
     transition: right 0.4s ease-in-out;
 }
@@ -213,7 +211,7 @@ body::-webkit-scrollbar {
     top: 0;
     right: -300px;
     width: 300px;
-    height: 100%;
+    height: 100vh;
     background-color: rgba(0, 0, 0, 0.8);
     color: white;
     overflow-y: auto;
