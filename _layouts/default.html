@@ -5,9 +5,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>{{ page.title }}</title>
     <link rel="stylesheet" href="{{ '/assets/css/style.css' | relative_url }}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
 </head>
 <body>
-
+<!--
     <aside class="sidebar">
         <img src="{{ '/assets/images/HeadshotPortrait.jpg' | relative_url }}" alt="Mihir Madhaparia" class="profile-pic">
         <h1 class="name">Mihir Madhaparia</h1>
@@ -15,6 +16,30 @@
             <p><strong>Email:</strong> <a href="mailto:mihirmadhaparia@gmail.com">mihirmadhaparia@gmail.com</a></p>
             <p><strong>LinkedIn:</strong> <a href="https://www.linkedin.com/in/mihirmadhaparia" target="_blank">linkedin.com/in/mihirmadhaparia</a></p>
             <p><strong>GitHub:</strong> <a href="https://github.com/mihir-madhaparia" target="_blank">github.com/mihir-madhaparia</a></p>
+        </div>
+    </aside> 
+-->
+    <!-- Side Panel -->
+    <aside class="side-panel">
+        <img src="{{ site.baseurl }}/assets/images/HeadshotPortrait.jpg" alt="Profile Picture" class="profile-pic">
+        <h2 class="name">Mihir Madhaparia</h2>
+        
+        <div class="contact-info">
+            <p>
+                <a href="mailto:mihirmadhaparia@gmail.com">
+                    <i class="fas fa-envelope"></i> Email
+                </a>
+            </p>
+            <p>
+                <a href="https://www.linkedin.com/in/mihirmadhaparia" target="_blank">
+                    <i class="fab fa-linkedin"></i> LinkedIn
+                </a>
+            </p>
+            <p>
+                <a href="https://github.com/mihir-madhaparia" target="_blank">
+                    <i class="fab fa-github"></i> GitHub
+                </a>
+            </p>
         </div>
     </aside>
     
