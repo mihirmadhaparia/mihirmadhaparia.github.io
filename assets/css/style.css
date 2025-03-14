@@ -95,9 +95,9 @@ nav a {
         ),
         linear-gradient(
           to right,
-          rgba(255, 0, 0, 1),
-          rgba(255, 0, 180, 1),
-          rgba(0, 100, 200, 1)
+          rgba(255, 125, 70, 1),
+          rgba(255, 125, 70, 1),
+          rgba(255, 110, 65, 1)
     );
     background-size: 100% 3px, 0 3px;
     background-position: 100% 100%, 0 100%;
@@ -160,6 +160,7 @@ nav.shrink a {
     text-decoration: none;
     color: #D4E8D3;
     font-size: 0.9em;
+    position: relative;
     transition: color 0.3s ease;
 }
 
@@ -167,54 +168,93 @@ nav.shrink a {
     color: #A0CFA0;
 }
 
-/* Ensure the Font Awesome icons are visible and properly sized */
+/* Icons Styling */
 .side-panel .contact-info i {
     margin-right: 10px;
-    color: #D4E8D3; /* Light green color for icons */
-    font-size: 1.5em; /* Adjust the size of the icon */
+    font-size: 1.5em;
     transition: transform 0.3s ease, color 0.3s ease; /* Smooth transition for hover effects */
 }
 
-/* Rainbow Gradient Hover Effect */
-.side-panel .contact-info .contact-item:hover i {
-    background: linear-gradient(90deg, red, orange, yellow, green, blue, indigo, violet);
-    -webkit-background-clip: text;
-    color: transparent; /* Make the text color transparent to show the gradient */
-    animation: gradientColorChange 3s ease-in-out infinite; /* Apply rainbow animation */
-}
-
-/* Keyframes for the email icon animation (Scaling Effect) */
-@keyframes emailOpen {
-    0% {
-        transform: scale(1) rotate(0deg);
-    }
-    50% {
-        transform: scale(1.2) rotate(10deg); /* Slight zoom and rotate */
-    }
-    100% {
-        transform: scale(1) rotate(0deg); /* Return to original state */
-    }
-}
-
-/* Specific hover effect for the email icon */
+/* Individual Icon Hover Animations & Colors */
 .side-panel .contact-info .email:hover i {
-    animation: emailOpen 0.6s ease-in-out; /* Apply the scaling animation */
+    color: #D44638; /* Red for Email */
+    animation: emailDance 0.6s ease-in-out; /* Apply the dance animation */
 }
 
-/* Gradient animation for the icon and text */
-@keyframes gradientColorChange {
+.side-panel .contact-info .linkedin:hover i {
+    color: #0A66C2; /* LinkedIn Blue */
+    animation: linkedinDance 0.6s ease-in-out; /* Apply the dance animation */
+}
+
+.side-panel .contact-info .github:hover i {
+    color: #6e5494; /* GitHub Purple */
+    animation: githubDance 0.6s ease-in-out; /* Apply the dance animation */
+}
+
+/* Hover Dance Animations for Each Icon */
+@keyframes emailDance {
     0% {
-        background: linear-gradient(90deg, red, orange, yellow, green, blue, indigo, violet);
-        -webkit-background-clip: text;
+        transform: rotate(0deg);
+    }
+    25% {
+        transform: rotate(-15deg) translateY(-5px);
     }
     50% {
-        background: linear-gradient(90deg, violet, indigo, blue, green, yellow, orange, red);
-        -webkit-background-clip: text;
+        transform: rotate(15deg) translateY(5px);
+    }
+    75% {
+        transform: rotate(-10deg) translateY(-5px);
     }
     100% {
-        background: linear-gradient(90deg, red, orange, yellow, green, blue, indigo, violet);
-        -webkit-background-clip: text;
+        transform: rotate(0deg);
     }
+}
+
+@keyframes linkedinDance {
+    0% {
+        transform: rotate(0deg);
+    }
+    25% {
+        transform: rotate(-10deg) translateY(-5px);
+    }
+    50% {
+        transform: rotate(10deg) translateY(5px);
+    }
+    75% {
+        transform: rotate(-5deg) translateY(-5px);
+    }
+    100% {
+        transform: rotate(0deg);
+    }
+}
+
+@keyframes githubDance {
+    0% {
+        transform: rotate(0deg);
+    }
+    25% {
+        transform: rotate(15deg) translateY(5px);
+    }
+    50% {
+        transform: rotate(-10deg) translateY(-5px);
+    }
+    75% {
+        transform: rotate(10deg) translateY(5px);
+    }
+    100% {
+        transform: rotate(0deg);
+    }
+}
+
+/* Underline Hover Effect for Text */
+.contact-info a:hover::after {
+    content: '';
+    position: absolute;
+    bottom: -5px;
+    left: 0;
+    width: 100%;
+    height: 2px;
+    background: linear-gradient(90deg, #ff4500, #ff6347); /* Red-Orange Gradient */
 }
 
 /* END OF LEFT BAR ITEMS */
