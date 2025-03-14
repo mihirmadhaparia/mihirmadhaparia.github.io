@@ -184,63 +184,51 @@ body::-webkit-scrollbar {
     opacity: 1;
 }
 
-/* Gallery Tab Styles */
-.gallery-tab {
+/* Gallery Tab */
+#gallery-tab {
     position: fixed;
-    right: 300px; /* Move left so it's not covered */
+    right: 0; /* Stick to the right edge */
     top: 50%;
     transform: translateY(-50%) rotate(90deg); /* Rotate text */
-    transform-origin: right center; /* Ensure correct rotation */
-    background-color: #2F3E2F;
+    transform-origin: right center;
+    background: rgba(0, 128, 0, 0.8); /* Greenish semi-transparent */
     color: white;
-    padding: 10px 15px; /* Padding for text */
-    font-size: 14px; /* Smaller text */
+    padding: 10px 15px;
+    font-size: 14px;
     font-weight: normal;
-    border-radius: 15px -15px -15px 15px; /* Flush with panel */
+    border-radius: 10px 0 0 10px; /* Flush with panel */
     cursor: pointer;
-    transition: right 0.4s ease-in-out;
-    white-space: nowrap; /* Prevents breaking text */
+    transition: background 0.3s ease;
+    white-space: nowrap;
+    z-index: 1001; /* Ensure it is always above the panel */
 }
 
-.gallery-tab:hover {
-    background-color: rgba(64, 64, 64, 0.9);
-}
-
-/* Gallery Panel Styles */
-.gallery-panel {
+/* Gallery Panel */
+#gallery-panel {
     position: fixed;
     top: 0;
-    right: -300px;
+    right: -300px; /* Start hidden */
     width: 300px;
     height: 100vh;
-    background-color: #2F3E2F;
-    color: white;
+    background: rgba(255, 255, 255, 0.95);
+    box-shadow: -5px 0 10px rgba(0, 0, 0, 0.2);
+    transition: right 0.3s ease;
     overflow-y: auto;
-    transition: right 0.4s ease-in-out;
+    padding: 15px;
+    z-index: 1000; /* Below the tab */
 }
 
-/* Open gallery panel */
-.gallery-panel.open {
+/* When gallery panel is open */
+#gallery-panel.open {
     right: 0;
 }
 
-/* Ensure the main scrollbar moves when the gallery is open */
-body.gallery-open ::-webkit-scrollbar {
-    margin-right: 300px;
+/* Ensure the tab stays visible and doesn't move */
+#gallery-panel.open + #gallery-tab {
+    right: 300px; /* Moves left with the panel */
 }
 
-/* Gallery content styles */
-.gallery-content {
-    padding: 20px;
-}
-
-.gallery-content img, .gallery-content video {
-    width: 100%;
-    margin-bottom: 10px;
-}
-
-/* Hide scrollbar in gallery panel */
-.gallery-panel::-webkit-scrollbar {
-    display: none;
+#gallery-tab:hover {
+    background: rgba(0, 150, 0, 0.9);
 }
 
