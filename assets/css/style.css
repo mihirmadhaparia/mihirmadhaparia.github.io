@@ -219,5 +219,5 @@ body::-webkit-scrollbar {
 }
 
 .gallery-carousel {
-    animation: scrollUp 10s linear infinite;
+    animation: scrollUp 30s linear infinite;
 }
