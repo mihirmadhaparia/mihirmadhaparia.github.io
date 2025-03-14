@@ -168,7 +168,7 @@ nav.shrink a {
 }
 
 /* Ensure the Font Awesome icons are visible and properly sized */
-#sidebar .contact-info i {
+.side-panel .contact-info i {
     margin-right: 10px;
     color: #D4E8D3; /* Light green color for icons */
     font-size: 1.5em; /* Adjust the size of the icon */
@@ -176,28 +176,29 @@ nav.shrink a {
 }
 
 /* Rainbow Gradient Hover Effect */
-#sidebar .contact-info .contact-item:hover i {
+.side-panel .contact-info .contact-item:hover i {
     background: linear-gradient(90deg, red, orange, yellow, green, blue, indigo, violet);
     -webkit-background-clip: text;
     color: transparent; /* Make the text color transparent to show the gradient */
     animation: gradientColorChange 3s ease-in-out infinite; /* Apply rainbow animation */
 }
 
-/* Keyframes for the email icon animation */
+/* Keyframes for the email icon animation (Scaling Effect) */
 @keyframes emailOpen {
     0% {
-        content: '\2709'; /* Envelope icon */
-        transform: rotate(0deg);
+        transform: scale(1) rotate(0deg);
+    }
+    50% {
+        transform: scale(1.2) rotate(10deg); /* Slight zoom and rotate */
     }
     100% {
-        content: '\2709\2709'; /* Open envelope with the letter inside */
-        transform: rotate(15deg); /* Rotate for a fun effect */
+        transform: scale(1) rotate(0deg); /* Return to original state */
     }
 }
 
 /* Specific hover effect for the email icon */
-#sidebar .contact-info .email:hover i {
-    animation: emailOpen 0.6s forwards; /* Animate the opening of the email */
+.side-panel .contact-info .email:hover i {
+    animation: emailOpen 0.6s ease-in-out; /* Apply the scaling animation */
 }
 
 /* Gradient animation for the icon and text */
