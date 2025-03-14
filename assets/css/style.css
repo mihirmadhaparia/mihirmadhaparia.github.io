@@ -167,10 +167,54 @@ nav.shrink a {
     color: #A0CFA0;
 }
 
-/* Contact Icons */
-.contact-info i {
-    margin-right: 8px;
-    font-size: 1.2em;
+/* Contact Info Icons Styling */
+#sidebar .contact-info i {
+    margin-right: 10px;
+    color: #D4E8D3; /* Light green color for icons */
+    font-size: 1.5em; /* Adjust the size of the icon */
+    transition: all 0.3s ease; /* Smooth transition for all effects */
+}
+
+/* Rainbow Gradient Hover Effect */
+#sidebar .contact-info i:hover, 
+#sidebar .contact-info span:hover {
+    background: linear-gradient(90deg, red, orange, yellow, green, blue, indigo, violet);
+    -webkit-background-clip: text;
+    color: transparent; /* Make the text color transparent so that the gradient shows */
+    animation: gradientColorChange 3s ease-in-out infinite; /* Apply the rainbow animation */
+}
+
+/* Keyframes for the email icon animation */
+@keyframes emailOpen {
+    0% {
+        content: '\2709'; /* Envelope icon */
+        transform: rotate(0deg);
+    }
+    100% {
+        content: '\2709\2709'; /* Open envelope with the letter inside */
+        transform: rotate(15deg); /* Rotate for a fun effect */
+    }
+}
+
+/* Specific hover effect for the email icon */
+#sidebar .contact-info .email:hover {
+    animation: emailOpen 0.6s forwards; /* Animate the opening of the email */
+}
+
+/* Gradient animation for the icon and text */
+@keyframes gradientColorChange {
+    0% {
+        background: linear-gradient(90deg, red, orange, yellow, green, blue, indigo, violet);
+        -webkit-background-clip: text;
+    }
+    50% {
+        background: linear-gradient(90deg, violet, indigo, blue, green, yellow, orange, red);
+        -webkit-background-clip: text;
+    }
+    100% {
+        background: linear-gradient(90deg, red, orange, yellow, green, blue, indigo, violet);
+        -webkit-background-clip: text;
+    }
 }
 
 /* END OF LEFT BAR ITEMS */
