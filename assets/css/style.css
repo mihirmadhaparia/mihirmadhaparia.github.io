@@ -115,52 +115,62 @@ nav.shrink a {
 
 /* END OF MAIN TOP NAV BAR ITEMS */
 
-/* Sidebar for Profile & Contact */
-.sidebar {
+/* Side Panel Styling */
+.side-panel {
     position: fixed;
     left: 0;
     top: 0;
     width: 250px;
     height: 100vh;
-    background-color: #2F3E2F;
-    color: #F1EDE2;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    padding: 100px 20px 20px;
-    box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);
+    background-color: #2F3E2F; /* Dark green */
+    color: #D4E8D3; /* Light green */
+    padding: 20px;
+    text-align: center;
+    z-index: 10;
+    box-shadow: 4px 0 10px rgba(0, 0, 0, 0.2);
 }
 
+/* Profile Picture */
 .profile-pic {
-    width: 175px; /* Adjust width as needed */
-    height: 300px; /* Adjust height as needed */
-    object-fit: cover;
-    margin-bottom: 15px;
-}
-
-.name {
-    font-size: 22px;
-    font-weight: bold;
-    text-align: center;
-}
-
-.contact-info {
-    text-align: center;
+    width: 80%;
+    max-width: 180px;
+    border-radius: 8px; /* Keep rectangular but with slight rounding */
     margin-top: 10px;
 }
 
+/* Name Styling */
+.name {
+    font-size: 1.4em;
+    font-weight: bold;
+    margin-top: 10px;
+}
+
+/* Contact Info */
+.contact-info {
+    margin-top: 15px;
+}
+
 .contact-info p {
-    font-size: 14px;
-    margin: 5px 0;
+    margin: 10px 0;
 }
 
 .contact-info a {
-    color: #A8D5BA;
+    display: flex;
+    align-items: center;
     text-decoration: none;
+    color: #D4E8D3;
+    font-size: 0.9em;
+    transition: color 0.3s ease;
 }
 
 .contact-info a:hover {
-    text-decoration: underline;
+    color: #A0CFA0;
+}
+
+/* Contact Icons */
+.contact-info i {
+    margin-right: 8px;
+    font-size: 1.2em;
 }
 
 /* END OF LEFT BAR ITEMS */
