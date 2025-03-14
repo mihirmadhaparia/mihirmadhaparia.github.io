@@ -167,21 +167,20 @@ nav.shrink a {
     color: #A0CFA0;
 }
 
-/* General Contact Info Icons Styling */
+/* Ensure the Font Awesome icons are visible and properly sized */
 #sidebar .contact-info i {
     margin-right: 10px;
     color: #D4E8D3; /* Light green color for icons */
     font-size: 1.5em; /* Adjust the size of the icon */
-    transition: all 0.3s ease; /* Smooth transition for all effects */
+    transition: transform 0.3s ease, color 0.3s ease; /* Smooth transition for hover effects */
 }
 
 /* Rainbow Gradient Hover Effect */
-#sidebar .contact-info i:hover, 
-#sidebar .contact-info span:hover {
+#sidebar .contact-info .contact-item:hover i {
     background: linear-gradient(90deg, red, orange, yellow, green, blue, indigo, violet);
     -webkit-background-clip: text;
-    color: transparent; /* Make the text color transparent so that the gradient shows */
-    animation: gradientColorChange 3s ease-in-out infinite; /* Apply the rainbow animation */
+    color: transparent; /* Make the text color transparent to show the gradient */
+    animation: gradientColorChange 3s ease-in-out infinite; /* Apply rainbow animation */
 }
 
 /* Keyframes for the email icon animation */
