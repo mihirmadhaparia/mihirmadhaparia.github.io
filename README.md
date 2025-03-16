@@ -36,8 +36,9 @@
         <section id="work" class="section">
             <h2 class="section-heading">Work Experience</h2>
             <div class="experience-box">
+            <div class="date-box">January 2025 - Present</div> 
                 <h3>SwiftZip LLC</h3>
-                <p><strong>Co-Founder & Stakeholder (January 2025 - Present)</strong></p>
+                <p><strong>Co-Founder & Stakeholder</strong></p>
                 <ul>
                     <li>Lead Research & Development Engineer; Spearheaded all research and development efforts for SwiftZip's surgical suture alternative, from initial concept to functional prototype.</li>
                     <li>Authored Consumer & Product Requirement Documentation (CPRD), outlining critical device specifications, performance criteria, and user needs, ensuring alignment with regulatory requirements and market demands.</li>
