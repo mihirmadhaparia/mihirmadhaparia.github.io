@@ -59,7 +59,7 @@ body {
     position: relative; /* Allows absolute positioning inside */
     border-radius: 12px;
     box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.2);
-    padding: 5px;
+    padding: 2px 8px;
     margin: 8px 0;
     background-color: #f9f9f9;
     border-left: 5px solid #00ff99; /* Neon green accent */
@@ -69,7 +69,7 @@ body {
 .section-heading {
     background-color: #00ff99;
     color: black;
-    padding: 3px 6px;
+    padding: 2px 8px;
     font-size: 2.5em;
     font-weight: bold;
     display: inline-block;
@@ -101,7 +101,7 @@ nav a {
     text-decoration: none;
     padding: 15px 20px;
     display: inline-block;
-    font-size: 20px;
+    font-size: 25px;
     position: relative;
     transition: color 0.3s ease-in-out, font-size 0.3s ease-in-out;
     background: linear-gradient(to right, #FF3B30, #FF9500);
