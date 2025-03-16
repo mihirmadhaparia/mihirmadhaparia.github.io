@@ -108,7 +108,7 @@ nav a {
     background-size: 100% 3px, 0 3px;
     background-position: 100% 100%, 0 100%;
     background-repeat: no-repeat;
-    transition: background-size 400ms;
+    transition: background-size 500ms;
 }
 
 nav a:hover {
