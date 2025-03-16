@@ -50,13 +50,20 @@
     </div>
 
     <script>
-        window.addEventListener("scroll", function() {
-            let nav = document.querySelector("nav");
-            if (window.scrollY === 0) {
-                nav.classList.remove("shrink");
+        let lastScrollTop = 0;
+        const navbar = document.querySelector('nav');
+    
+        window.addEventListener('scroll', function() {
+            let scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+    
+            if (scrollTop > lastScrollTop) {
+                // Scroll down, add 'shrink' class to navbar
+                navbar.classList.add('shrink');
             } else {
-                nav.classList.add("shrink");
+                // Scroll up, remove 'shrink' class from navbar
+                navbar.classList.remove('shrink');
             }
+            lastScrollTop = scrollTop <= 0 ? 0 : scrollTop; // Prevent negative scroll
         });
     </script>
     
