@@ -88,7 +88,7 @@ nav {
     padding: 20px 0;
     text-align: center;
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-    transition: all 0.3s ease-in-out;
+    transition: padding 0.3s ease-in-out, 0.3s ease-in-out; /* Smooth padding transition */
     z-index: 500;
 }
 
@@ -103,7 +103,7 @@ nav a {
     display: inline-block;
     font-size: 25px;
     position: relative;
-    transition: color 0.3s ease-in-out, font-size 0.3s ease-in-out;
+    transition: color 0.3s ease-in-out, font-size 0.3s ease-in-out; /* Transition for font size */
     background: linear-gradient(to right, #FF3B30, #FF9500);
     background-size: 100% 3px, 0 3px;
     background-position: 100% 100%, 0 100%;
@@ -112,7 +112,7 @@ nav a {
 }
 
 nav a:hover {
-  background-size: 0 3px, 100% 3px;
+    background-size: 0 3px, 100% 3px;
 }
 
 nav.shrink a {
