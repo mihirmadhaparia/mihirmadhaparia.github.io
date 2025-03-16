@@ -104,18 +104,7 @@ nav a {
     font-size: 20px;
     position: relative;
     transition: color 0.3s ease-in-out, font-size 0.3s ease-in-out;
-    background:
-        linear-gradient(
-          to right,
-          rgba(153, 223, 123, 0.8),
-          rgba(197, 235, 181, 0.8)
-        ),
-        linear-gradient(
-          to right,
-          rgba(255, 125, 70, 1),
-          rgba(255, 125, 70, 1),
-          rgba(255, 110, 65, 1)
-    );
+    background: linear-gradient(to right, #FF3B30, #FF9500);
     background-size: 100% 3px, 0 3px;
     background-position: 100% 100%, 0 100%;
     background-repeat: no-repeat;
