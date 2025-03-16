@@ -32,9 +32,9 @@ html {
 
 /* Overall Website Background */
 body {
-    background-color: #D4E8D3; /* Light green background */
-    color: #2F3E2F; /* Dark green text for contrast */
-    font-family: Arial, sans-serif;
+    background-color: #D4E8D3;
+    color: #2F3E2F;
+    font-family: 'Roboto', Arial, sans-serif;
 }
 
 /* END OF MAIN WEBSITE GENERAL ITEMS */
