@@ -80,7 +80,7 @@ body {
     right: 15px; /* Distance from the right side */
     top: 50%; /* Center vertically */
     transform: translateY(-50%); /* Center vertically */
-    width: 50px; /* Adjust size of the logo */
+    width: 100px; /* Adjust size of the logo */
     height: auto;
 }
 
