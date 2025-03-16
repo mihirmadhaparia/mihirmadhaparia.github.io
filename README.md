@@ -17,14 +17,11 @@
 
         <section id="education" class="section">
             <h2 class="section-heading">Education</h2>
-            <div class="experience-box">
                 <div class="experience-details">
                     <h3>University of Minnesota – Twin Cities, College of Science & Engineering</h3>
                     <p><strong>Master of Science in Mechanical Engineering</strong> (Expected December 2025)</p>
                     <p><strong>Bachelor of Mechanical Engineering, Minor in Computer Science</strong> (January 2021 - December 2024)</p>
                 </div>
-            <img src="{{ site.baseurl }}/assets/images/umnlogo.png" alt="UMN Logo" class="experience-logo">
-            </div>
         </section>
 
         <section id="skills" class="section">
