@@ -7,7 +7,6 @@
     <link rel="stylesheet" href="{{ '/assets/css/style.css' | relative_url }}">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <link rel="icon" href="{{ site.baseurl }}/assets/images/Mfavicon.ico" type="image/x-icon">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
 </head>
 <body>
@@ -36,13 +35,19 @@
         </div>
     </aside>
     
+    <!-- Navigation Menu -->
     <nav>
-        <a href="#about">About</a>
-        <a href="#education">Education</a>
-        <a href="#skills">Skills</a>
-        <a href="#work">Work Experience</a>
-        <a href="#projects">Projects</a>
-        <a href="#awards">Awards</a>
+        <div class="menu-toggle" onclick="toggleMenu()">
+            <i class="fas fa-bars"></i>
+        </div>
+        <ul class="nav-links">
+            <li><a href="#about">About</a></li>
+            <li><a href="#education">Education</a></li>
+            <li><a href="#skills">Skills</a></li>
+            <li><a href="#work">Work Experience</a></li>
+            <li><a href="#projects">Projects</a></li>
+            <li><a href="#awards">Awards</a></li>
+        </ul>
     </nav>
 
     <div class="content">
@@ -52,19 +57,20 @@
     <script>
         let lastScrollTop = 0;
         const navbar = document.querySelector('nav');
-    
+        
         window.addEventListener('scroll', function() {
             let scrollTop = window.pageYOffset || document.documentElement.scrollTop;
-    
             if (scrollTop > lastScrollTop) {
-                // Scroll down, add 'shrink' class to navbar
                 navbar.classList.add('shrink');
             } else {
-                // Scroll up, remove 'shrink' class from navbar
                 navbar.classList.remove('shrink');
             }
-            lastScrollTop = scrollTop <= 0 ? 0 : scrollTop; // Prevent negative scroll
+            lastScrollTop = scrollTop <= 0 ? 0 : scrollTop;
         });
+
+        function toggleMenu() {
+            document.querySelector('.nav-links').classList.toggle('active');
+        }
     </script>
     
 </body>
