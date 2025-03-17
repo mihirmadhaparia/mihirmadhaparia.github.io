@@ -1,4 +1,4 @@
-/* Limit image size */
+/* Responsive Image Sizing */
 .content img {
     max-width: 80%;
     height: auto;
@@ -7,7 +7,7 @@
     border-radius: 10px;
 }
 
-/* Limit iframe (videos) size */
+/* Responsive Video Sizing */
 .content iframe {
     max-width: 80%;
     height: auto;
@@ -16,35 +16,43 @@
     margin: 20px auto;
 }
 
-/* Main content */
+/* Main Content Styling */
 .content {
     padding: 80px 20px;
-    /*max-width: 900px;*/
     margin: auto;
     color: #232b23;
     margin-left: 290px;
 }
 
+/* Smooth Scrolling */
 html {
     scroll-behavior: smooth;
     scroll-padding-top: 95px;
 }
 
-/* Overall Website Background */
+/* Website Background */
 body {
     background-color: #D4E8D3;
     color: #2F3E2F;
     font-family: 'Roboto', Arial, sans-serif;
 }
 
-/* END OF MAIN WEBSITE GENERAL ITEMS */
+/* Experience Section Styling */
+.experience-box {
+    position: relative;
+    border-radius: 12px;
+    box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.2);
+    padding: 2px 8px;
+    margin: 8px 0;
+    background-color: #f9f9f9;
+    border-left: 5px solid #00ff99;
+}
 
-/* Date Box Styling */
 .experience-box .date-box {
     position: absolute;
     top: 10px;
     right: 10px;
-    background-color: #ff8c00; /* Orange */
+    background-color: #ff8c00;
     color: black;
     padding: 5px 10px;
     font-size: 0.9em;
@@ -54,18 +62,7 @@ body {
     white-space: nowrap;
 }
 
-/* Styling for section boxes */
-.experience-box {
-    position: relative; /* Allows absolute positioning inside */
-    border-radius: 12px;
-    box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.2);
-    padding: 2px 8px;
-    margin: 8px 0;
-    background-color: #f9f9f9;
-    border-left: 5px solid #00ff99; /* Neon green accent */
-}
-
-/* Styling for headings */
+/* Section Heading Styling */
 .section-heading {
     background-color: #00ff99;
     color: black;
@@ -77,8 +74,6 @@ body {
     margin-bottom: 5px;
 }
 
-/* END OF SECTION BOX ITEMS */
-
 /* Sticky Navigation Bar */
 nav {
     position: fixed;
@@ -88,7 +83,7 @@ nav {
     padding: 20px 0;
     text-align: center;
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-    transition: padding 0.5s ease-in-out, 0.5s ease-in-out; /* Smooth padding transition */
+    transition: padding 0.5s ease-in-out;
     z-index: 500;
 }
 
@@ -103,12 +98,11 @@ nav a {
     display: inline-block;
     font-size: 25px;
     position: relative;
-    transition: color 0.3s ease-in-out, font-size 0.3s ease-in-out; /* Transition for font size */
     background: linear-gradient(to right, #FF3B30, #FF9500);
     background-size: 100% 3px, 0 3px;
     background-position: 100% 100%, 0 100%;
     background-repeat: no-repeat;
-    transition: background-size 500ms;
+    transition: background-size 500ms, font-size 0.3s ease-in-out;
 }
 
 nav a:hover {
@@ -119,28 +113,25 @@ nav.shrink a {
     font-size: 15px;
 }
 
-/* END OF MAIN TOP NAV BAR ITEMS */
-
-/* Side Panel Styling */
+/* Sidebar Panel */
 .side-panel {
     position: fixed;
     left: 0;
     top: 0;
     width: 250px;
     height: 100vh;
-    background-color: #2F3E2F; /* Dark green */
-    color: #D4E8D3; /* Light green */
+    background-color: #2F3E2F;
+    color: #D4E8D3;
     padding: 20px;
     text-align: center;
     z-index: 1000;
-    box-shadow: none;
 }
 
 /* Profile Picture */
 .profile-pic {
     width: 80%;
     max-width: 180px;
-    border-radius: 8px; /* Keep rectangular but with slight rounding */
+    border-radius: 8px;
     margin-top: 10px;
 }
 
@@ -151,7 +142,7 @@ nav.shrink a {
     margin-top: 10px;
 }
 
-/* Contact Info */
+/* Contact Info Styling */
 .contact-info {
     margin-top: 15px;
 }
@@ -166,7 +157,6 @@ nav.shrink a {
     text-decoration: none;
     color: #D4E8D3;
     font-size: 0.9em;
-    position: relative;
     transition: color 0.3s ease;
 }
 
@@ -174,98 +164,97 @@ nav.shrink a {
     color: #A0CFA0;
 }
 
-/* Icons Styling */
+/* Icon Hover Effects */
 .side-panel .contact-info i {
     margin-right: 10px;
     font-size: 1.5em;
-    transition: transform 0.3s ease, color 0.3s ease; /* Smooth transition for hover effects */
+    transition: transform 0.3s ease, color 0.3s ease;
 }
 
-/* Individual Icon Hover Animations & Colors */
 .side-panel .contact-info .email:hover i {
-    color: #D44638; /* Red for Email */
-    animation: emailDance 0.6s ease-in-out; /* Apply the dance animation */
+    color: #D44638;
+    animation: emailDance 0.6s ease-in-out;
 }
 
 .side-panel .contact-info .linkedin:hover i {
-    color: #0A66C2; /* LinkedIn Blue */
-    animation: linkedinDance 0.6s ease-in-out; /* Apply the dance animation */
+    color: #0A66C2;
+    animation: linkedinDance 0.6s ease-in-out;
 }
 
 .side-panel .contact-info .github:hover i {
-    color: #6e5494; /* GitHub Purple */
-    animation: githubDance 0.6s ease-in-out; /* Apply the dance animation */
+    color: #6e5494;
+    animation: githubDance 0.6s ease-in-out;
 }
 
-/* Hover Dance Animations for Each Icon */
+/* Hover Animations */
 @keyframes emailDance {
-    0% {
-        transform: rotate(0deg);
-    }
-    25% {
-        transform: rotate(-15deg) translateY(-5px);
-    }
-    50% {
-        transform: rotate(15deg) translateY(5px);
-    }
-    75% {
-        transform: rotate(-10deg) translateY(-5px);
-    }
-    100% {
-        transform: rotate(0deg);
-    }
+    0% { transform: rotate(0deg); }
+    25% { transform: rotate(-15deg) translateY(-5px); }
+    50% { transform: rotate(15deg) translateY(5px); }
+    75% { transform: rotate(-10deg) translateY(-5px); }
+    100% { transform: rotate(0deg); }
 }
 
 @keyframes linkedinDance {
-    0% {
-        transform: rotate(0deg);
-    }
-    25% {
-        transform: rotate(-10deg) translateY(-5px);
-    }
-    50% {
-        transform: rotate(10deg) translateY(5px);
-    }
-    75% {
-        transform: rotate(-5deg) translateY(-5px);
-    }
-    100% {
-        transform: rotate(0deg);
-    }
+    0% { transform: rotate(0deg); }
+    25% { transform: rotate(-10deg) translateY(-5px); }
+    50% { transform: rotate(10deg) translateY(5px); }
+    75% { transform: rotate(-5deg) translateY(-5px); }
+    100% { transform: rotate(0deg); }
 }
 
 @keyframes githubDance {
-    0% {
-        transform: rotate(0deg);
+    0% { transform: rotate(0deg); }
+    25% { transform: rotate(15deg) translateY(5px); }
+    50% { transform: rotate(-10deg) translateY(-5px); }
+    75% { transform: rotate(10deg) translateY(5px); }
+    100% { transform: rotate(0deg); }
+}
+
+/* Responsive Design Adjustments */
+@media (max-width: 768px) {
+    .content {
+        margin-left: 0;
+        padding: 20px;
     }
-    25% {
-        transform: rotate(15deg) translateY(5px);
+
+    .side-panel {
+        width: 100%;
+        height: auto;
+        position: relative;
+        text-align: center;
+        padding: 10px;
     }
-    50% {
-        transform: rotate(-10deg) translateY(-5px);
+
+    .profile-pic {
+        max-width: 120px;
     }
-    75% {
-        transform: rotate(10deg) translateY(5px);
+
+    .contact-info a {
+        font-size: 1em;
     }
-    100% {
-        transform: rotate(0deg);
+
+    .gallery {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 10px;
+    }
+
+    nav {
+        position: relative;
+    }
+
+    nav a {
+        font-size: 18px;
+        padding: 10px 15px;
+    }
+
+    nav.shrink a {
+        font-size: 14px;
     }
 }
 
-/* Underline Hover Effect for Text */
-.contact-info a:hover::after {
-    content: '';
-    position: absolute;
-    bottom: -5px;
-    left: 0;
-    width: 100%;
-    height: 2px;
-    background: linear-gradient(90deg, #ff4500, #ff6347); /* Red-Orange Gradient */
-}
-
-/* END OF LEFT BAR ITEMS */
-
-/* Custom Scrollbar for the whole webpage */
+/* Scrollbar Customization */
 ::-webkit-scrollbar {
     width: 10px;
     background: #2F3E2F;
