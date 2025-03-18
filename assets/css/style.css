@@ -228,10 +228,62 @@ nav.shrink a {
 
 /* Responsive Design Adjustments */
 @media (max-width: 768px) {
+    .side-panel {
+        width: 100%;
+        height: auto;
+        position: relative;
+        padding: 15px;
+    }
+    
+    .side-panel .profile-pic {
+        width: 120px;
+        height: 120px;
+    }
+    
     .content {
         margin-left: 0;
-        padding: 20px;
+        padding: 15px;
     }
+    
+    nav {
+        position: sticky;
+        top: 0;
+        width: 100%;
+        z-index: 1000;
+    }
+    
+    .nav-links {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 10px;
+    }
+    
+    .nav-links a {
+        padding: 8px 12px;
+        font-size: 14px;
+    }
+    
+    .experience-box {
+        padding: 15px;
+    }
+}
+
+@media (max-width: 480px) {
+    .side-panel .profile-pic {
+        width: 100px;
+        height: 100px;
+    }
+    
+    .nav-links a {
+        padding: 6px 10px;
+        font-size: 13px;
+    }
+    
+    h2.section-heading {
+        font-size: 1.5rem;
+    }
+}
 
     .side-panel {
     width: 280px;
