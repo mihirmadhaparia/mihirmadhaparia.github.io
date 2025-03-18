@@ -93,8 +93,7 @@ body {
 nav {
     position: fixed;
     top: 0;
-    right: 0;
-    width: calc(100% - 250px);
+    width: 100%;
     background: #2F3E2F;
     padding: 20px 0;
     text-align: center;
@@ -230,31 +229,26 @@ nav.shrink a {
 /* Responsive Design Adjustments */
 @media (max-width: 768px) {
     .side-panel {
-        position: relative;
         width: 100%;
         height: auto;
-        min-height: auto;
-        padding: 20px;
+        position: relative;
+        padding: 15px;
     }
     
     .side-panel .profile-pic {
-        width: 150px;
-        height: 150px;
-        margin: 10px auto;
+        width: 120px;
+        height: 120px;
     }
     
     .content {
         margin-left: 0;
-        padding: 20px;
-        width: 100%;
-        clear: both;
+        padding: 15px;
     }
     
     nav {
         position: sticky;
         top: 0;
         width: 100%;
-        background: #2F3E2F;
         z-index: 1000;
     }
     
@@ -263,36 +257,15 @@ nav.shrink a {
         flex-wrap: wrap;
         justify-content: center;
         gap: 10px;
-        padding: 5px;
     }
     
     .nav-links a {
         padding: 8px 12px;
         font-size: 14px;
-        color: #F1EDE2;
     }
     
     .experience-box {
-        padding: 20px;
-        margin: 10px 0;
-        width: 100%;
-    }
-
-    body {
-        overflow-x: hidden;
-    }
-}
-
-    .contact-info {
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        gap: 10px;
-    }
-
-    .contact-info a {
-        width: 100%;
-        max-width: 300px;
+        padding: 15px;
     }
 }
 
