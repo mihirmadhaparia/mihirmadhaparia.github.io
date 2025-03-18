@@ -300,8 +300,6 @@ PLATFORMS
 DEPENDENCIES
   github-pages (~> 228)
   jekyll (~> 3.9.3)
-  jekyll-theme-cayman
-  kramdown-parser-gfm
   webrick
 
 BUNDLED WITH
