@@ -231,24 +231,28 @@ nav.shrink a {
     .side-panel {
         width: 100%;
         height: auto;
-        position: relative;
-        padding: 15px;
+        position: static;
+        padding: 20px;
     }
     
     .side-panel .profile-pic {
-        width: 120px;
-        height: 120px;
+        width: 150px;
+        height: 150px;
+        margin: 10px auto;
     }
     
     .content {
         margin-left: 0;
-        padding: 15px;
+        padding: 20px;
+        width: 100%;
     }
     
     nav {
         position: sticky;
         top: 0;
+        left: 0;
         width: 100%;
+        background: rgba(255, 255, 255, 0.95);
         z-index: 1000;
     }
     
@@ -256,16 +260,32 @@ nav.shrink a {
         display: flex;
         flex-wrap: wrap;
         justify-content: center;
-        gap: 10px;
+        gap: 15px;
+        padding: 10px;
     }
     
     .nav-links a {
-        padding: 8px 12px;
-        font-size: 14px;
+        padding: 10px 15px;
+        font-size: 16px;
+        background: #f5f5f5;
+        border-radius: 5px;
     }
     
     .experience-box {
-        padding: 15px;
+        padding: 20px;
+        margin: 10px 0;
+    }
+
+    .contact-info {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 10px;
+    }
+
+    .contact-info a {
+        width: 100%;
+        max-width: 300px;
     }
 }
 
