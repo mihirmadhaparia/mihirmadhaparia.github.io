@@ -93,7 +93,8 @@ body {
 nav {
     position: fixed;
     top: 0;
-    width: 100%;
+    right: 0;
+    width: calc(100% - 250px);
     background: #2F3E2F;
     padding: 20px 0;
     text-align: center;
@@ -229,9 +230,10 @@ nav.shrink a {
 /* Responsive Design Adjustments */
 @media (max-width: 768px) {
     .side-panel {
+        position: relative;
         width: 100%;
         height: auto;
-        position: static;
+        min-height: auto;
         padding: 20px;
     }
     
@@ -245,14 +247,14 @@ nav.shrink a {
         margin-left: 0;
         padding: 20px;
         width: 100%;
+        clear: both;
     }
     
     nav {
         position: sticky;
         top: 0;
-        left: 0;
         width: 100%;
-        background: rgba(255, 255, 255, 0.95);
+        background: #2F3E2F;
         z-index: 1000;
     }
     
@@ -260,21 +262,26 @@ nav.shrink a {
         display: flex;
         flex-wrap: wrap;
         justify-content: center;
-        gap: 15px;
-        padding: 10px;
+        gap: 10px;
+        padding: 5px;
     }
     
     .nav-links a {
-        padding: 10px 15px;
-        font-size: 16px;
-        background: #f5f5f5;
-        border-radius: 5px;
+        padding: 8px 12px;
+        font-size: 14px;
+        color: #F1EDE2;
     }
     
     .experience-box {
         padding: 20px;
         margin: 10px 0;
+        width: 100%;
     }
+
+    body {
+        overflow-x: hidden;
+    }
+}
 
     .contact-info {
         display: flex;
