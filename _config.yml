@@ -13,3 +13,4 @@ kramdown:
 plugins:
   - jekyll-seo-tag # For SEO enhancements
   - jekyll-sitemap # To generate a sitemap.xml
+  - jekyll-markdown-filter # Liquid markdown understanding
