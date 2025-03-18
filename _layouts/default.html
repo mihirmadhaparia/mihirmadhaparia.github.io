@@ -53,21 +53,7 @@
         {{ content }}
     </div>
 
-    <script>
-        let lastScrollTop = 0;
-        const navbar = document.querySelector('nav');
-        
-        window.addEventListener('scroll', function() {
-            let scrollTop = window.pageYOffset || document.documentElement.scrollTop;
-            
-            if (scrollTop > lastScrollTop) {
-                navbar.classList.add('shrink');
-            } else {
-                navbar.classList.remove('shrink');
-            }
-            lastScrollTop = scrollTop <= 0 ? 0 : scrollTop;
-        });
-    </script>
+    
     
 </body>
 </html>
