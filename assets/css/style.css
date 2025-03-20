@@ -66,12 +66,37 @@ html {
 .experience-box {
     position: relative;
     border-radius: 16px;
-    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.08);
     padding: 30px 35px;
     margin: 20px 0;
     background-color: #ffffff;
     border-left: 5px solid #2ecc71;
-    transition: all 0.3s ease;
+    transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+    opacity: 0;
+    transform: translateY(20px);
+    animation: fadeInUp 0.8s forwards;
+    animation-play-state: paused;
+}
+
+.experience-box.visible {
+    animation-play-state: running;
+}
+
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.experience-box:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 12px 25px rgba(46, 204, 113, 0.15);
+    border-left: 8px solid #2ecc71;
 }
 
 .experience-box h3 {
@@ -113,6 +138,25 @@ html {
     display: inline-block;
     margin-bottom: 20px;
     border-bottom: 4px solid #2ecc71;
+    opacity: 0;
+    transform: translateX(-20px);
+    animation: fadeInLeft 0.6s forwards;
+    animation-play-state: paused;
+}
+
+.section-heading.visible {
+    animation-play-state: running;
+}
+
+@keyframes fadeInLeft {
+    from {
+        opacity: 0;
+        transform: translateX(-20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
 }
 
 /* Sticky Navigation Bar */
