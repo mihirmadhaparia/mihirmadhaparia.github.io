@@ -37,7 +37,7 @@
         </section>
 
         <section id="work" class="section">
-            <div class="experience-box">
+            <div class="experience-box with-logo">
                 <div class="experience-content">
                     <div class="date-box">January 2025 - Present</div> 
                     <h3>SwiftZip LLC</h3>
@@ -141,7 +141,7 @@
 
         <section id="projects" class="section">
             <h2 class="section-heading">Research Projects</h2>
-            <div class="experience-box">
+            <div class="experience-box with-logo">
                 <div class="experience-content">
                     <div class="date-box">January 2024 - Present</div>
                     <h3>McAlpine Research Group, University of Minnesota</h3>
