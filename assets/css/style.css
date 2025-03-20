@@ -69,7 +69,7 @@ html {
     box-shadow: 0 8px 20px rgba(0, 0, 0, 0.08);
     padding: 30px 35px;
     margin: 20px 0;
-    background-color: #ffffff;
+    background: linear-gradient(to right, #D4E8D3 70%, #2ecc71 30%); /* Light sage on the left and darker green on the right */
     border-left: 5px solid #2ecc71;
     transition: transform 0.3s ease-out, box-shadow 0.3s ease-out;
     opacity: 0;
