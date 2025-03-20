@@ -17,7 +17,7 @@
 
         <section id="education" class="section">
             <h2 class="section-heading">Education</h2>
-                <div class="experience-box">
+                <div class="experience-box gradient">
                     <h3>University of Minnesota – Twin Cities, College of Science & Engineering</h3>
                     <p><strong>Master of Science in Mechanical Engineering</strong> (Expected December 2025)</p>
                     <p><strong>Bachelor of Mechanical Engineering, Minor in Computer Science</strong> (January 2021 - December 2024)</p>
@@ -35,7 +35,7 @@
 
         <section id="work" class="section">
             <h2 class="section-heading">Work Experience</h2>
-            <div class="experience-box">
+            <div class="experience-box gradient">
             <div class="date-box">January 2025 - Present</div> 
                 <h3>SwiftZip LLC</h3>
                 <p><strong>Co-Founder & Stakeholder</strong></p>
@@ -46,7 +46,7 @@
                 </ul>
             </div>
 
-            <div class="experience-box">
+            <div class="experience-box gradient">
             <div class="date-box">May 2024 - August 2024</div>
                 <h3>Hennepin County Medical Center</h3>
                 <p><strong>Research & Quality Intern</strong></p>
@@ -57,7 +57,7 @@
                 </ul>
             </div>
 
-            <div class="experience-box">
+            <div class="experience-box gradient">
             <div class="date-box">January 2024 - May 2024</div>
                 <h3>Mechanical Engineering Department – University of Minnesota</h3>
                 <p><strong>Teaching Assistant – ME 3281: System Dynamics & Controls</strong></p>
@@ -68,7 +68,7 @@
                 </ul>
             </div>
 
-            <div class="experience-box">
+            <div class="experience-box gradient">
             <div class="date-box">January 2024 - May 2024</div>
                 <h3>Computer Science Department - University of Minnesota</h3>
                 <p><strong>CSCI 1113 - Introduction to C/C++ Programming for Scientists and Engineers</strong></p>
@@ -81,7 +81,7 @@
             </div>
 
 
-            <div class="experience-box">
+            <div class="experience-box gradient">
             <div class="date-box">January 2023 - December 2023</div>
                 <h3>Abbott Laboratories – Structural Heart, St. Paul, MN</h3>
                 <p><strong>Research & Development Engineer Co-op</strong></p>
@@ -94,7 +94,7 @@
                 </ul>
             </div>
 
-            <div class="experience-box">
+            <div class="experience-box gradient">
             <div class="date-box">June 2022 - July 2022</div>
                 <h3>Earl Bakken Medical Device Center, University of Minnesota</h3>
                 <p><strong>Project Engineering Intern</strong></p>
@@ -104,7 +104,7 @@
                 </ul>
             </div>
 
-            <div class="experience-box">
+            <div class="experience-box gradient">
             <div class="date-box">May 2021 - August 2021</div>
                 <h3>Superfit Steelcon Ltd., Nairobi, Kenya</h3>
                 <p><strong>Structural Engineer Intern</strong></p>
@@ -118,7 +118,7 @@
 
         <section id="projects" class="section">
             <h2 class="section-heading">Research Projects</h2>
-            <div class="experience-box">
+            <div class="experience-box gradient">
             <div class="date-box">January 2024 - Present</div>
                 <h3>McAlpine Research Group, University of Minnesota</h3>
                 <p><strong>Research Assistant - Development of 3D Printable Spinal Cord</strong></p>
@@ -138,7 +138,7 @@
                 </ul>
             </div>
 
-            <div class="experience-box">
+            <div class="experience-box gradient">
             <div class="date-box">March 2022 - Present</div>
                 <h3>Earl Bakken Medical Device Center, University of Minnesota</h3>
                 <p><strong>Research Assistant - Invention of Novel Suturing Device</strong></p>
@@ -154,7 +154,7 @@
 
         <section id="leadership" class="section">
             <h2 class="section-heading">Leadership & Volunteer Projects</h2>
-            <div class="experience-box">
+            <div class="experience-box gradient">
             <div class="date-box">January 2022 - Present</div>
                 <h3>Engineers Without Borders- University of Minnesota Chapter</h3>
                 <p><strong>President</strong></p>
@@ -173,7 +173,7 @@
                 </ul>
             </div>
 
-            <div class="experience-box">
+            <div class="experience-box gradient">
             <div class="date-box">April 2022 - April 2024</div>
                 <h3>Science and Engineering Student Board, University of Minnesota</h3>
                 <p><strong>Director of Academic Affairs Committee</strong></p>
@@ -192,7 +192,7 @@
                 </ul>
             </div>
 
-            <div class="experience-box">
+            <div class="experience-box gradient">
             <div class="date-box">September 2022 - May 2023</div>
                 <h3>College of Science & Engineering STEM Mentor</h3>
                 <p><strong>Cancer and Cardiovascular Research Center, University of Minnesota</strong></p>
@@ -203,7 +203,7 @@
                 </ul>
             </div>
 
-            <div class="experience-box">
+            <div class="experience-box gradient">
             <div class="date-box">January 2022 - December 2022</div>
                 <h3>Plumb Bob, University of Minnesota</h3>
                 <p><strong>Officer</strong></p>
