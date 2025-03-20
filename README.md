@@ -17,7 +17,7 @@
 
         <section id="education" class="section">
             <h2 class="section-heading">Education</h2>
-            <div class="experience-box">
+            <div class="experience-box with-logo">
                 <div class="experience-content">
                     <h3>University of Minnesota – Twin Cities, College of Science & Engineering</h3>
                     <p><strong>Master of Science in Mechanical Engineering</strong> (Expected December 2025)</p>

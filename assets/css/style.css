@@ -72,6 +72,9 @@ html {
     background-color: #ffffff;
     border-left: 5px solid #2ecc71;
     transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.experience-box.with-logo {
     display: flex;
     justify-content: space-between;
     align-items: flex-start;
