@@ -72,6 +72,7 @@ html {
 .experience-box p,
 .experience-box ul {
     position: relative;
+    max-width: 70%; /* Restricts the text to 70% of the box width */
     z-index: 1; /* Ensure the text is above the gradient */
 }
 
