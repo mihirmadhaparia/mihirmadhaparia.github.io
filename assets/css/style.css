@@ -71,7 +71,7 @@ html {
     margin: 20px 0;
     background-color: #ffffff;
     border-left: 5px solid #2ecc71;
-    transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+    transition: transform 0.3s ease-out, box-shadow 0.3s ease-out;
     opacity: 0;
     transform: translateY(20px);
     animation: fadeInUp 0.8s forwards;
@@ -94,10 +94,8 @@ html {
 }
 
 .experience-box:hover {
-    transform: translateY(-5px) scale(1.01);
+    transform: translateY(-5px);
     box-shadow: 0 15px 35px rgba(46, 204, 113, 0.2);
-    border-left: 8px solid #2ecc71;
-    background: linear-gradient(165deg, #ffffff, #f0f2f5);
 }
 
 .experience-box h3 {
