@@ -74,44 +74,6 @@ html {
     transition: transform 0.2s ease, box-shadow 0.2s ease;
 }
 
-.experience-box {
-    position: relative;
-    padding: 20px;
-    margin-bottom: 20px;
-    background-color: #ffffff;
-    border-left: 5px solid #2ecc71;
-    border-radius: 5px;
-    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-    transition: transform 0.2s ease, box-shadow 0.2s ease;
-}
-
-.experience-box.with-logo {
-    display: flex;
-    justify-content: space-between;
-    align-items: flex-start;
-}
-
-.experience-content {
-    flex: 1;
-    padding-right: 20px;
-}
-
-.experience-logo {
-    width: 100px;
-    height: auto;
-    object-fit: contain;
-    margin-top: 10px;
-    margin-left: 20px;
-}
-
-.experience-logo.small {
-    width: 80px;
-}
-
-.experience-logo.large {
-    width: 120px;
-}
-
 .experience-box:hover {
     transform: translateY(-3px);
     box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15);
