@@ -3,11 +3,16 @@
 const observer = new IntersectionObserver((entries) => {
     entries.forEach(entry => {
         if (entry.isIntersecting) {
-            entry.target.classList.add('visible');
+            requestAnimationFrame(() => {
+                requestAnimationFrame(() => {
+                    entry.target.classList.add('visible');
+                });
+            });
         }
     });
 }, {
-    threshold: 0.1
+    threshold: 0.15,
+    rootMargin: '50px'
 });
 
 // Observe all experience boxes and section headings
