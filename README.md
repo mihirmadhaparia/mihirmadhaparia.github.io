@@ -62,7 +62,7 @@
                         <li>Simplified patient understanding of research participation by redesigning consent protocols using psychologically proven methods to help candidates gain better understandings of research requirements, improving engagement and enrollment rates.</li>
                     </ul>
                 </div>
-                <img src="{{ site.baseurl }}/assets/images/hc_logo.png" alt="Hennepin County Medical Center Logo" class="experience-logo">
+                <img src="{{ site.baseurl }}/assets/images/hcmclogo.jpg" alt="Hennepin County Medical Center Logo" class="experience-logo">
             </div>
 
             <div class="experience-box">
