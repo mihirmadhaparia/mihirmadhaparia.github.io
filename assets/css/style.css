@@ -67,11 +67,22 @@ html {
     position: relative;
     border-radius: 16px;
     box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
-    padding: 20px 25px;
-    margin: 15px 0;
+    padding: 30px 35px;
+    margin: 20px 0;
     background-color: #ffffff;
     border-left: 5px solid #2ecc71;
-    transition: transform 0.2s ease, box-shadow 0.2s ease;
+    transition: all 0.3s ease;
+}
+
+.experience-box h3 {
+    color: #2F3E2F;
+    margin-bottom: 15px;
+    font-size: 1.4em;
+}
+
+.experience-box ul {
+    margin-top: 15px;
+    line-height: 1.6;
 }
 
 .experience-box:hover {
@@ -124,15 +135,15 @@ nav.shrink {
 nav a {
     color: #F1EDE2;
     text-decoration: none;
-    padding: 15px 20px;
+    padding: 12px 18px;
     display: inline-block;
     font-size: 25px;
     position: relative;
-    background: linear-gradient(to right, #FF3B30, #FF9500);
+    background: linear-gradient(to right, #2ecc71, #27ae60);
     background-size: 100% 3px, 0 3px;
     background-position: 100% 100%, 0 100%;
     background-repeat: no-repeat;
-    transition: background-size 500ms, font-size 0.3s ease-in-out;
+    transition: all 0.3s ease-in-out;
 }
 
 nav a:hover {
