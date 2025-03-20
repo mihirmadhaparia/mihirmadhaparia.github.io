@@ -64,7 +64,15 @@ html {
 
 /* Experience Section Styling */
 .experience-box.gradient {
+    position: relative;
     background: linear-gradient(to right, #f0fff1 70%, #2ecc71 30%);
+}
+
+.experience-box h3,
+.experience-box p,
+.experience-box ul {
+    position: relative;
+    z-index: 1; /* Ensure the text is above the gradient */
 }
 
 .experience-box {
