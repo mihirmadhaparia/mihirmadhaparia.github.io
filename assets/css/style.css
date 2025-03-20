@@ -66,6 +66,7 @@ html {
 .experience-box.gradient {
     position: relative;
     background: linear-gradient(to right, #f0fff1 70%, #2ecc71 30%);
+    padding: 30px 35px;
 }
 
 .experience-box h3,
