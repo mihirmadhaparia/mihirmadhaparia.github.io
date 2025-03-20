@@ -66,14 +66,13 @@ html {
 .experience-box.gradient {
     position: relative;
     background: linear-gradient(to right, #f0fff1 70%, #2ecc71 30%);
-    padding: 30px 35px;
 }
 
-.experience-box h3,
-.experience-box p,
-.experience-box ul {
+.experience-box.gradient h3,
+.experience-box.gradient p,
+.experience-box.gradient ul {
     position: relative;
-    max-width: 70%; /* Restricts the text to 70% of the box width */
+    max-width: 65%; /* Restricts the text to 70% of the box width */
     z-index: 1; /* Ensure the text is above the gradient */
 }
 
