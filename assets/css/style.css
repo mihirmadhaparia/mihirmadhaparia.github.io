@@ -483,3 +483,48 @@ body::-webkit-scrollbar {
     color: #6B8E72;
     margin-top: 5px;
 }
+
+.education-container {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.education-box {
+    display: flex;
+    align-items: center;
+    background: #f5f5f5;
+    padding: 15px;
+    border-radius: 10px;
+    box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease-in-out;
+}
+
+.education-box:hover {
+    transform: scale(1.02);
+}
+
+.umn-logo {
+    width: 60px;
+    height: auto;
+    margin-right: 15px;
+}
+
+.education-details {
+    flex-grow: 1;
+}
+
+.download-btn {
+    display: inline-block;
+    margin-top: 10px;
+    padding: 8px 12px;
+    background-color: #a30000;
+    color: white;
+    text-decoration: none;
+    border-radius: 5px;
+    font-weight: bold;
+}
+
+.download-btn:hover {
+    background-color: #7a0000;
+}
