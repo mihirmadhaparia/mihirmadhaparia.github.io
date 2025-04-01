@@ -484,6 +484,7 @@ body::-webkit-scrollbar {
     margin-top: 5px;
 }
 
+/* Education Section */
 .education-container {
     display: flex;
     flex-direction: column;
@@ -492,6 +493,7 @@ body::-webkit-scrollbar {
 
 .education-box {
     display: flex;
+    justify-content: space-between;
     align-items: center;
     background: #f5f5f5;
     padding: 15px;
@@ -504,14 +506,21 @@ body::-webkit-scrollbar {
     transform: scale(1.02);
 }
 
-.umn-logo {
-    width: 60px;
-    height: auto;
-    margin-right: 15px;
-}
-
 .education-details {
     flex-grow: 1;
+}
+
+.umn-logo {
+    width: 80px; /* Increased size */
+    height: auto;
+    margin-left: 15px; /* Push it to the far right */
+}
+
+.education-dates {
+    font-weight: bold;
+    background: linear-gradient(90deg, #a30000, #ff6700);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
 }
 
 .download-btn {
