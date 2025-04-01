@@ -511,7 +511,7 @@ body::-webkit-scrollbar {
 }
 
 .umn-logo {
-    width: 80px; /* Increased size */
+    width: 100px; /* Increased size */
     height: auto;
     margin-left: 15px; /* Push it to the far right */
 }
