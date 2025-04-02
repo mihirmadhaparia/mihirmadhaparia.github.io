@@ -591,3 +591,15 @@ body::-webkit-scrollbar {
     width: 28px;
     height: auto;
 }
+
+/* Footer */
+.site-footer {
+    text-align: center;
+    font-size: 14px;
+    padding: 15px;
+    background-color: #222; /* Dark footer */
+    color: white;
+    position: relative;
+    bottom: 0;
+    width: 100%;
+}
