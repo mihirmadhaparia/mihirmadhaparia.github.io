@@ -597,9 +597,10 @@ body::-webkit-scrollbar {
     text-align: center;
     font-size: 14px;
     padding: 15px;
-    background-color: #222; /* Dark footer */
+    background-color: #2F3E2F; /* Dark footer */
     color: white;
     position: relative;
     bottom: 0;
     width: 100%;
+    max-width: 100vw;
 }
