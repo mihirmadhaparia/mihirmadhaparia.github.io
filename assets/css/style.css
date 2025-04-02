@@ -232,6 +232,12 @@ nav.shrink a {
   margin-top: 10px;
 }
 
+.titlecontact {
+  font-size: 1.0em;
+  font-weight: bold;
+  margin-top: 10px;
+}
+
 .contact-info {
   margin-top: 15px;
 }
