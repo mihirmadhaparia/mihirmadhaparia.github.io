@@ -3,7 +3,7 @@ layout: default
 title: Home
 permalink: //
 ---
-
+<!--
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -13,6 +13,11 @@ permalink: //
 </head>
 <body>
     <div class="container">
+
+            </div>
+</body>
+</html>
+-->
         <section id="Home" class="section">
             <h2 class="section-heading">About Me</h2>
             <div class="experience-box">
@@ -21,6 +26,4 @@ permalink: //
                 <p>As an engineer, I continuously seek opportunities to innovate, collaborate, and push the boundaries of medical technology to shape a future where advanced healthcare solutions are more efficient, effective, and widely accessible.</p>
             </div>
         </section>
-    </div>
-</body>
-</html>
+
