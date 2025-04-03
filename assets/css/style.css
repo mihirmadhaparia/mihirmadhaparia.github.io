@@ -617,13 +617,6 @@ html, body {
     width: 100%; /* Ensures no extra space is created */
 }
 
-/* Background Video Styling */
-#hero {
-    position: relative;
-    height: 100vh;
-    overflow: hidden;
-}
-
 #background-video {
     position: absolute;
     top: 0;
