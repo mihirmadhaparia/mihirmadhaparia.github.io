@@ -643,7 +643,7 @@ body {
     z-index: -1;
 }
 
-/* Homepage content */
+/* Homepage content 
 .home-content {
     display: flex;
     flex-direction: column;
@@ -655,6 +655,22 @@ body {
     z-index: 1;
     color: white;
     box-sizing: border-box;
+}
+*/
+/* Homepage content */
+.home-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    height: 100vh;
+    width: 100vw;
+    position: relative;
+    z-index: 1;
+    color: white;
+    box-sizing: border-box;
+    padding: 20px;
 }
 
 /* Profile Image & Name */
