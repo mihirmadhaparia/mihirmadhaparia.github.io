@@ -629,7 +629,7 @@ body {
 
 /* Full-page video background */
 .full-page {
-    position: absolute;
+    position: relative;
     overflow: hidden;
 }
 
@@ -651,7 +651,7 @@ body {
     justify-content: center;
     text-align: center;
     height: 100vh;
-    position: static;
+    position: absolute;
     z-index: 1;
     color: white;
     box-sizing: border-box;
