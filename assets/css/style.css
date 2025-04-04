@@ -1,6 +1,6 @@
 /* Base Styles */
 html {
-  font-family: 'Open Sans', sans-serif;
+  font-family: 'Inter', sans-serif;
   -ms-text-size-adjust: 100%;
   -webkit-text-size-adjust: 100%;
 }
@@ -9,7 +9,7 @@ body {
   margin: 0;
   background-color: #D4E8D3;
   color: #2F3E2F;
-  font-family: 'Roboto', Arial, sans-serif;
+  font-family: 'Inter', sans-serif;
 }
 
 /* Form Elements */
