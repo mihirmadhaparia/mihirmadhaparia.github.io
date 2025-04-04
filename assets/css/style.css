@@ -651,7 +651,7 @@ body {
     justify-content: center;
     text-align: center;
     height: 100vh;
-    position: absolute;
+    position: static;
     z-index: 1;
     color: white;
     box-sizing: border-box;
