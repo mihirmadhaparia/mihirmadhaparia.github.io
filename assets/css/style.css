@@ -412,7 +412,6 @@ nav.shrink a {
     }
 }
 
-
 /* Footer */
 .site-footer {
   padding-top: 2rem;
@@ -629,9 +628,7 @@ body {
 
 /* Full-page video background */
 .full-page {
-    position: absolute; /* relative 
-    width: 100vw;
-    height: 100vh; */
+    position: absolute;
     overflow: hidden;
 }
 
