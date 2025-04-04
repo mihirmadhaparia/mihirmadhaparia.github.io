@@ -20,7 +20,7 @@ body {
     font-display: swap;
     src: url("assets/fonts/Inter-Light.woff2") format("woff2");
 }
-
+/*
 @font-face {
     font-family: "Inter";
     font-style: normal;
@@ -60,7 +60,7 @@ body {
     font-display: swap;
     src: url("assets/fonts/Inter-Black.woff2") format("woff2");
 }
-
+*/
 /* Form Elements */
 button,
 input,
