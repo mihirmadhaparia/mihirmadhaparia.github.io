@@ -620,7 +620,12 @@ html, body {
 /* No side panel on homepage */
 body.home-page .side-panel {
     display: none;
+}
+
+/* Remove left margin only on homepage */
+body.home-page .content {
     margin-left: 0;
+    padding: 0;
 }
 
 /* Prevent lateral scroll */
