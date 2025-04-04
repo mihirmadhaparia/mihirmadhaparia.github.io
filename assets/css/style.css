@@ -651,8 +651,7 @@ body {
     justify-content: center;
     text-align: center;
     height: 100vh;
-    /* padding: 30px 20px; */
-    position: relative;
+    position: absolute;
     z-index: 1;
     color: white;
     box-sizing: border-box;
