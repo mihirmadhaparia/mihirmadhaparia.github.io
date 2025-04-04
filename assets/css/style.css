@@ -415,7 +415,8 @@ nav.shrink a {
 /* Footer */
 .site-footer {
   padding-top: 2rem;
-  margin-top: 2rem;
+  position: fixed;
+  bottom: 0;
   border-top: solid 1px #eff0f1;
 }
 
