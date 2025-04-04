@@ -620,6 +620,7 @@ html, body {
 /* No side panel on homepage */
 body.home-page .side-panel {
     display: none;
+    margin-left: 0;
 }
 
 /* Prevent lateral scroll */
@@ -643,20 +644,6 @@ body {
     z-index: -1;
 }
 
-/* Homepage content 
-.home-content {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    text-align: center;
-    height: 100vh;
-    position: fixed;
-    z-index: 1;
-    color: white;
-    box-sizing: border-box;
-}
-*/
 /* Homepage content */
 .home-content {
     display: flex;
