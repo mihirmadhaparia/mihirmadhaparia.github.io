@@ -629,7 +629,7 @@ body {
 
 /* Full-page video background */
 .full-page {
-    position: static; /* relative 
+    position: absolute; /* relative 
     width: 100vw;
     height: 100vh; */
     overflow: hidden;
