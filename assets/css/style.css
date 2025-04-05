@@ -12,6 +12,7 @@ body {
   background-color: #D4E8D3;
   color: #2F3E2F;
   font-family: 'Lora', sans-serif !important;
+  opacity: 0;
 }
 
 /* Fonts */
