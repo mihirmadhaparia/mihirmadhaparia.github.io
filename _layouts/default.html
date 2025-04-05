@@ -78,33 +78,5 @@
         <p>© 2025 Mihir Madhaparia. All Rights Reserved.</p>
     </footer>
 
-    <script>
-      document.addEventListener("DOMContentLoaded", () => {
-        // Fade in on page load
-        document.body.classList.add("fade-in");
-    
-        // Handle all internal anchor links
-        const anchors = document.querySelectorAll("a[href]");
-    
-        anchors.forEach(anchor => {
-          const href = anchor.getAttribute("href");
-          const isSameOrigin = anchor.origin === window.location.origin;
-    
-          // Ignore external or special links
-          if (!isSameOrigin || href.startsWith('#') || anchor.target === "_blank") return;
-    
-          anchor.addEventListener("click", (e) => {
-            e.preventDefault();
-            document.body.classList.remove("fade-in");
-            document.body.classList.add("fade-out");
-    
-            setTimeout(() => {
-              window.location = href;
-            }, 500); // Match the CSS transition duration
-          });
-        });
-      });
-    </script>
-
 </body>
 </html>
