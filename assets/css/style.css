@@ -708,3 +708,14 @@ body {
     border-image: linear-gradient(to bottom right, #00ff9c, #00cfff) 1;
     backdrop-filter: blur(5px);
 }
+
+/* Fade transition effect */
+body.fade-out {
+  opacity: 0;
+  transition: opacity 0.5s ease-in-out;
+}
+
+body.fade-in {
+  opacity: 1;
+  transition: opacity 0.5s ease-in-out;
+}
