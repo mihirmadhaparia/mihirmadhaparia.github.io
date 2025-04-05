@@ -76,6 +76,8 @@ html {
 .experience-box.gradient {
     position: relative;
     background: linear-gradient(to right, #f0fff1 70%, #2ecc71 30%);
+    display: flex;
+    overflow: hidden;
 }
 
 .experience-box.gradient h3,
@@ -144,6 +146,59 @@ html {
     right: 10px;
     white-space: nowrap;
 }
+
+
+
+
+
+/* HERE */
+
+
+
+
+
+
+
+/* Image carousel section on right */
+.experience-box.gradient .experience-gallery {
+  flex: 0 0 30%;
+  position: relative;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  padding-left: 10px;
+}
+
+.experience-box.gradient .experience-gallery img {
+  width: 100%;
+  height: auto;
+  margin: 10px 0;
+  border-radius: 12px;
+  transition: transform 0.3s ease;
+  object-fit: cover;
+}
+
+/* Optional: Scroll on hover */
+.experience-box.gradient .experience-gallery:hover {
+  overflow-y: auto;
+  scrollbar-width: thin;
+}
+
+.experience-box.gradient .experience-gallery:hover img:hover {
+  transform: scale(1.05);
+}
+
+
+
+
+
+
+
+/* TO HERE */
+
+
 
 /* Section Heading Styling */
 .section-heading {
