@@ -163,9 +163,7 @@ html {
 .experience-box.gradient .experience-gallery {
   position: relative;
   overflow: hidden;
-  display: flex;
   align-items: center;
-  justify-content: flex-start;
   padding-left: 10px;
 }
 
