@@ -77,5 +77,32 @@
     <footer class="site-footer">
         <p>© 2025 Mihir Madhaparia. All Rights Reserved.</p>
     </footer>
+
+    <script>
+      document.addEventListener("DOMContentLoaded", () => {
+        document.body.classList.add("fade-in");
+    
+        const anchors = document.querySelectorAll("a[href]");
+    
+        anchors.forEach(anchor => {
+          const url = new URL(anchor.href);
+          if (url.origin === window.location.origin) {
+            anchor.addEventListener("click", (e) => {
+              // Only apply effect for internal links
+              e.preventDefault();
+              const href = anchor.getAttribute("href");
+    
+              document.body.classList.remove("fade-in");
+              document.body.classList.add("fade-out");
+    
+              setTimeout(() => {
+                window.location.href = href;
+              }, 500); // Match the CSS transition duration
+            });
+          }
+        });
+      });
+    </script>
+
 </body>
 </html>
