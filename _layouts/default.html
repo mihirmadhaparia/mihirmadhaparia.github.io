@@ -80,26 +80,28 @@
 
     <script>
       document.addEventListener("DOMContentLoaded", () => {
+        // Fade in on page load
         document.body.classList.add("fade-in");
     
+        // Handle all internal anchor links
         const anchors = document.querySelectorAll("a[href]");
     
         anchors.forEach(anchor => {
-          const url = new URL(anchor.href);
-          if (url.origin === window.location.origin) {
-            anchor.addEventListener("click", (e) => {
-              // Only apply effect for internal links
-              e.preventDefault();
-              const href = anchor.getAttribute("href");
+          const href = anchor.getAttribute("href");
+          const isSameOrigin = anchor.origin === window.location.origin;
     
-              document.body.classList.remove("fade-in");
-              document.body.classList.add("fade-out");
+          // Ignore external or special links
+          if (!isSameOrigin || href.startsWith('#') || anchor.target === "_blank") return;
     
-              setTimeout(() => {
-                window.location.href = href;
-              }, 500); // Match the CSS transition duration
-            });
-          }
+          anchor.addEventListener("click", (e) => {
+            e.preventDefault();
+            document.body.classList.remove("fade-in");
+            document.body.classList.add("fade-out");
+    
+            setTimeout(() => {
+              window.location = href;
+            }, 500); // Match the CSS transition duration
+          });
         });
       });
     </script>
