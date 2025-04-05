@@ -672,6 +672,7 @@ body {
     z-index: 1;
     color: white;
     box-sizing: border-box;
+    margin-top: 150px;
 }
 
 /* Profile Image & Name */
