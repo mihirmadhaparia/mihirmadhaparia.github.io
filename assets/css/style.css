@@ -161,11 +161,9 @@ html {
 
 /* Image carousel section on right */
 .experience-box.gradient .experience-gallery {
-  flex: 0 0 30%;
   position: relative;
   overflow: hidden;
   display: flex;
-  flex-direction: column;
   align-items: center;
   justify-content: flex-start;
   padding-left: 10px;
