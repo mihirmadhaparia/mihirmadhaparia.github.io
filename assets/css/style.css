@@ -12,7 +12,6 @@ body {
   background-color: #D4E8D3;
   color: #2F3E2F;
   font-family: 'Lora', sans-serif !important;
-  opacity: 0;
 }
 
 /* Fonts */
@@ -708,15 +707,4 @@ body {
     border: 2px solid transparent;
     border-image: linear-gradient(to bottom right, #00ff9c, #00cfff) 1;
     backdrop-filter: blur(5px);
-}
-
-/* Fade transition effect */
-body.fade-out {
-  opacity: 0;
-  transition: opacity 0.5s ease-in-out;
-}
-
-body.fade-in {
-  opacity: 1;
-  transition: opacity 0.5s ease-in-out;
 }
