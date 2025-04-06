@@ -78,5 +78,26 @@
         <p>© 2025 Mihir Madhaparia. All Rights Reserved.</p>
     </footer>
 
+    <script>
+      document.addEventListener("DOMContentLoaded", () => {
+        const footer = document.querySelector('.site-footer');
+    
+        function checkScrollPosition() {
+          const scrollTop = window.scrollY || document.documentElement.scrollTop;
+          const windowHeight = window.innerHeight;
+          const documentHeight = document.documentElement.scrollHeight;
+    
+          if (scrollTop + windowHeight >= documentHeight - 10) {
+            footer.classList.add('show');
+          } else {
+            footer.classList.remove('show');
+          }
+        }
+    
+        window.addEventListener('scroll', checkScrollPosition);
+        checkScrollPosition(); // In case you're already at the bottom
+      });
+    </script>
+
 </body>
 </html>
