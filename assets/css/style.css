@@ -86,6 +86,36 @@ html {
     z-index: 1; /* Ensure the text is above the gradient */
 }
 
+/* Right-side image container */
+.experience-box.gradient .image-carousel {
+    position: absolute;
+    top: 30px;
+    right: 35px;
+    bottom: 30px;
+    width: 25%; /* Leave some padding inside the 30% green area */
+    overflow: hidden;
+    border-radius: 12px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    scroll-snap-type: y mandatory;
+    overflow-y: auto;
+    padding-right: 5px;
+}
+
+.experience-box.gradient .image-carousel img {
+    width: 100%;
+    height: auto;
+    border-radius: 10px;
+    object-fit: cover;
+    scroll-snap-align: start;
+    transition: transform 0.3s ease;
+}
+
+.experience-box.gradient .image-carousel img:hover {
+    transform: scale(1.05);
+}
+
 .experience-box {
     position: relative;
     border-radius: 16px;
