@@ -104,7 +104,7 @@ html {
 
 /* Style the images in the carousel */
 .experience-box.gradient .image-carousel img {
-    height: 120px;
+    height: 200px;
     border-radius: 10px;
     object-fit: cover;
     scroll-snap-align: start;
