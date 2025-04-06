@@ -86,34 +86,50 @@ html {
     z-index: 1; /* Ensure the text is above the gradient */
 }
 
-/* Right-side image container */
 .experience-box.gradient .image-carousel {
     position: absolute;
-    top: 30px;
+    top: 60px; /* increased from 30px to make space for the date box */
     right: 35px;
     bottom: 30px;
-    width: 25%; /* Leave some padding inside the 30% green area */
-    overflow: hidden;
-    border-radius: 12px;
+    width: 25%;
+    overflow-x: auto;
+    overflow-y: hidden;
     display: flex;
-    flex-direction: column;
     gap: 10px;
-    scroll-snap-type: y mandatory;
-    overflow-y: auto;
-    padding-right: 5px;
+    padding-bottom: 8px;
+    scroll-snap-type: x mandatory;
+    align-items: center;
+    scroll-behavior: smooth;
 }
 
+/* Style the images in the carousel */
 .experience-box.gradient .image-carousel img {
-    width: 100%;
-    height: auto;
+    height: 120px;
     border-radius: 10px;
     object-fit: cover;
     scroll-snap-align: start;
+    flex-shrink: 0;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.1);
     transition: transform 0.3s ease;
 }
 
 .experience-box.gradient .image-carousel img:hover {
     transform: scale(1.05);
+}
+
+/* Aesthetic scroll bar styling */
+.experience-box.gradient .image-carousel::-webkit-scrollbar {
+    height: 6px;
+}
+
+.experience-box.gradient .image-carousel::-webkit-scrollbar-track {
+    background: transparent;
+    border-radius: 4px;
+}
+
+.experience-box.gradient .image-carousel::-webkit-scrollbar-thumb {
+    background: linear-gradient(to right, #2ecc71, #27ae60);
+    border-radius: 4px;
 }
 
 .experience-box {
