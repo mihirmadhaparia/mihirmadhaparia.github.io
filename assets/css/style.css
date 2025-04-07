@@ -114,22 +114,18 @@ html {
     transition: transform 0.3s ease;
 }
 
-.experience-box.gradient .image-carousel img:hover {
-    transform: scale(1.05);
-}
-
 /* Aesthetic scroll bar styling */
 .experience-box.gradient .image-carousel::-webkit-scrollbar {
     height: 6px;
 }
-
+/*
 .experience-box.gradient .image-carousel::-webkit-scrollbar-track {
-    background: transparent;
+    background: none;
     border-radius: 4px;
 }
-
+*/
 .experience-box.gradient .image-carousel::-webkit-scrollbar-thumb {
-    background: linear-gradient(to right, #2ecc71, #27ae60);
+    background: linear-gradient(135deg, red, orange);
     border-radius: 4px;
 }
 
