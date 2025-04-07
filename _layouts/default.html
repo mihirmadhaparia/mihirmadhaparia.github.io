@@ -78,26 +78,5 @@
         <p>© 2025 Mihir Madhaparia. All Rights Reserved.</p>
     </footer>
 
-    <div id="imageTooltip" class="image-tooltip">Click to open in new tab</div>
-
-    <script>
-      const tooltip = document.getElementById('imageTooltip');
-    
-      document.querySelectorAll('.carousel-image').forEach(img => {
-        img.addEventListener('mouseenter', () => {
-          tooltip.style.opacity = 1;
-        });
-    
-        img.addEventListener('mousemove', e => {
-          tooltip.style.left = `${e.pageX}px`;
-          tooltip.style.top = `${e.pageY - 20}px`;
-        });
-    
-        img.addEventListener('mouseleave', () => {
-          tooltip.style.opacity = 0;
-        });
-      });
-    </script>
-
 </body>
 </html>
