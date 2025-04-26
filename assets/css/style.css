@@ -450,10 +450,6 @@ nav.shrink a {
         gap: 10px;
     }
 
-    nav {
-        position: relative;
-    }
-
     nav a {
         font-size: 18px;
         padding: 10px 15px;
