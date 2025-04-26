@@ -406,28 +406,37 @@ nav.shrink a {
     }
 
     nav {
-        position: fixed;
-        top: 0;
-        left: 280px;
-        right: 0;
-        background: rgba(255, 255, 255, 0.95);
-        backdrop-filter: blur(10px);
-        padding: 15px 30px;
-        box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-        transition: all 0.3s ease;
-        z-index: 1000;
+          position: fixed; /* Keep it fixed at the top */
+          top: 0;
+          left: 0; /* Start from the left edge */
+          right: 0; /* Extend to the right edge */
+          width: 100%; /* Ensure it spans full width */
+          background: #2F3E2F; /* Use the original dark background */
+          padding: 15px 0; /* Adjust padding as needed, maybe less horizontal */
+          box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); 
+          transition: all 0.3s ease; 
+          z-index: 500; /* Match the desktop z-index */
+          text-align: center; /* Center the links */
     }
 
     nav a {
-        color: #2ecc71;
+        color: #F1EDE2; /* Use the original light link color */
         text-decoration: none;
-        margin: 0 15px;
-        font-weight: 500;
+        padding: 10px 15px; /* Adjust padding for mobile */
+        display: inline-block;
+        font-size: 16px; /* Adjust font size for mobile */
+        font-weight: 500; 
         transition: color 0.3s ease;
+        /* Keep hover effect from desktop or adjust */
+        background: linear-gradient(to right, #2ecc71, #27ae60);
+        background-size: 100% 3px, 0 3px;
+        background-position: 100% 100%, 0 100%;
+        background-repeat: no-repeat;
     }
-
+            
     nav a:hover {
-        color: #27ae60;
+        color: #F1EDE2; /* Keep text color on hover */
+        background-size: 0 3px, 100% 3px; /* Keep the underline animation */
     }
 
     .content {
