@@ -592,3 +592,130 @@ body.home-page .full-page  { width: 100vw; min-height: 100vh; }
   nav a { font-size: 0.72em; padding: 5px 7px; }
   .name-title { font-size: 1.8rem; }
 }
+
+/* ─── Publications Page ──────────────────────────────────────── */
+.pub-section-label {
+  font-family: 'DM Sans', sans-serif;
+  font-size: 0.72em;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin: 0 0 14px;
+  padding-bottom: 8px;
+  border-bottom: 1px solid rgba(46,204,113,0.15);
+}
+
+/* Type badges */
+.pub-type-badge {
+  display: inline-flex;
+  align-items: center;
+  font-size: 0.72em;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  padding: 4px 12px;
+  border-radius: 20px;
+  margin-bottom: 10px;
+}
+.thesis-badge { background: rgba(241,196,15,0.15); color: #b7860b; border: 1px solid rgba(241,196,15,0.35); }
+.poster-badge { background: rgba(46,204,113,0.12); color: var(--green-dark); border: 1px solid rgba(46,204,113,0.3); }
+.paper-badge  { background: rgba(52,152,219,0.12); color: #1a6fa0; border: 1px solid rgba(52,152,219,0.3); }
+
+/* Left border accent per type */
+.pub-thesis { border-left: 4px solid #f1c40f; }
+.pub-poster { border-left: 4px solid var(--green-primary); }
+.pub-paper  { border-left: 4px solid #3498db; }
+
+/* Authors / venue */
+.pub-authors {
+  font-size: 0.875em !important;
+  color: var(--text-primary) !important;
+  margin: 2px 0 2px !important;
+}
+.pub-authors strong { color: var(--green-deep); }
+.pub-venue {
+  font-size: 0.8em !important;
+  color: var(--text-muted) !important;
+  margin: 0 0 14px !important;
+}
+
+/* Abstract */
+.pub-abstract {
+  background: var(--green-light);
+  border-radius: var(--radius-md);
+  padding: 14px 16px;
+  margin: 14px 0;
+  border-left: 3px solid rgba(46,204,113,0.3);
+}
+.pub-abstract p {
+  font-size: 0.855em !important;
+  color: var(--text-secondary) !important;
+  line-height: 1.7;
+  margin-bottom: 8px !important;
+}
+.pub-abstract p:last-child { margin-bottom: 0 !important; }
+
+/* Highlights */
+.pub-highlights {
+  display: flex;
+  flex-direction: column;
+  gap: 7px;
+  margin: 14px 0;
+}
+.pub-highlight-item {
+  font-size: 0.845em;
+  color: var(--text-secondary);
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  line-height: 1.55;
+}
+.pub-highlight-item i {
+  color: var(--green-primary);
+  font-size: 0.9em;
+  margin-top: 2px;
+  flex-shrink: 0;
+  width: 16px;
+}
+
+/* Actions row */
+.pub-actions {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-top: 18px;
+  padding-top: 14px;
+  border-top: 1px solid rgba(46,204,113,0.10);
+}
+.pub-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  padding: 8px 18px;
+  border-radius: var(--radius-sm);
+  font-size: 0.82em;
+  font-weight: 600;
+  text-decoration: none;
+  transition: var(--transition);
+  flex-shrink: 0;
+}
+.primary-btn {
+  background: var(--green-deep);
+  color: white;
+}
+.primary-btn:hover { background: var(--green-dark); transform: translateY(-1px); box-shadow: 0 4px 12px rgba(46,204,113,0.25); }
+
+.pub-keyword-pill {
+  font-size: 0.75em;
+  font-weight: 500;
+  padding: 4px 10px;
+  background: var(--green-light);
+  border: 1px solid rgba(46,204,113,0.2);
+  border-radius: 20px;
+  color: var(--text-secondary);
+  white-space: nowrap;
+}
