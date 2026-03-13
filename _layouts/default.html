@@ -5,11 +5,11 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>{{ page.title }}</title>
     <link rel="stylesheet" href="{{ '/assets/css/style.css' | relative_url }}">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
     <link rel="icon" href="{{ site.baseurl }}/assets/images/Mfavicon.ico" type="image/x-icon">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Lora&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,600;0,700;1,400&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
 </head>
 <body class="{% if page.url == '/' %}home-page{% endif %}">
 
@@ -17,27 +17,27 @@
     <aside class="side-panel">
         <img src="{{ site.baseurl }}/assets/images/HeadshotPortrait.jpg" alt="Profile Picture" class="profile-pic">
         <h2 class="name">Mihir Madhaparia</h2>
-        
+
         <div class="contact-info">
             <h2 class="titlecontact">Contact</h2>
             <p>
                 <a href="mailto:mihirmadhaparia@gmail.com" class="contact-item email">
-                    <i class="fas fa-envelope"></i> Email - mihirmadhaparia@gmail.com
+                    <i class="fas fa-envelope"></i> mihirmadhaparia@gmail.com
                 </a>
             </p>
             <p>
                 <a href="https://www.linkedin.com/in/mihirmadhaparia" target="_blank" class="contact-item linkedin">
-                    <i class="fab fa-linkedin"></i> LinkedIn - Mihir Madhaparia
+                    <i class="fab fa-linkedin"></i> LinkedIn
                 </a>
             </p>
             <p>
                 <a href="https://github.com/mihirmadhaparia" target="_blank" class="contact-item github">
-                    <i class="fab fa-github"></i> GitHub - Mihir Madhaparia
+                    <i class="fab fa-github"></i> GitHub
                 </a>
             </p>
         </div>
     </aside>
-    
+
     <!-- Navigation Bar -->
     <nav>
         <div class="nav-container">
@@ -45,8 +45,9 @@
                 <a href="{{ '/' | relative_url }}">Home</a>
                 <a href="{{ '/education/' | relative_url }}">Education</a>
                 <a href="{{ '/skills/' | relative_url }}">Skills</a>
-                <a href="{{ '/work/' | relative_url }}">Work Experience</a>
+                <a href="{{ '/work/' | relative_url }}">Work</a>
                 <a href="{{ '/projects/' | relative_url }}">Projects</a>
+                <a href="{{ '/publications/' | relative_url }}">Publications</a>
                 <a href="{{ '/awards/' | relative_url }}">Awards</a>
             </div>
         </div>
@@ -56,24 +57,8 @@
         {{ content }}
     </div>
 
-    <script>
-        let lastScrollTop = 0;
-        const navbar = document.querySelector('nav');
-        
-        window.addEventListener('scroll', function() {
-            let scrollTop = window.pageYOffset || document.documentElement.scrollTop;
-            
-            if (scrollTop > lastScrollTop) {
-                navbar.classList.add('shrink');
-            } else {
-                navbar.classList.remove('shrink');
-            }
-            lastScrollTop = scrollTop <= 0 ? 0 : scrollTop;
-        });
-    </script>
-    
     <script src="{{ '/assets/js/animations.js' | relative_url }}"></script>
-    
+
     <footer class="site-footer">
         <p>© 2025 Mihir Madhaparia. All Rights Reserved.</p>
     </footer>
