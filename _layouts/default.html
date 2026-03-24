@@ -13,10 +13,13 @@
 </head>
 <body class="{% if page.url == '/' %}home-page{% endif %}">
 
-    <!-- Global background video -->
+    <!-- Background video — shown on every page -->
     <video autoplay muted loop playsinline id="background-video">
         <source src="{{ site.baseurl }}/assets/backgroundgreen.mp4" type="video/mp4">
     </video>
+
+    <!-- Dark overlay for inner pages (hidden on homepage via CSS) -->
+    <div class="page-overlay"></div>
 
     <!-- Side Panel -->
     <aside class="side-panel">
@@ -26,8 +29,8 @@
         <div class="contact-info">
             <h2 class="titlecontact">Contact</h2>
             <p>
-                <a href="/cdn-cgi/l/email-protection#5c313534352e313d38343d2c3d2e353d1c3b313d3530723f3331" class="contact-item email">
-                    <i class="fas fa-envelope"></i> <span class="__cf_email__" data-cfemail="513c383938233c30353930213023383011363c30383d7f323e3c">[email&#160;protected]</span>
+                <a href="mailto:mihirmadhaparia@gmail.com" class="contact-item email">
+                    <i class="fas fa-envelope"></i> mihirmadhaparia@gmail.com
                 </a>
             </p>
             <p>
@@ -62,4 +65,11 @@
         {{ content }}
     </div>
 
-    <script data-cfasync="false" src="/cdn-cgi/scripts/5
+    <script src="{{ '/assets/js/animations.js' | relative_url }}"></script>
+
+    <footer class="site-footer">
+        <p>© 2025 Mihir Madhaparia. All Rights Reserved.</p>
+    </footer>
+
+</body>
+</html>
