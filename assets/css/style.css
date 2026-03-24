@@ -529,7 +529,7 @@ body.home-page .page-overlay { display: none; }
 
 /* Inner pages: heavy blur + darken */
 body:not(.home-page) #background-video {
-  filter: blur(20px) brightness(0.30) saturate(0.6);
+  filter: blur(15px) brightness(0.8) saturate(0.6);
   transform: scale(1.06);
 }
 
