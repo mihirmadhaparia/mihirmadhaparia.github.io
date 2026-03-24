@@ -181,7 +181,7 @@ nav a:hover::after { transform: scaleX(1); }
   padding: calc(var(--nav-h) + 36px) 40px 80px;
   max-width: 1100px;
   position: relative;
-  z-index: 1;
+  z-index: 10;
 }
 
 /* ─── Section Heading ────────────────────────────────────────── */
@@ -504,47 +504,47 @@ nav a:hover::after { transform: scaleX(1); }
 .award-year { display: block; font-size: 0.85em; color: #7ab07a; margin-top: 6px; font-weight: 400; }
 
 /* ─── Homepage ───────────────────────────────────────────────── */
-body.home-page .side-panel { display: none; }
-body.home-page nav         { left: 0; width: 100%; }
-body.home-page .content    { margin-left: 0; padding: 0; max-width: 100%; }
-
-/* Force the home section to truly fill the whole screen */
-body.home-page .full-page  { width: 100vw; min-height: 100vh; }
+body.home-page .side-panel  { display: none; }
+body.home-page nav          { left: 0; width: 100%; }
+body.home-page .content     { margin-left: 0; padding: 0; max-width: 100%; }
+body.home-page .page-overlay { display: none; }
 
 .full-page { position: relative; overflow: hidden; }
 
-/* ─── Global background video ───────────────────────────────── */
+/* ─── Z-index stack (clean, explicit) ───────────────────────── */
+/* 1  video          — furthest back                             */
+/* 2  .page-overlay  — sits above video, below everything else  */
+/* 500 nav           — already set                              */
+/* 1000 .side-panel  — already set                              */
+
+/* ─── Background video ───────────────────────────────────────── */
 #background-video {
-  position: fixed; top: 0; left: 0;
+  position: fixed;
+  top: 0; left: 0;
   width: 100vw; height: 100vh;
   object-fit: cover;
-  z-index: -2;
-  transition: filter 0.4s ease;
-}
-
-/* Home: video plays clean, full brightness */
-body.home-page #background-video {
-  filter: none;
-  transform: none;
-}
-
-/* Inner pages: heavy blur + darkening so content stays readable */
-body:not(.home-page) #background-video {
-  filter: blur(20px) brightness(0.30) saturate(0.6);
-  transform: scale(1.06); /* prevents blurred edges from showing */
-}
-
-/* Semi-transparent dark overlay over blurred video on inner pages */
-body:not(.home-page)::before {
-  content: '';
-  position: fixed;
-  inset: 0;
-  background: rgba(15, 28, 15, 0.50);
-  z-index: -1;
+  z-index: 1;
   pointer-events: none;
 }
 
-/* Inner page cards already styled dark green — no override needed */
+/* Inner pages: heavy blur + darken */
+body:not(.home-page) #background-video {
+  filter: blur(20px) brightness(0.30) saturate(0.6);
+  transform: scale(1.06);
+}
+
+/* ─── Page overlay div (inner pages only) ────────────────────── */
+.page-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(10, 22, 10, 0.52);
+  z-index: 2;
+  pointer-events: none;
+}
+
+/* ─── Everything above the overlay ───────────────────────────── */
+/* .content z-index: 10 is set in the Main Content block above   */
+/* nav z-index: 500 and .side-panel z-index: 1000 set above too  */
 
 /* Section headings on dark bg */
 body:not(.home-page) .section-heading {
