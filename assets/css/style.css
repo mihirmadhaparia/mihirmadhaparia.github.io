@@ -492,10 +492,60 @@ body.home-page .full-page  { width: 100vw; min-height: 100vh; }
 
 .full-page { position: relative; overflow: hidden; }
 
+/* ─── Global background video ───────────────────────────────── */
 #background-video {
   position: fixed; top: 0; left: 0;
   width: 100vw; height: 100vh;
-  object-fit: cover; z-index: -1;
+  object-fit: cover;
+  z-index: -2;
+  transition: filter 0.4s ease;
+}
+
+/* Home: video plays clean, full brightness */
+body.home-page #background-video {
+  filter: none;
+  transform: none;
+}
+
+/* Inner pages: heavy blur + darkening so content stays readable */
+body:not(.home-page) #background-video {
+  filter: blur(20px) brightness(0.30) saturate(0.6);
+  transform: scale(1.06); /* prevents blurred edges from showing */
+}
+
+/* Semi-transparent dark overlay over blurred video on inner pages */
+body:not(.home-page)::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  background: rgba(15, 28, 15, 0.50);
+  z-index: -1;
+  pointer-events: none;
+}
+
+/* Inner page cards stay crisp white on dark bg */
+body:not(.home-page) .experience-box,
+body:not(.home-page) .skills-box,
+body:not(.home-page) .education-box,
+body:not(.home-page) .award-card,
+body:not(.home-page) .pub-card {
+  background: rgba(255, 255, 255, 0.97);
+  backdrop-filter: blur(2px);
+}
+
+/* Section headings on dark bg */
+body:not(.home-page) .section-heading {
+  color: #e2f0e2;
+  text-shadow: 0 2px 10px rgba(0,0,0,0.6);
+}
+body:not(.home-page) .section-heading::after {
+  background: var(--green-primary);
+}
+
+/* Pub section labels on dark bg */
+body:not(.home-page) .pub-section-label {
+  color: rgba(190, 225, 190, 0.80);
+  border-bottom-color: rgba(46,204,113,0.25);
 }
 
 .home-content {
