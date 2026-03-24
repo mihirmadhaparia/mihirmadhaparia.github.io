@@ -40,6 +40,11 @@ body {
   min-height: 100vh;
 }
 
+/* Inner pages use a dark background so there's no light flash before the video loads */
+body:not(.home-page) {
+  background: #0a160a;
+}
+
 /* ─── Typography ─────────────────────────────────────────────── */
 h1, h2, h3 { font-family: 'Lora', serif; }
 
@@ -175,6 +180,8 @@ nav a:hover::after { transform: scaleX(1); }
   margin-left: var(--sidebar-w);
   padding: calc(var(--nav-h) + 36px) 40px 80px;
   max-width: 1100px;
+  position: relative;
+  z-index: 1;
 }
 
 /* ─── Section Heading ────────────────────────────────────────── */
@@ -208,9 +215,11 @@ nav a:hover::after { transform: scaleX(1); }
 
 /* ─── Experience Card ────────────────────────────────────────── */
 .experience-box {
-  background: var(--card-bg);
+  background: rgba(10, 22, 10, 0.78);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
   border-radius: var(--radius-lg);
-  box-shadow: var(--card-shadow);
+  box-shadow: 0 4px 28px rgba(0,0,0,0.35);
   margin: 0 0 24px;
   overflow: hidden;
   display: flex;
@@ -220,11 +229,15 @@ nav a:hover::after { transform: scaleX(1); }
   animation: fadeInUp 0.6s forwards;
   animation-play-state: paused;
   transition: box-shadow 0.3s ease, transform 0.3s ease;
-  border: 1px solid rgba(46,204,113,0.10);
+  border: 1px solid rgba(46,204,113,0.25);
   min-height: 240px;
 }
 .experience-box.visible { animation-play-state: running; }
-.experience-box:hover { box-shadow: var(--card-shadow-hover); transform: translateY(-3px); }
+.experience-box:hover {
+  box-shadow: 0 12px 40px rgba(46,204,113,0.20);
+  transform: translateY(-3px);
+  border-color: rgba(46,204,113,0.45);
+}
 
 @keyframes fadeInUp {
   to { opacity: 1; transform: translateY(0); }
@@ -240,17 +253,17 @@ nav a:hover::after { transform: scaleX(1); }
 .card-content h3 {
   font-size: 1.2em;
   font-weight: 700;
-  color: var(--text-primary);
+  color: #e4f4e4;
   margin-bottom: 4px;
   line-height: 1.3;
 }
 
-.card-content p { font-size: 0.9em; margin-top: 6px; color: var(--text-secondary); }
+.card-content p { font-size: 0.9em; margin-top: 6px; color: #a8c8a8; }
 .card-content p strong {
   font-family: 'DM Sans', sans-serif;
   font-size: 0.82em;
   font-weight: 600;
-  color: var(--green-dark);
+  color: var(--green-primary);
   text-transform: uppercase;
   letter-spacing: 0.06em;
 }
@@ -259,7 +272,7 @@ nav a:hover::after { transform: scaleX(1); }
   margin: 10px 0 6px 18px;
   line-height: 1.7;
   font-size: 0.875em;
-  color: var(--text-secondary);
+  color: #b8d0b8;
 }
 .card-content ul li { margin-bottom: 4px; }
 
@@ -366,26 +379,28 @@ nav a:hover::after { transform: scaleX(1); }
 .skills-container { display: flex; flex-direction: column; gap: 20px; }
 
 .skills-box {
-  background: var(--card-bg);
+  background: rgba(10, 22, 10, 0.78);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
   border-radius: var(--radius-lg);
   padding: 24px 28px;
-  box-shadow: var(--card-shadow);
-  border: 1px solid rgba(46,204,113,0.10);
+  box-shadow: 0 4px 28px rgba(0,0,0,0.35);
+  border: 1px solid rgba(46,204,113,0.25);
   transition: var(--transition);
 }
-.skills-box:hover { box-shadow: var(--card-shadow-hover); }
+.skills-box:hover { border-color: rgba(46,204,113,0.45); box-shadow: 0 12px 40px rgba(46,204,113,0.18); }
 
 .skill-category {
   font-family: 'Lora', serif;
   font-size: 1.1em;
   font-weight: 700;
-  color: var(--text-primary);
+  color: #e4f4e4;
   display: flex;
   align-items: center;
   gap: 10px;
   margin-bottom: 16px;
   padding-bottom: 12px;
-  border-bottom: 2px solid var(--green-light);
+  border-bottom: 1px solid rgba(46,204,113,0.25);
 }
 .skill-icon { color: var(--green-primary); }
 
@@ -398,44 +413,47 @@ nav a:hover::after { transform: scaleX(1); }
   font-size: 0.875em;
   font-weight: 500;
   padding: 7px 14px;
-  background: var(--green-light);
+  background: rgba(46,204,113,0.10);
   border-radius: 30px;
-  border: 1px solid rgba(46,204,113,0.15);
-  color: var(--text-primary);
+  border: 1px solid rgba(46,204,113,0.25);
+  color: #c8e8c8;
   transition: var(--transition);
   cursor: default;
 }
 .skill-item:hover {
   background: var(--green-primary);
-  color: white;
+  color: #fff;
   transform: translateY(-2px);
   box-shadow: 0 4px 12px rgba(46,204,113,0.3);
+  border-color: var(--green-primary);
 }
 .skill-item:hover .skill-logo { color: white; }
 .skill-item:hover .skill-logo-img { filter: brightness(0) invert(1); }
 
-.skill-logo { font-size: 1em; color: var(--green-dark); }
-.skill-logo-img { width: 18px; height: auto; }
+.skill-logo { font-size: 1em; color: var(--green-primary); }
+.skill-logo-img { width: 18px; height: auto; filter: brightness(0) invert(0.8); }
 
 /* ─── Education Page ─────────────────────────────────────────── */
 .education-container { display: flex; flex-direction: column; gap: 18px; }
 
 .education-box {
-  background: var(--card-bg);
+  background: rgba(10, 22, 10, 0.78);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
   padding: 24px 28px;
   border-radius: var(--radius-lg);
-  box-shadow: var(--card-shadow);
+  box-shadow: 0 4px 28px rgba(0,0,0,0.35);
   display: flex;
   align-items: center;
   gap: 24px;
-  border: 1px solid rgba(46,204,113,0.10);
+  border: 1px solid rgba(46,204,113,0.25);
   transition: var(--transition);
 }
-.education-box:hover { box-shadow: var(--card-shadow-hover); transform: translateY(-2px); }
+.education-box:hover { border-color: rgba(46,204,113,0.45); transform: translateY(-2px); box-shadow: 0 12px 40px rgba(46,204,113,0.18); }
 
-.umn-logo { width: 72px; height: auto; flex-shrink: 0; }
-.education-details h3 { font-size: 1.1em; color: var(--text-primary); margin-bottom: 4px; }
-.education-details p { font-size: 0.9em; color: var(--text-secondary); margin: 2px 0; }
+.umn-logo { width: 72px; height: auto; flex-shrink: 0; filter: brightness(0) invert(1); opacity: 0.85; }
+.education-details h3 { font-size: 1.1em; color: #e4f4e4; margin-bottom: 4px; }
+.education-details p { font-size: 0.9em; color: #a8c8a8; margin: 2px 0; }
 
 .education-dates {
   font-weight: 700;
@@ -450,15 +468,16 @@ nav a:hover::after { transform: scaleX(1); }
   gap: 6px;
   margin-top: 8px;
   padding: 7px 16px;
-  background: var(--green-deep);
-  color: white;
+  background: rgba(46,204,113,0.18);
+  color: #a0e0a0;
+  border: 1px solid rgba(46,204,113,0.40);
   text-decoration: none;
   border-radius: var(--radius-sm);
   font-size: 0.8em;
   font-weight: 600;
   transition: var(--transition);
 }
-.download-btn:hover { background: var(--green-dark); transform: translateY(-1px); }
+.download-btn:hover { background: var(--green-primary); color: #fff; border-color: var(--green-primary); transform: translateY(-1px); }
 
 /* ─── Awards Page ────────────────────────────────────────────── */
 .awards-container {
@@ -469,18 +488,20 @@ nav a:hover::after { transform: scaleX(1); }
 }
 
 .award-card {
-  background: var(--card-bg);
+  background: rgba(10, 22, 10, 0.78);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
   border-radius: var(--radius-lg);
-  box-shadow: var(--card-shadow);
+  box-shadow: 0 4px 28px rgba(0,0,0,0.35);
   padding: 28px 20px 24px;
   text-align: center;
-  border: 1px solid rgba(46,204,113,0.10);
+  border: 1px solid rgba(46,204,113,0.25);
   transition: var(--transition);
 }
-.award-card:hover { transform: translateY(-5px); box-shadow: var(--card-shadow-hover); }
-.award-card img { width: 60px; height: auto; margin-bottom: 14px; }
-.award-card p { font-size: 0.9em; color: var(--text-primary); font-weight: 600; line-height: 1.4; }
-.award-year { display: block; font-size: 0.85em; color: var(--text-muted); margin-top: 6px; font-weight: 400; }
+.award-card:hover { transform: translateY(-5px); border-color: rgba(46,204,113,0.45); box-shadow: 0 12px 40px rgba(46,204,113,0.18); }
+.award-card img { width: 60px; height: auto; margin-bottom: 14px; filter: brightness(0) invert(1); opacity: 0.85; }
+.award-card p { font-size: 0.9em; color: #e4f4e4; font-weight: 600; line-height: 1.4; }
+.award-year { display: block; font-size: 0.85em; color: #7ab07a; margin-top: 6px; font-weight: 400; }
 
 /* ─── Homepage ───────────────────────────────────────────────── */
 body.home-page .side-panel { display: none; }
@@ -523,15 +544,7 @@ body:not(.home-page)::before {
   pointer-events: none;
 }
 
-/* Inner page cards stay crisp white on dark bg */
-body:not(.home-page) .experience-box,
-body:not(.home-page) .skills-box,
-body:not(.home-page) .education-box,
-body:not(.home-page) .award-card,
-body:not(.home-page) .pub-card {
-  background: rgba(255, 255, 255, 0.97);
-  backdrop-filter: blur(2px);
-}
+/* Inner page cards already styled dark green — no override needed */
 
 /* Section headings on dark bg */
 body:not(.home-page) .section-heading {
@@ -650,16 +663,16 @@ body:not(.home-page) .pub-section-label {
   font-weight: 700;
   letter-spacing: 0.14em;
   text-transform: uppercase;
-  color: var(--text-muted);
+  color: rgba(190, 225, 190, 0.75);
   display: flex;
   align-items: center;
   gap: 8px;
   margin: 0 0 14px;
   padding-bottom: 8px;
-  border-bottom: 1px solid rgba(46,204,113,0.15);
+  border-bottom: 1px solid rgba(46,204,113,0.25);
 }
 
-/* Type badges */
+/* Type badges — lightened for dark bg */
 .pub-type-badge {
   display: inline-flex;
   align-items: center;
@@ -670,9 +683,9 @@ body:not(.home-page) .pub-section-label {
   border-radius: 20px;
   margin-bottom: 10px;
 }
-.thesis-badge { background: rgba(241,196,15,0.15); color: #b7860b; border: 1px solid rgba(241,196,15,0.35); }
-.poster-badge { background: rgba(46,204,113,0.12); color: var(--green-dark); border: 1px solid rgba(46,204,113,0.3); }
-.paper-badge  { background: rgba(52,152,219,0.12); color: #1a6fa0; border: 1px solid rgba(52,152,219,0.3); }
+.thesis-badge { background: rgba(241,196,15,0.18); color: #f0d060; border: 1px solid rgba(241,196,15,0.45); }
+.poster-badge { background: rgba(46,204,113,0.18); color: #6ee6a0; border: 1px solid rgba(46,204,113,0.40); }
+.paper-badge  { background: rgba(52,152,219,0.18); color: #70c0f0; border: 1px solid rgba(52,152,219,0.40); }
 
 /* Left border accent per type */
 .pub-thesis { border-left: 4px solid #f1c40f; }
@@ -682,27 +695,27 @@ body:not(.home-page) .pub-section-label {
 /* Authors / venue */
 .pub-authors {
   font-size: 0.875em !important;
-  color: var(--text-primary) !important;
+  color: #c8e8c8 !important;
   margin: 2px 0 2px !important;
 }
-.pub-authors strong { color: var(--green-deep); }
+.pub-authors strong { color: var(--green-primary); }
 .pub-venue {
   font-size: 0.8em !important;
-  color: var(--text-muted) !important;
+  color: #7ab07a !important;
   margin: 0 0 14px !important;
 }
 
 /* Abstract */
 .pub-abstract {
-  background: var(--green-light);
+  background: rgba(46,204,113,0.08);
   border-radius: var(--radius-md);
   padding: 14px 16px;
   margin: 14px 0;
-  border-left: 3px solid rgba(46,204,113,0.3);
+  border-left: 3px solid rgba(46,204,113,0.35);
 }
 .pub-abstract p {
   font-size: 0.855em !important;
-  color: var(--text-secondary) !important;
+  color: #b8d0b8 !important;
   line-height: 1.7;
   margin-bottom: 8px !important;
 }
@@ -717,7 +730,7 @@ body:not(.home-page) .pub-section-label {
 }
 .pub-highlight-item {
   font-size: 0.845em;
-  color: var(--text-secondary);
+  color: #b0ccb0;
   display: flex;
   align-items: flex-start;
   gap: 10px;
@@ -739,7 +752,7 @@ body:not(.home-page) .pub-section-label {
   gap: 8px;
   margin-top: 18px;
   padding-top: 14px;
-  border-top: 1px solid rgba(46,204,113,0.10);
+  border-top: 1px solid rgba(46,204,113,0.18);
 }
 .pub-btn {
   display: inline-flex;
@@ -754,18 +767,19 @@ body:not(.home-page) .pub-section-label {
   flex-shrink: 0;
 }
 .primary-btn {
-  background: var(--green-deep);
-  color: white;
+  background: rgba(46,204,113,0.18);
+  color: #a0e0a0;
+  border: 1px solid rgba(46,204,113,0.40);
 }
-.primary-btn:hover { background: var(--green-dark); transform: translateY(-1px); box-shadow: 0 4px 12px rgba(46,204,113,0.25); }
+.primary-btn:hover { background: var(--green-primary); color: #fff; border-color: var(--green-primary); transform: translateY(-1px); box-shadow: 0 4px 14px rgba(46,204,113,0.30); }
 
 .pub-keyword-pill {
   font-size: 0.75em;
   font-weight: 500;
   padding: 4px 10px;
-  background: var(--green-light);
-  border: 1px solid rgba(46,204,113,0.2);
+  background: rgba(46,204,113,0.10);
+  border: 1px solid rgba(46,204,113,0.25);
   border-radius: 20px;
-  color: var(--text-secondary);
+  color: #88c888;
   white-space: nowrap;
 }
