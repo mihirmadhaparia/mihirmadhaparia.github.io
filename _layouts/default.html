@@ -3,73 +3,68 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>{{ page.title }}</title>
+    <title>{% if page.title %}{{ page.title }} | {% endif %}{{ site.title }}</title>
+    <meta name="description" content="{% if page.excerpt %}{{ page.excerpt | strip_html | normalize_whitespace | escape }}{% else %}{{ site.description }}{% endif %}">
     <link rel="stylesheet" href="{{ '/assets/css/style.css' | relative_url }}">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
     <link rel="icon" href="{{ site.baseurl }}/assets/images/Mfavicon.ico" type="image/x-icon">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,600;0,700;1,400&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 </head>
-<body class="{% if page.url == '/' %}home-page{% endif %}">
-
-    <!-- Background video — shown on every page -->
-    <video autoplay muted loop playsinline id="background-video">
-        <source src="{{ site.baseurl }}/assets/backgroundgreen.mp4" type="video/mp4">
-    </video>
-
-    <!-- Dark overlay for inner pages (hidden on homepage via CSS) -->
-    <div class="page-overlay"></div>
-
-    <!-- Side Panel -->
-    <aside class="side-panel">
-        <img src="{{ site.baseurl }}/assets/images/HeadshotPortrait.jpg" alt="Profile Picture" class="profile-pic">
-        <h2 class="name">Mihir Madhaparia</h2>
-
-        <div class="contact-info">
-            <h2 class="titlecontact">Contact</h2>
-            <p>
-                <a href="mailto:mihirmadhaparia@gmail.com" class="contact-item email">
-                    <i class="fas fa-envelope"></i> mihirmadhaparia@gmail.com
+<body class="{% if page.url == '/' %}home-page{% else %}interior-page{% endif %}">
+    <div class="site-chrome">
+        <header class="site-header">
+            <div class="header-shell">
+                <a href="{{ '/' | relative_url }}" class="brand-mark" aria-label="Mihir Madhaparia home">
+                    <span class="brand-mark__monogram">MM</span>
+                    <span class="brand-mark__text">
+                        <strong>Mihir Madhaparia</strong>
+                        <span>Mechanical engineer and medical technology researcher</span>
+                    </span>
                 </a>
-            </p>
-            <p>
-                <a href="https://www.linkedin.com/in/mihirmadhaparia" target="_blank" class="contact-item linkedin">
-                    <i class="fab fa-linkedin"></i> LinkedIn
-                </a>
-            </p>
-            <p>
-                <a href="https://github.com/mihirmadhaparia" target="_blank" class="contact-item github">
-                    <i class="fab fa-github"></i> GitHub
-                </a>
-            </p>
-        </div>
-    </aside>
 
-    <!-- Navigation Bar -->
-    <nav>
-        <div class="nav-container">
-            <div class="nav-links">
-                <a href="{{ '/' | relative_url }}">Home</a>
-                <a href="{{ '/education/' | relative_url }}">Education</a>
-                <a href="{{ '/skills/' | relative_url }}">Skills</a>
-                <a href="{{ '/work/' | relative_url }}">Work</a>
-                <a href="{{ '/projects/' | relative_url }}">Projects</a>
-                <a href="{{ '/publications/' | relative_url }}">Publications</a>
-                <a href="{{ '/awards/' | relative_url }}">Awards</a>
+                <button class="menu-toggle" type="button" aria-expanded="false" aria-controls="site-navigation">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                    <span class="sr-only">Toggle navigation</span>
+                </button>
+
+                <nav class="site-nav" id="site-navigation" aria-label="Primary navigation">
+                    <div class="nav-links">
+                        <a href="{{ '/' | relative_url }}" {% if page.url == '/' %}aria-current="page"{% endif %}>Home</a>
+                        <a href="{{ '/education/' | relative_url }}" {% if page.url == '/education/' %}aria-current="page"{% endif %}>Education</a>
+                        <a href="{{ '/skills/' | relative_url }}" {% if page.url == '/skills/' %}aria-current="page"{% endif %}>Skills</a>
+                        <a href="{{ '/work/' | relative_url }}" {% if page.url == '/work/' %}aria-current="page"{% endif %}>Work</a>
+                        <a href="{{ '/projects/' | relative_url }}" {% if page.url == '/projects/' %}aria-current="page"{% endif %}>Projects</a>
+                        <a href="{{ '/publications/' | relative_url }}" {% if page.url == '/publications/' %}aria-current="page"{% endif %}>Publications</a>
+                        <a href="{{ '/awards/' | relative_url }}" {% if page.url == '/awards/' %}aria-current="page"{% endif %}>Awards</a>
+                    </div>
+                </nav>
             </div>
-        </div>
-    </nav>
+        </header>
 
-    <div class="content">
-        {{ content }}
+        <main class="site-main">
+            {{ content }}
+        </main>
+
+        <footer class="site-footer">
+            <div class="footer-shell">
+                <div>
+                    <p class="footer-title">Mihir Madhaparia</p>
+                    <p class="footer-copy">Personal website for engineering work, research, design, and publications.</p>
+                </div>
+                <div class="footer-links">
+                    <a href="mailto:mihirmadhaparia@gmail.com">mihirmadhaparia@gmail.com</a>
+                    <a href="https://www.linkedin.com/in/mihirmadhaparia" target="_blank" rel="noopener noreferrer">LinkedIn</a>
+                    <a href="https://github.com/mihirmadhaparia" target="_blank" rel="noopener noreferrer">GitHub</a>
+                </div>
+                <p class="footer-meta">&copy; 2026 Mihir Madhaparia</p>
+            </div>
+        </footer>
     </div>
 
     <script src="{{ '/assets/js/animations.js' | relative_url }}"></script>
-
-    <footer class="site-footer">
-        <p>© 2025 Mihir Madhaparia. All Rights Reserved.</p>
-    </footer>
-
 </body>
 </html>

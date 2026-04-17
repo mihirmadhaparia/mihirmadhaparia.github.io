@@ -1,85 +1,94 @@
-// ─── Scroll-triggered animations ─────────────────────────────
-const observer = new IntersectionObserver((entries) => {
-    entries.forEach(entry => {
-        if (entry.isIntersecting) {
-            requestAnimationFrame(() => {
-                requestAnimationFrame(() => {
-                    entry.target.classList.add('visible');
-                });
+const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+document.addEventListener("DOMContentLoaded", () => {
+    const body = document.body;
+    const menuToggle = document.querySelector(".menu-toggle");
+    const siteNav = document.querySelector(".site-nav");
+
+    if (menuToggle && siteNav) {
+        menuToggle.addEventListener("click", () => {
+            const isOpen = body.classList.toggle("menu-open");
+            menuToggle.setAttribute("aria-expanded", String(isOpen));
+        });
+
+        siteNav.querySelectorAll("a").forEach((link) => {
+            link.addEventListener("click", () => {
+                body.classList.remove("menu-open");
+                menuToggle.setAttribute("aria-expanded", "false");
             });
-        }
-    });
-}, { threshold: 0.10, rootMargin: '40px' });
+        });
 
-document.addEventListener('DOMContentLoaded', () => {
-    document.querySelectorAll('.experience-box, .section-heading').forEach(el => {
-        observer.observe(el);
-    });
+        window.addEventListener("resize", () => {
+            if (window.innerWidth > 920) {
+                body.classList.remove("menu-open");
+                menuToggle.setAttribute("aria-expanded", "false");
+            }
+        });
+    }
 
-    // ─── Navbar shrink on scroll ──────────────────────────────
-    let lastScrollTop = 0;
-    const navbar = document.querySelector('nav');
-    window.addEventListener('scroll', () => {
-        const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
-        if (scrollTop > lastScrollTop && scrollTop > 60) {
-            navbar.classList.add('shrink');
-        } else {
-            navbar.classList.remove('shrink');
-        }
-        lastScrollTop = Math.max(scrollTop, 0);
-    }, { passive: true });
+    const revealItems = document.querySelectorAll(".reveal");
+    if (!prefersReducedMotion && "IntersectionObserver" in window) {
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach((entry) => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add("is-visible");
+                    observer.unobserve(entry.target);
+                }
+            });
+        }, { threshold: 0.14, rootMargin: "0px 0px -40px 0px" });
 
-    // ─── Image Carousels ──────────────────────────────────────
-    document.querySelectorAll('.card-image-panel').forEach(panel => {
-        const count = parseInt(panel.dataset.count || '0', 10);
+        revealItems.forEach((item) => observer.observe(item));
+    } else {
+        revealItems.forEach((item) => item.classList.add("is-visible"));
+    }
 
-        // Hide panels with no images
-        if (count === 0) {
-            panel.style.display = 'none';
+    document.querySelectorAll(".media-carousel").forEach((carousel) => {
+        const track = carousel.querySelector(".media-carousel__track");
+        const slides = carousel.querySelectorAll(".media-frame");
+        const prevButton = carousel.querySelector(".carousel-btn.prev");
+        const nextButton = carousel.querySelector(".carousel-btn.next");
+        const dots = carousel.querySelectorAll(".carousel-dot");
+
+        if (!track || slides.length <= 1) {
+            const controls = carousel.querySelector(".media-carousel__controls");
+            if (controls) controls.hidden = true;
             return;
         }
-
-        // No controls needed for single image
-        if (count === 1) {
-            const controls = panel.querySelector('.carousel-controls');
-            if (controls) controls.style.display = 'none';
-            return;
-        }
-
-        const track  = panel.querySelector('.carousel-track');
-        const dots   = panel.querySelectorAll('.carousel-dot');
-        const prevBtn = panel.querySelector('.carousel-btn.prev');
-        const nextBtn = panel.querySelector('.carousel-btn.next');
-
-        if (!track) return;
 
         let current = 0;
 
-        function goTo(index) {
-            current = (index + count) % count;
+        const update = (index) => {
+            current = (index + slides.length) % slides.length;
             track.style.transform = `translateX(-${current * 100}%)`;
-            dots.forEach((d, i) => d.classList.toggle('active', i === current));
+            dots.forEach((dot, dotIndex) => {
+                dot.classList.toggle("active", dotIndex === current);
+            });
+        };
+
+        prevButton?.addEventListener("click", () => update(current - 1));
+        nextButton?.addEventListener("click", () => update(current + 1));
+        dots.forEach((dot, index) => dot.addEventListener("click", () => update(index)));
+
+        let startX = 0;
+
+        carousel.addEventListener("touchstart", (event) => {
+            startX = event.changedTouches[0].clientX;
+        }, { passive: true });
+
+        carousel.addEventListener("touchend", (event) => {
+            const deltaX = startX - event.changedTouches[0].clientX;
+            if (Math.abs(deltaX) > 35) {
+                update(deltaX > 0 ? current + 1 : current - 1);
+            }
+        }, { passive: true });
+
+        if (!prefersReducedMotion) {
+            let intervalId = window.setInterval(() => update(current + 1), 5000);
+
+            carousel.addEventListener("mouseenter", () => window.clearInterval(intervalId));
+            carousel.addEventListener("mouseleave", () => {
+                intervalId = window.setInterval(() => update(current + 1), 5000);
+            });
         }
-
-        if (prevBtn) prevBtn.addEventListener('click', () => goTo(current - 1));
-        if (nextBtn) nextBtn.addEventListener('click', () => goTo(current + 1));
-        dots.forEach((dot, i) => dot.addEventListener('click', () => goTo(i)));
-
-        // Touch / swipe support
-        let touchStartX = 0;
-        panel.addEventListener('touchstart', e => {
-            touchStartX = e.changedTouches[0].clientX;
-        }, { passive: true });
-        panel.addEventListener('touchend', e => {
-            const diff = touchStartX - e.changedTouches[0].clientX;
-            if (Math.abs(diff) > 40) goTo(diff > 0 ? current + 1 : current - 1);
-        }, { passive: true });
-
-        // Auto-advance every 4s (pause on hover)
-        let autoTimer = setInterval(() => goTo(current + 1), 4000);
-        panel.addEventListener('mouseenter', () => clearInterval(autoTimer));
-        panel.addEventListener('mouseleave', () => {
-            autoTimer = setInterval(() => goTo(current + 1), 4000);
-        });
     });
 });

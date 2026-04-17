@@ -4,22 +4,98 @@ title: Home
 permalink: /
 ---
 
-<section id="home" class="full-page">
-    <video autoplay muted loop id="background-video">
-        <source src="assets/backgroundgreen.mp4" type="video/mp4">
-        Your browser does not support the video tag.
-    </video>
-    <div class="home-content">
-        <div class="profile-container">
-            <img src="assets/images/HeadshotPortrait.jpg" alt="Mihir Madhaparia" class="profile-img">
-            <h1 class="name-title">Mihir Madhaparia</h1>
+<section class="home-hero">
+    <div class="page-shell home-hero__shell">
+        <div class="reveal">
+            <p class="eyebrow">Medical technology, research, and CAD</p>
+            <h1>Building healthcare-focused engineering work with the clarity of product design.</h1>
+            <p class="hero-summary">Mihir Madhaparia is a mechanical engineer focused on medical devices, translational research, regenerative systems, and polished technical storytelling across work, projects, and publications.</p>
+
+            <div class="hero-actions">
+                <a href="{{ '/work/' | relative_url }}" class="button">View Work</a>
+                <a href="{{ '/projects/' | relative_url }}" class="button-secondary">See Projects</a>
+                <a href="{{ '/publications/' | relative_url }}" class="button-secondary">Read Publications</a>
+            </div>
+
+            <div class="metric-grid">
+                <article class="metric-card">
+                    <strong>6+</strong>
+                    <span>Years across engineering, research, and product development.</span>
+                </article>
+                <article class="metric-card">
+                    <strong>Medical</strong>
+                    <span>Focused on device design, bioprinting, validation, and clinical translation.</span>
+                </article>
+                <article class="metric-card">
+                    <strong>CAD-Ready</strong>
+                    <span>Project layouts are prepared for future renders, file downloads, and model embeds.</span>
+                </article>
+            </div>
         </div>
-        
-        <div class="about-me-box">
-            <h2>About Me</h2>
-            <p>I am a dedicated and innovative engineer with a deep passion for medical technology, bioprinting, and applied research. My expertise lies at the intersection of mechanical engineering, materials science, and biomedical device development, where I work to bridge the gap between technology and healthcare to improve patient outcomes.</p>
-            <p>Throughout my career, I have spearheaded advanced research in regenerative medicine, focusing on the development of biocompatible materials and novel fabrication techniques for tissue engineering. My work extends to designing and optimizing medical devices that address critical healthcare challenges.</p>
-            <p>As an engineer, I continuously seek opportunities to innovate, collaborate, and push the boundaries of medical technology to shape a future where advanced healthcare solutions are more efficient, effective, and widely accessible.</p>
+
+        <div class="hero-visual reveal">
+            <div class="hero-visual__video">
+                <video autoplay muted loop playsinline poster="{{ '/assets/images/HeadshotPortrait.jpg' | relative_url }}">
+                    <source src="{{ '/assets/backgroundgreen.mp4' | relative_url }}" type="video/mp4">
+                </video>
+                <div class="hero-visual__overlay"></div>
+            </div>
+            <img src="{{ '/assets/images/HeadshotPortrait.jpg' | relative_url }}" alt="Portrait of Mihir Madhaparia" class="hero-portrait">
+            <div class="floating-note floating-note--top">Mechanical engineering for medical technology, research systems, and product development.</div>
+            <div class="floating-note floating-note--bottom">Future project modules can hold CAD renders, downloadable files, or interactive 3D previews.</div>
+        </div>
+    </div>
+</section>
+
+<section class="section-block">
+    <div class="page-shell">
+        <div class="section-header reveal">
+            <p class="eyebrow">Explore the site</p>
+            <h2>A cleaner portfolio structure built around the work itself.</h2>
+            <p>The website now uses a more editorial layout: stronger page intros, quieter backgrounds, and reusable cards that make it easy to keep adding new engineering work over time.</p>
+        </div>
+
+        <div class="feature-grid">
+            <a href="{{ '/work/' | relative_url }}" class="feature-card reveal">
+                <i class="fa-solid fa-briefcase"></i>
+                <h3>Work</h3>
+                <p>Industry, research, and leadership experience presented in a clearer portfolio format.</p>
+            </a>
+            <a href="{{ '/projects/' | relative_url }}" class="feature-card reveal">
+                <i class="fa-solid fa-cubes"></i>
+                <h3>Projects</h3>
+                <p>Research builds, inventions, and technical initiatives with room for future CAD showcases.</p>
+            </a>
+            <a href="{{ '/publications/' | relative_url }}" class="feature-card reveal">
+                <i class="fa-solid fa-file-lines"></i>
+                <h3>Publications</h3>
+                <p>Thesis, posters, and papers with improved readability and expandable abstract sections.</p>
+            </a>
+            <a href="{{ '/skills/' | relative_url }}" class="feature-card reveal">
+                <i class="fa-solid fa-screwdriver-wrench"></i>
+                <h3>Skills</h3>
+                <p>Software, methods, and engineering competencies organized into cleaner capability groups.</p>
+            </a>
+        </div>
+    </div>
+</section>
+
+<section class="section-block section-block--soft">
+    <div class="page-shell split-callout reveal">
+        <div>
+            <p class="eyebrow">Future-ready UI</p>
+            <h2>Prepared for CAD assets when you want to add them later.</h2>
+            <p>The updated project and work layouts include media panels, chip-style asset labels, and flexible side modules, which means you can later add rendered views, download buttons for STEP or SOLIDWORKS files, or even browser-based 3D components without redesigning the site shell again.</p>
+        </div>
+
+        <div class="cad-card">
+            <span class="pill pill--ghost">Built for future portfolio growth</span>
+            <ul class="mini-list">
+                <li>Dedicated media rails beside project narratives.</li>
+                <li>Room for CAD download chips and technical asset links.</li>
+                <li>Expandable card structure for interactive 3D viewers later.</li>
+            </ul>
+            <p class="cad-note">For now, the UI stays clean and content-first while still leaving clear space for richer design showcases later.</p>
         </div>
     </div>
 </section>
