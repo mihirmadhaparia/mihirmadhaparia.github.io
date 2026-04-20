@@ -13,6 +13,10 @@
     <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 </head>
 <body class="{% if page.url == '/' %}home-page{% else %}interior-page{% endif %}">
+
+    <!-- Animated gradient orb background -->
+    <canvas id="bg-canvas" aria-hidden="true"></canvas>
+
     <div class="site-chrome">
         <header class="site-header">
             <div class="header-shell">
@@ -20,14 +24,12 @@
                     <span class="brand-mark__monogram">MM</span>
                     <span class="brand-mark__text">
                         <strong>Mihir Madhaparia</strong>
-                        <span>Mechanical engineer and medical technology researcher</span>
+                        <span>Mechanical engineer and researcher</span>
                     </span>
                 </a>
 
                 <button class="menu-toggle" type="button" aria-expanded="false" aria-controls="site-navigation">
-                    <span></span>
-                    <span></span>
-                    <span></span>
+                    <span></span><span></span><span></span>
                     <span class="sr-only">Toggle navigation</span>
                 </button>
 
@@ -53,7 +55,7 @@
             <div class="footer-shell">
                 <div>
                     <p class="footer-title">Mihir Madhaparia</p>
-                    <p class="footer-copy">Personal website for engineering work, research, design, and publications.</p>
+                    <p class="footer-copy">Engineering work, research, and publications.</p>
                 </div>
                 <div class="footer-links">
                     <a href="mailto:mihirmadhaparia@gmail.com">mihirmadhaparia@gmail.com</a>
