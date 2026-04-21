@@ -2660,6 +2660,8 @@ def load_css() -> None:
                 --radius-lg: 24px;
                 --radius-md: 18px;
                 --radius-sm: 12px;
+                --composer-left-offset: 342px;
+                --composer-right-offset: 24px;
             }
             #MainMenu, footer, [data-testid="stDecoration"],
             [data-testid="stStatusWidget"], .stDeployButton {
@@ -2674,7 +2676,13 @@ def load_css() -> None:
                 color: var(--text-primary) !important;
                 font-family: "Plus Jakarta Sans", sans-serif;
             }
-            [data-testid="stHeader"],
+            [data-testid="stHeader"] {
+                background: transparent !important;
+                border: 0 !important;
+                height: 0 !important;
+                min-height: 0 !important;
+                pointer-events: none !important;
+            }
             [data-testid="stToolbar"],
             [data-testid="stAppToolbar"],
             [data-testid="stHeaderActionElements"] {
@@ -2689,14 +2697,20 @@ def load_css() -> None:
                 color: var(--text-primary) !important;
                 backdrop-filter: blur(18px);
             }
-            [data-testid="collapsedControl"] {
+            [data-testid="collapsedControl"],
+            [data-testid="stSidebarCollapsedControl"],
+            button[aria-label="Open sidebar"] {
                 display: flex !important;
                 visibility: visible !important;
                 left: 0.85rem !important;
+                pointer-events: auto !important;
+                position: fixed !important;
                 top: 0.75rem !important;
-                z-index: 1000 !important;
+                z-index: 1100 !important;
             }
             [data-testid="collapsedControl"] button,
+            [data-testid="stSidebarCollapsedControl"] button,
+            button[aria-label="Open sidebar"],
             button[kind="header"],
             button[kind="headerNoPadding"] {
                 background: rgba(255, 255, 255, 0.92) !important;
@@ -2708,6 +2722,8 @@ def load_css() -> None:
                 min-width: 40px !important;
             }
             [data-testid="collapsedControl"] button svg,
+            [data-testid="stSidebarCollapsedControl"] button svg,
+            button[aria-label="Open sidebar"] svg,
             button[kind="header"] svg,
             button[kind="headerNoPadding"] svg {
                 color: var(--text-primary) !important;
@@ -2781,6 +2797,11 @@ def load_css() -> None:
                 gap: 14px;
                 min-width: 0;
                 text-decoration: none;
+                transition: opacity 180ms ease, transform 180ms ease;
+            }
+            .brand-mark:hover {
+                opacity: 0.92;
+                transform: translateY(-1px);
             }
             .brand-mark__monogram {
                 background: linear-gradient(135deg, #0e203b, #0071e3);
@@ -2965,10 +2986,11 @@ def load_css() -> None:
                 border-radius: 30px;
                 bottom: 24px;
                 box-shadow: 0 22px 50px rgba(15, 23, 42, 0.12);
-                left: max(342px, calc(50% - 520px));
+                left: var(--composer-left-offset);
                 padding: 10px 12px;
                 position: fixed;
-                right: max(24px, calc(50% - 520px));
+                right: var(--composer-right-offset);
+                transition: left 220ms ease, right 220ms ease, box-shadow 220ms ease;
                 z-index: 950;
                 backdrop-filter: blur(20px);
             }
@@ -3152,6 +3174,63 @@ def load_css() -> None:
     )
 
 
+def sync_layout_offsets() -> None:
+    components.html(
+        """
+        <script>
+        const parentWindow = window.parent;
+        const parentDoc = parentWindow.document;
+        const root = parentDoc.documentElement;
+
+        if (parentWindow.__steelStudioLayoutSync) {
+            parentWindow.__steelStudioLayoutSync();
+        }
+
+        function updateComposerOffsets() {
+            const sidebar = parentDoc.querySelector('[data-testid="stSidebar"]');
+            const viewportWidth = parentWindow.innerWidth || parentDoc.documentElement.clientWidth || 1280;
+            const baseOffset = Math.max(24, (viewportWidth - 1040) / 2);
+            const sidebarWidth = sidebar ? Math.round(sidebar.getBoundingClientRect().width) : 0;
+            const leftOffset = sidebarWidth > 120 ? Math.max(baseOffset, sidebarWidth + 24) : baseOffset;
+            root.style.setProperty('--composer-left-offset', `${leftOffset}px`);
+            root.style.setProperty('--composer-right-offset', `${baseOffset}px`);
+        }
+
+        const runUpdate = () => parentWindow.requestAnimationFrame(updateComposerOffsets);
+        runUpdate();
+
+        const sidebar = parentDoc.querySelector('[data-testid="stSidebar"]');
+        const cleanupFns = [];
+        if (sidebar && parentWindow.ResizeObserver) {
+            const sidebarObserver = new parentWindow.ResizeObserver(runUpdate);
+            sidebarObserver.observe(sidebar);
+            cleanupFns.push(() => sidebarObserver.disconnect());
+        }
+        if (parentWindow.ResizeObserver) {
+            const bodyObserver = new parentWindow.ResizeObserver(runUpdate);
+            bodyObserver.observe(parentDoc.body);
+            cleanupFns.push(() => bodyObserver.disconnect());
+        }
+        const mutationObserver = new parentWindow.MutationObserver(runUpdate);
+        mutationObserver.observe(parentDoc.body, {
+            attributes: true,
+            childList: true,
+            subtree: true,
+        });
+        cleanupFns.push(() => mutationObserver.disconnect());
+        parentWindow.addEventListener('resize', runUpdate);
+        cleanupFns.push(() => parentWindow.removeEventListener('resize', runUpdate));
+        parentWindow.__steelStudioLayoutSync = () => {
+            cleanupFns.forEach((cleanup) => cleanup());
+            delete parentWindow.__steelStudioLayoutSync;
+        };
+        </script>
+        """,
+        height=0,
+        width=0,
+    )
+
+
 def render_site_header() -> str:
     if "active_page" not in st.session_state or st.session_state.active_page not in NAV_PAGES:
         st.session_state.active_page = "Prompt"
@@ -3160,13 +3239,12 @@ def render_site_header() -> str:
         with brand_col:
             st.markdown(
                 """
-                <div class="brand-mark">
+                <a class="brand-mark" href="https://mihirmadhaparia.github.io" target="_top" rel="noopener noreferrer">
                     <span class="brand-mark__monogram">MM</span>
                     <span class="brand-mark__text">
                         <strong>Mihir Madhaparia</strong>
-                        <span>Mechanical engineer and medical technology researcher</span>
                     </span>
-                </div>
+                </a>
                 """,
                 unsafe_allow_html=True,
             )
@@ -3636,6 +3714,7 @@ def main() -> None:
     st.set_page_config(page_title="AI Steel Structure Studio", layout="wide")
     init_state()
     load_css()
+    sync_layout_offsets()
 
     active_page = render_site_header()
 
