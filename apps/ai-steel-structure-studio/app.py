@@ -2939,15 +2939,21 @@ def load_css() -> None:
             }
             .st-key-top_nav_shell [data-testid="stPills"] button,
             .st-key-top_nav_shell [data-testid="stPills"] [role="radio"] {
-                background: rgba(255, 255, 255, 0.82) !important;
-                border: 1px solid rgba(16, 17, 20, 0.06) !important;
+                background: rgba(255, 255, 255, 0.9) !important;
+                border: 1px solid transparent !important;
                 border-radius: 999px !important;
-                box-shadow: none !important;
+                box-shadow: 0 1px 0 rgba(255, 255, 255, 0.96) inset, 0 12px 28px rgba(15, 23, 42, 0.06) !important;
                 color: var(--text-secondary) !important;
                 font-size: 0.88rem !important;
                 font-weight: 600 !important;
                 min-height: 40px !important;
                 padding: 8px 14px !important;
+                transition: transform 180ms ease, box-shadow 220ms ease, background 220ms ease, color 220ms ease !important;
+            }
+            .st-key-top_nav_shell [data-testid="stPills"] button:hover,
+            .st-key-top_nav_shell [data-testid="stPills"] [role="radio"]:hover {
+                box-shadow: 0 1px 0 rgba(255, 255, 255, 0.96) inset, 0 16px 32px rgba(15, 23, 42, 0.09) !important;
+                transform: translateY(-1px);
             }
             .st-key-top_nav_shell [data-testid="stPills"] button[aria-checked="true"],
             .st-key-top_nav_shell [data-testid="stPills"] [role="radio"][aria-checked="true"] {
@@ -2993,7 +2999,7 @@ def load_css() -> None:
             .studio-loading-state {
                 align-items: center;
                 background: linear-gradient(180deg, rgba(255, 255, 255, 0.92), rgba(245, 245, 247, 0.92));
-                border: 1px dashed rgba(16, 17, 20, 0.1);
+                border: 1px solid transparent;
                 border-radius: 24px;
                 display: flex;
                 flex-direction: column;
@@ -3002,6 +3008,7 @@ def load_css() -> None:
                 min-height: 360px;
                 padding: 32px;
                 text-align: center;
+                box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.72), 0 24px 40px rgba(15, 23, 42, 0.03);
             }
             .studio-empty-state h2,
             .studio-loading-state strong {
@@ -3016,11 +3023,21 @@ def load_css() -> None:
                 max-width: 420px;
             }
             .studio-loading-state__pulse {
-                animation: studioPulse 1.05s infinite ease-in-out;
-                background: linear-gradient(135deg, #0d4b96, var(--accent));
+                animation: studioOrbCore 1.6s infinite ease-in-out;
+                background: radial-gradient(circle at 30% 30%, #7cb7ff, #0d4b96 55%, var(--accent) 100%);
                 border-radius: 999px;
-                height: 16px;
-                width: 16px;
+                box-shadow: 0 0 0 10px rgba(0, 113, 227, 0.08), 0 18px 36px rgba(0, 113, 227, 0.18);
+                height: 18px;
+                position: relative;
+                width: 18px;
+            }
+            .studio-loading-state__pulse::after {
+                animation: studioOrbRing 1.6s infinite ease-out;
+                border: 1px solid rgba(0, 113, 227, 0.22);
+                border-radius: 999px;
+                content: "";
+                inset: -14px;
+                position: absolute;
             }
             .hero-panel {
                 display: grid;
@@ -3158,21 +3175,29 @@ def load_css() -> None:
             .chat-bubble--loading {
                 align-items: center;
                 display: inline-flex;
-                gap: 9px;
+                gap: 12px;
             }
-            .loading-dot {
-                animation: studioPulse 1.05s infinite ease-in-out;
-                background: rgba(0, 113, 227, 0.9);
+            .loading-orb {
+                animation: studioOrbCore 1.6s infinite ease-in-out;
+                background: radial-gradient(circle at 30% 30%, #7cb7ff, #0d4b96 55%, var(--accent) 100%);
                 border-radius: 999px;
                 display: inline-block;
-                height: 9px;
-                width: 9px;
+                height: 14px;
+                position: relative;
+                width: 14px;
             }
-            .loading-dot:nth-child(2) {
-                animation-delay: 0.12s;
+            .loading-orb::after {
+                animation: studioOrbRing 1.6s infinite ease-out;
+                border: 1px solid rgba(0, 113, 227, 0.24);
+                border-radius: 999px;
+                content: "";
+                inset: -10px;
+                position: absolute;
             }
-            .loading-dot:nth-child(3) {
-                animation-delay: 0.24s;
+            .loading-copy {
+                color: var(--text-secondary) !important;
+                font-size: 0.94rem;
+                line-height: 1.5;
             }
             @keyframes studioPulse {
                 0%, 80%, 100% {
@@ -3182,6 +3207,26 @@ def load_css() -> None:
                 40% {
                     opacity: 1;
                     transform: scale(1);
+                }
+            }
+            @keyframes studioOrbCore {
+                0%, 100% {
+                    opacity: 0.88;
+                    transform: scale(0.92);
+                }
+                50% {
+                    opacity: 1;
+                    transform: scale(1.08);
+                }
+            }
+            @keyframes studioOrbRing {
+                0% {
+                    opacity: 0.5;
+                    transform: scale(0.75);
+                }
+                100% {
+                    opacity: 0;
+                    transform: scale(1.35);
                 }
             }
             .st-key-composer_shell {
@@ -3245,10 +3290,16 @@ def load_css() -> None:
                 align-items: flex-end;
             }
             div[data-baseweb="select"] > div {
-                background: var(--surface-strong) !important;
-                border-color: var(--border) !important;
-                border-radius: 14px !important;
+                background: rgba(255, 255, 255, 0.94) !important;
+                border: 1px solid transparent !important;
+                border-radius: 16px !important;
+                box-shadow: 0 1px 0 rgba(255, 255, 255, 0.96) inset, 0 12px 26px rgba(15, 23, 42, 0.05) !important;
                 color: var(--text-primary) !important;
+                transition: transform 180ms ease, box-shadow 220ms ease, background 220ms ease !important;
+            }
+            div[data-baseweb="select"] > div:hover {
+                box-shadow: 0 1px 0 rgba(255, 255, 255, 0.98) inset, 0 16px 32px rgba(15, 23, 42, 0.08) !important;
+                transform: translateY(-1px);
             }
             div[data-baseweb="select"] span,
             div[data-baseweb="select"] div,
@@ -3280,14 +3331,14 @@ def load_css() -> None:
             [data-testid="stBaseButton-primary"],
             [data-testid="baseButton-secondary"],
             [data-testid="baseButton-primary"] {
-                background: rgba(255, 255, 255, 0.72) !important;
-                border: 1px solid var(--border) !important;
+                background: rgba(255, 255, 255, 0.9) !important;
+                border: 1px solid transparent !important;
                 border-radius: 999px !important;
-                box-shadow: none !important;
+                box-shadow: 0 1px 0 rgba(255, 255, 255, 0.98) inset, 0 14px 30px rgba(15, 23, 42, 0.06) !important;
                 color: var(--text-primary) !important;
                 font-weight: 600 !important;
                 min-height: 46px;
-                transition: transform 220ms ease, box-shadow 220ms ease, background 220ms ease, border-color 220ms ease, color 220ms ease;
+                transition: transform 180ms ease, box-shadow 220ms ease, background 220ms ease, border-color 220ms ease, color 220ms ease;
             }
             .stButton > button *,
             .stDownloadButton > button *,
@@ -3306,9 +3357,18 @@ def load_css() -> None:
             button:hover,
             [role="button"]:hover {
                 background: #ffffff !important;
-                border-color: var(--border-strong) !important;
+                border-color: transparent !important;
                 color: var(--text-primary) !important;
                 transform: translateY(-1px);
+                box-shadow: 0 1px 0 rgba(255, 255, 255, 0.98) inset, 0 18px 34px rgba(15, 23, 42, 0.09) !important;
+            }
+            .stButton > button:active,
+            .stDownloadButton > button:active,
+            [data-testid="stFormSubmitButton"] button:active,
+            button:active,
+            [role="button"]:active {
+                transform: translateY(0) scale(0.96);
+                box-shadow: 0 1px 0 rgba(255, 255, 255, 0.96) inset, 0 8px 16px rgba(15, 23, 42, 0.08) !important;
             }
             .stButton > button[kind="primary"],
             [data-testid="stFormSubmitButton"] button[kind="primary"],
@@ -3319,6 +3379,13 @@ def load_css() -> None:
                 border-color: transparent !important;
                 box-shadow: 0 18px 30px rgba(0, 113, 227, 0.2) !important;
                 color: #ffffff !important;
+            }
+            .stButton > button[kind="primary"]:hover,
+            [data-testid="stFormSubmitButton"] button[kind="primary"]:hover,
+            button[kind="primary"]:hover,
+            [data-testid="stBaseButton-primary"]:hover,
+            [data-testid="baseButton-primary"]:hover {
+                box-shadow: 0 24px 38px rgba(0, 113, 227, 0.24) !important;
             }
             .stButton > button[kind="primary"] *,
             [data-testid="stFormSubmitButton"] button[kind="primary"] *,
@@ -3690,9 +3757,8 @@ def render_loading_bubble() -> None:
         <div class="chat-bubble chat-bubble--assistant">
             <div class="chat-bubble__label">Studio</div>
             <div class="chat-bubble__body chat-bubble--loading">
-                <span class="loading-dot"></span>
-                <span class="loading-dot"></span>
-                <span class="loading-dot"></span>
+                <span class="loading-orb"></span>
+                <span class="loading-copy">Generating the updated concept...</span>
             </div>
         </div>
         """,
