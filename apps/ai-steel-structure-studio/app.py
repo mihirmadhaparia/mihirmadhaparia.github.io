@@ -158,6 +158,12 @@ class ModelPackage:
     warnings: list[str]
 
 
+DEFAULT_SECTION_CATALOG_FILES = [
+    "ultimate_steel_parts_database.csv",
+    "steel_sections.csv",
+]
+
+
 SECTION_CATALOG: dict[str, SteelSection] = {
     "W8X10": SteelSection("W8X10", "W", 0.200, 0.100, 0.0043, 0.0052, 14.9),
     "W10X12": SteelSection("W10X12", "W", 0.251, 0.101, 0.0048, 0.0053, 17.9),
@@ -174,7 +180,7 @@ SECTION_CATALOG: dict[str, SteelSection] = {
 }
 
 
-def load_section_catalog_from_csv(path: str = "steel_sections.csv") -> dict[str, SteelSection]:
+def load_section_catalog_from_csv(path: str) -> dict[str, SteelSection]:
     csv_path = resolve_app_path(path)
     if not csv_path.exists():
         return {}
@@ -201,7 +207,8 @@ def load_section_catalog_from_csv(path: str = "steel_sections.csv") -> dict[str,
     return loaded
 
 
-SECTION_CATALOG.update(load_section_catalog_from_csv())
+for catalog_path in DEFAULT_SECTION_CATALOG_FILES:
+    SECTION_CATALOG.update(load_section_catalog_from_csv(catalog_path))
 
 
 def load_brace_connection_catalog(path: str = "brace_connection_catalog.csv") -> list[BraceConnectionRule]:
