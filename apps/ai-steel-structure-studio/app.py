@@ -2657,7 +2657,7 @@ def load_css() -> None:
                 --radius-md: 18px;
                 --radius-sm: 12px;
             }
-            #MainMenu, footer, [data-testid="stToolbar"], [data-testid="stDecoration"],
+            #MainMenu, footer, [data-testid="stDecoration"],
             [data-testid="stStatusWidget"], .stDeployButton {
                 display: none !important;
                 visibility: hidden !important;
@@ -2676,11 +2676,41 @@ def load_css() -> None:
                 border-bottom: 1px solid rgba(16, 17, 20, 0.06);
                 color: var(--text-primary) !important;
             }
+            [data-testid="stToolbar"] {
+                background: transparent !important;
+                border: 0 !important;
+                right: 0.85rem !important;
+                top: 0.65rem !important;
+            }
             [data-testid="stSidebar"] {
                 background: rgba(255, 255, 255, 0.78) !important;
                 border-right: 1px solid var(--border);
                 color: var(--text-primary) !important;
                 backdrop-filter: blur(18px);
+            }
+            [data-testid="collapsedControl"] {
+                display: flex !important;
+                visibility: visible !important;
+                left: 0.85rem !important;
+                top: 0.75rem !important;
+                z-index: 1000 !important;
+            }
+            [data-testid="collapsedControl"] button,
+            button[kind="header"],
+            button[kind="headerNoPadding"] {
+                background: rgba(255, 255, 255, 0.92) !important;
+                border: 1px solid var(--border) !important;
+                border-radius: 999px !important;
+                box-shadow: var(--shadow-sm) !important;
+                color: var(--text-primary) !important;
+                min-height: 40px !important;
+                min-width: 40px !important;
+            }
+            [data-testid="collapsedControl"] button svg,
+            button[kind="header"] svg,
+            button[kind="headerNoPadding"] svg {
+                color: var(--text-primary) !important;
+                fill: var(--text-primary) !important;
             }
             .stApp,
             [data-testid="stMarkdownContainer"],
@@ -2726,18 +2756,21 @@ def load_css() -> None:
             [data-testid="stCaptionContainer"] * {
                 color: var(--text-secondary) !important;
             }
-            .site-header-shell {
-                align-items: center;
+            .st-key-header_shell {
                 background: rgba(245, 245, 247, 0.78);
                 border: 1px solid rgba(16, 17, 20, 0.06);
                 border-radius: 28px;
                 box-shadow: var(--shadow-sm);
-                display: flex;
-                gap: 24px;
-                justify-content: space-between;
                 margin-bottom: 14px;
-                padding: 18px 22px;
+                padding: 10px 18px 10px 72px;
                 backdrop-filter: blur(18px);
+            }
+            .st-key-header_shell [data-testid="stHorizontalBlock"] {
+                align-items: center;
+            }
+            .st-key-header_shell [data-testid="column"] {
+                display: flex;
+                align-items: center;
             }
             .brand-mark {
                 align-items: center;
@@ -2772,16 +2805,11 @@ def load_css() -> None:
             .brand-mark__text span {
                 color: var(--text-tertiary) !important;
                 font-size: 0.76rem;
-                white-space: nowrap;
+                white-space: normal;
             }
             .st-key-top_nav_shell {
-                background: rgba(255, 255, 255, 0.76);
-                border: 1px solid var(--border);
-                border-radius: var(--radius-lg);
-                box-shadow: var(--shadow-sm);
-                margin: 0 0 42px;
-                padding: 8px 10px;
-                backdrop-filter: blur(18px);
+                margin: 0;
+                padding: 0;
             }
             .st-key-top_nav_shell [data-testid="stPills"] {
                 width: 100%;
@@ -2792,23 +2820,26 @@ def load_css() -> None:
                 display: flex;
                 flex-wrap: wrap;
                 gap: 6px;
+                justify-content: flex-end;
             }
             .st-key-top_nav_shell [data-testid="stPills"] button,
             .st-key-top_nav_shell [data-testid="stPills"] [role="radio"] {
-                background: transparent !important;
-                border: 0 !important;
+                background: rgba(255, 255, 255, 0.72) !important;
+                border: 1px solid var(--border) !important;
                 border-radius: 999px !important;
                 box-shadow: none !important;
                 color: var(--text-secondary) !important;
-                font-size: 0.92rem !important;
+                font-size: 0.88rem !important;
                 font-weight: 600 !important;
-                min-height: 42px !important;
-                padding: 9px 14px !important;
+                min-height: 40px !important;
+                padding: 8px 14px !important;
             }
             .st-key-top_nav_shell [data-testid="stPills"] button[aria-checked="true"],
             .st-key-top_nav_shell [data-testid="stPills"] [role="radio"][aria-checked="true"] {
-                background: rgba(16, 17, 20, 0.06) !important;
-                color: var(--text-primary) !important;
+                background: linear-gradient(135deg, #0d4b96, var(--accent)) !important;
+                border-color: transparent !important;
+                box-shadow: 0 14px 24px rgba(0, 113, 227, 0.18) !important;
+                color: #ffffff !important;
             }
             .st-key-top_nav_shell label {
                 display: none !important;
@@ -2818,6 +2849,7 @@ def load_css() -> None:
                 gap: 18px;
                 margin: 0 0 30px;
                 max-width: 760px;
+                padding: 6px 0 4px;
             }
             .eyebrow {
                 align-items: center;
@@ -2880,45 +2912,108 @@ def load_css() -> None:
                 caret-color: var(--text-primary) !important;
                 -webkit-text-fill-color: var(--text-primary) !important;
             }
-            .prompt-composer {
+            .chat-meta {
                 background: var(--bg-elevated);
                 border: 1px solid var(--border);
-                border-radius: var(--radius-xl);
+                border-radius: var(--radius-lg);
                 box-shadow: var(--shadow-sm);
-                margin: 18px 0 12px;
-                padding: 22px;
+                margin: 12px 0;
+                padding: 16px 18px;
                 backdrop-filter: blur(18px);
             }
-            .prompt-composer-title {
+            .chat-meta strong {
                 color: var(--text-primary) !important;
-                font-size: 1.15rem;
+                display: block;
+                font-size: 0.92rem;
                 font-weight: 700;
-                letter-spacing: -0.02em;
-                margin-bottom: 6px;
+                letter-spacing: -0.01em;
+                margin-bottom: 4px;
             }
-            .prompt-composer-copy {
+            .chat-meta span,
+            .chat-meta p {
                 color: var(--text-secondary) !important;
                 line-height: 1.6;
-                margin: 0 0 14px;
+                margin: 0;
             }
-            [data-testid="stForm"] {
+            .st-key-chat_shell {
                 background: var(--bg-elevated);
                 border: 1px solid var(--border);
                 border-radius: var(--radius-xl);
                 box-shadow: var(--shadow-sm);
-                padding: 18px 18px 16px;
+                margin-top: 18px;
+                padding: 12px;
                 backdrop-filter: blur(18px);
             }
-            [data-testid="stForm"] textarea {
-                background: #ffffff !important;
-                border: 1px solid var(--border) !important;
-                border-radius: 22px !important;
-                box-shadow: inset 0 0 0 1px rgba(16, 17, 20, 0.02) !important;
+            .chat-bubble {
+                border: 1px solid var(--border);
+                border-radius: 26px;
+                margin: 10px 0;
+                max-width: min(860px, 100%);
+                padding: 16px 18px;
+                box-shadow: var(--shadow-sm);
+            }
+            .chat-bubble--assistant {
+                background: rgba(255, 255, 255, 0.78);
+                margin-right: auto;
+            }
+            .chat-bubble--user {
+                background: linear-gradient(135deg, rgba(13, 75, 150, 0.12), rgba(0, 113, 227, 0.08));
+                border-color: rgba(0, 113, 227, 0.18);
+                margin-left: auto;
+            }
+            .chat-bubble__label {
+                color: var(--accent-deep) !important;
+                font-family: "IBM Plex Mono", monospace !important;
+                font-size: 0.74rem;
+                font-weight: 600;
+                letter-spacing: 0.08em;
+                margin-bottom: 8px;
+                text-transform: uppercase;
+            }
+            .chat-bubble__body {
                 color: var(--text-primary) !important;
-                font-size: 1.02rem !important;
-                line-height: 1.62 !important;
-                padding: 16px 18px !important;
-                -webkit-text-fill-color: var(--text-primary) !important;
+                line-height: 1.7;
+                white-space: normal;
+            }
+            .chat-empty {
+                color: var(--text-secondary) !important;
+                padding: 26px 20px;
+                text-align: center;
+            }
+            .chat-toolbar {
+                align-items: center;
+                display: flex;
+                gap: 12px;
+                justify-content: space-between;
+                margin-top: 8px;
+                padding: 4px 0 2px;
+            }
+            .chat-toolbar-copy {
+                color: var(--text-secondary) !important;
+                font-size: 0.95rem;
+                line-height: 1.6;
+                margin: 0;
+                max-width: 760px;
+            }
+            .chat-toolbar-actions {
+                display: flex;
+                gap: 10px;
+                justify-content: flex-end;
+                width: 100%;
+            }
+            [data-testid="stChatInput"] {
+                background: rgba(255, 255, 255, 0.94) !important;
+                border: 1px solid var(--border) !important;
+                border-radius: 26px !important;
+                box-shadow: 0 16px 34px rgba(15, 23, 42, 0.08) !important;
+                margin-top: 16px !important;
+                padding: 8px 12px !important;
+            }
+            [data-testid="stChatInput"] textarea {
+                color: var(--text-primary) !important;
+                font-size: 1rem !important;
+                line-height: 1.6 !important;
+                min-height: 42px !important;
             }
             div[data-baseweb="select"] > div {
                 background: var(--surface-strong) !important;
@@ -2945,16 +3040,6 @@ def load_css() -> None:
             [data-baseweb="tab"], [data-baseweb="tab"] *,
             [data-testid="stMetric"], [data-testid="stMetric"] *,
             [data-testid="stAlert"], [data-testid="stAlert"] * {
-                color: var(--text-primary) !important;
-            }
-            [data-testid="stChatMessage"] {
-                background: var(--bg-elevated) !important;
-                border: 1px solid var(--border) !important;
-                border-radius: 24px !important;
-                box-shadow: var(--shadow-sm);
-                backdrop-filter: blur(18px);
-            }
-            [data-testid="stChatMessage"] * {
                 color: var(--text-primary) !important;
             }
             .stButton > button,
@@ -3060,16 +3145,19 @@ def load_css() -> None:
                 color: var(--text-primary) !important;
             }
             @media (max-width: 920px) {
-                .site-header-shell {
-                    align-items: flex-start;
-                    flex-direction: column;
+                .st-key-header_shell {
+                    padding-left: 18px;
                 }
                 .st-key-top_nav_shell [data-testid="stPills"] [role="radiogroup"],
                 .st-key-top_nav_shell [data-testid="stPills"] div[role="group"] {
                     justify-content: flex-start;
                 }
-                .brand-mark__text span {
-                    white-space: normal;
+                .chat-toolbar {
+                    align-items: flex-start;
+                    flex-direction: column;
+                }
+                .chat-toolbar-actions {
+                    justify-content: flex-start;
                 }
             }
         </style>
@@ -3078,18 +3166,28 @@ def load_css() -> None:
     )
 
 
-def render_site_header() -> None:
+def render_site_header() -> str:
+    if "active_page" not in st.session_state or st.session_state.active_page not in NAV_PAGES:
+        st.session_state.active_page = "Prompt"
+    with st.container(key="header_shell"):
+        brand_col, nav_col = st.columns([1.15, 1.85], gap="medium")
+        with brand_col:
+            st.markdown(
+                """
+                <div class="brand-mark">
+                    <span class="brand-mark__monogram">MM</span>
+                    <span class="brand-mark__text">
+                        <strong>Mihir Madhaparia</strong>
+                        <span>Mechanical engineer and medical technology researcher</span>
+                    </span>
+                </div>
+                """,
+                unsafe_allow_html=True,
+            )
+        with nav_col:
+            active_page = render_top_nav()
     st.markdown(
         """
-        <div class="site-header-shell">
-            <div class="brand-mark">
-                <span class="brand-mark__monogram">MM</span>
-                <span class="brand-mark__text">
-                    <strong>Mihir Madhaparia</strong>
-                    <span>Mechanical engineer and medical technology researcher</span>
-                </span>
-            </div>
-        </div>
         <section class="hero-panel">
             <span class="eyebrow">AI Steel Structure Studio</span>
             <h1>Prompt-driven steel building concepts.</h1>
@@ -3101,11 +3199,10 @@ def render_site_header() -> None:
         """,
         unsafe_allow_html=True,
     )
+    return active_page
 
 
 def render_top_nav() -> str:
-    if "active_page" not in st.session_state or st.session_state.active_page not in NAV_PAGES:
-        st.session_state.active_page = "Prompt"
     with st.container(key="top_nav_shell"):
         selected = st.pills(
             "Main navigation",
@@ -3182,9 +3279,49 @@ def render_sidebar(spec: BuildingSpec) -> BuildingSpec:
     return validate_spec(updated)
 
 
+def reset_project_chat() -> None:
+    st.session_state.spec = spec_to_dict(BuildingSpec())
+    st.session_state.project_history = []
+    st.session_state.chat_messages = [
+        {
+            "role": "assistant",
+            "content": "Project reset. Describe the steel building you want to create.",
+        }
+    ]
+    st.session_state.extraction_notice = None
+
+
+def render_chat_bubble(role: str, content: str) -> None:
+    bubble_role = "user" if role == "user" else "assistant"
+    label = "You" if role == "user" else "Studio"
+    safe_content = html.escape(content).replace("\n", "<br>")
+    st.markdown(
+        f"""
+        <div class="chat-bubble chat-bubble--{bubble_role}">
+            <div class="chat-bubble__label">{label}</div>
+            <div class="chat-bubble__body">{safe_content}</div>
+        </div>
+        """,
+        unsafe_allow_html=True,
+    )
+
+
 def render_prompt_tab() -> None:
-    st.subheader("Project Chat")
-    st.write("Work on one active project at a time. Start with a building description, then keep asking for changes until the design matches your vision.")
+    provider, api_key, model, ollama_host = current_ai_settings()
+    model_label = model if provider != "Free local parser" else "rules"
+
+    st.markdown(
+        f"""
+        <div class="chat-meta">
+            <strong>Project chat</strong>
+            <span>
+                Start with a building brief, then refine it naturally like a running design conversation.
+                Current AI engine: {html.escape(provider)} | Model: {html.escape(model_label)}
+            </span>
+        </div>
+        """,
+        unsafe_allow_html=True,
+    )
 
     if st.session_state.extraction_notice:
         level, message = st.session_state.extraction_notice
@@ -3193,51 +3330,45 @@ def render_prompt_tab() -> None:
         else:
             st.warning(message)
 
-    provider, api_key, model, ollama_host = current_ai_settings()
-    st.caption(f"Current AI engine: {provider} | Model: {model if provider != 'Free local parser' else 'rules'}")
-
-    for message in st.session_state.chat_messages:
-        with st.chat_message(message["role"]):
-            st.write(message["content"])
-
-    reset_col, setup_col = st.columns([1, 2])
-    with reset_col:
-        if st.button("Reset Project Chat", use_container_width=True):
-            st.session_state.spec = spec_to_dict(BuildingSpec())
-            st.session_state.project_history = []
-            st.session_state.chat_messages = [
-                {
-                    "role": "assistant",
-                    "content": "Project reset. Describe the steel building you want to create.",
-                }
-            ]
-            st.session_state.extraction_notice = None
-            st.rerun()
-    with setup_col:
-        st.caption("Change the AI engine, model, or Ollama host in the AI Setup tab.")
-
-    st.markdown(
-        """
-        <div class="prompt-composer">
-            <div class="prompt-composer-title">Tell the studio what to build next.</div>
-            <p class="prompt-composer-copy">
-                Use one clear sentence, or ask for a change to the active project. Example:
-                "Use standing seam roof sheets, insulated wall panels, and make it 5m wider."
-            </p>
-        </div>
-        """,
-        unsafe_allow_html=True,
-    )
-    with st.form("project_chat_composer", clear_on_submit=True):
-        user_message = st.text_area(
-            "Project prompt",
-            placeholder="Describe the first design or ask for a change...",
-            label_visibility="collapsed",
-            height=120,
+    toolbar_col, action_col = st.columns([3.2, 1], gap="medium")
+    with toolbar_col:
+        st.markdown(
+            """
+            <div class="chat-toolbar">
+                <p class="chat-toolbar-copy">
+                    Keep working on one active project at a time. Describe the first concept, then ask for layout,
+                    cladding, framing, or detailing changes just like you would in a design review.
+                </p>
+            </div>
+            """,
+            unsafe_allow_html=True,
         )
-        submitted = st.form_submit_button("Send to AI", type="primary", use_container_width=True)
+    with action_col:
+        if st.button("Reset Project Chat", use_container_width=True):
+            reset_project_chat()
+            st.rerun()
 
-    if submitted and user_message.strip():
+    st.caption("Change the AI engine, model, or Ollama host in the AI Setup tab.")
+
+    with st.container(key="chat_shell"):
+        if st.session_state.chat_messages:
+            for message in st.session_state.chat_messages:
+                render_chat_bubble(message["role"], message["content"])
+        else:
+            st.markdown(
+                """
+                <div class="chat-empty">
+                    Start the project with a short building brief. The studio will turn it into a structured concept package.
+                </div>
+                """,
+                unsafe_allow_html=True,
+            )
+
+    user_message = st.chat_input(
+        "Describe the first design or ask for a change to the active project...",
+    )
+
+    if user_message and user_message.strip():
         user_message = user_message.strip()
         st.session_state.chat_messages.append({"role": "user", "content": user_message})
         has_active_project = len(st.session_state.project_history) > 0
@@ -3572,8 +3703,7 @@ def main() -> None:
     init_state()
     load_css()
 
-    render_site_header()
-    active_page = render_top_nav()
+    active_page = render_site_header()
 
     current_spec = spec_from_dict(st.session_state.spec)
     spec = render_sidebar(current_spec)
