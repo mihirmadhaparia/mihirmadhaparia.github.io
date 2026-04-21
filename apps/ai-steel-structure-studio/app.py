@@ -2833,11 +2833,11 @@ def load_css() -> None:
                 line-height: 0.98 !important;
             }
             .block-container {
-                max-width: min(1380px, calc(100vw - 48px));
+                max-width: min(1480px, calc(100vw - 28px));
                 margin-left: auto;
                 margin-right: auto;
                 padding-bottom: 3rem;
-                padding-top: 1.2rem;
+                padding-top: 0.55rem;
                 transition: max-width 240ms ease;
                 width: auto;
             }
@@ -2855,8 +2855,8 @@ def load_css() -> None:
                 border: 1px solid rgba(16, 17, 20, 0.06);
                 border-radius: 28px;
                 box-shadow: var(--shadow-sm);
-                margin: 0 0 18px 0;
-                min-height: 68px;
+                margin: 0 0 10px 0;
+                min-height: 64px;
                 padding: 10px 18px 10px 72px;
                 position: static;
                 backdrop-filter: blur(18px);
@@ -2954,7 +2954,7 @@ def load_css() -> None:
             }
             .st-key-top_nav_shell [data-testid="stPills"] button:hover,
             .st-key-top_nav_shell [data-testid="stPills"] [role="radio"]:hover {
-                box-shadow: 0 1px 0 rgba(255, 255, 255, 0.96) inset, 0 16px 32px rgba(15, 23, 42, 0.09) !important;
+                box-shadow: 0 1px 0 rgba(255, 255, 255, 0.96) inset, 0 0 0 1px rgba(62, 146, 255, 0.12), 0 0 28px rgba(0, 113, 227, 0.22), 0 18px 32px rgba(15, 23, 42, 0.09) !important;
                 transform: translateY(-1px);
             }
             .st-key-top_nav_shell [data-testid="stPills"] button[aria-checked="true"],
@@ -2983,13 +2983,13 @@ def load_css() -> None:
                 padding: 20px 22px;
             }
             .st-key-studio_chat_shell {
-                min-height: 760px;
+                min-height: 720px;
                 position: sticky;
-                top: 92px;
+                top: 82px;
             }
             .st-key-studio_chat_composer_shell {
-                margin-top: 18px;
-                padding: 10px 12px;
+                margin-top: 14px;
+                padding: 8px 10px;
             }
             .st-key-studio_chat_composer_shell .stButton {
                 margin: 0 !important;
@@ -3002,8 +3002,49 @@ def load_css() -> None:
                 padding: 0 !important;
                 text-align: center !important;
             }
+            .st-key-studio_chat_composer_shell [data-testid="stChatInput"] {
+                background: rgba(255, 255, 255, 0.92) !important;
+                border: 1px solid transparent !important;
+                border-radius: 22px !important;
+                box-shadow: 0 1px 0 rgba(255, 255, 255, 0.98) inset, 0 12px 28px rgba(15, 23, 42, 0.06) !important;
+                min-height: 58px !important;
+                transition: box-shadow 220ms ease, transform 180ms ease, background 220ms ease !important;
+            }
+            .st-key-studio_chat_composer_shell [data-testid="stChatInput"]:focus-within {
+                box-shadow: 0 0 0 4px rgba(0, 113, 227, 0.1), 0 18px 32px rgba(15, 23, 42, 0.08) !important;
+            }
+            .st-key-studio_chat_composer_shell [data-testid="stChatInput"] textarea {
+                min-height: 44px !important;
+                padding: 10px 14px !important;
+            }
+            .st-key-studio_chat_composer_shell [data-testid="stChatInput"] button {
+                align-items: center !important;
+                background: linear-gradient(135deg, #0d4b96, var(--accent)) !important;
+                border: 1px solid transparent !important;
+                border-radius: 999px !important;
+                box-shadow: 0 18px 30px rgba(0, 113, 227, 0.2) !important;
+                color: #ffffff !important;
+                display: flex !important;
+                height: 42px !important;
+                justify-content: center !important;
+                min-height: 42px !important;
+                min-width: 42px !important;
+                padding: 0 !important;
+                transition: transform 180ms ease, box-shadow 220ms ease !important;
+                width: 42px !important;
+            }
+            .st-key-studio_chat_composer_shell [data-testid="stChatInput"] button:hover {
+                box-shadow: 0 0 0 1px rgba(62, 146, 255, 0.12), 0 0 24px rgba(0, 113, 227, 0.24), 0 22px 34px rgba(0, 113, 227, 0.24) !important;
+                transform: translateY(-1px);
+            }
+            .st-key-studio_chat_composer_shell [data-testid="stChatInput"] button:active {
+                transform: scale(0.96);
+            }
+            .st-key-studio_chat_reset_button button:hover {
+                box-shadow: 0 0 0 1px rgba(255, 100, 100, 0.12), 0 0 24px rgba(255, 59, 48, 0.18), 0 18px 34px rgba(15, 23, 42, 0.08) !important;
+            }
             .st-key-studio_preview_shell {
-                min-height: 760px;
+                min-height: 720px;
             }
             .st-key-studio_controls_shell {
                 margin-top: 24px;
@@ -3017,7 +3058,7 @@ def load_css() -> None:
                 align-items: center;
             }
             .st-key-preview_camera_shell {
-                max-width: 320px;
+                max-width: 300px;
             }
             .studio-empty-state,
             .studio-loading-state {
@@ -3867,32 +3908,6 @@ def process_pending_prompt(user_message: str, provider: str, api_key: str, model
     st.rerun()
 
 
-def mount_chat_enter_shortcut() -> None:
-    script = """
-        <script>
-        (() => {
-            const root = window.parent.document;
-            const textarea = root.querySelector('.st-key-studio_chat_composer_shell textarea');
-            const buttons = root.querySelectorAll('.st-key-studio_chat_composer_shell button');
-            const sendButton = buttons.length ? buttons[buttons.length - 1] : null;
-            if (!textarea || !sendButton || textarea.dataset.enterBound === 'true') {
-                return;
-            }
-            textarea.dataset.enterBound = 'true';
-            textarea.addEventListener('keydown', (event) => {
-                if (event.key === 'Enter' && !event.shiftKey) {
-                    event.preventDefault();
-                    textarea.dispatchEvent(new Event('input', { bubbles: true }));
-                    textarea.dispatchEvent(new Event('change', { bubbles: true }));
-                    window.setTimeout(() => sendButton.click(), 0);
-                }
-            });
-        })();
-        </script>
-    """
-    components.html(script, height=0, width=0)
-
-
 def render_design_controls_section(spec: BuildingSpec) -> BuildingSpec:
     version = st.session_state.get("controls_version", 0)
     with st.container(key="studio_controls_shell"):
@@ -4119,7 +4134,7 @@ def render_preview_tab(spec: BuildingSpec) -> None:
     package = build_model(updated_spec)
 
     with workspace_shell:
-        studio_cols = st.columns([0.92, 1.38], gap="large")
+        studio_cols = st.columns([0.98, 1.42], gap="medium")
         with studio_cols[0]:
             with st.container(key="studio_chat_shell"):
                 st.markdown("### Project Chat")
@@ -4142,20 +4157,14 @@ def render_preview_tab(spec: BuildingSpec) -> None:
                     render_loading_bubble()
 
                 with st.container(key="studio_chat_composer_shell"):
-                    prompt_col, reset_col, send_col = st.columns([12, 1, 1], gap="small")
+                    prompt_col, reset_col = st.columns([13, 1], gap="small")
                     with prompt_col:
-                        st.text_area(
-                            "Project prompt",
-                            key="chat_draft",
+                        submitted_prompt = st.chat_input(
                             placeholder="Ask for a new concept or request an edit to the current building...",
-                            label_visibility="collapsed",
-                            height=96,
+                            key="chat_input_box",
                         )
                     with reset_col:
                         reset_clicked = st.button("\u21bb", key="studio_chat_reset_button", use_container_width=True)
-                    with send_col:
-                        send_clicked = st.button("\u2191", key="studio_chat_send_button", type="primary", use_container_width=True)
-                    mount_chat_enter_shortcut()
 
         with studio_cols[1]:
             with st.container(key="studio_preview_shell"):
@@ -4214,8 +4223,8 @@ def render_preview_tab(spec: BuildingSpec) -> None:
         st.session_state.reset_chat_requested = True
         st.rerun()
 
-    if send_clicked and st.session_state.get("chat_draft", "").strip():
-        queue_prompt_for_processing(st.session_state.get("chat_draft", ""))
+    if submitted_prompt and submitted_prompt.strip():
+        queue_prompt_for_processing(submitted_prompt)
         st.rerun()
 
     if pending_prompt:
