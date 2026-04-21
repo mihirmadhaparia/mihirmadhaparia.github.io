@@ -44,6 +44,17 @@ def running_in_streamlit_cloud() -> bool:
     return Path("/mount/src").exists()
 
 
+def get_config_value(name: str, default: str = "") -> str:
+    env_value = os.getenv(name)
+    if env_value:
+        return env_value
+    try:
+        secret_value = st.secrets.get(name, default)
+        return str(secret_value) if secret_value is not None else default
+    except Exception:
+        return default
+
+
 @dataclass
 class BuildingSpec:
     project_name: str = "Concept Warehouse"
@@ -2623,17 +2634,17 @@ def init_state() -> None:
     if "sidebar_open" not in st.session_state:
         st.session_state.sidebar_open = True
     if "ai_provider" not in st.session_state:
-        st.session_state.ai_provider = os.getenv("AI_PROVIDER", "Ollama Cloud")
+        st.session_state.ai_provider = get_config_value("AI_PROVIDER", "Ollama Cloud")
     if "ai_model" not in st.session_state:
-        st.session_state.ai_model = os.getenv("OLLAMA_MODEL", DEFAULT_OLLAMA_MODEL)
+        st.session_state.ai_model = get_config_value("OLLAMA_MODEL", DEFAULT_OLLAMA_MODEL)
     if "ollama_host" not in st.session_state:
-        st.session_state.ollama_host = os.getenv("OLLAMA_HOST", DEFAULT_OLLAMA_CLOUD_HOST)
+        st.session_state.ollama_host = get_config_value("OLLAMA_HOST", DEFAULT_OLLAMA_CLOUD_HOST)
     if "ollama_api_key" not in st.session_state:
-        st.session_state.ollama_api_key = os.getenv("OLLAMA_API_KEY", "")
+        st.session_state.ollama_api_key = get_config_value("OLLAMA_API_KEY", "")
     if "openai_api_key" not in st.session_state:
-        st.session_state.openai_api_key = os.getenv("OPENAI_API_KEY", "")
+        st.session_state.openai_api_key = get_config_value("OPENAI_API_KEY", "")
     if "gemini_api_key" not in st.session_state:
-        st.session_state.gemini_api_key = os.getenv("GEMINI_API_KEY", "")
+        st.session_state.gemini_api_key = get_config_value("GEMINI_API_KEY", "")
 
 
 def current_ai_settings() -> tuple[str, str, str, str]:
@@ -2810,9 +2821,15 @@ def load_css() -> None:
                 width: 312px;
                 z-index: 900;
                 backdrop-filter: blur(18px);
+                transition: transform 220ms ease, opacity 220ms ease;
             }
             .st-key-control_panel_shell .stButton {
                 margin-top: 0;
+            }
+            body.steel-studio-sidebar-closed .st-key-control_panel_shell {
+                opacity: 0;
+                pointer-events: none;
+                transform: translateX(calc(-100% - 24px));
             }
             .st-key-header_shell [data-testid="stHorizontalBlock"] {
                 align-items: center;
@@ -3304,21 +3321,22 @@ def load_css() -> None:
 
 
 def mount_shell_bridge() -> None:
-    components.html(
-        """
+    script = """
         <script>
         (() => {
             try {
                 const parentWindow = window.parent;
                 const parentDoc = parentWindow.document;
-                const collapsed = parentDoc.querySelector('.st-key-control_panel_shell') === null;
+                const collapsed = __COLLAPSED__;
                 parentDoc.body.classList.toggle('steel-studio-sidebar-closed', collapsed);
             } catch (error) {
                 console.warn("Steel studio shell bridge failed", error);
             }
         })();
         </script>
-        """,
+        """.replace("__COLLAPSED__", "true" if not st.session_state.get("sidebar_open", True) else "false")
+    components.html(
+        script,
         height=0,
         width=0,
     )
@@ -3367,9 +3385,6 @@ def render_sidebar_toggle() -> None:
 
 
 def render_sidebar(spec: BuildingSpec) -> BuildingSpec:
-    if not st.session_state.get("sidebar_open", True):
-        return validate_spec(spec)
-
     with st.container(key="control_panel_shell"):
         st.header("Design Controls")
         st.caption("Use the prompt first, then fine-tune anything here.")
