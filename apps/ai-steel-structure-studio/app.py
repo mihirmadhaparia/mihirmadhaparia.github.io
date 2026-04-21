@@ -39,6 +39,10 @@ def resolve_app_path(path: str | Path) -> Path:
     return APP_DIR / candidate
 
 
+def running_in_streamlit_cloud() -> bool:
+    return Path("/mount/src").exists()
+
+
 @dataclass
 class BuildingSpec:
     project_name: str = "Concept Warehouse"
@@ -2599,14 +2603,11 @@ def init_state() -> None:
     if "project_history" not in st.session_state:
         st.session_state.project_history = []
     if "chat_messages" not in st.session_state:
-        st.session_state.chat_messages = [
-            {
-                "role": "assistant",
-                "content": "Describe the steel building you want. I will create the first rendition, then you can keep asking for changes in this same chat.",
-            }
-        ]
+        st.session_state.chat_messages = []
+    if "chat_draft" not in st.session_state:
+        st.session_state.chat_draft = ""
     if "ai_provider" not in st.session_state:
-        st.session_state.ai_provider = os.getenv("AI_PROVIDER", "Ollama Local")
+        st.session_state.ai_provider = os.getenv("AI_PROVIDER", "Free local parser")
     if "ai_model" not in st.session_state:
         st.session_state.ai_model = os.getenv("OLLAMA_MODEL", DEFAULT_OLLAMA_MODEL)
     if "ollama_host" not in st.session_state:
@@ -2619,6 +2620,9 @@ def init_state() -> None:
 
 def current_ai_settings() -> tuple[str, str, str, str]:
     provider = st.session_state.get("ai_provider", "Ollama Local")
+    if running_in_streamlit_cloud() and provider == "Ollama Local" and not os.getenv("AI_PROVIDER"):
+        provider = "Free local parser"
+        st.session_state.ai_provider = provider
     model = st.session_state.get("ai_model", DEFAULT_OLLAMA_MODEL)
     ollama_host = st.session_state.get("ollama_host", DEFAULT_OLLAMA_HOST)
     api_key = ""
@@ -2675,6 +2679,7 @@ def load_css() -> None:
                 backdrop-filter: blur(18px);
                 border-bottom: 1px solid rgba(16, 17, 20, 0.06);
                 color: var(--text-primary) !important;
+                min-height: 64px;
             }
             [data-testid="stToolbar"] {
                 background: transparent !important;
@@ -2750,20 +2755,24 @@ def load_css() -> None:
             }
             .block-container {
                 max-width: 1180px;
-                padding-top: 1.1rem;
+                padding-bottom: 9rem;
+                padding-top: 5.6rem;
             }
             [data-testid="stCaptionContainer"],
             [data-testid="stCaptionContainer"] * {
                 color: var(--text-secondary) !important;
             }
             .st-key-header_shell {
-                background: rgba(245, 245, 247, 0.78);
-                border: 1px solid rgba(16, 17, 20, 0.06);
-                border-radius: 28px;
-                box-shadow: var(--shadow-sm);
-                margin-bottom: 14px;
-                padding: 10px 18px 10px 72px;
-                backdrop-filter: blur(18px);
+                background: transparent;
+                border: 0;
+                box-shadow: none;
+                left: 4.3rem;
+                margin: 0;
+                padding: 0;
+                position: fixed;
+                right: 12rem;
+                top: 0.65rem;
+                z-index: 999;
             }
             .st-key-header_shell [data-testid="stHorizontalBlock"] {
                 align-items: center;
@@ -2824,8 +2833,8 @@ def load_css() -> None:
             }
             .st-key-top_nav_shell [data-testid="stPills"] button,
             .st-key-top_nav_shell [data-testid="stPills"] [role="radio"] {
-                background: rgba(255, 255, 255, 0.72) !important;
-                border: 1px solid var(--border) !important;
+                background: rgba(255, 255, 255, 0.82) !important;
+                border: 1px solid rgba(16, 17, 20, 0.06) !important;
                 border-radius: 999px !important;
                 box-shadow: none !important;
                 color: var(--text-secondary) !important;
@@ -2846,10 +2855,10 @@ def load_css() -> None:
             }
             .hero-panel {
                 display: grid;
-                gap: 18px;
-                margin: 0 0 30px;
+                gap: 0;
+                margin: 0 0 24px;
                 max-width: 760px;
-                padding: 6px 0 4px;
+                padding: 0;
             }
             .eyebrow {
                 align-items: center;
@@ -2874,6 +2883,16 @@ def load_css() -> None:
                 line-height: 1.72;
                 margin: 0;
                 max-width: 630px;
+            }
+            .st-key-chat_shell {
+                background: rgba(255, 255, 255, 0.66);
+                border: 1px solid var(--border);
+                border-radius: var(--radius-xl);
+                box-shadow: var(--shadow-sm);
+                margin-top: 8px;
+                min-height: clamp(320px, 48vh, 560px);
+                padding: 18px 18px 112px;
+                backdrop-filter: blur(18px);
             }
             .stTextInput input, .stTextArea textarea, .stNumberInput input,
             [data-testid="stSidebar"] input, [data-testid="stSidebar"] textarea {
@@ -2912,38 +2931,6 @@ def load_css() -> None:
                 caret-color: var(--text-primary) !important;
                 -webkit-text-fill-color: var(--text-primary) !important;
             }
-            .chat-meta {
-                background: var(--bg-elevated);
-                border: 1px solid var(--border);
-                border-radius: var(--radius-lg);
-                box-shadow: var(--shadow-sm);
-                margin: 12px 0;
-                padding: 16px 18px;
-                backdrop-filter: blur(18px);
-            }
-            .chat-meta strong {
-                color: var(--text-primary) !important;
-                display: block;
-                font-size: 0.92rem;
-                font-weight: 700;
-                letter-spacing: -0.01em;
-                margin-bottom: 4px;
-            }
-            .chat-meta span,
-            .chat-meta p {
-                color: var(--text-secondary) !important;
-                line-height: 1.6;
-                margin: 0;
-            }
-            .st-key-chat_shell {
-                background: var(--bg-elevated);
-                border: 1px solid var(--border);
-                border-radius: var(--radius-xl);
-                box-shadow: var(--shadow-sm);
-                margin-top: 18px;
-                padding: 12px;
-                backdrop-filter: blur(18px);
-            }
             .chat-bubble {
                 border: 1px solid var(--border);
                 border-radius: 26px;
@@ -2976,44 +2963,47 @@ def load_css() -> None:
                 white-space: normal;
             }
             .chat-empty {
-                color: var(--text-secondary) !important;
-                padding: 26px 20px;
-                text-align: center;
+                min-height: clamp(260px, 40vh, 480px);
             }
-            .chat-toolbar {
-                align-items: center;
-                display: flex;
-                gap: 12px;
-                justify-content: space-between;
-                margin-top: 8px;
-                padding: 4px 0 2px;
+            .st-key-composer_shell {
+                background: rgba(255, 255, 255, 0.9);
+                border: 1px solid rgba(16, 17, 20, 0.06);
+                border-radius: 30px;
+                bottom: 24px;
+                box-shadow: 0 22px 50px rgba(15, 23, 42, 0.12);
+                left: max(342px, calc(50% - 520px));
+                padding: 10px 12px;
+                position: fixed;
+                right: max(24px, calc(50% - 520px));
+                z-index: 950;
+                backdrop-filter: blur(20px);
             }
-            .chat-toolbar-copy {
-                color: var(--text-secondary) !important;
-                font-size: 0.95rem;
-                line-height: 1.6;
-                margin: 0;
-                max-width: 760px;
+            .st-key-composer_shell [data-testid="stForm"] {
+                background: transparent;
+                border: 0;
+                padding: 0;
             }
-            .chat-toolbar-actions {
-                display: flex;
-                gap: 10px;
-                justify-content: flex-end;
-                width: 100%;
-            }
-            [data-testid="stChatInput"] {
-                background: rgba(255, 255, 255, 0.94) !important;
-                border: 1px solid var(--border) !important;
-                border-radius: 26px !important;
-                box-shadow: 0 16px 34px rgba(15, 23, 42, 0.08) !important;
-                margin-top: 16px !important;
-                padding: 8px 12px !important;
-            }
-            [data-testid="stChatInput"] textarea {
+            .st-key-composer_shell textarea {
+                background: transparent !important;
+                border: 0 !important;
+                box-shadow: none !important;
                 color: var(--text-primary) !important;
                 font-size: 1rem !important;
                 line-height: 1.6 !important;
-                min-height: 42px !important;
+                min-height: 60px !important;
+                padding: 10px 14px !important;
+                resize: none !important;
+            }
+            .st-key-composer_shell textarea:focus {
+                box-shadow: none !important;
+            }
+            .st-key-composer_shell [data-testid="stFormSubmitButton"] button {
+                min-height: 48px !important;
+                min-width: 48px !important;
+                padding: 0 !important;
+            }
+            .st-key-composer_shell [data-testid="column"] {
+                align-items: flex-end;
             }
             div[data-baseweb="select"] > div {
                 background: var(--surface-strong) !important;
@@ -3146,18 +3136,22 @@ def load_css() -> None:
             }
             @media (max-width: 920px) {
                 .st-key-header_shell {
-                    padding-left: 18px;
+                    left: 1rem;
+                    position: static;
+                    right: 1rem;
+                    top: auto;
                 }
                 .st-key-top_nav_shell [data-testid="stPills"] [role="radiogroup"],
                 .st-key-top_nav_shell [data-testid="stPills"] div[role="group"] {
                     justify-content: flex-start;
                 }
-                .chat-toolbar {
-                    align-items: flex-start;
-                    flex-direction: column;
+                .block-container {
+                    padding-top: 2rem;
                 }
-                .chat-toolbar-actions {
-                    justify-content: flex-start;
+                .st-key-composer_shell {
+                    bottom: 16px;
+                    left: 16px;
+                    right: 16px;
                 }
             }
         </style>
@@ -3189,12 +3183,7 @@ def render_site_header() -> str:
     st.markdown(
         """
         <section class="hero-panel">
-            <span class="eyebrow">AI Steel Structure Studio</span>
             <h1>Prompt-driven steel building concepts.</h1>
-            <p class="hero-summary">
-                Generate conceptual warehouse and factory frames, cladding takeoffs, connection schedules,
-                drawings, and 3D previews from one clean project chat.
-            </p>
         </section>
         """,
         unsafe_allow_html=True,
@@ -3282,12 +3271,8 @@ def render_sidebar(spec: BuildingSpec) -> BuildingSpec:
 def reset_project_chat() -> None:
     st.session_state.spec = spec_to_dict(BuildingSpec())
     st.session_state.project_history = []
-    st.session_state.chat_messages = [
-        {
-            "role": "assistant",
-            "content": "Project reset. Describe the steel building you want to create.",
-        }
-    ]
+    st.session_state.chat_messages = []
+    st.session_state.chat_draft = ""
     st.session_state.extraction_notice = None
 
 
@@ -3308,67 +3293,37 @@ def render_chat_bubble(role: str, content: str) -> None:
 
 def render_prompt_tab() -> None:
     provider, api_key, model, ollama_host = current_ai_settings()
-    model_label = model if provider != "Free local parser" else "rules"
-
-    st.markdown(
-        f"""
-        <div class="chat-meta">
-            <strong>Project chat</strong>
-            <span>
-                Start with a building brief, then refine it naturally like a running design conversation.
-                Current AI engine: {html.escape(provider)} | Model: {html.escape(model_label)}
-            </span>
-        </div>
-        """,
-        unsafe_allow_html=True,
-    )
-
-    if st.session_state.extraction_notice:
-        level, message = st.session_state.extraction_notice
-        if level == "success":
-            st.success(message)
-        else:
-            st.warning(message)
-
-    toolbar_col, action_col = st.columns([3.2, 1], gap="medium")
-    with toolbar_col:
-        st.markdown(
-            """
-            <div class="chat-toolbar">
-                <p class="chat-toolbar-copy">
-                    Keep working on one active project at a time. Describe the first concept, then ask for layout,
-                    cladding, framing, or detailing changes just like you would in a design review.
-                </p>
-            </div>
-            """,
-            unsafe_allow_html=True,
-        )
-    with action_col:
-        if st.button("Reset Project Chat", use_container_width=True):
-            reset_project_chat()
-            st.rerun()
-
-    st.caption("Change the AI engine, model, or Ollama host in the AI Setup tab.")
 
     with st.container(key="chat_shell"):
         if st.session_state.chat_messages:
             for message in st.session_state.chat_messages:
                 render_chat_bubble(message["role"], message["content"])
         else:
-            st.markdown(
-                """
-                <div class="chat-empty">
-                    Start the project with a short building brief. The studio will turn it into a structured concept package.
-                </div>
-                """,
-                unsafe_allow_html=True,
-            )
+            st.markdown("""<div class="chat-empty"></div>""", unsafe_allow_html=True)
 
-    user_message = st.chat_input(
-        "Describe the first design or ask for a change to the active project...",
-    )
+    user_message = ""
+    with st.container(key="composer_shell"):
+        with st.form("project_chat_composer", clear_on_submit=False):
+            prompt_col, reset_col, send_col = st.columns([12, 1, 1], gap="small")
+            with prompt_col:
+                st.text_area(
+                    "Project prompt",
+                    key="chat_draft",
+                    placeholder="Describe the first design or ask for a change to the active project...",
+                    label_visibility="collapsed",
+                    height=64,
+                )
+            with reset_col:
+                reset_clicked = st.form_submit_button("↺", use_container_width=True)
+            with send_col:
+                send_clicked = st.form_submit_button("↑", type="primary", use_container_width=True)
 
-    if user_message and user_message.strip():
+    if reset_clicked:
+        reset_project_chat()
+        st.rerun()
+
+    if send_clicked and st.session_state.chat_draft.strip():
+        user_message = st.session_state.chat_draft.strip()
         user_message = user_message.strip()
         st.session_state.chat_messages.append({"role": "user", "content": user_message})
         has_active_project = len(st.session_state.project_history) > 0
@@ -3398,6 +3353,7 @@ def render_prompt_tab() -> None:
                 st.session_state.project_history = [f"Initial rendition via {source}: {user_message}"]
                 response = f"Created the first rendition with {source}. You can keep asking for refinements here."
             st.session_state.chat_messages.append({"role": "assistant", "content": response})
+            st.session_state.chat_draft = ""
             st.session_state.extraction_notice = ("success", response)
             st.rerun()
         except (ValueError, KeyError, urllib.error.URLError, TimeoutError) as exc:
@@ -3413,23 +3369,9 @@ def render_prompt_tab() -> None:
                 st.session_state.project_history = [f"Initial rendition via fallback local parser: {user_message}"]
                 response = f"The selected AI failed, so I used the free local parser. Details: {exc}"
             st.session_state.chat_messages.append({"role": "assistant", "content": response})
+            st.session_state.chat_draft = ""
             st.session_state.extraction_notice = ("warning", response)
             st.rerun()
-
-    if st.session_state.project_history:
-        with st.expander("Project change history", expanded=False):
-            for index, item in enumerate(st.session_state.project_history, start=1):
-                st.write(f"{index}. {item}")
-
-    st.markdown(
-        """
-        <div class="notice">
-        This app intentionally separates AI interpretation from geometry generation. That keeps the CAD output predictable:
-        the AI extracts parameters, then deterministic code creates the model, drawings, and BOM.
-        </div>
-        """,
-        unsafe_allow_html=True,
-    )
 
 
 def render_preview_tab(package: ModelPackage) -> None:
