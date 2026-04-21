@@ -1,0 +1,386 @@
+section_id,family,depth_m,flange_width_m,web_thickness_m,flange_thickness_m,weight_kg_m,wall_thickness_m,lip_m,source_note
+Z100X1P5,Z,0.1,0.045,0.0015,0.0015,2.661,0.0015,0.018,Generated common cold-formed Zee purlin size for conceptual modeling; verify against manufacturer tables.
+Z100X1P9,Z,0.1,0.045,0.0019,0.0019,3.371,0.0019,0.018,Generated common cold-formed Zee purlin size for conceptual modeling; verify against manufacturer tables.
+Z100X2P0,Z,0.1,0.045,0.002,0.002,3.548,0.002,0.018,Generated common cold-formed Zee purlin size for conceptual modeling; verify against manufacturer tables.
+Z100X2P5,Z,0.1,0.045,0.0025,0.0025,4.435,0.0025,0.018,Generated common cold-formed Zee purlin size for conceptual modeling; verify against manufacturer tables.
+Z100X3P0,Z,0.1,0.045,0.003,0.003,5.322,0.003,0.018,Generated common cold-formed Zee purlin size for conceptual modeling; verify against manufacturer tables.
+Z100X3P2,Z,0.1,0.045,0.0032,0.0032,5.677,0.0032,0.018,Generated common cold-formed Zee purlin size for conceptual modeling; verify against manufacturer tables.
+Z100X4P0,Z,0.1,0.045,0.004,0.004,7.096,0.004,0.018,Generated common cold-formed Zee purlin size for conceptual modeling; verify against manufacturer tables.
+Z120X1P5,Z,0.12,0.045,0.0015,0.0015,2.897,0.0015,0.018,Generated common cold-formed Zee purlin size for conceptual modeling; verify against manufacturer tables.
+Z120X1P9,Z,0.12,0.045,0.0019,0.0019,3.669,0.0019,0.018,Generated common cold-formed Zee purlin size for conceptual modeling; verify against manufacturer tables.
+Z120X2P0,Z,0.12,0.045,0.002,0.002,3.862,0.002,0.018,Generated common cold-formed Zee purlin size for conceptual modeling; verify against manufacturer tables.
+Z120X2P5,Z,0.12,0.045,0.0025,0.0025,4.828,0.0025,0.018,Generated common cold-formed Zee purlin size for conceptual modeling; verify against manufacturer tables.
+Z120X3P0,Z,0.12,0.045,0.003,0.003,5.793,0.003,0.018,Generated common cold-formed Zee purlin size for conceptual modeling; verify against manufacturer tables.
+Z120X3P2,Z,0.12,0.045,0.0032,0.0032,6.18,0.0032,0.018,Generated common cold-formed Zee purlin size for conceptual modeling; verify against manufacturer tables.
+Z120X4P0,Z,0.12,0.045,0.004,0.004,7.724,0.004,0.018,Generated common cold-formed Zee purlin size for conceptual modeling; verify against manufacturer tables.
+Z150X1P5,Z,0.15,0.048,0.0015,0.0015,3.321,0.0015,0.018,Generated common cold-formed Zee purlin size for conceptual modeling; verify against manufacturer tables.
+Z150X1P9,Z,0.15,0.048,0.0019,0.0019,4.206,0.0019,0.018,Generated common cold-formed Zee purlin size for conceptual modeling; verify against manufacturer tables.
+Z150X2P0,Z,0.15,0.048,0.002,0.002,4.427,0.002,0.018,Generated common cold-formed Zee purlin size for conceptual modeling; verify against manufacturer tables.
+Z150X2P5,Z,0.15,0.048,0.0025,0.0025,5.534,0.0025,0.018,Generated common cold-formed Zee purlin size for conceptual modeling; verify against manufacturer tables.
+Z150X3P0,Z,0.15,0.048,0.003,0.003,6.641,0.003,0.018,Generated common cold-formed Zee purlin size for conceptual modeling; verify against manufacturer tables.
+Z150X3P2,Z,0.15,0.048,0.0032,0.0032,7.084,0.0032,0.018,Generated common cold-formed Zee purlin size for conceptual modeling; verify against manufacturer tables.
+Z150X4P0,Z,0.15,0.048,0.004,0.004,8.855,0.004,0.018,Generated common cold-formed Zee purlin size for conceptual modeling; verify against manufacturer tables.
+Z175X1P5,Z,0.175,0.056,0.0015,0.0015,3.803,0.0015,0.018,Generated common cold-formed Zee purlin size for conceptual modeling; verify against manufacturer tables.
+Z175X1P9,Z,0.175,0.056,0.0019,0.0019,4.818,0.0019,0.018,Generated common cold-formed Zee purlin size for conceptual modeling; verify against manufacturer tables.
+Z175X2P0,Z,0.175,0.056,0.002,0.002,5.071,0.002,0.018,Generated common cold-formed Zee purlin size for conceptual modeling; verify against manufacturer tables.
+Z175X2P5,Z,0.175,0.056,0.0025,0.0025,6.339,0.0025,0.018,Generated common cold-formed Zee purlin size for conceptual modeling; verify against manufacturer tables.
+Z175X3P0,Z,0.175,0.056,0.003,0.003,7.607,0.003,0.018,Generated common cold-formed Zee purlin size for conceptual modeling; verify against manufacturer tables.
+Z175X3P2,Z,0.175,0.056,0.0032,0.0032,8.114,0.0032,0.018,Generated common cold-formed Zee purlin size for conceptual modeling; verify against manufacturer tables.
+Z175X4P0,Z,0.175,0.056,0.004,0.004,10.142,0.004,0.018,Generated common cold-formed Zee purlin size for conceptual modeling; verify against manufacturer tables.
+Z200X1P5,Z,0.2,0.064,0.0015,0.0015,4.286,0.0015,0.018,Generated common cold-formed Zee purlin size for conceptual modeling; verify against manufacturer tables.
+Z200X1P9,Z,0.2,0.064,0.0019,0.0019,5.429,0.0019,0.018,Generated common cold-formed Zee purlin size for conceptual modeling; verify against manufacturer tables.
+Z200X2P0,Z,0.2,0.064,0.002,0.002,5.715,0.002,0.018,Generated common cold-formed Zee purlin size for conceptual modeling; verify against manufacturer tables.
+Z200X2P5,Z,0.2,0.064,0.0025,0.0025,7.144,0.0025,0.018,Generated common cold-formed Zee purlin size for conceptual modeling; verify against manufacturer tables.
+Z200X3P0,Z,0.2,0.064,0.003,0.003,8.572,0.003,0.018,Generated common cold-formed Zee purlin size for conceptual modeling; verify against manufacturer tables.
+Z200X3P2,Z,0.2,0.064,0.0032,0.0032,9.144,0.0032,0.018,Generated common cold-formed Zee purlin size for conceptual modeling; verify against manufacturer tables.
+Z200X4P0,Z,0.2,0.064,0.004,0.004,11.43,0.004,0.018,Generated common cold-formed Zee purlin size for conceptual modeling; verify against manufacturer tables.
+Z225X1P5,Z,0.225,0.072,0.0015,0.0015,4.769,0.0015,0.018,Generated common cold-formed Zee purlin size for conceptual modeling; verify against manufacturer tables.
+Z225X1P9,Z,0.225,0.072,0.0019,0.0019,6.041,0.0019,0.018,Generated common cold-formed Zee purlin size for conceptual modeling; verify against manufacturer tables.
+Z225X2P0,Z,0.225,0.072,0.002,0.002,6.358,0.002,0.018,Generated common cold-formed Zee purlin size for conceptual modeling; verify against manufacturer tables.
+Z225X2P5,Z,0.225,0.072,0.0025,0.0025,7.948,0.0025,0.018,Generated common cold-formed Zee purlin size for conceptual modeling; verify against manufacturer tables.
+Z225X3P0,Z,0.225,0.072,0.003,0.003,9.538,0.003,0.018,Generated common cold-formed Zee purlin size for conceptual modeling; verify against manufacturer tables.
+Z225X3P2,Z,0.225,0.072,0.0032,0.0032,10.174,0.0032,0.018,Generated common cold-formed Zee purlin size for conceptual modeling; verify against manufacturer tables.
+Z225X4P0,Z,0.225,0.072,0.004,0.004,12.717,0.004,0.018,Generated common cold-formed Zee purlin size for conceptual modeling; verify against manufacturer tables.
+Z250X1P5,Z,0.25,0.08,0.0015,0.0015,5.252,0.0015,0.018,Generated common cold-formed Zee purlin size for conceptual modeling; verify against manufacturer tables.
+Z250X1P9,Z,0.25,0.08,0.0019,0.0019,6.652,0.0019,0.018,Generated common cold-formed Zee purlin size for conceptual modeling; verify against manufacturer tables.
+Z250X2P0,Z,0.25,0.08,0.002,0.002,7.002,0.002,0.018,Generated common cold-formed Zee purlin size for conceptual modeling; verify against manufacturer tables.
+Z250X2P5,Z,0.25,0.08,0.0025,0.0025,8.753,0.0025,0.018,Generated common cold-formed Zee purlin size for conceptual modeling; verify against manufacturer tables.
+Z250X3P0,Z,0.25,0.08,0.003,0.003,10.503,0.003,0.018,Generated common cold-formed Zee purlin size for conceptual modeling; verify against manufacturer tables.
+Z250X3P2,Z,0.25,0.08,0.0032,0.0032,11.204,0.0032,0.018,Generated common cold-formed Zee purlin size for conceptual modeling; verify against manufacturer tables.
+Z250X4P0,Z,0.25,0.08,0.004,0.004,14.004,0.004,0.018,Generated common cold-formed Zee purlin size for conceptual modeling; verify against manufacturer tables.
+Z300X1P5,Z,0.3,0.095,0.0015,0.0015,6.194,0.0015,0.018,Generated common cold-formed Zee purlin size for conceptual modeling; verify against manufacturer tables.
+Z300X1P9,Z,0.3,0.095,0.0019,0.0019,7.845,0.0019,0.018,Generated common cold-formed Zee purlin size for conceptual modeling; verify against manufacturer tables.
+Z300X2P0,Z,0.3,0.095,0.002,0.002,8.258,0.002,0.018,Generated common cold-formed Zee purlin size for conceptual modeling; verify against manufacturer tables.
+Z300X2P5,Z,0.3,0.095,0.0025,0.0025,10.323,0.0025,0.018,Generated common cold-formed Zee purlin size for conceptual modeling; verify against manufacturer tables.
+Z300X3P0,Z,0.3,0.095,0.003,0.003,12.387,0.003,0.018,Generated common cold-formed Zee purlin size for conceptual modeling; verify against manufacturer tables.
+Z300X3P2,Z,0.3,0.095,0.0032,0.0032,13.213,0.0032,0.018,Generated common cold-formed Zee purlin size for conceptual modeling; verify against manufacturer tables.
+Z300X4P0,Z,0.3,0.095,0.004,0.004,16.516,0.004,0.018,Generated common cold-formed Zee purlin size for conceptual modeling; verify against manufacturer tables.
+Z350X1P5,Z,0.35,0.095,0.0015,0.0015,6.782,0.0015,0.018,Generated common cold-formed Zee purlin size for conceptual modeling; verify against manufacturer tables.
+Z350X1P9,Z,0.35,0.095,0.0019,0.0019,8.591,0.0019,0.018,Generated common cold-formed Zee purlin size for conceptual modeling; verify against manufacturer tables.
+Z350X2P0,Z,0.35,0.095,0.002,0.002,9.043,0.002,0.018,Generated common cold-formed Zee purlin size for conceptual modeling; verify against manufacturer tables.
+Z350X2P5,Z,0.35,0.095,0.0025,0.0025,11.304,0.0025,0.018,Generated common cold-formed Zee purlin size for conceptual modeling; verify against manufacturer tables.
+Z350X3P0,Z,0.35,0.095,0.003,0.003,13.565,0.003,0.018,Generated common cold-formed Zee purlin size for conceptual modeling; verify against manufacturer tables.
+Z350X3P2,Z,0.35,0.095,0.0032,0.0032,14.469,0.0032,0.018,Generated common cold-formed Zee purlin size for conceptual modeling; verify against manufacturer tables.
+Z350X4P0,Z,0.35,0.095,0.004,0.004,18.086,0.004,0.018,Generated common cold-formed Zee purlin size for conceptual modeling; verify against manufacturer tables.
+Z400X1P5,Z,0.4,0.095,0.0015,0.0015,7.371,0.0015,0.018,Generated common cold-formed Zee purlin size for conceptual modeling; verify against manufacturer tables.
+Z400X1P9,Z,0.4,0.095,0.0019,0.0019,9.337,0.0019,0.018,Generated common cold-formed Zee purlin size for conceptual modeling; verify against manufacturer tables.
+Z400X2P0,Z,0.4,0.095,0.002,0.002,9.828,0.002,0.018,Generated common cold-formed Zee purlin size for conceptual modeling; verify against manufacturer tables.
+Z400X2P5,Z,0.4,0.095,0.0025,0.0025,12.285,0.0025,0.018,Generated common cold-formed Zee purlin size for conceptual modeling; verify against manufacturer tables.
+Z400X3P0,Z,0.4,0.095,0.003,0.003,14.742,0.003,0.018,Generated common cold-formed Zee purlin size for conceptual modeling; verify against manufacturer tables.
+Z400X3P2,Z,0.4,0.095,0.0032,0.0032,15.725,0.0032,0.018,Generated common cold-formed Zee purlin size for conceptual modeling; verify against manufacturer tables.
+Z400X4P0,Z,0.4,0.095,0.004,0.004,19.656,0.004,0.018,Generated common cold-formed Zee purlin size for conceptual modeling; verify against manufacturer tables.
+ZLAP100X1P5,Z,0.1,0.045,0.0015,0.0015,2.661,0.0015,0.018,Generated common cold-formed Lapped zee purlin size for conceptual modeling; verify against manufacturer tables.
+ZLAP100X1P9,Z,0.1,0.045,0.0019,0.0019,3.371,0.0019,0.018,Generated common cold-formed Lapped zee purlin size for conceptual modeling; verify against manufacturer tables.
+ZLAP100X2P0,Z,0.1,0.045,0.002,0.002,3.548,0.002,0.018,Generated common cold-formed Lapped zee purlin size for conceptual modeling; verify against manufacturer tables.
+ZLAP100X2P5,Z,0.1,0.045,0.0025,0.0025,4.435,0.0025,0.018,Generated common cold-formed Lapped zee purlin size for conceptual modeling; verify against manufacturer tables.
+ZLAP100X3P0,Z,0.1,0.045,0.003,0.003,5.322,0.003,0.018,Generated common cold-formed Lapped zee purlin size for conceptual modeling; verify against manufacturer tables.
+ZLAP100X3P2,Z,0.1,0.045,0.0032,0.0032,5.677,0.0032,0.018,Generated common cold-formed Lapped zee purlin size for conceptual modeling; verify against manufacturer tables.
+ZLAP100X4P0,Z,0.1,0.045,0.004,0.004,7.096,0.004,0.018,Generated common cold-formed Lapped zee purlin size for conceptual modeling; verify against manufacturer tables.
+ZLAP120X1P5,Z,0.12,0.045,0.0015,0.0015,2.897,0.0015,0.018,Generated common cold-formed Lapped zee purlin size for conceptual modeling; verify against manufacturer tables.
+ZLAP120X1P9,Z,0.12,0.045,0.0019,0.0019,3.669,0.0019,0.018,Generated common cold-formed Lapped zee purlin size for conceptual modeling; verify against manufacturer tables.
+ZLAP120X2P0,Z,0.12,0.045,0.002,0.002,3.862,0.002,0.018,Generated common cold-formed Lapped zee purlin size for conceptual modeling; verify against manufacturer tables.
+ZLAP120X2P5,Z,0.12,0.045,0.0025,0.0025,4.828,0.0025,0.018,Generated common cold-formed Lapped zee purlin size for conceptual modeling; verify against manufacturer tables.
+ZLAP120X3P0,Z,0.12,0.045,0.003,0.003,5.793,0.003,0.018,Generated common cold-formed Lapped zee purlin size for conceptual modeling; verify against manufacturer tables.
+ZLAP120X3P2,Z,0.12,0.045,0.0032,0.0032,6.18,0.0032,0.018,Generated common cold-formed Lapped zee purlin size for conceptual modeling; verify against manufacturer tables.
+ZLAP120X4P0,Z,0.12,0.045,0.004,0.004,7.724,0.004,0.018,Generated common cold-formed Lapped zee purlin size for conceptual modeling; verify against manufacturer tables.
+ZLAP150X1P5,Z,0.15,0.048,0.0015,0.0015,3.321,0.0015,0.018,Generated common cold-formed Lapped zee purlin size for conceptual modeling; verify against manufacturer tables.
+ZLAP150X1P9,Z,0.15,0.048,0.0019,0.0019,4.206,0.0019,0.018,Generated common cold-formed Lapped zee purlin size for conceptual modeling; verify against manufacturer tables.
+ZLAP150X2P0,Z,0.15,0.048,0.002,0.002,4.427,0.002,0.018,Generated common cold-formed Lapped zee purlin size for conceptual modeling; verify against manufacturer tables.
+ZLAP150X2P5,Z,0.15,0.048,0.0025,0.0025,5.534,0.0025,0.018,Generated common cold-formed Lapped zee purlin size for conceptual modeling; verify against manufacturer tables.
+ZLAP150X3P0,Z,0.15,0.048,0.003,0.003,6.641,0.003,0.018,Generated common cold-formed Lapped zee purlin size for conceptual modeling; verify against manufacturer tables.
+ZLAP150X3P2,Z,0.15,0.048,0.0032,0.0032,7.084,0.0032,0.018,Generated common cold-formed Lapped zee purlin size for conceptual modeling; verify against manufacturer tables.
+ZLAP150X4P0,Z,0.15,0.048,0.004,0.004,8.855,0.004,0.018,Generated common cold-formed Lapped zee purlin size for conceptual modeling; verify against manufacturer tables.
+ZLAP175X1P5,Z,0.175,0.056,0.0015,0.0015,3.803,0.0015,0.018,Generated common cold-formed Lapped zee purlin size for conceptual modeling; verify against manufacturer tables.
+ZLAP175X1P9,Z,0.175,0.056,0.0019,0.0019,4.818,0.0019,0.018,Generated common cold-formed Lapped zee purlin size for conceptual modeling; verify against manufacturer tables.
+ZLAP175X2P0,Z,0.175,0.056,0.002,0.002,5.071,0.002,0.018,Generated common cold-formed Lapped zee purlin size for conceptual modeling; verify against manufacturer tables.
+ZLAP175X2P5,Z,0.175,0.056,0.0025,0.0025,6.339,0.0025,0.018,Generated common cold-formed Lapped zee purlin size for conceptual modeling; verify against manufacturer tables.
+ZLAP175X3P0,Z,0.175,0.056,0.003,0.003,7.607,0.003,0.018,Generated common cold-formed Lapped zee purlin size for conceptual modeling; verify against manufacturer tables.
+ZLAP175X3P2,Z,0.175,0.056,0.0032,0.0032,8.114,0.0032,0.018,Generated common cold-formed Lapped zee purlin size for conceptual modeling; verify against manufacturer tables.
+ZLAP175X4P0,Z,0.175,0.056,0.004,0.004,10.142,0.004,0.018,Generated common cold-formed Lapped zee purlin size for conceptual modeling; verify against manufacturer tables.
+ZLAP200X1P5,Z,0.2,0.064,0.0015,0.0015,4.286,0.0015,0.018,Generated common cold-formed Lapped zee purlin size for conceptual modeling; verify against manufacturer tables.
+ZLAP200X1P9,Z,0.2,0.064,0.0019,0.0019,5.429,0.0019,0.018,Generated common cold-formed Lapped zee purlin size for conceptual modeling; verify against manufacturer tables.
+ZLAP200X2P0,Z,0.2,0.064,0.002,0.002,5.715,0.002,0.018,Generated common cold-formed Lapped zee purlin size for conceptual modeling; verify against manufacturer tables.
+ZLAP200X2P5,Z,0.2,0.064,0.0025,0.0025,7.144,0.0025,0.018,Generated common cold-formed Lapped zee purlin size for conceptual modeling; verify against manufacturer tables.
+ZLAP200X3P0,Z,0.2,0.064,0.003,0.003,8.572,0.003,0.018,Generated common cold-formed Lapped zee purlin size for conceptual modeling; verify against manufacturer tables.
+ZLAP200X3P2,Z,0.2,0.064,0.0032,0.0032,9.144,0.0032,0.018,Generated common cold-formed Lapped zee purlin size for conceptual modeling; verify against manufacturer tables.
+ZLAP200X4P0,Z,0.2,0.064,0.004,0.004,11.43,0.004,0.018,Generated common cold-formed Lapped zee purlin size for conceptual modeling; verify against manufacturer tables.
+ZLAP225X1P5,Z,0.225,0.072,0.0015,0.0015,4.769,0.0015,0.018,Generated common cold-formed Lapped zee purlin size for conceptual modeling; verify against manufacturer tables.
+ZLAP225X1P9,Z,0.225,0.072,0.0019,0.0019,6.041,0.0019,0.018,Generated common cold-formed Lapped zee purlin size for conceptual modeling; verify against manufacturer tables.
+ZLAP225X2P0,Z,0.225,0.072,0.002,0.002,6.358,0.002,0.018,Generated common cold-formed Lapped zee purlin size for conceptual modeling; verify against manufacturer tables.
+ZLAP225X2P5,Z,0.225,0.072,0.0025,0.0025,7.948,0.0025,0.018,Generated common cold-formed Lapped zee purlin size for conceptual modeling; verify against manufacturer tables.
+ZLAP225X3P0,Z,0.225,0.072,0.003,0.003,9.538,0.003,0.018,Generated common cold-formed Lapped zee purlin size for conceptual modeling; verify against manufacturer tables.
+ZLAP225X3P2,Z,0.225,0.072,0.0032,0.0032,10.174,0.0032,0.018,Generated common cold-formed Lapped zee purlin size for conceptual modeling; verify against manufacturer tables.
+ZLAP225X4P0,Z,0.225,0.072,0.004,0.004,12.717,0.004,0.018,Generated common cold-formed Lapped zee purlin size for conceptual modeling; verify against manufacturer tables.
+ZLAP250X1P5,Z,0.25,0.08,0.0015,0.0015,5.252,0.0015,0.018,Generated common cold-formed Lapped zee purlin size for conceptual modeling; verify against manufacturer tables.
+ZLAP250X1P9,Z,0.25,0.08,0.0019,0.0019,6.652,0.0019,0.018,Generated common cold-formed Lapped zee purlin size for conceptual modeling; verify against manufacturer tables.
+ZLAP250X2P0,Z,0.25,0.08,0.002,0.002,7.002,0.002,0.018,Generated common cold-formed Lapped zee purlin size for conceptual modeling; verify against manufacturer tables.
+ZLAP250X2P5,Z,0.25,0.08,0.0025,0.0025,8.753,0.0025,0.018,Generated common cold-formed Lapped zee purlin size for conceptual modeling; verify against manufacturer tables.
+ZLAP250X3P0,Z,0.25,0.08,0.003,0.003,10.503,0.003,0.018,Generated common cold-formed Lapped zee purlin size for conceptual modeling; verify against manufacturer tables.
+ZLAP250X3P2,Z,0.25,0.08,0.0032,0.0032,11.204,0.0032,0.018,Generated common cold-formed Lapped zee purlin size for conceptual modeling; verify against manufacturer tables.
+ZLAP250X4P0,Z,0.25,0.08,0.004,0.004,14.004,0.004,0.018,Generated common cold-formed Lapped zee purlin size for conceptual modeling; verify against manufacturer tables.
+ZLAP300X1P5,Z,0.3,0.095,0.0015,0.0015,6.194,0.0015,0.018,Generated common cold-formed Lapped zee purlin size for conceptual modeling; verify against manufacturer tables.
+ZLAP300X1P9,Z,0.3,0.095,0.0019,0.0019,7.845,0.0019,0.018,Generated common cold-formed Lapped zee purlin size for conceptual modeling; verify against manufacturer tables.
+ZLAP300X2P0,Z,0.3,0.095,0.002,0.002,8.258,0.002,0.018,Generated common cold-formed Lapped zee purlin size for conceptual modeling; verify against manufacturer tables.
+ZLAP300X2P5,Z,0.3,0.095,0.0025,0.0025,10.323,0.0025,0.018,Generated common cold-formed Lapped zee purlin size for conceptual modeling; verify against manufacturer tables.
+ZLAP300X3P0,Z,0.3,0.095,0.003,0.003,12.387,0.003,0.018,Generated common cold-formed Lapped zee purlin size for conceptual modeling; verify against manufacturer tables.
+ZLAP300X3P2,Z,0.3,0.095,0.0032,0.0032,13.213,0.0032,0.018,Generated common cold-formed Lapped zee purlin size for conceptual modeling; verify against manufacturer tables.
+ZLAP300X4P0,Z,0.3,0.095,0.004,0.004,16.516,0.004,0.018,Generated common cold-formed Lapped zee purlin size for conceptual modeling; verify against manufacturer tables.
+ZLAP350X1P5,Z,0.35,0.095,0.0015,0.0015,6.782,0.0015,0.018,Generated common cold-formed Lapped zee purlin size for conceptual modeling; verify against manufacturer tables.
+ZLAP350X1P9,Z,0.35,0.095,0.0019,0.0019,8.591,0.0019,0.018,Generated common cold-formed Lapped zee purlin size for conceptual modeling; verify against manufacturer tables.
+ZLAP350X2P0,Z,0.35,0.095,0.002,0.002,9.043,0.002,0.018,Generated common cold-formed Lapped zee purlin size for conceptual modeling; verify against manufacturer tables.
+ZLAP350X2P5,Z,0.35,0.095,0.0025,0.0025,11.304,0.0025,0.018,Generated common cold-formed Lapped zee purlin size for conceptual modeling; verify against manufacturer tables.
+ZLAP350X3P0,Z,0.35,0.095,0.003,0.003,13.565,0.003,0.018,Generated common cold-formed Lapped zee purlin size for conceptual modeling; verify against manufacturer tables.
+ZLAP350X3P2,Z,0.35,0.095,0.0032,0.0032,14.469,0.0032,0.018,Generated common cold-formed Lapped zee purlin size for conceptual modeling; verify against manufacturer tables.
+ZLAP350X4P0,Z,0.35,0.095,0.004,0.004,18.086,0.004,0.018,Generated common cold-formed Lapped zee purlin size for conceptual modeling; verify against manufacturer tables.
+ZLAP400X1P5,Z,0.4,0.095,0.0015,0.0015,7.371,0.0015,0.018,Generated common cold-formed Lapped zee purlin size for conceptual modeling; verify against manufacturer tables.
+ZLAP400X1P9,Z,0.4,0.095,0.0019,0.0019,9.337,0.0019,0.018,Generated common cold-formed Lapped zee purlin size for conceptual modeling; verify against manufacturer tables.
+ZLAP400X2P0,Z,0.4,0.095,0.002,0.002,9.828,0.002,0.018,Generated common cold-formed Lapped zee purlin size for conceptual modeling; verify against manufacturer tables.
+ZLAP400X2P5,Z,0.4,0.095,0.0025,0.0025,12.285,0.0025,0.018,Generated common cold-formed Lapped zee purlin size for conceptual modeling; verify against manufacturer tables.
+ZLAP400X3P0,Z,0.4,0.095,0.003,0.003,14.742,0.003,0.018,Generated common cold-formed Lapped zee purlin size for conceptual modeling; verify against manufacturer tables.
+ZLAP400X3P2,Z,0.4,0.095,0.0032,0.0032,15.725,0.0032,0.018,Generated common cold-formed Lapped zee purlin size for conceptual modeling; verify against manufacturer tables.
+ZLAP400X4P0,Z,0.4,0.095,0.004,0.004,19.656,0.004,0.018,Generated common cold-formed Lapped zee purlin size for conceptual modeling; verify against manufacturer tables.
+C100X1P5,C,0.1,0.045,0.0015,0.0015,2.661,0.0015,0.018,Generated common cold-formed Cee purlin/girt size for conceptual modeling; verify against manufacturer tables.
+C100X1P9,C,0.1,0.045,0.0019,0.0019,3.371,0.0019,0.018,Generated common cold-formed Cee purlin/girt size for conceptual modeling; verify against manufacturer tables.
+C100X2P0,C,0.1,0.045,0.002,0.002,3.548,0.002,0.018,Generated common cold-formed Cee purlin/girt size for conceptual modeling; verify against manufacturer tables.
+C100X2P5,C,0.1,0.045,0.0025,0.0025,4.435,0.0025,0.018,Generated common cold-formed Cee purlin/girt size for conceptual modeling; verify against manufacturer tables.
+C100X3P0,C,0.1,0.045,0.003,0.003,5.322,0.003,0.018,Generated common cold-formed Cee purlin/girt size for conceptual modeling; verify against manufacturer tables.
+C100X3P2,C,0.1,0.045,0.0032,0.0032,5.677,0.0032,0.018,Generated common cold-formed Cee purlin/girt size for conceptual modeling; verify against manufacturer tables.
+C100X4P0,C,0.1,0.045,0.004,0.004,7.096,0.004,0.018,Generated common cold-formed Cee purlin/girt size for conceptual modeling; verify against manufacturer tables.
+C120X1P5,C,0.12,0.045,0.0015,0.0015,2.897,0.0015,0.018,Generated common cold-formed Cee purlin/girt size for conceptual modeling; verify against manufacturer tables.
+C120X1P9,C,0.12,0.045,0.0019,0.0019,3.669,0.0019,0.018,Generated common cold-formed Cee purlin/girt size for conceptual modeling; verify against manufacturer tables.
+C120X2P0,C,0.12,0.045,0.002,0.002,3.862,0.002,0.018,Generated common cold-formed Cee purlin/girt size for conceptual modeling; verify against manufacturer tables.
+C120X2P5,C,0.12,0.045,0.0025,0.0025,4.828,0.0025,0.018,Generated common cold-formed Cee purlin/girt size for conceptual modeling; verify against manufacturer tables.
+C120X3P0,C,0.12,0.045,0.003,0.003,5.793,0.003,0.018,Generated common cold-formed Cee purlin/girt size for conceptual modeling; verify against manufacturer tables.
+C120X3P2,C,0.12,0.045,0.0032,0.0032,6.18,0.0032,0.018,Generated common cold-formed Cee purlin/girt size for conceptual modeling; verify against manufacturer tables.
+C120X4P0,C,0.12,0.045,0.004,0.004,7.724,0.004,0.018,Generated common cold-formed Cee purlin/girt size for conceptual modeling; verify against manufacturer tables.
+C150X1P5,C,0.15,0.048,0.0015,0.0015,3.321,0.0015,0.018,Generated common cold-formed Cee purlin/girt size for conceptual modeling; verify against manufacturer tables.
+C150X1P9,C,0.15,0.048,0.0019,0.0019,4.206,0.0019,0.018,Generated common cold-formed Cee purlin/girt size for conceptual modeling; verify against manufacturer tables.
+C150X2P0,C,0.15,0.048,0.002,0.002,4.427,0.002,0.018,Generated common cold-formed Cee purlin/girt size for conceptual modeling; verify against manufacturer tables.
+C150X2P5,C,0.15,0.048,0.0025,0.0025,5.534,0.0025,0.018,Generated common cold-formed Cee purlin/girt size for conceptual modeling; verify against manufacturer tables.
+C150X3P0,C,0.15,0.048,0.003,0.003,6.641,0.003,0.018,Generated common cold-formed Cee purlin/girt size for conceptual modeling; verify against manufacturer tables.
+C150X3P2,C,0.15,0.048,0.0032,0.0032,7.084,0.0032,0.018,Generated common cold-formed Cee purlin/girt size for conceptual modeling; verify against manufacturer tables.
+C150X4P0,C,0.15,0.048,0.004,0.004,8.855,0.004,0.018,Generated common cold-formed Cee purlin/girt size for conceptual modeling; verify against manufacturer tables.
+C175X1P5,C,0.175,0.056,0.0015,0.0015,3.803,0.0015,0.018,Generated common cold-formed Cee purlin/girt size for conceptual modeling; verify against manufacturer tables.
+C175X1P9,C,0.175,0.056,0.0019,0.0019,4.818,0.0019,0.018,Generated common cold-formed Cee purlin/girt size for conceptual modeling; verify against manufacturer tables.
+C175X2P0,C,0.175,0.056,0.002,0.002,5.071,0.002,0.018,Generated common cold-formed Cee purlin/girt size for conceptual modeling; verify against manufacturer tables.
+C175X2P5,C,0.175,0.056,0.0025,0.0025,6.339,0.0025,0.018,Generated common cold-formed Cee purlin/girt size for conceptual modeling; verify against manufacturer tables.
+C175X3P0,C,0.175,0.056,0.003,0.003,7.607,0.003,0.018,Generated common cold-formed Cee purlin/girt size for conceptual modeling; verify against manufacturer tables.
+C175X3P2,C,0.175,0.056,0.0032,0.0032,8.114,0.0032,0.018,Generated common cold-formed Cee purlin/girt size for conceptual modeling; verify against manufacturer tables.
+C175X4P0,C,0.175,0.056,0.004,0.004,10.142,0.004,0.018,Generated common cold-formed Cee purlin/girt size for conceptual modeling; verify against manufacturer tables.
+C200X1P5,C,0.2,0.064,0.0015,0.0015,4.286,0.0015,0.018,Generated common cold-formed Cee purlin/girt size for conceptual modeling; verify against manufacturer tables.
+C200X1P9,C,0.2,0.064,0.0019,0.0019,5.429,0.0019,0.018,Generated common cold-formed Cee purlin/girt size for conceptual modeling; verify against manufacturer tables.
+C200X2P0,C,0.2,0.064,0.002,0.002,5.715,0.002,0.018,Generated common cold-formed Cee purlin/girt size for conceptual modeling; verify against manufacturer tables.
+C200X2P5,C,0.2,0.064,0.0025,0.0025,7.144,0.0025,0.018,Generated common cold-formed Cee purlin/girt size for conceptual modeling; verify against manufacturer tables.
+C200X3P0,C,0.2,0.064,0.003,0.003,8.572,0.003,0.018,Generated common cold-formed Cee purlin/girt size for conceptual modeling; verify against manufacturer tables.
+C200X3P2,C,0.2,0.064,0.0032,0.0032,9.144,0.0032,0.018,Generated common cold-formed Cee purlin/girt size for conceptual modeling; verify against manufacturer tables.
+C200X4P0,C,0.2,0.064,0.004,0.004,11.43,0.004,0.018,Generated common cold-formed Cee purlin/girt size for conceptual modeling; verify against manufacturer tables.
+C225X1P5,C,0.225,0.072,0.0015,0.0015,4.769,0.0015,0.018,Generated common cold-formed Cee purlin/girt size for conceptual modeling; verify against manufacturer tables.
+C225X1P9,C,0.225,0.072,0.0019,0.0019,6.041,0.0019,0.018,Generated common cold-formed Cee purlin/girt size for conceptual modeling; verify against manufacturer tables.
+C225X2P0,C,0.225,0.072,0.002,0.002,6.358,0.002,0.018,Generated common cold-formed Cee purlin/girt size for conceptual modeling; verify against manufacturer tables.
+C225X2P5,C,0.225,0.072,0.0025,0.0025,7.948,0.0025,0.018,Generated common cold-formed Cee purlin/girt size for conceptual modeling; verify against manufacturer tables.
+C225X3P0,C,0.225,0.072,0.003,0.003,9.538,0.003,0.018,Generated common cold-formed Cee purlin/girt size for conceptual modeling; verify against manufacturer tables.
+C225X3P2,C,0.225,0.072,0.0032,0.0032,10.174,0.0032,0.018,Generated common cold-formed Cee purlin/girt size for conceptual modeling; verify against manufacturer tables.
+C225X4P0,C,0.225,0.072,0.004,0.004,12.717,0.004,0.018,Generated common cold-formed Cee purlin/girt size for conceptual modeling; verify against manufacturer tables.
+C250X1P5,C,0.25,0.08,0.0015,0.0015,5.252,0.0015,0.018,Generated common cold-formed Cee purlin/girt size for conceptual modeling; verify against manufacturer tables.
+C250X1P9,C,0.25,0.08,0.0019,0.0019,6.652,0.0019,0.018,Generated common cold-formed Cee purlin/girt size for conceptual modeling; verify against manufacturer tables.
+C250X2P0,C,0.25,0.08,0.002,0.002,7.002,0.002,0.018,Generated common cold-formed Cee purlin/girt size for conceptual modeling; verify against manufacturer tables.
+C250X2P5,C,0.25,0.08,0.0025,0.0025,8.753,0.0025,0.018,Generated common cold-formed Cee purlin/girt size for conceptual modeling; verify against manufacturer tables.
+C250X3P0,C,0.25,0.08,0.003,0.003,10.503,0.003,0.018,Generated common cold-formed Cee purlin/girt size for conceptual modeling; verify against manufacturer tables.
+C250X3P2,C,0.25,0.08,0.0032,0.0032,11.204,0.0032,0.018,Generated common cold-formed Cee purlin/girt size for conceptual modeling; verify against manufacturer tables.
+C250X4P0,C,0.25,0.08,0.004,0.004,14.004,0.004,0.018,Generated common cold-formed Cee purlin/girt size for conceptual modeling; verify against manufacturer tables.
+C300X1P5,C,0.3,0.095,0.0015,0.0015,6.194,0.0015,0.018,Generated common cold-formed Cee purlin/girt size for conceptual modeling; verify against manufacturer tables.
+C300X1P9,C,0.3,0.095,0.0019,0.0019,7.845,0.0019,0.018,Generated common cold-formed Cee purlin/girt size for conceptual modeling; verify against manufacturer tables.
+C300X2P0,C,0.3,0.095,0.002,0.002,8.258,0.002,0.018,Generated common cold-formed Cee purlin/girt size for conceptual modeling; verify against manufacturer tables.
+C300X2P5,C,0.3,0.095,0.0025,0.0025,10.323,0.0025,0.018,Generated common cold-formed Cee purlin/girt size for conceptual modeling; verify against manufacturer tables.
+C300X3P0,C,0.3,0.095,0.003,0.003,12.387,0.003,0.018,Generated common cold-formed Cee purlin/girt size for conceptual modeling; verify against manufacturer tables.
+C300X3P2,C,0.3,0.095,0.0032,0.0032,13.213,0.0032,0.018,Generated common cold-formed Cee purlin/girt size for conceptual modeling; verify against manufacturer tables.
+C300X4P0,C,0.3,0.095,0.004,0.004,16.516,0.004,0.018,Generated common cold-formed Cee purlin/girt size for conceptual modeling; verify against manufacturer tables.
+C350X1P5,C,0.35,0.095,0.0015,0.0015,6.782,0.0015,0.018,Generated common cold-formed Cee purlin/girt size for conceptual modeling; verify against manufacturer tables.
+C350X1P9,C,0.35,0.095,0.0019,0.0019,8.591,0.0019,0.018,Generated common cold-formed Cee purlin/girt size for conceptual modeling; verify against manufacturer tables.
+C350X2P0,C,0.35,0.095,0.002,0.002,9.043,0.002,0.018,Generated common cold-formed Cee purlin/girt size for conceptual modeling; verify against manufacturer tables.
+C350X2P5,C,0.35,0.095,0.0025,0.0025,11.304,0.0025,0.018,Generated common cold-formed Cee purlin/girt size for conceptual modeling; verify against manufacturer tables.
+C350X3P0,C,0.35,0.095,0.003,0.003,13.565,0.003,0.018,Generated common cold-formed Cee purlin/girt size for conceptual modeling; verify against manufacturer tables.
+C350X3P2,C,0.35,0.095,0.0032,0.0032,14.469,0.0032,0.018,Generated common cold-formed Cee purlin/girt size for conceptual modeling; verify against manufacturer tables.
+C350X4P0,C,0.35,0.095,0.004,0.004,18.086,0.004,0.018,Generated common cold-formed Cee purlin/girt size for conceptual modeling; verify against manufacturer tables.
+C400X1P5,C,0.4,0.095,0.0015,0.0015,7.371,0.0015,0.018,Generated common cold-formed Cee purlin/girt size for conceptual modeling; verify against manufacturer tables.
+C400X1P9,C,0.4,0.095,0.0019,0.0019,9.337,0.0019,0.018,Generated common cold-formed Cee purlin/girt size for conceptual modeling; verify against manufacturer tables.
+C400X2P0,C,0.4,0.095,0.002,0.002,9.828,0.002,0.018,Generated common cold-formed Cee purlin/girt size for conceptual modeling; verify against manufacturer tables.
+C400X2P5,C,0.4,0.095,0.0025,0.0025,12.285,0.0025,0.018,Generated common cold-formed Cee purlin/girt size for conceptual modeling; verify against manufacturer tables.
+C400X3P0,C,0.4,0.095,0.003,0.003,14.742,0.003,0.018,Generated common cold-formed Cee purlin/girt size for conceptual modeling; verify against manufacturer tables.
+C400X3P2,C,0.4,0.095,0.0032,0.0032,15.725,0.0032,0.018,Generated common cold-formed Cee purlin/girt size for conceptual modeling; verify against manufacturer tables.
+C400X4P0,C,0.4,0.095,0.004,0.004,19.656,0.004,0.018,Generated common cold-formed Cee purlin/girt size for conceptual modeling; verify against manufacturer tables.
+SIGMA100X1P5,SIGMA,0.1,0.045,0.0015,0.0015,2.661,0.0015,0.018,Generated common cold-formed Sigma purlin size for conceptual modeling; verify against manufacturer tables.
+SIGMA100X1P9,SIGMA,0.1,0.045,0.0019,0.0019,3.371,0.0019,0.018,Generated common cold-formed Sigma purlin size for conceptual modeling; verify against manufacturer tables.
+SIGMA100X2P0,SIGMA,0.1,0.045,0.002,0.002,3.548,0.002,0.018,Generated common cold-formed Sigma purlin size for conceptual modeling; verify against manufacturer tables.
+SIGMA100X2P5,SIGMA,0.1,0.045,0.0025,0.0025,4.435,0.0025,0.018,Generated common cold-formed Sigma purlin size for conceptual modeling; verify against manufacturer tables.
+SIGMA100X3P0,SIGMA,0.1,0.045,0.003,0.003,5.322,0.003,0.018,Generated common cold-formed Sigma purlin size for conceptual modeling; verify against manufacturer tables.
+SIGMA100X3P2,SIGMA,0.1,0.045,0.0032,0.0032,5.677,0.0032,0.018,Generated common cold-formed Sigma purlin size for conceptual modeling; verify against manufacturer tables.
+SIGMA100X4P0,SIGMA,0.1,0.045,0.004,0.004,7.096,0.004,0.018,Generated common cold-formed Sigma purlin size for conceptual modeling; verify against manufacturer tables.
+SIGMA120X1P5,SIGMA,0.12,0.045,0.0015,0.0015,2.897,0.0015,0.018,Generated common cold-formed Sigma purlin size for conceptual modeling; verify against manufacturer tables.
+SIGMA120X1P9,SIGMA,0.12,0.045,0.0019,0.0019,3.669,0.0019,0.018,Generated common cold-formed Sigma purlin size for conceptual modeling; verify against manufacturer tables.
+SIGMA120X2P0,SIGMA,0.12,0.045,0.002,0.002,3.862,0.002,0.018,Generated common cold-formed Sigma purlin size for conceptual modeling; verify against manufacturer tables.
+SIGMA120X2P5,SIGMA,0.12,0.045,0.0025,0.0025,4.828,0.0025,0.018,Generated common cold-formed Sigma purlin size for conceptual modeling; verify against manufacturer tables.
+SIGMA120X3P0,SIGMA,0.12,0.045,0.003,0.003,5.793,0.003,0.018,Generated common cold-formed Sigma purlin size for conceptual modeling; verify against manufacturer tables.
+SIGMA120X3P2,SIGMA,0.12,0.045,0.0032,0.0032,6.18,0.0032,0.018,Generated common cold-formed Sigma purlin size for conceptual modeling; verify against manufacturer tables.
+SIGMA120X4P0,SIGMA,0.12,0.045,0.004,0.004,7.724,0.004,0.018,Generated common cold-formed Sigma purlin size for conceptual modeling; verify against manufacturer tables.
+SIGMA150X1P5,SIGMA,0.15,0.048,0.0015,0.0015,3.321,0.0015,0.018,Generated common cold-formed Sigma purlin size for conceptual modeling; verify against manufacturer tables.
+SIGMA150X1P9,SIGMA,0.15,0.048,0.0019,0.0019,4.206,0.0019,0.018,Generated common cold-formed Sigma purlin size for conceptual modeling; verify against manufacturer tables.
+SIGMA150X2P0,SIGMA,0.15,0.048,0.002,0.002,4.427,0.002,0.018,Generated common cold-formed Sigma purlin size for conceptual modeling; verify against manufacturer tables.
+SIGMA150X2P5,SIGMA,0.15,0.048,0.0025,0.0025,5.534,0.0025,0.018,Generated common cold-formed Sigma purlin size for conceptual modeling; verify against manufacturer tables.
+SIGMA150X3P0,SIGMA,0.15,0.048,0.003,0.003,6.641,0.003,0.018,Generated common cold-formed Sigma purlin size for conceptual modeling; verify against manufacturer tables.
+SIGMA150X3P2,SIGMA,0.15,0.048,0.0032,0.0032,7.084,0.0032,0.018,Generated common cold-formed Sigma purlin size for conceptual modeling; verify against manufacturer tables.
+SIGMA150X4P0,SIGMA,0.15,0.048,0.004,0.004,8.855,0.004,0.018,Generated common cold-formed Sigma purlin size for conceptual modeling; verify against manufacturer tables.
+SIGMA175X1P5,SIGMA,0.175,0.056,0.0015,0.0015,3.803,0.0015,0.018,Generated common cold-formed Sigma purlin size for conceptual modeling; verify against manufacturer tables.
+SIGMA175X1P9,SIGMA,0.175,0.056,0.0019,0.0019,4.818,0.0019,0.018,Generated common cold-formed Sigma purlin size for conceptual modeling; verify against manufacturer tables.
+SIGMA175X2P0,SIGMA,0.175,0.056,0.002,0.002,5.071,0.002,0.018,Generated common cold-formed Sigma purlin size for conceptual modeling; verify against manufacturer tables.
+SIGMA175X2P5,SIGMA,0.175,0.056,0.0025,0.0025,6.339,0.0025,0.018,Generated common cold-formed Sigma purlin size for conceptual modeling; verify against manufacturer tables.
+SIGMA175X3P0,SIGMA,0.175,0.056,0.003,0.003,7.607,0.003,0.018,Generated common cold-formed Sigma purlin size for conceptual modeling; verify against manufacturer tables.
+SIGMA175X3P2,SIGMA,0.175,0.056,0.0032,0.0032,8.114,0.0032,0.018,Generated common cold-formed Sigma purlin size for conceptual modeling; verify against manufacturer tables.
+SIGMA175X4P0,SIGMA,0.175,0.056,0.004,0.004,10.142,0.004,0.018,Generated common cold-formed Sigma purlin size for conceptual modeling; verify against manufacturer tables.
+SIGMA200X1P5,SIGMA,0.2,0.064,0.0015,0.0015,4.286,0.0015,0.018,Generated common cold-formed Sigma purlin size for conceptual modeling; verify against manufacturer tables.
+SIGMA200X1P9,SIGMA,0.2,0.064,0.0019,0.0019,5.429,0.0019,0.018,Generated common cold-formed Sigma purlin size for conceptual modeling; verify against manufacturer tables.
+SIGMA200X2P0,SIGMA,0.2,0.064,0.002,0.002,5.715,0.002,0.018,Generated common cold-formed Sigma purlin size for conceptual modeling; verify against manufacturer tables.
+SIGMA200X2P5,SIGMA,0.2,0.064,0.0025,0.0025,7.144,0.0025,0.018,Generated common cold-formed Sigma purlin size for conceptual modeling; verify against manufacturer tables.
+SIGMA200X3P0,SIGMA,0.2,0.064,0.003,0.003,8.572,0.003,0.018,Generated common cold-formed Sigma purlin size for conceptual modeling; verify against manufacturer tables.
+SIGMA200X3P2,SIGMA,0.2,0.064,0.0032,0.0032,9.144,0.0032,0.018,Generated common cold-formed Sigma purlin size for conceptual modeling; verify against manufacturer tables.
+SIGMA200X4P0,SIGMA,0.2,0.064,0.004,0.004,11.43,0.004,0.018,Generated common cold-formed Sigma purlin size for conceptual modeling; verify against manufacturer tables.
+SIGMA225X1P5,SIGMA,0.225,0.072,0.0015,0.0015,4.769,0.0015,0.018,Generated common cold-formed Sigma purlin size for conceptual modeling; verify against manufacturer tables.
+SIGMA225X1P9,SIGMA,0.225,0.072,0.0019,0.0019,6.041,0.0019,0.018,Generated common cold-formed Sigma purlin size for conceptual modeling; verify against manufacturer tables.
+SIGMA225X2P0,SIGMA,0.225,0.072,0.002,0.002,6.358,0.002,0.018,Generated common cold-formed Sigma purlin size for conceptual modeling; verify against manufacturer tables.
+SIGMA225X2P5,SIGMA,0.225,0.072,0.0025,0.0025,7.948,0.0025,0.018,Generated common cold-formed Sigma purlin size for conceptual modeling; verify against manufacturer tables.
+SIGMA225X3P0,SIGMA,0.225,0.072,0.003,0.003,9.538,0.003,0.018,Generated common cold-formed Sigma purlin size for conceptual modeling; verify against manufacturer tables.
+SIGMA225X3P2,SIGMA,0.225,0.072,0.0032,0.0032,10.174,0.0032,0.018,Generated common cold-formed Sigma purlin size for conceptual modeling; verify against manufacturer tables.
+SIGMA225X4P0,SIGMA,0.225,0.072,0.004,0.004,12.717,0.004,0.018,Generated common cold-formed Sigma purlin size for conceptual modeling; verify against manufacturer tables.
+SIGMA250X1P5,SIGMA,0.25,0.08,0.0015,0.0015,5.252,0.0015,0.018,Generated common cold-formed Sigma purlin size for conceptual modeling; verify against manufacturer tables.
+SIGMA250X1P9,SIGMA,0.25,0.08,0.0019,0.0019,6.652,0.0019,0.018,Generated common cold-formed Sigma purlin size for conceptual modeling; verify against manufacturer tables.
+SIGMA250X2P0,SIGMA,0.25,0.08,0.002,0.002,7.002,0.002,0.018,Generated common cold-formed Sigma purlin size for conceptual modeling; verify against manufacturer tables.
+SIGMA250X2P5,SIGMA,0.25,0.08,0.0025,0.0025,8.753,0.0025,0.018,Generated common cold-formed Sigma purlin size for conceptual modeling; verify against manufacturer tables.
+SIGMA250X3P0,SIGMA,0.25,0.08,0.003,0.003,10.503,0.003,0.018,Generated common cold-formed Sigma purlin size for conceptual modeling; verify against manufacturer tables.
+SIGMA250X3P2,SIGMA,0.25,0.08,0.0032,0.0032,11.204,0.0032,0.018,Generated common cold-formed Sigma purlin size for conceptual modeling; verify against manufacturer tables.
+SIGMA250X4P0,SIGMA,0.25,0.08,0.004,0.004,14.004,0.004,0.018,Generated common cold-formed Sigma purlin size for conceptual modeling; verify against manufacturer tables.
+SIGMA300X1P5,SIGMA,0.3,0.095,0.0015,0.0015,6.194,0.0015,0.018,Generated common cold-formed Sigma purlin size for conceptual modeling; verify against manufacturer tables.
+SIGMA300X1P9,SIGMA,0.3,0.095,0.0019,0.0019,7.845,0.0019,0.018,Generated common cold-formed Sigma purlin size for conceptual modeling; verify against manufacturer tables.
+SIGMA300X2P0,SIGMA,0.3,0.095,0.002,0.002,8.258,0.002,0.018,Generated common cold-formed Sigma purlin size for conceptual modeling; verify against manufacturer tables.
+SIGMA300X2P5,SIGMA,0.3,0.095,0.0025,0.0025,10.323,0.0025,0.018,Generated common cold-formed Sigma purlin size for conceptual modeling; verify against manufacturer tables.
+SIGMA300X3P0,SIGMA,0.3,0.095,0.003,0.003,12.387,0.003,0.018,Generated common cold-formed Sigma purlin size for conceptual modeling; verify against manufacturer tables.
+SIGMA300X3P2,SIGMA,0.3,0.095,0.0032,0.0032,13.213,0.0032,0.018,Generated common cold-formed Sigma purlin size for conceptual modeling; verify against manufacturer tables.
+SIGMA300X4P0,SIGMA,0.3,0.095,0.004,0.004,16.516,0.004,0.018,Generated common cold-formed Sigma purlin size for conceptual modeling; verify against manufacturer tables.
+SIGMA350X1P5,SIGMA,0.35,0.095,0.0015,0.0015,6.782,0.0015,0.018,Generated common cold-formed Sigma purlin size for conceptual modeling; verify against manufacturer tables.
+SIGMA350X1P9,SIGMA,0.35,0.095,0.0019,0.0019,8.591,0.0019,0.018,Generated common cold-formed Sigma purlin size for conceptual modeling; verify against manufacturer tables.
+SIGMA350X2P0,SIGMA,0.35,0.095,0.002,0.002,9.043,0.002,0.018,Generated common cold-formed Sigma purlin size for conceptual modeling; verify against manufacturer tables.
+SIGMA350X2P5,SIGMA,0.35,0.095,0.0025,0.0025,11.304,0.0025,0.018,Generated common cold-formed Sigma purlin size for conceptual modeling; verify against manufacturer tables.
+SIGMA350X3P0,SIGMA,0.35,0.095,0.003,0.003,13.565,0.003,0.018,Generated common cold-formed Sigma purlin size for conceptual modeling; verify against manufacturer tables.
+SIGMA350X3P2,SIGMA,0.35,0.095,0.0032,0.0032,14.469,0.0032,0.018,Generated common cold-formed Sigma purlin size for conceptual modeling; verify against manufacturer tables.
+SIGMA350X4P0,SIGMA,0.35,0.095,0.004,0.004,18.086,0.004,0.018,Generated common cold-formed Sigma purlin size for conceptual modeling; verify against manufacturer tables.
+SIGMA400X1P5,SIGMA,0.4,0.095,0.0015,0.0015,7.371,0.0015,0.018,Generated common cold-formed Sigma purlin size for conceptual modeling; verify against manufacturer tables.
+SIGMA400X1P9,SIGMA,0.4,0.095,0.0019,0.0019,9.337,0.0019,0.018,Generated common cold-formed Sigma purlin size for conceptual modeling; verify against manufacturer tables.
+SIGMA400X2P0,SIGMA,0.4,0.095,0.002,0.002,9.828,0.002,0.018,Generated common cold-formed Sigma purlin size for conceptual modeling; verify against manufacturer tables.
+SIGMA400X2P5,SIGMA,0.4,0.095,0.0025,0.0025,12.285,0.0025,0.018,Generated common cold-formed Sigma purlin size for conceptual modeling; verify against manufacturer tables.
+SIGMA400X3P0,SIGMA,0.4,0.095,0.003,0.003,14.742,0.003,0.018,Generated common cold-formed Sigma purlin size for conceptual modeling; verify against manufacturer tables.
+SIGMA400X3P2,SIGMA,0.4,0.095,0.0032,0.0032,15.725,0.0032,0.018,Generated common cold-formed Sigma purlin size for conceptual modeling; verify against manufacturer tables.
+SIGMA400X4P0,SIGMA,0.4,0.095,0.004,0.004,19.656,0.004,0.018,Generated common cold-formed Sigma purlin size for conceptual modeling; verify against manufacturer tables.
+HAT100X1P5,HAT,0.1,0.045,0.0015,0.0015,2.237,0.0015,0.0,Generated common cold-formed Hat/channel purlin size for conceptual modeling; verify against manufacturer tables.
+HAT100X1P9,HAT,0.1,0.045,0.0019,0.0019,2.834,0.0019,0.0,Generated common cold-formed Hat/channel purlin size for conceptual modeling; verify against manufacturer tables.
+HAT100X2P0,HAT,0.1,0.045,0.002,0.002,2.983,0.002,0.0,Generated common cold-formed Hat/channel purlin size for conceptual modeling; verify against manufacturer tables.
+HAT100X2P5,HAT,0.1,0.045,0.0025,0.0025,3.729,0.0025,0.0,Generated common cold-formed Hat/channel purlin size for conceptual modeling; verify against manufacturer tables.
+HAT100X3P0,HAT,0.1,0.045,0.003,0.003,4.474,0.003,0.0,Generated common cold-formed Hat/channel purlin size for conceptual modeling; verify against manufacturer tables.
+HAT100X3P2,HAT,0.1,0.045,0.0032,0.0032,4.773,0.0032,0.0,Generated common cold-formed Hat/channel purlin size for conceptual modeling; verify against manufacturer tables.
+HAT100X4P0,HAT,0.1,0.045,0.004,0.004,5.966,0.004,0.0,Generated common cold-formed Hat/channel purlin size for conceptual modeling; verify against manufacturer tables.
+HAT120X1P5,HAT,0.12,0.045,0.0015,0.0015,2.473,0.0015,0.0,Generated common cold-formed Hat/channel purlin size for conceptual modeling; verify against manufacturer tables.
+HAT120X1P9,HAT,0.12,0.045,0.0019,0.0019,3.132,0.0019,0.0,Generated common cold-formed Hat/channel purlin size for conceptual modeling; verify against manufacturer tables.
+HAT120X2P0,HAT,0.12,0.045,0.002,0.002,3.297,0.002,0.0,Generated common cold-formed Hat/channel purlin size for conceptual modeling; verify against manufacturer tables.
+HAT120X2P5,HAT,0.12,0.045,0.0025,0.0025,4.121,0.0025,0.0,Generated common cold-formed Hat/channel purlin size for conceptual modeling; verify against manufacturer tables.
+HAT120X3P0,HAT,0.12,0.045,0.003,0.003,4.946,0.003,0.0,Generated common cold-formed Hat/channel purlin size for conceptual modeling; verify against manufacturer tables.
+HAT120X3P2,HAT,0.12,0.045,0.0032,0.0032,5.275,0.0032,0.0,Generated common cold-formed Hat/channel purlin size for conceptual modeling; verify against manufacturer tables.
+HAT120X4P0,HAT,0.12,0.045,0.004,0.004,6.594,0.004,0.0,Generated common cold-formed Hat/channel purlin size for conceptual modeling; verify against manufacturer tables.
+HAT150X1P5,HAT,0.15,0.048,0.0015,0.0015,2.897,0.0015,0.0,Generated common cold-formed Hat/channel purlin size for conceptual modeling; verify against manufacturer tables.
+HAT150X1P9,HAT,0.15,0.048,0.0019,0.0019,3.669,0.0019,0.0,Generated common cold-formed Hat/channel purlin size for conceptual modeling; verify against manufacturer tables.
+HAT150X2P0,HAT,0.15,0.048,0.002,0.002,3.862,0.002,0.0,Generated common cold-formed Hat/channel purlin size for conceptual modeling; verify against manufacturer tables.
+HAT150X2P5,HAT,0.15,0.048,0.0025,0.0025,4.828,0.0025,0.0,Generated common cold-formed Hat/channel purlin size for conceptual modeling; verify against manufacturer tables.
+HAT150X3P0,HAT,0.15,0.048,0.003,0.003,5.793,0.003,0.0,Generated common cold-formed Hat/channel purlin size for conceptual modeling; verify against manufacturer tables.
+HAT150X3P2,HAT,0.15,0.048,0.0032,0.0032,6.18,0.0032,0.0,Generated common cold-formed Hat/channel purlin size for conceptual modeling; verify against manufacturer tables.
+HAT150X4P0,HAT,0.15,0.048,0.004,0.004,7.724,0.004,0.0,Generated common cold-formed Hat/channel purlin size for conceptual modeling; verify against manufacturer tables.
+HAT175X1P5,HAT,0.175,0.056,0.0015,0.0015,3.379,0.0015,0.0,Generated common cold-formed Hat/channel purlin size for conceptual modeling; verify against manufacturer tables.
+HAT175X1P9,HAT,0.175,0.056,0.0019,0.0019,4.281,0.0019,0.0,Generated common cold-formed Hat/channel purlin size for conceptual modeling; verify against manufacturer tables.
+HAT175X2P0,HAT,0.175,0.056,0.002,0.002,4.506,0.002,0.0,Generated common cold-formed Hat/channel purlin size for conceptual modeling; verify against manufacturer tables.
+HAT175X2P5,HAT,0.175,0.056,0.0025,0.0025,5.632,0.0025,0.0,Generated common cold-formed Hat/channel purlin size for conceptual modeling; verify against manufacturer tables.
+HAT175X3P0,HAT,0.175,0.056,0.003,0.003,6.759,0.003,0.0,Generated common cold-formed Hat/channel purlin size for conceptual modeling; verify against manufacturer tables.
+HAT175X3P2,HAT,0.175,0.056,0.0032,0.0032,7.209,0.0032,0.0,Generated common cold-formed Hat/channel purlin size for conceptual modeling; verify against manufacturer tables.
+HAT175X4P0,HAT,0.175,0.056,0.004,0.004,9.012,0.004,0.0,Generated common cold-formed Hat/channel purlin size for conceptual modeling; verify against manufacturer tables.
+HAT200X1P5,HAT,0.2,0.064,0.0015,0.0015,3.862,0.0015,0.0,Generated common cold-formed Hat/channel purlin size for conceptual modeling; verify against manufacturer tables.
+HAT200X1P9,HAT,0.2,0.064,0.0019,0.0019,4.892,0.0019,0.0,Generated common cold-formed Hat/channel purlin size for conceptual modeling; verify against manufacturer tables.
+HAT200X2P0,HAT,0.2,0.064,0.002,0.002,5.15,0.002,0.0,Generated common cold-formed Hat/channel purlin size for conceptual modeling; verify against manufacturer tables.
+HAT200X2P5,HAT,0.2,0.064,0.0025,0.0025,6.437,0.0025,0.0,Generated common cold-formed Hat/channel purlin size for conceptual modeling; verify against manufacturer tables.
+HAT200X3P0,HAT,0.2,0.064,0.003,0.003,7.724,0.003,0.0,Generated common cold-formed Hat/channel purlin size for conceptual modeling; verify against manufacturer tables.
+HAT200X3P2,HAT,0.2,0.064,0.0032,0.0032,8.239,0.0032,0.0,Generated common cold-formed Hat/channel purlin size for conceptual modeling; verify against manufacturer tables.
+HAT200X4P0,HAT,0.2,0.064,0.004,0.004,10.299,0.004,0.0,Generated common cold-formed Hat/channel purlin size for conceptual modeling; verify against manufacturer tables.
+HAT225X1P5,HAT,0.225,0.072,0.0015,0.0015,4.345,0.0015,0.0,Generated common cold-formed Hat/channel purlin size for conceptual modeling; verify against manufacturer tables.
+HAT225X1P9,HAT,0.225,0.072,0.0019,0.0019,5.504,0.0019,0.0,Generated common cold-formed Hat/channel purlin size for conceptual modeling; verify against manufacturer tables.
+HAT225X2P0,HAT,0.225,0.072,0.002,0.002,5.793,0.002,0.0,Generated common cold-formed Hat/channel purlin size for conceptual modeling; verify against manufacturer tables.
+HAT225X2P5,HAT,0.225,0.072,0.0025,0.0025,7.242,0.0025,0.0,Generated common cold-formed Hat/channel purlin size for conceptual modeling; verify against manufacturer tables.
+HAT225X3P0,HAT,0.225,0.072,0.003,0.003,8.69,0.003,0.0,Generated common cold-formed Hat/channel purlin size for conceptual modeling; verify against manufacturer tables.
+HAT225X3P2,HAT,0.225,0.072,0.0032,0.0032,9.269,0.0032,0.0,Generated common cold-formed Hat/channel purlin size for conceptual modeling; verify against manufacturer tables.
+HAT225X4P0,HAT,0.225,0.072,0.004,0.004,11.587,0.004,0.0,Generated common cold-formed Hat/channel purlin size for conceptual modeling; verify against manufacturer tables.
+HAT250X1P5,HAT,0.25,0.08,0.0015,0.0015,4.828,0.0015,0.0,Generated common cold-formed Hat/channel purlin size for conceptual modeling; verify against manufacturer tables.
+HAT250X1P9,HAT,0.25,0.08,0.0019,0.0019,6.115,0.0019,0.0,Generated common cold-formed Hat/channel purlin size for conceptual modeling; verify against manufacturer tables.
+HAT250X2P0,HAT,0.25,0.08,0.002,0.002,6.437,0.002,0.0,Generated common cold-formed Hat/channel purlin size for conceptual modeling; verify against manufacturer tables.
+HAT250X2P5,HAT,0.25,0.08,0.0025,0.0025,8.046,0.0025,0.0,Generated common cold-formed Hat/channel purlin size for conceptual modeling; verify against manufacturer tables.
+HAT250X3P0,HAT,0.25,0.08,0.003,0.003,9.655,0.003,0.0,Generated common cold-formed Hat/channel purlin size for conceptual modeling; verify against manufacturer tables.
+HAT250X3P2,HAT,0.25,0.08,0.0032,0.0032,10.299,0.0032,0.0,Generated common cold-formed Hat/channel purlin size for conceptual modeling; verify against manufacturer tables.
+HAT250X4P0,HAT,0.25,0.08,0.004,0.004,12.874,0.004,0.0,Generated common cold-formed Hat/channel purlin size for conceptual modeling; verify against manufacturer tables.
+EAVE150X1P5,HSS,0.15,0.048,0.0015,0.0015,2.897,0.0015,0.0,Generated common cold-formed Eave strut size for conceptual modeling; verify against manufacturer tables.
+EAVE150X1P9,HSS,0.15,0.048,0.0019,0.0019,3.669,0.0019,0.0,Generated common cold-formed Eave strut size for conceptual modeling; verify against manufacturer tables.
+EAVE150X2P0,HSS,0.15,0.048,0.002,0.002,3.862,0.002,0.0,Generated common cold-formed Eave strut size for conceptual modeling; verify against manufacturer tables.
+EAVE150X2P5,HSS,0.15,0.048,0.0025,0.0025,4.828,0.0025,0.0,Generated common cold-formed Eave strut size for conceptual modeling; verify against manufacturer tables.
+EAVE150X3P0,HSS,0.15,0.048,0.003,0.003,5.793,0.003,0.0,Generated common cold-formed Eave strut size for conceptual modeling; verify against manufacturer tables.
+EAVE150X3P2,HSS,0.15,0.048,0.0032,0.0032,6.18,0.0032,0.0,Generated common cold-formed Eave strut size for conceptual modeling; verify against manufacturer tables.
+EAVE150X4P0,HSS,0.15,0.048,0.004,0.004,7.724,0.004,0.0,Generated common cold-formed Eave strut size for conceptual modeling; verify against manufacturer tables.
+EAVE175X1P5,HSS,0.175,0.056,0.0015,0.0015,3.379,0.0015,0.0,Generated common cold-formed Eave strut size for conceptual modeling; verify against manufacturer tables.
+EAVE175X1P9,HSS,0.175,0.056,0.0019,0.0019,4.281,0.0019,0.0,Generated common cold-formed Eave strut size for conceptual modeling; verify against manufacturer tables.
+EAVE175X2P0,HSS,0.175,0.056,0.002,0.002,4.506,0.002,0.0,Generated common cold-formed Eave strut size for conceptual modeling; verify against manufacturer tables.
+EAVE175X2P5,HSS,0.175,0.056,0.0025,0.0025,5.632,0.0025,0.0,Generated common cold-formed Eave strut size for conceptual modeling; verify against manufacturer tables.
+EAVE175X3P0,HSS,0.175,0.056,0.003,0.003,6.759,0.003,0.0,Generated common cold-formed Eave strut size for conceptual modeling; verify against manufacturer tables.
+EAVE175X3P2,HSS,0.175,0.056,0.0032,0.0032,7.209,0.0032,0.0,Generated common cold-formed Eave strut size for conceptual modeling; verify against manufacturer tables.
+EAVE175X4P0,HSS,0.175,0.056,0.004,0.004,9.012,0.004,0.0,Generated common cold-formed Eave strut size for conceptual modeling; verify against manufacturer tables.
+EAVE200X1P5,HSS,0.2,0.064,0.0015,0.0015,3.862,0.0015,0.0,Generated common cold-formed Eave strut size for conceptual modeling; verify against manufacturer tables.
+EAVE200X1P9,HSS,0.2,0.064,0.0019,0.0019,4.892,0.0019,0.0,Generated common cold-formed Eave strut size for conceptual modeling; verify against manufacturer tables.
+EAVE200X2P0,HSS,0.2,0.064,0.002,0.002,5.15,0.002,0.0,Generated common cold-formed Eave strut size for conceptual modeling; verify against manufacturer tables.
+EAVE200X2P5,HSS,0.2,0.064,0.0025,0.0025,6.437,0.0025,0.0,Generated common cold-formed Eave strut size for conceptual modeling; verify against manufacturer tables.
+EAVE200X3P0,HSS,0.2,0.064,0.003,0.003,7.724,0.003,0.0,Generated common cold-formed Eave strut size for conceptual modeling; verify against manufacturer tables.
+EAVE200X3P2,HSS,0.2,0.064,0.0032,0.0032,8.239,0.0032,0.0,Generated common cold-formed Eave strut size for conceptual modeling; verify against manufacturer tables.
+EAVE200X4P0,HSS,0.2,0.064,0.004,0.004,10.299,0.004,0.0,Generated common cold-formed Eave strut size for conceptual modeling; verify against manufacturer tables.
+EAVE225X1P5,HSS,0.225,0.072,0.0015,0.0015,4.345,0.0015,0.0,Generated common cold-formed Eave strut size for conceptual modeling; verify against manufacturer tables.
+EAVE225X1P9,HSS,0.225,0.072,0.0019,0.0019,5.504,0.0019,0.0,Generated common cold-formed Eave strut size for conceptual modeling; verify against manufacturer tables.
+EAVE225X2P0,HSS,0.225,0.072,0.002,0.002,5.793,0.002,0.0,Generated common cold-formed Eave strut size for conceptual modeling; verify against manufacturer tables.
+EAVE225X2P5,HSS,0.225,0.072,0.0025,0.0025,7.242,0.0025,0.0,Generated common cold-formed Eave strut size for conceptual modeling; verify against manufacturer tables.
+EAVE225X3P0,HSS,0.225,0.072,0.003,0.003,8.69,0.003,0.0,Generated common cold-formed Eave strut size for conceptual modeling; verify against manufacturer tables.
+EAVE225X3P2,HSS,0.225,0.072,0.0032,0.0032,9.269,0.0032,0.0,Generated common cold-formed Eave strut size for conceptual modeling; verify against manufacturer tables.
+EAVE225X4P0,HSS,0.225,0.072,0.004,0.004,11.587,0.004,0.0,Generated common cold-formed Eave strut size for conceptual modeling; verify against manufacturer tables.
+EAVE250X1P5,HSS,0.25,0.08,0.0015,0.0015,4.828,0.0015,0.0,Generated common cold-formed Eave strut size for conceptual modeling; verify against manufacturer tables.
+EAVE250X1P9,HSS,0.25,0.08,0.0019,0.0019,6.115,0.0019,0.0,Generated common cold-formed Eave strut size for conceptual modeling; verify against manufacturer tables.
+EAVE250X2P0,HSS,0.25,0.08,0.002,0.002,6.437,0.002,0.0,Generated common cold-formed Eave strut size for conceptual modeling; verify against manufacturer tables.
+EAVE250X2P5,HSS,0.25,0.08,0.0025,0.0025,8.046,0.0025,0.0,Generated common cold-formed Eave strut size for conceptual modeling; verify against manufacturer tables.
+EAVE250X3P0,HSS,0.25,0.08,0.003,0.003,9.655,0.003,0.0,Generated common cold-formed Eave strut size for conceptual modeling; verify against manufacturer tables.
+EAVE250X3P2,HSS,0.25,0.08,0.0032,0.0032,10.299,0.0032,0.0,Generated common cold-formed Eave strut size for conceptual modeling; verify against manufacturer tables.
+EAVE250X4P0,HSS,0.25,0.08,0.004,0.004,12.874,0.004,0.0,Generated common cold-formed Eave strut size for conceptual modeling; verify against manufacturer tables.
+EAVE300X1P5,HSS,0.3,0.095,0.0015,0.0015,5.77,0.0015,0.0,Generated common cold-formed Eave strut size for conceptual modeling; verify against manufacturer tables.
+EAVE300X1P9,HSS,0.3,0.095,0.0019,0.0019,7.308,0.0019,0.0,Generated common cold-formed Eave strut size for conceptual modeling; verify against manufacturer tables.
+EAVE300X2P0,HSS,0.3,0.095,0.002,0.002,7.693,0.002,0.0,Generated common cold-formed Eave strut size for conceptual modeling; verify against manufacturer tables.
+EAVE300X2P5,HSS,0.3,0.095,0.0025,0.0025,9.616,0.0025,0.0,Generated common cold-formed Eave strut size for conceptual modeling; verify against manufacturer tables.
+EAVE300X3P0,HSS,0.3,0.095,0.003,0.003,11.54,0.003,0.0,Generated common cold-formed Eave strut size for conceptual modeling; verify against manufacturer tables.
+EAVE300X3P2,HSS,0.3,0.095,0.0032,0.0032,12.309,0.0032,0.0,Generated common cold-formed Eave strut size for conceptual modeling; verify against manufacturer tables.
+EAVE300X4P0,HSS,0.3,0.095,0.004,0.004,15.386,0.004,0.0,Generated common cold-formed Eave strut size for conceptual modeling; verify against manufacturer tables.
+EAVE350X1P5,HSS,0.35,0.095,0.0015,0.0015,6.358,0.0015,0.0,Generated common cold-formed Eave strut size for conceptual modeling; verify against manufacturer tables.
+EAVE350X1P9,HSS,0.35,0.095,0.0019,0.0019,8.054,0.0019,0.0,Generated common cold-formed Eave strut size for conceptual modeling; verify against manufacturer tables.
+EAVE350X2P0,HSS,0.35,0.095,0.002,0.002,8.478,0.002,0.0,Generated common cold-formed Eave strut size for conceptual modeling; verify against manufacturer tables.
+EAVE350X2P5,HSS,0.35,0.095,0.0025,0.0025,10.598,0.0025,0.0,Generated common cold-formed Eave strut size for conceptual modeling; verify against manufacturer tables.
+EAVE350X3P0,HSS,0.35,0.095,0.003,0.003,12.717,0.003,0.0,Generated common cold-formed Eave strut size for conceptual modeling; verify against manufacturer tables.
+EAVE350X3P2,HSS,0.35,0.095,0.0032,0.0032,13.565,0.0032,0.0,Generated common cold-formed Eave strut size for conceptual modeling; verify against manufacturer tables.
+EAVE350X4P0,HSS,0.35,0.095,0.004,0.004,16.956,0.004,0.0,Generated common cold-formed Eave strut size for conceptual modeling; verify against manufacturer tables.
+EAVE400X1P5,HSS,0.4,0.095,0.0015,0.0015,6.947,0.0015,0.0,Generated common cold-formed Eave strut size for conceptual modeling; verify against manufacturer tables.
+EAVE400X1P9,HSS,0.4,0.095,0.0019,0.0019,8.8,0.0019,0.0,Generated common cold-formed Eave strut size for conceptual modeling; verify against manufacturer tables.
+EAVE400X2P0,HSS,0.4,0.095,0.002,0.002,9.263,0.002,0.0,Generated common cold-formed Eave strut size for conceptual modeling; verify against manufacturer tables.
+EAVE400X2P5,HSS,0.4,0.095,0.0025,0.0025,11.579,0.0025,0.0,Generated common cold-formed Eave strut size for conceptual modeling; verify against manufacturer tables.
+EAVE400X3P0,HSS,0.4,0.095,0.003,0.003,13.895,0.003,0.0,Generated common cold-formed Eave strut size for conceptual modeling; verify against manufacturer tables.
+EAVE400X3P2,HSS,0.4,0.095,0.0032,0.0032,14.821,0.0032,0.0,Generated common cold-formed Eave strut size for conceptual modeling; verify against manufacturer tables.
+EAVE400X4P0,HSS,0.4,0.095,0.004,0.004,18.526,0.004,0.0,Generated common cold-formed Eave strut size for conceptual modeling; verify against manufacturer tables.

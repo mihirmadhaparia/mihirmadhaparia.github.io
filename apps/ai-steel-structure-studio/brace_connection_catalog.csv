@@ -1,0 +1,10 @@
+rule_id,brace_family,min_angle_deg,max_angle_deg,preferred_section,connection_plate,bolt_spec,bolts_per_end,bolt_diameter_mm,weld_detail,use_case,status
+ROD_X_BRACE_LOW,Cross bracing,0,35,ROD20,6mm gusset plate,M16 class 8.8 bolts,1,16,5mm fillet shop weld to frame where engineered,Low-angle tension rod cross brace,Concept placeholder - engineer before fabrication
+ROD_X_BRACE_STD,Cross bracing,35,55,ROD24,8mm gusset plate,M20 class 8.8 bolts,1,20,6mm fillet shop weld to frame where engineered,Typical tension rod cross brace,Concept placeholder - engineer before fabrication
+ROD_X_BRACE_STEEP,Cross bracing,55,90,ROD30,10mm gusset plate,M24 class 8.8 bolts,1,24,6mm fillet shop weld to frame where engineered,Steep tension rod cross brace,Concept placeholder - engineer before fabrication
+HSS_DIAGONAL_LOW,Compression bracing,0,35,HSS100X100X6,10mm slotted gusset plate,M20 class 8.8 bolts,2,20,6mm fillet weld to cap plate,Low-angle HSS diagonal brace,Concept placeholder - engineer before fabrication
+HSS_DIAGONAL_STD,Compression bracing,35,60,HSS125X125X6,12mm gusset plate,M22 class 8.8 bolts,2,22,6mm fillet weld to cap plate,Typical HSS diagonal brace,Concept placeholder - engineer before fabrication
+HSS_KNEE_BRACE,Knee bracing,30,70,HSS100X100X6,10mm end plate pair,M20 class 8.8 bolts,4,20,6mm fillet weld all around end plate,Knee brace between column and rafter,Concept placeholder - engineer before fabrication
+ANGLE_KICKER,Kicker bracing,20,70,L75X75X8,8mm clip angle,M16 class 8.8 bolts,2,16,5mm fillet weld to clip where engineered,Secondary kicker/anti-sag brace,Concept placeholder - engineer before fabrication
+PURLIN_SAG_ROD,Purlin bridging,0,25,ROD12,Manufacturer bridging clip,M12 bolts/screws,1,12,No field weld preferred,Sag rod or anti-sag purlin bracing,Concept placeholder - engineer before fabrication
+PORTAL_BRACE,Portal bracing,70,90,W8X10,Moment end plate,M20 class 8.8 bolts,6,20,Engineer welds for portal moment frame,Portal frame bracing bay,Concept placeholder - engineer before fabrication

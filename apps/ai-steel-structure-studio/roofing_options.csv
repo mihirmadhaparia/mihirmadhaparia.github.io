@@ -1,0 +1,17 @@
+option_id,display_name,panel_type,material,thickness_mm,rib_height_mm,coverage_width_m,min_pitch_deg,weight_kg_m2,fastening_pattern,notes
+CORRUGATED_GALV,Corrugated galvanized steel,Corrugated,Galvanized steel,0.55,18,0.762,5,5.2,Crest fasteners at every support with side-lap stitching,Common economical warehouse/factory roof and wall sheet; verify span and wind uplift tables.
+CORRUGATED_ALUM,Corrugated aluminum,Corrugated,Aluminum,0.70,18,0.762,5,2.4,Crest fasteners at every support with compatible washers,Lightweight corrosion-resistant option; check galvanic compatibility.
+R_PANEL_26GA,R-panel 26 gauge,Exposed-fastener ribbed steel,Galvalume steel,0.48,32,0.914,3,4.7,Exposed fasteners in flats at purlins,Common metal building roof/wall panel.
+R_PANEL_24GA,R-panel 24 gauge,Exposed-fastener ribbed steel,Galvalume steel,0.61,32,0.914,3,5.9,Exposed fasteners in flats at purlins,Heavier-gauge ribbed panel for higher durability.
+PBR_PANEL_26GA,PBR-panel 26 gauge,Purlin-bearing rib panel,Galvalume steel,0.48,32,0.914,3,4.8,Exposed fasteners with purlin-bearing leg,Common pre-engineered metal building panel.
+STANDING_SEAM_24GA,Standing seam 24 gauge,Standing seam,Painted Galvalume steel,0.61,38,0.457,1,6.2,Concealed clips at panel seams,Premium low-slope roof option with concealed fasteners.
+STANDING_SEAM_22GA,Standing seam 22 gauge,Standing seam,Painted Galvalume steel,0.76,50,0.457,1,7.8,Concealed clips at panel seams,Heavier standing seam panel for demanding roofs.
+TRAPEZOIDAL_32MM,Trapezoidal 32mm rib,Trapezoidal,Painted steel,0.50,32,1.000,4,5.1,Valley/flat fasteners at supports,Common industrial cladding panel with strong ribs.
+TRAPEZOIDAL_45MM,Trapezoidal 45mm rib,Trapezoidal,Painted steel,0.60,45,1.000,4,6.1,Valley/flat fasteners at supports,Deeper rib option for longer spans.
+INSULATED_PIR_50,Insulated PIR sandwich panel 50mm,Insulated sandwich panel,Steel skins with PIR core,50.00,40,1.000,3,11.5,Through-fastened or concealed clip system per manufacturer,Thermal roof/wall panel for conditioned warehouses.
+INSULATED_PIR_100,Insulated PIR sandwich panel 100mm,Insulated sandwich panel,Steel skins with PIR core,100.00,40,1.000,3,14.8,Through-fastened or concealed clip system per manufacturer,Higher insulation panel for controlled environments.
+METAL_DECK_B_22GA,B-deck 22 gauge structural roof deck,Structural metal deck,Galvanized steel,0.76,38,0.914,2,10.7,Deck sidelaps and puddle weld/screw fastening per engineer,Use when roof membrane or concrete topping is planned.
+METAL_DECK_N_20GA,N-deck 20 gauge structural roof deck,Structural metal deck,Galvanized steel,0.91,76,0.610,2,15.2,Deck sidelaps and weld/screw fastening per engineer,Deep structural roof deck placeholder.
+POLYCARB_SKYLIGHT,Translucent polycarbonate rooflight,Translucent panel,Polycarbonate,2.00,32,1.000,5,2.7,Compatible fasteners and closure strips per manufacturer,Use as skylight strips with compatible metal panel profile.
+FRP_TRANSLUCENT,Translucent FRP panel,Translucent panel,Fiberglass reinforced plastic,1.50,32,1.000,5,2.2,Compatible fasteners and sealants per manufacturer,Daylighting panel option.
+PVC_CORRUGATED,Lightweight PVC corrugated sheet,Corrugated,PVC,1.20,18,0.900,7,1.8,Crest fasteners with oversized holes and washers,Low-cost non-structural covering; verify fire/weather suitability.
