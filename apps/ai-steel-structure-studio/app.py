@@ -28,7 +28,8 @@ except Exception:  # pragma: no cover - handled in the UI
 APP_VERSION = "0.2.0"
 STEEL_DENSITY_KG_M3 = 7850
 DEFAULT_OLLAMA_HOST = "http://localhost:11434"
-DEFAULT_OLLAMA_MODEL = "llama3.2:1b"
+DEFAULT_OLLAMA_CLOUD_HOST = "https://ollama.com"
+DEFAULT_OLLAMA_MODEL = "gpt-oss:20b"
 APP_DIR = Path(__file__).resolve().parent
 
 
@@ -826,9 +827,11 @@ def apply_followup_with_provider(
             raise ValueError("Google Gemini selected, but no API key was provided.")
         updated = extract_with_gemini(followup_prompt(current, request), api_key, model)
         return merge_followup_ai_result(current, request, updated), "Google Gemini"
-    if provider == "Ollama Local":
-        updated = extract_with_ollama(followup_prompt(current, request), model, ollama_host)
-        return merge_followup_ai_result(current, request, updated), "Ollama Local"
+    if provider in {"Ollama Cloud", "Ollama Local"}:
+        if provider == "Ollama Cloud" and not api_key:
+            raise ValueError("Ollama Cloud selected, but no API key was provided.")
+        updated = extract_with_ollama(followup_prompt(current, request), model, ollama_host, api_key)
+        return merge_followup_ai_result(current, request, updated), provider
     return apply_followup_local(current, request), "Local parser"
 
 
@@ -970,7 +973,7 @@ def extract_with_gemini(prompt: str, api_key: str, model: str) -> BuildingSpec:
     return validate_spec(spec_from_dict(parse_json_from_text(text)))
 
 
-def extract_with_ollama(prompt: str, model: str, host: str) -> BuildingSpec:
+def extract_with_ollama(prompt: str, model: str, host: str, api_key: str = "") -> BuildingSpec:
     payload = {
         "model": model,
         "stream": False,
@@ -980,7 +983,10 @@ def extract_with_ollama(prompt: str, model: str, host: str) -> BuildingSpec:
         ],
         "format": building_spec_json_schema(),
     }
-    data = post_json(f"{host.rstrip('/')}/api/chat", payload, {}, timeout=120)
+    headers: dict[str, str] = {}
+    if api_key and host.rstrip("/").startswith("https://ollama.com"):
+        headers["Authorization"] = f"Bearer {api_key}"
+    data = post_json(f"{host.rstrip('/')}/api/chat", payload, headers, timeout=120)
     return validate_spec(spec_from_dict(parse_json_from_text(data["message"]["content"])))
 
 
@@ -993,8 +999,10 @@ def extract_spec(prompt: str, provider: str, api_key: str, model: str, ollama_ho
         if not api_key:
             raise ValueError("Google Gemini selected, but no API key was provided.")
         return merge_ai_with_explicit_prompt(prompt, extract_with_gemini(prompt, api_key, model)), "Google Gemini"
-    if provider == "Ollama Local":
-        return merge_ai_with_explicit_prompt(prompt, extract_with_ollama(prompt, model, ollama_host)), "Ollama Local"
+    if provider in {"Ollama Cloud", "Ollama Local"}:
+        if provider == "Ollama Cloud" and not api_key:
+            raise ValueError("Ollama Cloud selected, but no API key was provided.")
+        return merge_ai_with_explicit_prompt(prompt, extract_with_ollama(prompt, model, ollama_host, api_key)), provider
     return extract_with_local_parser(prompt), "Local parser"
 
 
@@ -2612,12 +2620,16 @@ def init_state() -> None:
         st.session_state.process_prompt_requested = False
     if "reset_chat_requested" not in st.session_state:
         st.session_state.reset_chat_requested = False
+    if "sidebar_open" not in st.session_state:
+        st.session_state.sidebar_open = True
     if "ai_provider" not in st.session_state:
-        st.session_state.ai_provider = os.getenv("AI_PROVIDER", "Ollama Local")
+        st.session_state.ai_provider = os.getenv("AI_PROVIDER", "Ollama Cloud")
     if "ai_model" not in st.session_state:
         st.session_state.ai_model = os.getenv("OLLAMA_MODEL", DEFAULT_OLLAMA_MODEL)
     if "ollama_host" not in st.session_state:
-        st.session_state.ollama_host = os.getenv("OLLAMA_HOST", DEFAULT_OLLAMA_HOST)
+        st.session_state.ollama_host = os.getenv("OLLAMA_HOST", DEFAULT_OLLAMA_CLOUD_HOST)
+    if "ollama_api_key" not in st.session_state:
+        st.session_state.ollama_api_key = os.getenv("OLLAMA_API_KEY", "")
     if "openai_api_key" not in st.session_state:
         st.session_state.openai_api_key = os.getenv("OPENAI_API_KEY", "")
     if "gemini_api_key" not in st.session_state:
@@ -2625,11 +2637,13 @@ def init_state() -> None:
 
 
 def current_ai_settings() -> tuple[str, str, str, str]:
-    provider = st.session_state.get("ai_provider", "Ollama Local")
+    provider = st.session_state.get("ai_provider", "Ollama Cloud")
     model = st.session_state.get("ai_model", DEFAULT_OLLAMA_MODEL)
-    ollama_host = st.session_state.get("ollama_host", DEFAULT_OLLAMA_HOST)
+    ollama_host = st.session_state.get("ollama_host", DEFAULT_OLLAMA_CLOUD_HOST)
     api_key = ""
-    if provider == "OpenAI":
+    if provider in {"Ollama Cloud", "Ollama Local"}:
+        api_key = st.session_state.get("ollama_api_key", "")
+    elif provider == "OpenAI":
         api_key = st.session_state.get("openai_api_key", "")
     elif provider == "Google Gemini":
         api_key = st.session_state.get("gemini_api_key", "")
@@ -2761,11 +2775,44 @@ def load_css() -> None:
                 border: 1px solid rgba(16, 17, 20, 0.06);
                 border-radius: 28px;
                 box-shadow: var(--shadow-sm);
-                margin: 0 0 18px;
+                margin: 0 0 18px 0;
                 min-height: 68px;
                 padding: 10px 18px 10px 72px;
                 position: static;
                 backdrop-filter: blur(18px);
+            }
+            .st-key-sidebar_toggle_shell {
+                left: 14px;
+                position: fixed;
+                top: 14px;
+                width: 42px;
+                z-index: 1200;
+            }
+            .st-key-sidebar_toggle_shell .stButton {
+                margin: 0;
+            }
+            .st-key-sidebar_toggle_shell button {
+                min-height: 42px !important;
+                min-width: 42px !important;
+                padding: 0 !important;
+            }
+            .st-key-control_panel_shell {
+                background: rgba(255, 255, 255, 0.82);
+                border: 1px solid rgba(16, 17, 20, 0.06);
+                border-radius: 28px;
+                box-shadow: var(--shadow-sm);
+                height: calc(100vh - 96px);
+                left: 14px;
+                overflow-y: auto;
+                padding: 16px 18px 20px;
+                position: fixed;
+                top: 78px;
+                width: 312px;
+                z-index: 900;
+                backdrop-filter: blur(18px);
+            }
+            .st-key-control_panel_shell .stButton {
+                margin-top: 0;
             }
             .st-key-header_shell [data-testid="stHorizontalBlock"] {
                 align-items: center;
@@ -2855,13 +2902,13 @@ def load_css() -> None:
                 padding: 0;
             }
             .prompt-landing-shell {
-                left: var(--content-center-x);
                 pointer-events: none;
                 position: fixed;
+                right: 36px;
                 text-align: left;
                 top: 47%;
-                transform: translate(-50%, -55%);
-                width: min(900px, var(--content-width));
+                transform: translateY(-55%);
+                width: min(900px, calc(100vw - 420px));
                 z-index: 5;
             }
             .prompt-landing__title {
@@ -2901,8 +2948,7 @@ def load_css() -> None:
                 border: 1px solid var(--border);
                 border-radius: var(--radius-xl);
                 box-shadow: var(--shadow-sm);
-                margin: 8px auto 0;
-                max-width: min(980px, var(--content-width));
+                margin: 8px 36px 0 344px;
                 min-height: calc(100vh - 220px);
                 padding: 18px 18px 112px;
                 backdrop-filter: blur(18px);
@@ -3013,16 +3059,32 @@ def load_css() -> None:
                 border-radius: 30px;
                 bottom: 28px;
                 box-shadow: 0 22px 50px rgba(15, 23, 42, 0.12);
-                left: var(--composer-center-x);
+                left: 344px;
                 max-width: calc(100vw - 32px);
                 padding: 10px 12px;
                 position: fixed;
-                right: auto;
-                transform: translateX(-50%);
-                transition: left 220ms ease, width 220ms ease, box-shadow 220ms ease;
-                width: min(920px, var(--composer-width));
+                right: 36px;
+                transform: none;
+                transition: left 220ms ease, right 220ms ease, width 220ms ease, box-shadow 220ms ease;
+                width: auto;
                 z-index: 950;
                 backdrop-filter: blur(20px);
+            }
+            body.steel-studio-sidebar-closed .prompt-landing-shell {
+                left: 50%;
+                right: auto;
+                transform: translate(-50%, -55%);
+                width: min(900px, calc(100vw - 48px));
+            }
+            body.steel-studio-sidebar-closed .st-key-chat_shell {
+                margin-left: 24px;
+                margin-right: 24px;
+            }
+            body.steel-studio-sidebar-closed .st-key-composer_shell {
+                left: 50%;
+                right: auto;
+                transform: translateX(-50%);
+                width: min(920px, calc(100vw - 48px));
             }
             .st-key-composer_shell [data-testid="stForm"] {
                 background: transparent;
@@ -3195,16 +3257,43 @@ def load_css() -> None:
                     padding-top: 1rem;
                 }
                 .prompt-landing-shell {
+                    left: 24px;
+                    right: 24px;
                     top: 43%;
-                    transform: translate(-50%, -50%);
-                    width: min(92vw, 720px);
+                    transform: translateY(-50%);
+                    width: auto;
                 }
                 .prompt-landing__title {
                     font-size: clamp(2.9rem, 12vw, 4.6rem) !important;
                 }
+                .st-key-control_panel_shell {
+                    bottom: 16px;
+                    height: auto;
+                    left: 16px;
+                    top: 78px;
+                    width: calc(100vw - 32px);
+                }
+                .st-key-chat_shell {
+                    margin-left: 16px;
+                    margin-right: 16px;
+                }
                 .st-key-composer_shell {
                     bottom: 16px;
-                    left: 50vw;
+                    left: 16px;
+                    right: 16px;
+                    transform: none;
+                    width: calc(100vw - 32px);
+                }
+                body.steel-studio-sidebar-closed .prompt-landing-shell {
+                    left: 24px;
+                    right: 24px;
+                    transform: translateY(-50%);
+                    width: auto;
+                }
+                body.steel-studio-sidebar-closed .st-key-composer_shell {
+                    left: 16px;
+                    right: 16px;
+                    transform: none;
                     width: calc(100vw - 32px);
                 }
             }
@@ -3222,118 +3311,8 @@ def mount_shell_bridge() -> None:
             try {
                 const parentWindow = window.parent;
                 const parentDoc = parentWindow.document;
-                const root = parentDoc.documentElement;
-                const STYLE_ID = "steel-studio-shell-style";
-                const BUTTON_ID = "steel-studio-sidebar-toggle";
-
-                if (parentWindow.__steelStudioShellCleanup) {
-                    parentWindow.__steelStudioShellCleanup();
-                }
-
-                if (!parentDoc.getElementById(STYLE_ID)) {
-                    const style = parentDoc.createElement("style");
-                    style.id = STYLE_ID;
-                    style.textContent = `
-                        #${BUTTON_ID} {
-                            align-items: center;
-                            background: rgba(255, 255, 255, 0.94);
-                            border: 1px solid rgba(16, 17, 20, 0.08);
-                            border-radius: 999px;
-                            box-shadow: 0 10px 30px rgba(15, 23, 42, 0.08);
-                            color: #101114;
-                            cursor: pointer;
-                            display: inline-flex;
-                            font-family: "Plus Jakarta Sans", sans-serif;
-                            font-size: 1.15rem;
-                            font-weight: 700;
-                            height: 42px;
-                            justify-content: center;
-                            left: 14px;
-                            line-height: 1;
-                            position: fixed;
-                            top: 14px;
-                            width: 42px;
-                            z-index: 1200;
-                        }
-                        #${BUTTON_ID}:hover {
-                            transform: translateY(-1px);
-                        }
-                        [data-testid="stSidebar"].steel-studio-sidebar-hidden {
-                            opacity: 0;
-                            pointer-events: none !important;
-                            transform: translateX(calc(-100% - 24px));
-                        }
-                    `;
-                    parentDoc.head.appendChild(style);
-                }
-
-                const toggleButton = parentDoc.getElementById(BUTTON_ID) || (() => {
-                    const button = parentDoc.createElement("button");
-                    button.id = BUTTON_ID;
-                    button.type = "button";
-                    parentDoc.body.appendChild(button);
-                    return button;
-                })();
-
-                const cleanupFns = [];
-                const getCollapsed = () => parentWindow.localStorage.getItem("steelStudioSidebarCollapsed") == "1";
-                const setCollapsed = (value) => {
-                    parentWindow.localStorage.setItem("steelStudioSidebarCollapsed", value ? "1" : "0");
-                    applyLayout();
-                };
-
-                function applyLayout() {
-                    const sidebar = parentDoc.querySelector('[data-testid="stSidebar"]');
-                    const viewportWidth = parentWindow.innerWidth || parentDoc.documentElement.clientWidth || 1280;
-                    const isMobile = viewportWidth < 920;
-                    const collapsed = !isMobile && getCollapsed();
-                    const baseOffset = isMobile ? 16 : Math.max(24, Math.floor((viewportWidth - 1180) / 2));
-                    const sidebarWidth = sidebar && !collapsed ? Math.round(sidebar.getBoundingClientRect().width) : 0;
-                    const contentLeft = collapsed ? baseOffset : Math.max(baseOffset, sidebarWidth + 24);
-                    const contentRight = baseOffset;
-                    const contentWidth = Math.max(320, viewportWidth - contentLeft - contentRight);
-                    const composerWidth = Math.min(920, contentWidth);
-                    const contentCenter = contentLeft + (contentWidth / 2);
-
-                    if (sidebar) {
-                        sidebar.classList.toggle("steel-studio-sidebar-hidden", collapsed);
-                        sidebar.style.opacity = collapsed ? "0" : "1";
-                        sidebar.style.pointerEvents = collapsed ? "none" : "auto";
-                        sidebar.style.transform = collapsed ? "translateX(calc(-100% - 24px))" : "translateX(0)";
-                        sidebar.style.visibility = collapsed ? "hidden" : "visible";
-                    }
-                    root.style.setProperty("--content-center-x", `${contentCenter}px`);
-                    root.style.setProperty("--content-width", `${contentWidth}px`);
-                    root.style.setProperty("--composer-center-x", `${contentCenter}px`);
-                    root.style.setProperty("--composer-width", `${composerWidth}px`);
-
-                    toggleButton.textContent = collapsed ? ">" : "<";
-                    toggleButton.setAttribute("aria-label", collapsed ? "Open controls" : "Hide controls");
-                }
-
-                toggleButton.onclick = (event) => {
-                    event.preventDefault();
-                    setCollapsed(!getCollapsed());
-                };
-
-                applyLayout();
-
-                const handleResize = () => parentWindow.requestAnimationFrame(applyLayout);
-                parentWindow.addEventListener("resize", handleResize);
-                cleanupFns.push(() => parentWindow.removeEventListener("resize", handleResize));
-
-                const sidebar = parentDoc.querySelector('[data-testid="stSidebar"]');
-                if (sidebar && parentWindow.ResizeObserver) {
-                    const sidebarObserver = new parentWindow.ResizeObserver(handleResize);
-                    sidebarObserver.observe(sidebar);
-                    cleanupFns.push(() => sidebarObserver.disconnect());
-                }
-
-                parentWindow.__steelStudioShellCleanup = () => {
-                    cleanupFns.forEach((cleanup) => cleanup());
-                    toggleButton.remove();
-                    delete parentWindow.__steelStudioShellCleanup;
-                };
+                const collapsed = parentDoc.querySelector('.st-key-control_panel_shell') === null;
+                parentDoc.body.classList.toggle('steel-studio-sidebar-closed', collapsed);
             } catch (error) {
                 console.warn("Steel studio shell bridge failed", error);
             }
@@ -3379,8 +3358,19 @@ def render_top_nav() -> str:
     return selected or "Prompt"
 
 
+def render_sidebar_toggle() -> None:
+    with st.container(key="sidebar_toggle_shell"):
+        label = "\u2039" if st.session_state.get("sidebar_open", True) else "\u203a"
+        if st.button(label, key="sidebar_toggle_button", help="Show or hide design controls", use_container_width=True):
+            st.session_state.sidebar_open = not st.session_state.get("sidebar_open", True)
+            st.rerun()
+
+
 def render_sidebar(spec: BuildingSpec) -> BuildingSpec:
-    with st.sidebar:
+    if not st.session_state.get("sidebar_open", True):
+        return validate_spec(spec)
+
+    with st.container(key="control_panel_shell"):
         st.header("Design Controls")
         st.caption("Use the prompt first, then fine-tune anything here.")
         project_name = st.text_input("Project name", spec.project_name)
@@ -3843,16 +3833,21 @@ def render_ai_setup_tab() -> None:
     st.subheader("AI Setup")
     st.write("Configure the AI used by the clean chat page. These settings apply to the single active project.")
 
-    providers = ["Ollama Local", "Free local parser", "OpenAI", "Google Gemini"]
+    providers = ["Ollama Cloud", "Ollama Local", "Free local parser", "OpenAI", "Google Gemini"]
     provider = st.selectbox(
         "Extraction engine",
         providers,
         index=providers.index(st.session_state.ai_provider) if st.session_state.ai_provider in providers else 0,
-        help="Ollama is the free local AI path. If it is not running, the chat falls back to the deterministic parser.",
+        help="Use Ollama Cloud for the hosted website, or Ollama Local when running the app on your own machine.",
     )
     st.session_state.ai_provider = provider
 
-    if provider == "Ollama Local":
+    if provider == "Ollama Cloud":
+        st.session_state.ai_model = st.text_input("Model", value=st.session_state.ai_model or DEFAULT_OLLAMA_MODEL)
+        st.session_state.ollama_host = st.text_input("Ollama host", value=st.session_state.ollama_host or DEFAULT_OLLAMA_CLOUD_HOST)
+        st.session_state.ollama_api_key = st.text_input("Ollama API key", value=st.session_state.ollama_api_key, type="password")
+        st.caption("Set `OLLAMA_API_KEY` in Streamlit Cloud secrets for the hosted app.")
+    elif provider == "Ollama Local":
         st.session_state.ai_model = st.text_input("Model", value=st.session_state.ai_model or DEFAULT_OLLAMA_MODEL)
         st.session_state.ollama_host = st.text_input("Ollama host", value=st.session_state.ollama_host or DEFAULT_OLLAMA_HOST)
         if st.button("Test Ollama Connection", use_container_width=True):
@@ -3875,7 +3870,9 @@ def render_ai_setup_tab() -> None:
     st.subheader("AI Agent Integration Options")
     st.markdown(
         """
-        **Best free path:** start with the built-in parser, then try **Ollama Local** if your computer can run a local model.
+        **Hosted website path:** use **Ollama Cloud** with an API key so the public app can reach the model online.
+
+        **Desktop development path:** switch to **Ollama Local** if you want to run the model on your own machine.
 
         **Most practical paid path:** use an API model only for parameter extraction, not for geometry. That keeps token usage tiny
         because the expensive CAD work is deterministic Python.
@@ -3949,11 +3946,11 @@ def main() -> None:
     init_state()
     load_css()
 
+    render_sidebar_toggle()
     active_page = render_site_header()
-
+    mount_shell_bridge()
     current_spec = spec_from_dict(st.session_state.spec)
     spec = render_sidebar(current_spec)
-    mount_shell_bridge()
     package = build_model(spec)
 
     if active_page == "Prompt":
