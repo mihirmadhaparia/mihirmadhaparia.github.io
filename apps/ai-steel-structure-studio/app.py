@@ -2674,18 +2674,14 @@ def load_css() -> None:
                 color: var(--text-primary) !important;
                 font-family: "Plus Jakarta Sans", sans-serif;
             }
-            [data-testid="stHeader"] {
-                background: rgba(245, 245, 247, 0.78);
-                backdrop-filter: blur(18px);
-                border-bottom: 1px solid rgba(16, 17, 20, 0.06);
-                color: var(--text-primary) !important;
-                min-height: 64px;
-            }
-            [data-testid="stToolbar"] {
-                background: transparent !important;
-                border: 0 !important;
-                right: 0.85rem !important;
-                top: 0.65rem !important;
+            [data-testid="stHeader"],
+            [data-testid="stToolbar"],
+            [data-testid="stAppToolbar"],
+            [data-testid="stHeaderActionElements"] {
+                display: none !important;
+                height: 0 !important;
+                min-height: 0 !important;
+                visibility: hidden !important;
             }
             [data-testid="stSidebar"] {
                 background: rgba(255, 255, 255, 0.78) !important;
@@ -2756,23 +2752,21 @@ def load_css() -> None:
             .block-container {
                 max-width: 1180px;
                 padding-bottom: 9rem;
-                padding-top: 5.6rem;
+                padding-top: 1.2rem;
             }
             [data-testid="stCaptionContainer"],
             [data-testid="stCaptionContainer"] * {
                 color: var(--text-secondary) !important;
             }
             .st-key-header_shell {
-                background: transparent;
-                border: 0;
-                box-shadow: none;
-                left: 4.3rem;
-                margin: 0;
-                padding: 0;
-                position: fixed;
-                right: 12rem;
-                top: 0.65rem;
-                z-index: 999;
+                background: rgba(245, 245, 247, 0.82);
+                border: 1px solid rgba(16, 17, 20, 0.06);
+                border-radius: 28px;
+                box-shadow: var(--shadow-sm);
+                margin: 0 0 18px;
+                padding: 12px 18px 12px 72px;
+                position: static;
+                backdrop-filter: blur(18px);
             }
             .st-key-header_shell [data-testid="stHorizontalBlock"] {
                 align-items: center;
@@ -3136,17 +3130,15 @@ def load_css() -> None:
             }
             @media (max-width: 920px) {
                 .st-key-header_shell {
-                    left: 1rem;
                     position: static;
-                    right: 1rem;
-                    top: auto;
+                    padding: 12px 16px;
                 }
                 .st-key-top_nav_shell [data-testid="stPills"] [role="radiogroup"],
                 .st-key-top_nav_shell [data-testid="stPills"] div[role="group"] {
                     justify-content: flex-start;
                 }
                 .block-container {
-                    padding-top: 2rem;
+                    padding-top: 1rem;
                 }
                 .st-key-composer_shell {
                     bottom: 16px;
