@@ -2681,6 +2681,8 @@ def init_state() -> None:
         st.session_state.chat_messages = []
     if "chat_draft" not in st.session_state:
         st.session_state.chat_draft = ""
+    if "chat_draft_input" not in st.session_state:
+        st.session_state.chat_draft_input = ""
     if "queued_prompt" not in st.session_state:
         st.session_state.queued_prompt = ""
     if "process_prompt_requested" not in st.session_state:
@@ -3002,7 +3004,7 @@ def load_css() -> None:
                 padding: 0 !important;
                 text-align: center !important;
             }
-            .st-key-studio_chat_composer_shell [data-testid="stChatInput"] {
+            .st-key-studio_chat_composer_shell .stTextInput > div > div {
                 background: rgba(255, 255, 255, 0.92) !important;
                 border: 1px solid transparent !important;
                 border-radius: 22px !important;
@@ -3010,35 +3012,26 @@ def load_css() -> None:
                 min-height: 58px !important;
                 transition: box-shadow 220ms ease, transform 180ms ease, background 220ms ease !important;
             }
-            .st-key-studio_chat_composer_shell [data-testid="stChatInput"]:focus-within {
+            .st-key-studio_chat_composer_shell .stTextInput > div > div:focus-within {
                 box-shadow: 0 0 0 4px rgba(0, 113, 227, 0.1), 0 18px 32px rgba(15, 23, 42, 0.08) !important;
             }
-            .st-key-studio_chat_composer_shell [data-testid="stChatInput"] textarea {
+            .st-key-studio_chat_composer_shell .stTextInput input {
+                background: transparent !important;
+                border: 0 !important;
+                box-shadow: none !important;
+                color: var(--text-primary) !important;
                 min-height: 44px !important;
                 padding: 10px 14px !important;
             }
-            .st-key-studio_chat_composer_shell [data-testid="stChatInput"] button {
-                align-items: center !important;
-                background: linear-gradient(135deg, #0d4b96, var(--accent)) !important;
-                border: 1px solid transparent !important;
-                border-radius: 999px !important;
-                box-shadow: 0 18px 30px rgba(0, 113, 227, 0.2) !important;
-                color: #ffffff !important;
-                display: flex !important;
-                height: 42px !important;
-                justify-content: center !important;
-                min-height: 42px !important;
-                min-width: 42px !important;
-                padding: 0 !important;
-                transition: transform 180ms ease, box-shadow 220ms ease !important;
-                width: 42px !important;
+            .st-key-studio_chat_composer_shell .stTextInput input:focus {
+                box-shadow: none !important;
             }
-            .st-key-studio_chat_composer_shell [data-testid="stChatInput"] button:hover {
+            .st-key-studio_chat_composer_shell .stTextInput input::placeholder {
+                color: var(--text-tertiary) !important;
+                padding: 10px 14px !important;
+            }
+            .st-key-studio_chat_send_button button:hover {
                 box-shadow: 0 0 0 1px rgba(62, 146, 255, 0.12), 0 0 24px rgba(0, 113, 227, 0.24), 0 22px 34px rgba(0, 113, 227, 0.24) !important;
-                transform: translateY(-1px);
-            }
-            .st-key-studio_chat_composer_shell [data-testid="stChatInput"] button:active {
-                transform: scale(0.96);
             }
             .st-key-studio_chat_reset_button button:hover {
                 box-shadow: 0 0 0 1px rgba(255, 100, 100, 0.12), 0 0 24px rgba(255, 59, 48, 0.18), 0 18px 34px rgba(15, 23, 42, 0.08) !important;
@@ -3724,6 +3717,7 @@ def reset_project_chat() -> None:
     st.session_state.visible_layers = list(DEFAULT_VISUALIZER_LAYERS)
     if "chat_draft" in st.session_state:
         del st.session_state["chat_draft"]
+    st.session_state.chat_draft_input = ""
     st.session_state.extraction_notice = None
 
 
@@ -3844,6 +3838,14 @@ def queue_prompt_for_processing(prompt: str) -> None:
     st.session_state.queued_prompt = prompt.strip()
     st.session_state.process_prompt_requested = True
     st.session_state.active_page = "3D Preview"
+
+
+def submit_chat_draft() -> None:
+    prompt = st.session_state.get("chat_draft_input", "").strip()
+    if not prompt:
+        return
+    queue_prompt_for_processing(prompt)
+    st.session_state.chat_draft_input = ""
 
 
 def get_pending_prompt() -> str:
@@ -4157,14 +4159,19 @@ def render_preview_tab(spec: BuildingSpec) -> None:
                     render_loading_bubble()
 
                 with st.container(key="studio_chat_composer_shell"):
-                    prompt_col, reset_col = st.columns([13, 1], gap="small")
+                    prompt_col, reset_col, send_col = st.columns([12, 1, 1], gap="small")
                     with prompt_col:
-                        submitted_prompt = st.chat_input(
+                        st.text_input(
+                            "Project prompt",
+                            key="chat_draft_input",
                             placeholder="Ask for a new concept or request an edit to the current building...",
-                            key="chat_input_box",
+                            label_visibility="collapsed",
+                            on_change=submit_chat_draft,
                         )
                     with reset_col:
                         reset_clicked = st.button("\u21bb", key="studio_chat_reset_button", use_container_width=True)
+                    with send_col:
+                        send_clicked = st.button("\u2191", key="studio_chat_send_button", type="primary", use_container_width=True)
 
         with studio_cols[1]:
             with st.container(key="studio_preview_shell"):
@@ -4223,8 +4230,8 @@ def render_preview_tab(spec: BuildingSpec) -> None:
         st.session_state.reset_chat_requested = True
         st.rerun()
 
-    if submitted_prompt and submitted_prompt.strip():
-        queue_prompt_for_processing(submitted_prompt)
+    if send_clicked:
+        submit_chat_draft()
         st.rerun()
 
     if pending_prompt:
