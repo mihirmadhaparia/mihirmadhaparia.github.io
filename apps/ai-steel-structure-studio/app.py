@@ -2660,8 +2660,10 @@ def load_css() -> None:
                 --radius-lg: 24px;
                 --radius-md: 18px;
                 --radius-sm: 12px;
-                --composer-left-offset: 342px;
-                --composer-right-offset: 24px;
+                --content-center-x: 50vw;
+                --content-width: min(980px, calc(100vw - 48px));
+                --composer-center-x: 50vw;
+                --composer-width: min(920px, calc(100vw - 48px));
             }
             #MainMenu, footer, [data-testid="stDecoration"],
             [data-testid="stStatusWidget"], .stDeployButton {
@@ -2696,38 +2698,15 @@ def load_css() -> None:
                 border-right: 1px solid var(--border);
                 color: var(--text-primary) !important;
                 backdrop-filter: blur(18px);
+                transition: transform 220ms ease, opacity 220ms ease;
             }
             [data-testid="collapsedControl"],
             [data-testid="stSidebarCollapsedControl"],
-            button[aria-label="Open sidebar"] {
-                display: flex !important;
-                visibility: visible !important;
-                left: 0.85rem !important;
-                pointer-events: auto !important;
-                position: fixed !important;
-                top: 0.75rem !important;
-                z-index: 1100 !important;
-            }
-            [data-testid="collapsedControl"] button,
-            [data-testid="stSidebarCollapsedControl"] button,
             button[aria-label="Open sidebar"],
             button[kind="header"],
             button[kind="headerNoPadding"] {
-                background: rgba(255, 255, 255, 0.92) !important;
-                border: 1px solid var(--border) !important;
-                border-radius: 999px !important;
-                box-shadow: var(--shadow-sm) !important;
-                color: var(--text-primary) !important;
-                min-height: 40px !important;
-                min-width: 40px !important;
-            }
-            [data-testid="collapsedControl"] button svg,
-            [data-testid="stSidebarCollapsedControl"] button svg,
-            button[aria-label="Open sidebar"] svg,
-            button[kind="header"] svg,
-            button[kind="headerNoPadding"] svg {
-                color: var(--text-primary) !important;
-                fill: var(--text-primary) !important;
+                display: none !important;
+                visibility: hidden !important;
             }
             .stApp,
             [data-testid="stMarkdownContainer"],
@@ -2780,7 +2759,8 @@ def load_css() -> None:
                 border-radius: 28px;
                 box-shadow: var(--shadow-sm);
                 margin: 0 0 18px;
-                padding: 12px 18px 12px 72px;
+                min-height: 68px;
+                padding: 10px 18px 10px 72px;
                 position: static;
                 backdrop-filter: blur(18px);
             }
@@ -2819,17 +2799,13 @@ def load_css() -> None:
             .brand-mark__text {
                 display: flex;
                 flex-direction: column;
+                justify-content: center;
                 min-width: 0;
             }
             .brand-mark__text strong {
                 color: var(--text-primary) !important;
                 font-size: 0.95rem;
                 font-weight: 700;
-            }
-            .brand-mark__text span {
-                color: var(--text-tertiary) !important;
-                font-size: 0.76rem;
-                white-space: normal;
             }
             .st-key-top_nav_shell {
                 margin: 0;
@@ -2875,6 +2851,24 @@ def load_css() -> None:
                 max-width: 760px;
                 padding: 0;
             }
+            .prompt-landing-shell {
+                left: var(--content-center-x);
+                pointer-events: none;
+                position: fixed;
+                text-align: left;
+                top: 47%;
+                transform: translate(-50%, -55%);
+                width: min(900px, var(--content-width));
+                z-index: 5;
+            }
+            .prompt-landing__title {
+                color: var(--text-primary) !important;
+                font-size: clamp(3.4rem, 8vw, 6.4rem) !important;
+                letter-spacing: -0.065em;
+                line-height: 0.9 !important;
+                margin: 0;
+                max-width: 860px;
+            }
             .eyebrow {
                 align-items: center;
                 color: var(--accent) !important;
@@ -2904,8 +2898,9 @@ def load_css() -> None:
                 border: 1px solid var(--border);
                 border-radius: var(--radius-xl);
                 box-shadow: var(--shadow-sm);
-                margin-top: 8px;
-                min-height: clamp(320px, 48vh, 560px);
+                margin: 8px auto 0;
+                max-width: min(980px, var(--content-width));
+                min-height: calc(100vh - 220px);
                 padding: 18px 18px 112px;
                 backdrop-filter: blur(18px);
             }
@@ -2980,17 +2975,49 @@ def load_css() -> None:
             .chat-empty {
                 min-height: clamp(260px, 40vh, 480px);
             }
+            .chat-bubble--loading {
+                align-items: center;
+                display: inline-flex;
+                gap: 9px;
+            }
+            .loading-dot {
+                animation: studioPulse 1.05s infinite ease-in-out;
+                background: rgba(0, 113, 227, 0.9);
+                border-radius: 999px;
+                display: inline-block;
+                height: 9px;
+                width: 9px;
+            }
+            .loading-dot:nth-child(2) {
+                animation-delay: 0.12s;
+            }
+            .loading-dot:nth-child(3) {
+                animation-delay: 0.24s;
+            }
+            @keyframes studioPulse {
+                0%, 80%, 100% {
+                    opacity: 0.28;
+                    transform: scale(0.8);
+                }
+                40% {
+                    opacity: 1;
+                    transform: scale(1);
+                }
+            }
             .st-key-composer_shell {
                 background: rgba(255, 255, 255, 0.9);
                 border: 1px solid rgba(16, 17, 20, 0.06);
                 border-radius: 30px;
-                bottom: 24px;
+                bottom: 28px;
                 box-shadow: 0 22px 50px rgba(15, 23, 42, 0.12);
-                left: var(--composer-left-offset);
+                left: var(--composer-center-x);
+                max-width: calc(100vw - 32px);
                 padding: 10px 12px;
                 position: fixed;
-                right: var(--composer-right-offset);
-                transition: left 220ms ease, right 220ms ease, box-shadow 220ms ease;
+                right: auto;
+                transform: translateX(-50%);
+                transition: left 220ms ease, width 220ms ease, box-shadow 220ms ease;
+                width: min(920px, var(--composer-width));
                 z-index: 950;
                 backdrop-filter: blur(20px);
             }
@@ -3007,6 +3034,8 @@ def load_css() -> None:
                 font-size: 1rem !important;
                 line-height: 1.6 !important;
                 min-height: 60px !important;
+                max-height: 180px !important;
+                overflow-y: auto !important;
                 padding: 10px 14px !important;
                 resize: none !important;
             }
@@ -3162,10 +3191,18 @@ def load_css() -> None:
                 .block-container {
                     padding-top: 1rem;
                 }
+                .prompt-landing-shell {
+                    top: 43%;
+                    transform: translate(-50%, -50%);
+                    width: min(92vw, 720px);
+                }
+                .prompt-landing__title {
+                    font-size: clamp(2.9rem, 12vw, 4.6rem) !important;
+                }
                 .st-key-composer_shell {
                     bottom: 16px;
-                    left: 16px;
-                    right: 16px;
+                    left: 50vw;
+                    width: calc(100vw - 32px);
                 }
             }
         </style>
@@ -3174,56 +3211,126 @@ def load_css() -> None:
     )
 
 
-def sync_layout_offsets() -> None:
+def mount_shell_bridge() -> None:
     components.html(
         """
         <script>
-        const parentWindow = window.parent;
-        const parentDoc = parentWindow.document;
-        const root = parentDoc.documentElement;
+        (() => {
+            try {
+                const parentWindow = window.parent;
+                const parentDoc = parentWindow.document;
+                const root = parentDoc.documentElement;
+                const STYLE_ID = "steel-studio-shell-style";
+                const BUTTON_ID = "steel-studio-sidebar-toggle";
 
-        if (parentWindow.__steelStudioLayoutSync) {
-            parentWindow.__steelStudioLayoutSync();
-        }
+                if (parentWindow.__steelStudioShellCleanup) {
+                    parentWindow.__steelStudioShellCleanup();
+                }
 
-        function updateComposerOffsets() {
-            const sidebar = parentDoc.querySelector('[data-testid="stSidebar"]');
-            const viewportWidth = parentWindow.innerWidth || parentDoc.documentElement.clientWidth || 1280;
-            const baseOffset = Math.max(24, (viewportWidth - 1040) / 2);
-            const sidebarWidth = sidebar ? Math.round(sidebar.getBoundingClientRect().width) : 0;
-            const leftOffset = sidebarWidth > 120 ? Math.max(baseOffset, sidebarWidth + 24) : baseOffset;
-            root.style.setProperty('--composer-left-offset', `${leftOffset}px`);
-            root.style.setProperty('--composer-right-offset', `${baseOffset}px`);
-        }
+                if (!parentDoc.getElementById(STYLE_ID)) {
+                    const style = parentDoc.createElement("style");
+                    style.id = STYLE_ID;
+                    style.textContent = `
+                        #${BUTTON_ID} {
+                            align-items: center;
+                            background: rgba(255, 255, 255, 0.94);
+                            border: 1px solid rgba(16, 17, 20, 0.08);
+                            border-radius: 999px;
+                            box-shadow: 0 10px 30px rgba(15, 23, 42, 0.08);
+                            color: #101114;
+                            cursor: pointer;
+                            display: inline-flex;
+                            font-family: "Plus Jakarta Sans", sans-serif;
+                            font-size: 1.15rem;
+                            font-weight: 700;
+                            height: 42px;
+                            justify-content: center;
+                            left: 14px;
+                            line-height: 1;
+                            position: fixed;
+                            top: 14px;
+                            width: 42px;
+                            z-index: 1200;
+                        }
+                        #${BUTTON_ID}:hover {
+                            transform: translateY(-1px);
+                        }
+                        [data-testid="stSidebar"].steel-studio-sidebar-hidden {
+                            opacity: 0;
+                            pointer-events: none !important;
+                            transform: translateX(calc(-100% - 24px));
+                        }
+                    `;
+                    parentDoc.head.appendChild(style);
+                }
 
-        const runUpdate = () => parentWindow.requestAnimationFrame(updateComposerOffsets);
-        runUpdate();
+                const toggleButton = parentDoc.getElementById(BUTTON_ID) || (() => {
+                    const button = parentDoc.createElement("button");
+                    button.id = BUTTON_ID;
+                    button.type = "button";
+                    parentDoc.body.appendChild(button);
+                    return button;
+                })();
 
-        const sidebar = parentDoc.querySelector('[data-testid="stSidebar"]');
-        const cleanupFns = [];
-        if (sidebar && parentWindow.ResizeObserver) {
-            const sidebarObserver = new parentWindow.ResizeObserver(runUpdate);
-            sidebarObserver.observe(sidebar);
-            cleanupFns.push(() => sidebarObserver.disconnect());
-        }
-        if (parentWindow.ResizeObserver) {
-            const bodyObserver = new parentWindow.ResizeObserver(runUpdate);
-            bodyObserver.observe(parentDoc.body);
-            cleanupFns.push(() => bodyObserver.disconnect());
-        }
-        const mutationObserver = new parentWindow.MutationObserver(runUpdate);
-        mutationObserver.observe(parentDoc.body, {
-            attributes: true,
-            childList: true,
-            subtree: true,
-        });
-        cleanupFns.push(() => mutationObserver.disconnect());
-        parentWindow.addEventListener('resize', runUpdate);
-        cleanupFns.push(() => parentWindow.removeEventListener('resize', runUpdate));
-        parentWindow.__steelStudioLayoutSync = () => {
-            cleanupFns.forEach((cleanup) => cleanup());
-            delete parentWindow.__steelStudioLayoutSync;
-        };
+                const cleanupFns = [];
+                const getCollapsed = () => parentWindow.localStorage.getItem("steelStudioSidebarCollapsed") == "1";
+                const setCollapsed = (value) => {
+                    parentWindow.localStorage.setItem("steelStudioSidebarCollapsed", value ? "1" : "0");
+                    applyLayout();
+                };
+
+                function applyLayout() {
+                    const sidebar = parentDoc.querySelector('[data-testid="stSidebar"]');
+                    const viewportWidth = parentWindow.innerWidth || parentDoc.documentElement.clientWidth || 1280;
+                    const isMobile = viewportWidth < 920;
+                    const collapsed = !isMobile && getCollapsed();
+                    const baseOffset = isMobile ? 16 : Math.max(24, Math.floor((viewportWidth - 1180) / 2));
+                    const sidebarWidth = sidebar && !collapsed ? Math.round(sidebar.getBoundingClientRect().width) : 0;
+                    const contentLeft = collapsed ? baseOffset : Math.max(baseOffset, sidebarWidth + 24);
+                    const contentRight = baseOffset;
+                    const contentWidth = Math.max(320, viewportWidth - contentLeft - contentRight);
+                    const composerWidth = Math.min(920, contentWidth);
+                    const contentCenter = contentLeft + (contentWidth / 2);
+
+                    if (sidebar) {
+                        sidebar.classList.toggle("steel-studio-sidebar-hidden", collapsed);
+                    }
+                    root.style.setProperty("--content-center-x", `${contentCenter}px`);
+                    root.style.setProperty("--content-width", `${contentWidth}px`);
+                    root.style.setProperty("--composer-center-x", `${contentCenter}px`);
+                    root.style.setProperty("--composer-width", `${composerWidth}px`);
+
+                    toggleButton.textContent = collapsed ? ">" : "<";
+                    toggleButton.setAttribute("aria-label", collapsed ? "Open controls" : "Hide controls");
+                }
+
+                toggleButton.onclick = (event) => {
+                    event.preventDefault();
+                    setCollapsed(!getCollapsed());
+                };
+
+                applyLayout();
+
+                const handleResize = () => parentWindow.requestAnimationFrame(applyLayout);
+                parentWindow.addEventListener("resize", handleResize);
+                cleanupFns.push(() => parentWindow.removeEventListener("resize", handleResize));
+
+                const sidebar = parentDoc.querySelector('[data-testid="stSidebar"]');
+                if (sidebar && parentWindow.ResizeObserver) {
+                    const sidebarObserver = new parentWindow.ResizeObserver(handleResize);
+                    sidebarObserver.observe(sidebar);
+                    cleanupFns.push(() => sidebarObserver.disconnect());
+                }
+
+                parentWindow.__steelStudioShellCleanup = () => {
+                    cleanupFns.forEach((cleanup) => cleanup());
+                    toggleButton.remove();
+                    delete parentWindow.__steelStudioShellCleanup;
+                };
+            } catch (error) {
+                console.warn("Steel studio shell bridge failed", error);
+            }
+        })();
         </script>
         """,
         height=0,
@@ -3239,7 +3346,7 @@ def render_site_header() -> str:
         with brand_col:
             st.markdown(
                 """
-                <a class="brand-mark" href="https://mihirmadhaparia.github.io" target="_top" rel="noopener noreferrer">
+                <a class="brand-mark" href="https://mihirmadhaparia.com" target="_top" rel="noopener noreferrer">
                     <span class="brand-mark__monogram">MM</span>
                     <span class="brand-mark__text">
                         <strong>Mihir Madhaparia</strong>
@@ -3250,14 +3357,6 @@ def render_site_header() -> str:
             )
         with nav_col:
             active_page = render_top_nav()
-    st.markdown(
-        """
-        <section class="hero-panel">
-            <h1>Prompt-driven steel building concepts.</h1>
-        </section>
-        """,
-        unsafe_allow_html=True,
-    )
     return active_page
 
 
@@ -3438,6 +3537,120 @@ def render_prompt_tab() -> None:
                 st.session_state.spec = spec_to_dict(fallback)
                 st.session_state.project_history = [f"Initial rendition via fallback local parser: {user_message}"]
                 response = f"The selected AI failed, so I used the free local parser. Details: {exc}"
+            st.session_state.chat_messages.append({"role": "assistant", "content": response})
+            st.session_state.chat_draft = ""
+            st.session_state.extraction_notice = ("warning", response)
+            st.rerun()
+
+
+def render_loading_bubble() -> None:
+    st.markdown(
+        """
+        <div class="chat-bubble chat-bubble--assistant">
+            <div class="chat-bubble__label">Studio</div>
+            <div class="chat-bubble__body chat-bubble--loading">
+                <span class="loading-dot"></span>
+                <span class="loading-dot"></span>
+                <span class="loading-dot"></span>
+            </div>
+        </div>
+        """,
+        unsafe_allow_html=True,
+    )
+
+
+def render_prompt_tab() -> None:
+    provider, api_key, model, ollama_host = current_ai_settings()
+    reset_clicked = False
+    send_clicked = False
+
+    with st.container(key="composer_shell"):
+        with st.form("project_chat_composer", clear_on_submit=False):
+            prompt_col, reset_col, send_col = st.columns([12, 1, 1], gap="small")
+            with prompt_col:
+                st.text_area(
+                    "Project prompt",
+                    key="chat_draft",
+                    placeholder="Describe the first design or ask for a change to the active project...",
+                    label_visibility="collapsed",
+                    height=64,
+                )
+            with reset_col:
+                reset_clicked = st.form_submit_button("\u21bb", use_container_width=True)
+            with send_col:
+                send_clicked = st.form_submit_button("\u2191", type="primary", use_container_width=True)
+
+    if reset_clicked:
+        reset_project_chat()
+        st.rerun()
+
+    user_message = st.session_state.chat_draft.strip()
+    pending_prompt = bool(send_clicked and user_message)
+    has_messages = bool(st.session_state.chat_messages)
+
+    if not has_messages and not pending_prompt:
+        st.markdown(
+            """
+            <section class="prompt-landing-shell">
+                <h1 class="prompt-landing__title">Prompt-driven steel building concepts.</h1>
+            </section>
+            """,
+            unsafe_allow_html=True,
+        )
+    else:
+        with st.container(key="chat_shell"):
+            for message in st.session_state.chat_messages:
+                render_chat_bubble(message["role"], message["content"])
+            if pending_prompt:
+                render_chat_bubble("user", user_message)
+                render_loading_bubble()
+
+    if pending_prompt:
+        has_active_project = len(st.session_state.project_history) > 0
+        try:
+            if has_active_project:
+                current = spec_from_dict(st.session_state.spec)
+                updated, source = apply_followup_with_provider(
+                    current,
+                    user_message,
+                    provider.replace("Free local parser", "Local"),
+                    api_key,
+                    model,
+                    ollama_host,
+                )
+                st.session_state.spec = spec_to_dict(updated)
+                st.session_state.project_history.append(f"Follow-up via {source}: {user_message}")
+                st.session_state.chat_messages.append({"role": "user", "content": user_message})
+                response = f"Updated the current project with {source}. The preview, drawings, BOM, and exports have been refreshed."
+            else:
+                spec, source = extract_spec(
+                    user_message,
+                    provider.replace("Free local parser", "Local"),
+                    api_key,
+                    model,
+                    ollama_host,
+                )
+                st.session_state.spec = spec_to_dict(spec)
+                st.session_state.project_history = [f"Initial rendition via {source}: {user_message}"]
+                st.session_state.chat_messages.append({"role": "user", "content": user_message})
+                response = f"Created the first rendition with {source}. You can keep asking for refinements here."
+            st.session_state.chat_messages.append({"role": "assistant", "content": response})
+            st.session_state.chat_draft = ""
+            st.session_state.extraction_notice = ("success", response)
+            st.rerun()
+        except (ValueError, KeyError, urllib.error.URLError, TimeoutError) as exc:
+            current = spec_from_dict(st.session_state.spec)
+            if has_active_project:
+                updated = apply_followup_local(current, user_message)
+                st.session_state.spec = spec_to_dict(updated)
+                st.session_state.project_history.append(f"Follow-up via fallback local parser: {user_message}")
+                response = f"The selected AI failed, so I applied deterministic changes where possible. Details: {exc}"
+            else:
+                fallback = extract_with_local_parser(user_message)
+                st.session_state.spec = spec_to_dict(fallback)
+                st.session_state.project_history = [f"Initial rendition via fallback local parser: {user_message}"]
+                response = f"The selected AI failed, so I used the free local parser. Details: {exc}"
+            st.session_state.chat_messages.append({"role": "user", "content": user_message})
             st.session_state.chat_messages.append({"role": "assistant", "content": response})
             st.session_state.chat_draft = ""
             st.session_state.extraction_notice = ("warning", response)
@@ -3711,15 +3924,15 @@ def render_ai_setup_tab() -> None:
 
 
 def main() -> None:
-    st.set_page_config(page_title="AI Steel Structure Studio", layout="wide")
+    st.set_page_config(page_title="AI Steel Structure Studio", layout="wide", initial_sidebar_state="expanded")
     init_state()
     load_css()
-    sync_layout_offsets()
 
     active_page = render_site_header()
 
     current_spec = spec_from_dict(st.session_state.spec)
     spec = render_sidebar(current_spec)
+    mount_shell_bridge()
     package = build_model(spec)
 
     if active_page == "Prompt":
