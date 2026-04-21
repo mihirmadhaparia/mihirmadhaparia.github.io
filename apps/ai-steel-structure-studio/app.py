@@ -7,6 +7,7 @@ import json
 import math
 import os
 import re
+import traceback
 import textwrap
 import urllib.error
 import urllib.request
@@ -3591,4 +3592,9 @@ def main() -> None:
 
 
 if __name__ == "__main__":
-    main()
+    try:
+        main()
+    except Exception:
+        st.set_page_config(page_title="AI Steel Structure Studio", layout="wide")
+        st.error("The app hit a startup error before it could fully render.")
+        st.code(traceback.format_exc())
