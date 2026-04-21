@@ -2691,6 +2691,8 @@ def init_state() -> None:
         st.session_state.sidebar_open = True
     if "controls_version" not in st.session_state:
         st.session_state.controls_version = 0
+    if "visible_layers" not in st.session_state:
+        st.session_state.visible_layers = list(DEFAULT_VISUALIZER_LAYERS)
     if "ai_provider" not in st.session_state:
         st.session_state.ai_provider = get_config_value("AI_PROVIDER", "Ollama Cloud")
     if "ai_model" not in st.session_state:
@@ -2989,11 +2991,33 @@ def load_css() -> None:
                 margin-top: 18px;
                 padding: 10px 12px;
             }
+            .st-key-studio_chat_composer_shell .stButton {
+                margin: 0 !important;
+            }
+            .st-key-studio_chat_composer_shell .stButton > button {
+                align-items: center !important;
+                display: flex !important;
+                justify-content: center !important;
+                line-height: 1 !important;
+                padding: 0 !important;
+                text-align: center !important;
+            }
             .st-key-studio_preview_shell {
                 min-height: 760px;
             }
             .st-key-studio_controls_shell {
                 margin-top: 24px;
+            }
+            .st-key-studio_controls_shell [data-testid="stCheckbox"] {
+                background: rgba(255, 255, 255, 0.7);
+                border-radius: 16px;
+                padding: 8px 12px;
+            }
+            .st-key-studio_controls_shell [data-testid="stCheckbox"] > label {
+                align-items: center;
+            }
+            .st-key-preview_camera_shell {
+                max-width: 320px;
             }
             .studio-empty-state,
             .studio-loading-state {
@@ -3370,6 +3394,14 @@ def load_css() -> None:
                 transform: translateY(0) scale(0.96);
                 box-shadow: 0 1px 0 rgba(255, 255, 255, 0.96) inset, 0 8px 16px rgba(15, 23, 42, 0.08) !important;
             }
+            .stButton > button:focus-visible,
+            .stDownloadButton > button:focus-visible,
+            [data-testid="stFormSubmitButton"] button:focus-visible,
+            button:focus-visible,
+            [role="button"]:focus-visible {
+                outline: none !important;
+                box-shadow: 0 0 0 4px rgba(0, 113, 227, 0.12), 0 18px 34px rgba(15, 23, 42, 0.08) !important;
+            }
             .stButton > button[kind="primary"],
             [data-testid="stFormSubmitButton"] button[kind="primary"],
             button[kind="primary"],
@@ -3648,6 +3680,7 @@ def reset_project_chat() -> None:
     st.session_state.queued_prompt = ""
     st.session_state.process_prompt_requested = False
     st.session_state.controls_version = st.session_state.get("controls_version", 0) + 1
+    st.session_state.visible_layers = list(DEFAULT_VISUALIZER_LAYERS)
     if "chat_draft" in st.session_state:
         del st.session_state["chat_draft"]
     st.session_state.extraction_notice = None
@@ -3834,6 +3867,32 @@ def process_pending_prompt(user_message: str, provider: str, api_key: str, model
     st.rerun()
 
 
+def mount_chat_enter_shortcut() -> None:
+    script = """
+        <script>
+        (() => {
+            const root = window.parent.document;
+            const textarea = root.querySelector('.st-key-studio_chat_composer_shell textarea');
+            const buttons = root.querySelectorAll('.st-key-studio_chat_composer_shell button');
+            const sendButton = buttons.length ? buttons[buttons.length - 1] : null;
+            if (!textarea || !sendButton || textarea.dataset.enterBound === 'true') {
+                return;
+            }
+            textarea.dataset.enterBound = 'true';
+            textarea.addEventListener('keydown', (event) => {
+                if (event.key === 'Enter' && !event.shiftKey) {
+                    event.preventDefault();
+                    textarea.dispatchEvent(new Event('input', { bubbles: true }));
+                    textarea.dispatchEvent(new Event('change', { bubbles: true }));
+                    window.setTimeout(() => sendButton.click(), 0);
+                }
+            });
+        })();
+        </script>
+    """
+    components.html(script, height=0, width=0)
+
+
 def render_design_controls_section(spec: BuildingSpec) -> BuildingSpec:
     version = st.session_state.get("controls_version", 0)
     with st.container(key="studio_controls_shell"):
@@ -3889,6 +3948,15 @@ def render_design_controls_section(spec: BuildingSpec) -> BuildingSpec:
                     index=cladding_ids.index(spec.wall_sheet_option) if spec.wall_sheet_option in cladding_ids else 0,
                     help="Conceptual panel family used for wall takeoff, fasteners, and trims.",
                 )
+                st.markdown("#### Visible model layers")
+                layer_checks = {}
+                visible_layers = set(st.session_state.get("visible_layers", list(DEFAULT_VISUALIZER_LAYERS)))
+                for layer_name in VISUALIZER_LAYERS:
+                    layer_checks[layer_name] = st.checkbox(
+                        layer_name,
+                        value=layer_name in visible_layers,
+                        key=f"layer_toggle_{version}_{layer_name}",
+                    )
 
             apply_clicked = st.form_submit_button("Apply design changes", type="primary", use_container_width=True)
 
@@ -3915,6 +3983,7 @@ def render_design_controls_section(spec: BuildingSpec) -> BuildingSpec:
             )
         )
         st.session_state.spec = spec_to_dict(updated)
+        st.session_state.visible_layers = [layer_name for layer_name in VISUALIZER_LAYERS if layer_checks.get(layer_name)]
         st.session_state.controls_version = version + 1
         st.rerun()
 
@@ -4073,40 +4142,32 @@ def render_preview_tab(spec: BuildingSpec) -> None:
                     render_loading_bubble()
 
                 with st.container(key="studio_chat_composer_shell"):
-                    with st.form("studio_chat_form", clear_on_submit=False):
-                        prompt_col, reset_col, send_col = st.columns([12, 1, 1], gap="small")
-                        with prompt_col:
-                            st.text_area(
-                                "Project prompt",
-                                key="chat_draft",
-                                placeholder="Ask for a new concept or request an edit to the current building...",
-                                label_visibility="collapsed",
-                                height=96,
-                            )
-                        with reset_col:
-                            reset_clicked = st.form_submit_button("\u21bb", use_container_width=True)
-                        with send_col:
-                            send_clicked = st.form_submit_button("\u2191", type="primary", use_container_width=True)
+                    prompt_col, reset_col, send_col = st.columns([12, 1, 1], gap="small")
+                    with prompt_col:
+                        st.text_area(
+                            "Project prompt",
+                            key="chat_draft",
+                            placeholder="Ask for a new concept or request an edit to the current building...",
+                            label_visibility="collapsed",
+                            height=96,
+                        )
+                    with reset_col:
+                        reset_clicked = st.button("\u21bb", key="studio_chat_reset_button", use_container_width=True)
+                    with send_col:
+                        send_clicked = st.button("\u2191", key="studio_chat_send_button", type="primary", use_container_width=True)
+                    mount_chat_enter_shortcut()
 
         with studio_cols[1]:
             with st.container(key="studio_preview_shell"):
-                top_controls = st.columns([1.05, 1.7], gap="medium")
-                with top_controls[0]:
+                with st.container(key="preview_camera_shell"):
                     view_preset = st.selectbox(
                         "Camera view",
                         VIEW_PRESETS,
                         index=0,
                         help="Use orthogonal presets for plan/elevation checks or low perspective for inspection.",
                     )
-                with top_controls[1]:
-                    selected_layers = st.multiselect(
-                        "Visible model layers",
-                        VISUALIZER_LAYERS,
-                        default=DEFAULT_VISUALIZER_LAYERS,
-                        help="Toggle structural steel, bracing, cladding, seams, connection hardware, and labels.",
-                    )
 
-                layer_set = set(selected_layers or DEFAULT_VISUALIZER_LAYERS)
+                layer_set = set(st.session_state.get("visible_layers", list(DEFAULT_VISUALIZER_LAYERS)) or DEFAULT_VISUALIZER_LAYERS)
                 plot_config = {"displaylogo": False, "scrollZoom": True, "responsive": True}
                 if pending_prompt and not has_design:
                     st.markdown(
