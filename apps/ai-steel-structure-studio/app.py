@@ -2606,8 +2606,14 @@ def init_state() -> None:
         st.session_state.chat_messages = []
     if "chat_draft" not in st.session_state:
         st.session_state.chat_draft = ""
+    if "queued_prompt" not in st.session_state:
+        st.session_state.queued_prompt = ""
+    if "process_prompt_requested" not in st.session_state:
+        st.session_state.process_prompt_requested = False
+    if "reset_chat_requested" not in st.session_state:
+        st.session_state.reset_chat_requested = False
     if "ai_provider" not in st.session_state:
-        st.session_state.ai_provider = os.getenv("AI_PROVIDER", "Free local parser")
+        st.session_state.ai_provider = os.getenv("AI_PROVIDER", "Ollama Local")
     if "ai_model" not in st.session_state:
         st.session_state.ai_model = os.getenv("OLLAMA_MODEL", DEFAULT_OLLAMA_MODEL)
     if "ollama_host" not in st.session_state:
@@ -2620,9 +2626,6 @@ def init_state() -> None:
 
 def current_ai_settings() -> tuple[str, str, str, str]:
     provider = st.session_state.get("ai_provider", "Ollama Local")
-    if running_in_streamlit_cloud() and provider == "Ollama Local" and not os.getenv("AI_PROVIDER"):
-        provider = "Free local parser"
-        st.session_state.ai_provider = provider
     model = st.session_state.get("ai_model", DEFAULT_OLLAMA_MODEL)
     ollama_host = st.session_state.get("ollama_host", DEFAULT_OLLAMA_HOST)
     api_key = ""
@@ -3294,6 +3297,10 @@ def mount_shell_bridge() -> None:
 
                     if (sidebar) {
                         sidebar.classList.toggle("steel-studio-sidebar-hidden", collapsed);
+                        sidebar.style.opacity = collapsed ? "0" : "1";
+                        sidebar.style.pointerEvents = collapsed ? "none" : "auto";
+                        sidebar.style.transform = collapsed ? "translateX(calc(-100% - 24px))" : "translateX(0)";
+                        sidebar.style.visibility = collapsed ? "hidden" : "visible";
                     }
                     root.style.setProperty("--content-center-x", `${contentCenter}px`);
                     root.style.setProperty("--content-width", `${contentWidth}px`);
@@ -3441,7 +3448,10 @@ def reset_project_chat() -> None:
     st.session_state.spec = spec_to_dict(BuildingSpec())
     st.session_state.project_history = []
     st.session_state.chat_messages = []
-    st.session_state.chat_draft = ""
+    st.session_state.queued_prompt = ""
+    st.session_state.process_prompt_requested = False
+    if "chat_draft" in st.session_state:
+        del st.session_state["chat_draft"]
     st.session_state.extraction_notice = None
 
 
@@ -3561,6 +3571,13 @@ def render_loading_bubble() -> None:
 
 def render_prompt_tab() -> None:
     provider, api_key, model, ollama_host = current_ai_settings()
+
+    if st.session_state.pop("reset_chat_requested", False):
+        reset_project_chat()
+    process_prompt = st.session_state.pop("process_prompt_requested", False)
+    user_message = st.session_state.get("queued_prompt", "").strip() if process_prompt else ""
+    if process_prompt and "chat_draft" in st.session_state:
+        del st.session_state["chat_draft"]
     reset_clicked = False
     send_clicked = False
 
@@ -3581,11 +3598,15 @@ def render_prompt_tab() -> None:
                 send_clicked = st.form_submit_button("\u2191", type="primary", use_container_width=True)
 
     if reset_clicked:
-        reset_project_chat()
+        st.session_state.reset_chat_requested = True
         st.rerun()
 
-    user_message = st.session_state.chat_draft.strip()
-    pending_prompt = bool(send_clicked and user_message)
+    if send_clicked and st.session_state.get("chat_draft", "").strip():
+        st.session_state.queued_prompt = st.session_state.get("chat_draft", "").strip()
+        st.session_state.process_prompt_requested = True
+        st.rerun()
+
+    pending_prompt = bool(process_prompt and user_message)
     has_messages = bool(st.session_state.chat_messages)
 
     if not has_messages and not pending_prompt:
@@ -3635,7 +3656,7 @@ def render_prompt_tab() -> None:
                 st.session_state.chat_messages.append({"role": "user", "content": user_message})
                 response = f"Created the first rendition with {source}. You can keep asking for refinements here."
             st.session_state.chat_messages.append({"role": "assistant", "content": response})
-            st.session_state.chat_draft = ""
+            st.session_state.queued_prompt = ""
             st.session_state.extraction_notice = ("success", response)
             st.rerun()
         except (ValueError, KeyError, urllib.error.URLError, TimeoutError) as exc:
@@ -3652,7 +3673,7 @@ def render_prompt_tab() -> None:
                 response = f"The selected AI failed, so I used the free local parser. Details: {exc}"
             st.session_state.chat_messages.append({"role": "user", "content": user_message})
             st.session_state.chat_messages.append({"role": "assistant", "content": response})
-            st.session_state.chat_draft = ""
+            st.session_state.queued_prompt = ""
             st.session_state.extraction_notice = ("warning", response)
             st.rerun()
 
