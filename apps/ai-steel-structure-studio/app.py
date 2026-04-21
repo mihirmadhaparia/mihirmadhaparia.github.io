@@ -302,7 +302,7 @@ DEFAULT_PROMPT = (
     "10 meters tall. Use a gable roof, 8 bays, roof purlins, wall girts, and "
     "cross bracing. Keep it simple for a conceptual factory building."
 )
-NAV_PAGES = ["Prompt", "3D Preview", "Drawings + BOM", "Exports", "AI Setup"]
+NAV_PAGES = ["Prompt", "3D Preview", "Drawings + BOM", "Exports"]
 VISUALIZER_LAYERS = [
     "Primary steel",
     "Secondary steel",
@@ -2773,9 +2773,18 @@ def load_css() -> None:
                 line-height: 0.98 !important;
             }
             .block-container {
-                max-width: 1180px;
+                max-width: min(1180px, calc(100vw - 392px));
+                margin-left: 344px;
+                margin-right: 36px;
                 padding-bottom: 9rem;
                 padding-top: 1.2rem;
+                transition: margin-left 240ms ease, margin-right 240ms ease, max-width 240ms ease;
+                width: auto;
+            }
+            body.steel-studio-sidebar-closed .block-container {
+                margin-left: 24px;
+                margin-right: 24px;
+                max-width: min(1180px, calc(100vw - 48px));
             }
             [data-testid="stCaptionContainer"],
             [data-testid="stCaptionContainer"] * {
@@ -2921,11 +2930,13 @@ def load_css() -> None:
             .prompt-landing-shell {
                 pointer-events: none;
                 position: fixed;
+                left: 344px;
                 right: 36px;
                 text-align: left;
                 top: 47%;
                 transform: translateY(-55%);
-                width: min(900px, calc(100vw - 420px));
+                transition: left 240ms ease, right 240ms ease, transform 240ms ease;
+                width: auto;
                 z-index: 5;
             }
             .prompt-landing__title {
@@ -2965,10 +2976,11 @@ def load_css() -> None:
                 border: 1px solid var(--border);
                 border-radius: var(--radius-xl);
                 box-shadow: var(--shadow-sm);
-                margin: 8px 36px 0 344px;
+                margin: 8px 0 0;
                 min-height: calc(100vh - 220px);
                 padding: 18px 18px 112px;
                 backdrop-filter: blur(18px);
+                transition: margin 240ms ease, transform 240ms ease;
             }
             .stTextInput input, .stTextArea textarea, .stNumberInput input,
             [data-testid="stSidebar"] input, [data-testid="stSidebar"] textarea {
@@ -3082,26 +3094,24 @@ def load_css() -> None:
                 position: fixed;
                 right: 36px;
                 transform: none;
-                transition: left 220ms ease, right 220ms ease, width 220ms ease, box-shadow 220ms ease;
+                transition: left 240ms ease, right 240ms ease, width 240ms ease, box-shadow 240ms ease, transform 240ms ease;
                 width: auto;
                 z-index: 950;
                 backdrop-filter: blur(20px);
             }
             body.steel-studio-sidebar-closed .prompt-landing-shell {
-                left: 50%;
-                right: auto;
-                transform: translate(-50%, -55%);
-                width: min(900px, calc(100vw - 48px));
+                left: 24px;
+                right: 24px;
+                transform: translateY(-55%);
             }
             body.steel-studio-sidebar-closed .st-key-chat_shell {
-                margin-left: 24px;
-                margin-right: 24px;
+                margin-top: 8px;
             }
             body.steel-studio-sidebar-closed .st-key-composer_shell {
-                left: 50%;
-                right: auto;
-                transform: translateX(-50%);
-                width: min(920px, calc(100vw - 48px));
+                left: 24px;
+                right: 24px;
+                transform: none;
+                width: auto;
             }
             .st-key-composer_shell [data-testid="stForm"] {
                 background: transparent;
@@ -3271,7 +3281,11 @@ def load_css() -> None:
                     justify-content: flex-start;
                 }
                 .block-container {
+                    margin-left: 0;
+                    margin-right: 0;
+                    max-width: 100%;
                     padding-top: 1rem;
+                    transition: none;
                 }
                 .prompt-landing-shell {
                     left: 24px;
@@ -3279,6 +3293,7 @@ def load_css() -> None:
                     top: 43%;
                     transform: translateY(-50%);
                     width: auto;
+                    transition: none;
                 }
                 .prompt-landing__title {
                     font-size: clamp(2.9rem, 12vw, 4.6rem) !important;
@@ -3293,12 +3308,14 @@ def load_css() -> None:
                 .st-key-chat_shell {
                     margin-left: 16px;
                     margin-right: 16px;
+                    transition: none;
                 }
                 .st-key-composer_shell {
                     bottom: 16px;
                     left: 16px;
                     right: 16px;
                     transform: none;
+                    transition: none;
                     width: calc(100vw - 32px);
                 }
                 body.steel-studio-sidebar-closed .prompt-landing-shell {
@@ -3976,8 +3993,6 @@ def main() -> None:
         render_drawings_tab(package)
     elif active_page == "Exports":
         render_exports_tab(package)
-    elif active_page == "AI Setup":
-        render_ai_setup_tab()
 
 
 if __name__ == "__main__":
