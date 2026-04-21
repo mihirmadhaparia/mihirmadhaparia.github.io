@@ -9,12 +9,12 @@ Deploy this app on Streamlit Community Cloud with:
 - Repository: `mihirmadhaparia/mihirmadhaparia.github.io`
 - Branch: `main`
 - Entrypoint file: `apps/ai-steel-structure-studio/app.py`
-- Suggested custom subdomain: `mihir-ai-steel-studio`
+- Suggested custom subdomain: `mihir-ai-steel-studios`
 
 The portfolio site links its **Launch App** button to:
 
 ```text
-https://mihir-ai-steel-studio.streamlit.app
+https://mihir-ai-steel-studios.streamlit.app
 ```
 
 After the app is created once in Streamlit Community Cloud, future pushes to this repo will update the deployed app automatically.
