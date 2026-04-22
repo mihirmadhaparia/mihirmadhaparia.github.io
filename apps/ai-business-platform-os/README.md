@@ -43,7 +43,7 @@ The app is built around data input first, then downloadable output:
 
 ## Run Locally
 
-From this folder:
+If you are working with this app as a standalone folder, from this folder:
 
 ```powershell
 python -m venv .venv
@@ -56,6 +56,13 @@ Then open the local URL shown in the terminal, usually:
 
 ```text
 http://localhost:8501
+```
+
+If you are running it from inside the portfolio repository, use the repository root so local behavior matches Streamlit Community Cloud:
+
+```powershell
+cd C:\path\to\mihirmadhaparia.github.io
+python -m streamlit run apps/ai-business-platform-os/app.py
 ```
 
 ## Hosting Online
@@ -79,6 +86,8 @@ inside your `mihirmadhaparia.github.io` repository, then deploy with:
 - Suggested subdomain: `mihir-business-platform`
 
 After the Streamlit app is created once, pushes to that repo will update the deployed app automatically.
+
+Community Cloud supports apps whose entrypoint lives in a subdirectory. In that setup, the shared repository-level `.streamlit/config.toml` is the main config file used by deployed apps, while `apps/ai-business-platform-os/requirements.txt` can stay next to this app's entrypoint.
 
 ## Website Integration Note
 
