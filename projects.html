@@ -144,14 +144,28 @@ permalink: /projects/
                     </ul>
                 </div>
                 <aside class="story-card__media">
-                    <div class="media-placeholder">
-                        <span class="media-placeholder__icon"><i class="fa-solid fa-cube"></i></span>
-                        <strong>CAD showcase slot</strong>
-                        <p class="support-copy">Ready for implant renders, exploded views, or downloadable model files.</p>
+                    <div class="cad-asset-card">
+                        <div class="cad-asset-card__header">
+                            <span class="media-placeholder__icon"><i class="fa-solid fa-cube"></i></span>
+                            <div>
+                                <strong>Spinal window CAD model</strong>
+                                <p class="support-copy">Native SOLIDWORKS part for the lowered, angled spinal-window iteration.</p>
+                            </div>
+                        </div>
+                        <a href="{{ '/assets/models/spinal-window/ver7-angledoutward-lowered-window-smaller.SLDPRT' | relative_url }}" download class="button-secondary cad-download-link">
+                            <i class="fa-solid fa-file-arrow-down"></i>
+                            Download SLDPRT
+                        </a>
+                    </div>
+                    <div class="model-viewer-card">
+                        <div class="model-viewer-card__icon"><i class="fa-solid fa-arrows-rotate"></i></div>
+                        <strong>Interactive viewer prepared</strong>
+                        <p class="support-copy">This slot is set up for the web-optimized GLB export so visitors can rotate the actual part in-browser.</p>
                     </div>
                     <div class="asset-chip-row">
                         <span class="asset-chip">ANSYS FEA</span>
                         <span class="asset-chip">SOLIDWORKS</span>
+                        <span class="asset-chip">CAD source</span>
                     </div>
                 </aside>
             </article>

@@ -531,6 +531,65 @@ h1, h2, h3 { margin: 0; letter-spacing: -0.04em; line-height: 1.05; }
 .media-placeholder strong { font-size: 0.92rem; font-weight: 700; color: var(--text-primary); }
 .support-copy { font-size: 0.84rem; color: var(--text-secondary); margin: 4px 0 0; line-height: 1.55; }
 
+.cad-asset-card,
+.model-viewer-card {
+  padding: 18px;
+  border-radius: 18px;
+  background: rgba(255,255,255,0.78);
+  border: 1px solid var(--border);
+  display: grid;
+  gap: 14px;
+}
+
+.cad-asset-card__header {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+}
+
+.cad-asset-card strong,
+.model-viewer-card strong {
+  font-size: 0.92rem;
+  font-weight: 700;
+  color: var(--text-primary);
+}
+
+.cad-download-link {
+  min-height: 40px;
+  padding: 0 16px;
+  font-size: 0.84rem;
+  width: 100%;
+}
+
+.model-viewer-card {
+  background: linear-gradient(160deg, rgba(0,113,227,0.055), rgba(52,199,89,0.045));
+  border-color: rgba(0,113,227,0.10);
+}
+
+.model-viewer-card__icon {
+  width: 44px;
+  height: 44px;
+  border-radius: 14px;
+  display: inline-grid;
+  place-items: center;
+  color: var(--accent);
+  background: rgba(0,113,227,0.08);
+}
+
+.model-viewer-frame {
+  overflow: hidden;
+  border-radius: 18px;
+  background: linear-gradient(145deg, #f8fafc, #e9eef5);
+  border: 1px solid var(--border);
+  aspect-ratio: 4 / 3;
+}
+
+.model-viewer-frame model-viewer {
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+
 .media-carousel { display: grid; gap: 10px; }
 
 .media-carousel__viewport {
