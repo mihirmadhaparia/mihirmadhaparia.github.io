@@ -158,9 +158,27 @@ permalink: /projects/
                         </a>
                     </div>
                     <div class="model-viewer-card">
-                        <div class="model-viewer-card__icon"><i class="fa-solid fa-arrows-rotate"></i></div>
-                        <strong>Interactive viewer prepared</strong>
-                        <p class="support-copy">This slot is set up for the web-optimized GLB export so visitors can rotate the actual part in-browser.</p>
+                        <div class="model-viewer-frame">
+                            <model-viewer
+                                src="{{ '/assets/models/spinal-window/ver7-angledoutward-lowered-window-smaller.glb' | relative_url }}"
+                                alt="Interactive 3D model of the spinal window implant part"
+                                camera-controls
+                                auto-rotate
+                                shadow-intensity="0.85"
+                                exposure="0.95"
+                                loading="lazy">
+                            </model-viewer>
+                        </div>
+                        <div class="model-viewer-card__caption">
+                            <strong>Rotate the spinal window design</strong>
+                            <p class="support-copy">Web-optimized GLB export of the same lowered, angled spinal-window part.</p>
+                        </div>
+                        <div class="model-download-row">
+                            <a href="{{ '/assets/models/spinal-window/ver7-angledoutward-lowered-window-smaller.glb' | relative_url }}" download class="button-secondary cad-download-link">
+                                <i class="fa-solid fa-cube"></i>
+                                Download GLB
+                            </a>
+                        </div>
                     </div>
                     <div class="asset-chip-row">
                         <span class="asset-chip">ANSYS FEA</span>

@@ -590,6 +590,15 @@ h1, h2, h3 { margin: 0; letter-spacing: -0.04em; line-height: 1.05; }
   height: 100%;
 }
 
+.model-viewer-card__caption {
+  display: grid;
+  gap: 4px;
+}
+
+.model-download-row {
+  display: grid;
+}
+
 .media-carousel { display: grid; gap: 10px; }
 
 .media-carousel__viewport {
