@@ -233,10 +233,28 @@ permalink: /projects/
                     </ul>
                 </div>
                 <aside class="story-card__media">
-                    <div class="media-placeholder">
-                        <span class="media-placeholder__icon"><i class="fa-solid fa-people-group"></i></span>
-                        <strong>Leadership impact</strong>
-                        <p class="support-copy">Ready for team or field images.</p>
+                    <div class="model-viewer-card">
+                        <div class="model-viewer-frame">
+                            <model-viewer
+                                src="{{ '/assets/models/ewb/boys_latrine_assem.glb' | relative_url }}"
+                                alt="Interactive 3D model of the Engineers Without Borders boys latrine assembly"
+                                camera-controls
+                                auto-rotate
+                                shadow-intensity="0.85"
+                                exposure="0.95"
+                                loading="lazy">
+                            </model-viewer>
+                        </div>
+                        <div class="model-viewer-card__caption">
+                            <strong>Boys latrine assembly</strong>
+                            <p class="support-copy">Rotatable GLB model from the East Africa sanitation infrastructure project.</p>
+                        </div>
+                        <div class="model-download-row">
+                            <a href="{{ '/assets/models/ewb/boys_latrine_assem.glb' | relative_url }}" download class="button-secondary cad-download-link">
+                                <i class="fa-solid fa-cube"></i>
+                                Download GLB
+                            </a>
+                        </div>
                     </div>
                 </aside>
             </article>
