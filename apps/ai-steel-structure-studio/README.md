@@ -22,11 +22,11 @@ After the app is created once in Streamlit Community Cloud, future pushes to thi
 A Streamlit MVP for turning a plain-English building prompt into a conceptual steel structure package:
 
 - 3D browser preview with opaque section-aware primary frames, rafters, purlins, girts, bracing, cladding surfaces, visible connection plates, clips, gussets, bolts, and slab
-- Downloadable STL and OBJ mesh exports for 3D viewing
+- Downloadable STL, OBJ, IFC, and SketchUp handoff exports for 3D/BIM viewing
 - Downloadable DXF and SVG conceptual drawings
-- Downloadable BOM CSV and project JSON
+- Downloadable BOM CSV, connection CSV, and project JSON
 - Free built-in prompt parser with optional Ollama, OpenAI, and Gemini extraction backends
-- Section-aware 3D visualization using extensive `steel_sections.csv`, `purlin_sections.csv`, and `brace_connection_catalog.csv` catalogs
+- Section-aware 3D visualization using `ultimate_steel_parts_database.csv`, `steel_sections.csv`, `purlin_sections.csv`, and `brace_connection_catalog.csv`
 - Roof and wall cladding takeoffs using `roofing_options.csv`, including corrugated, ribbed, standing seam, trapezoidal, insulated, deck, and translucent sheet options
 - One active project at a time with a chat-style prompt page for follow-up requests
 
@@ -69,7 +69,7 @@ Design a 60m x 24m x 9m steel factory with a gable roof, 10 bays, wall girts, pu
 3. Continue in the same chat with follow-ups like `make it 5m wider`, `remove wall girts`, or `switch to a mono-slope roof`.
 4. Fine-tune dimensions, roof style, bay count, and member display sizes in the sidebar.
 5. Review the **3D Preview** and **Drawings + BOM** tabs. In **3D Preview**, enable the large visualizer and use its **Full screen** button for easier orbiting and inspection.
-6. Download STL, OBJ, DXF, SVG, BOM CSV, or JSON from the **Exports** tab.
+6. Download STL, OBJ, IFC, SketchUp bundle, DXF, SVG, BOM CSV, connection CSV, or JSON from the **Exports** tab.
 
 To keep refining the same project, keep chatting in the **Prompt** tab. Example follow-ups:
 
@@ -84,11 +84,11 @@ The app intentionally keeps one active project in session. Use **Reset Project**
 
 ## Steel And Connection Catalogs
 
-The app loads section data from `steel_sections.csv` and falls back to an embedded starter catalog if the CSV is missing. The current generated catalog includes thousands of AISC-style W, M, S, HP, C, MC, HSS, pipe, tee, and angle entries plus cold-formed purlin families.
+The app loads section and part data from `ultimate_steel_parts_database.csv`, then overlays `steel_sections.csv` and `purlin_sections.csv`. This keeps the broad part database active for hardware/plate/bolt estimating while keeping the smaller section and purlin catalogs available as editable specialist sources. If the CSV files are missing, the app falls back to a small embedded starter catalog.
 
-`purlin_sections.csv` contains generated common Z, lapped Z, C, sigma, hat, and eave-strut style purlins/girts. `brace_connection_catalog.csv` contains angle-based conceptual brace, bolt, weld, and plate rules. `roofing_options.csv` contains roof and wall sheet/deck/cladding families used for takeoff rows and cladding fastener notes.
+`ultimate_steel_parts_database.csv` includes the full active section/parts database. `steel_sections.csv` is the generated structural-section subset used for visual member profiles and compatibility. `purlin_sections.csv` contains generated common Z, lapped Z, C, sigma, hat, and eave-strut style purlins/girts and is explicitly loaded after the main catalogs so purlin edits are honored. `brace_connection_catalog.csv` contains angle-based conceptual brace, bolt, weld, and plate rules. `roofing_options.csv` contains roof and wall sheet/deck/cladding families used for takeoff rows and cladding fastener notes.
 
-The app uses member angles to select conceptual brace plates/bolts and adds connection hardware rows to the BOM. The 3D preview also shows visible base plates, primary frame plates, purlin clips, girt clips, brace gussets, and bolt/anchor markers so the connection concept can be inspected visually.
+The app uses member angles to select conceptual brace plates/bolts and adds connection hardware rows to the BOM. BOM rows include units, quantity basis, calculated weight, waste/cut factor, estimated weight, and an estimate note. Steel member weights use catalog kg/m values with a cut/splice allowance, cladding uses catalog kg/m2 with lap/cut allowance, hardware uses catalog bolt weights or steel-volume estimates, and concrete uses plan area x slab thickness x normal-weight concrete density.
 
 The catalog can be regenerated with:
 
@@ -200,8 +200,9 @@ Keep native CAD generation in a backend worker, not directly in the website fron
 - `app.py`: Streamlit app, parser, AI provider calls, geometry generation, previews, and exports
 - `requirements.txt`: Python dependencies
 - `.env.example`: Optional AI environment variable template
+- `ultimate_steel_parts_database.csv`: Active master section/parts database, including extra metric/UK shapes, bolts, plates, cleats, washers, nuts, cladding, and other quotation parts
 - `steel_sections.csv`: Extensive editable section catalog for visual member profiles and BOM grouping
-- `purlin_sections.csv`: Generated purlin/girt/eave-strut catalog
+- `purlin_sections.csv`: Generated purlin/girt/eave-strut catalog, loaded explicitly after the broader catalogs so purlin edits take precedence
 - `brace_connection_catalog.csv`: Angle-based conceptual brace, bolt, weld, and plate rules
 - `roofing_options.csv`: Roof/wall cladding, deck, corrugated sheet, insulated panel, and translucent sheet catalog
 - `tools/build_catalogs.py`: Regenerates the section, purlin, and brace/connection catalogs

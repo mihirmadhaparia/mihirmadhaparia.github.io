@@ -28,6 +28,10 @@ except Exception:  # pragma: no cover - handled in the UI
 
 APP_VERSION = "0.2.0"
 STEEL_DENSITY_KG_M3 = 7850
+CONCRETE_DENSITY_KG_M3 = 2400
+STEEL_CUT_ALLOWANCE_FACTOR = 1.05
+CLADDING_WASTE_FACTOR = 1.07
+FASTENER_ALLOWANCE_FACTOR = 1.10
 DEFAULT_OLLAMA_HOST = "http://localhost:11434"
 DEFAULT_OLLAMA_CLOUD_HOST = "https://ollama.com"
 DEFAULT_OLLAMA_MODEL = "gpt-oss:20b"
@@ -161,7 +165,25 @@ class ModelPackage:
 DEFAULT_SECTION_CATALOG_FILES = [
     "ultimate_steel_parts_database.csv",
     "steel_sections.csv",
+    "purlin_sections.csv",
 ]
+BOM_FIELDNAMES = [
+    "role",
+    "section",
+    "profile",
+    "quantity",
+    "unit",
+    "quantity_basis",
+    "depth_m",
+    "total_length_m",
+    "total_area_m2",
+    "volume_m3",
+    "calculated_weight_kg",
+    "waste_factor",
+    "estimated_weight_kg",
+    "estimate_note",
+]
+CATALOG_LOAD_SUMMARY: list[dict[str, object]] = []
 
 
 SECTION_CATALOG: dict[str, SteelSection] = {
@@ -208,7 +230,16 @@ def load_section_catalog_from_csv(path: str) -> dict[str, SteelSection]:
 
 
 for catalog_path in DEFAULT_SECTION_CATALOG_FILES:
-    SECTION_CATALOG.update(load_section_catalog_from_csv(catalog_path))
+    loaded_catalog = load_section_catalog_from_csv(catalog_path)
+    if loaded_catalog:
+        SECTION_CATALOG.update(loaded_catalog)
+    CATALOG_LOAD_SUMMARY.append(
+        {
+            "file": catalog_path,
+            "rows_loaded": len(loaded_catalog),
+            "status": "loaded" if loaded_catalog else "missing or empty",
+        }
+    )
 
 
 def load_brace_connection_catalog(path: str = "brace_connection_catalog.csv") -> list[BraceConnectionRule]:
@@ -1432,11 +1463,91 @@ def wall_panel_count(spec: BuildingSpec, option: CladdingOption) -> int:
     return max(1, panels_on_sidewalls + panels_on_endwalls)
 
 
+def steel_cylinder_weight_kg(diameter_mm: float, length_mm: float) -> float:
+    diameter_m = diameter_mm / 1000
+    length_m = length_mm / 1000
+    return math.pi * (diameter_m**2) / 4 * length_m * STEEL_DENSITY_KG_M3
+
+
+def catalog_bolt_section(diameter_mm: float, length_mm: float, grade: str = "8.8") -> SteelSection | None:
+    diameter = int(round(diameter_mm))
+    candidates: list[tuple[float, SteelSection]] = []
+    pattern = re.compile(rf"^M{diameter}X(?P<length>\d+(?:\.\d+)?)", re.IGNORECASE)
+    for section in SECTION_CATALOG.values():
+        if not section.family.startswith("BOLT"):
+            continue
+        if grade and grade not in section.section_id:
+            continue
+        match = pattern.search(section.section_id)
+        if match:
+            candidates.append((abs(float(match.group("length")) - length_mm), section))
+    if not candidates:
+        return None
+    return min(candidates, key=lambda item: item[0])[1]
+
+
+def bolt_piece_estimate(diameter_mm: float, length_mm: float, grade: str = "8.8") -> tuple[str, float, str]:
+    section = catalog_bolt_section(diameter_mm, length_mm, grade)
+    if section:
+        return section.section_id, section.weight_kg_m, "piece weight from ultimate steel parts catalog"
+    section_id = f"M{diameter_mm:g}X{length_mm:g}" + (f"_{grade}" if grade else "")
+    return section_id, steel_cylinder_weight_kg(diameter_mm, length_mm), "piece weight estimated as solid steel cylinder"
+
+
+def plate_piece_weight_kg(thickness_mm: float, width_m: float, height_m: float) -> float:
+    return thickness_mm / 1000 * width_m * height_m * STEEL_DENSITY_KG_M3
+
+
+def plate_piece_estimate(description: str, role: str) -> tuple[str, float, str]:
+    thickness_match = re.search(r"(\d+(?:\.\d+)?)\s*mm", description, re.IGNORECASE)
+    thickness_mm = float(thickness_match.group(1)) if thickness_match else 8.0
+    role_text = f"{role} {description}".lower()
+    if "base" in role_text:
+        width_m, height_m = 0.45, 0.45
+    elif "gusset" in role_text:
+        width_m, height_m = 0.35, 0.35
+    elif "end plate" in role_text or "haunch" in role_text or "primary frame" in role_text:
+        width_m, height_m = 0.40, 0.35
+    elif "clip" in role_text or "cleat" in role_text:
+        width_m, height_m = 0.12, 0.10
+    else:
+        width_m, height_m = 0.25, 0.20
+    return (
+        f"PL{int(round(thickness_mm))} {width_m:.2f}m x {height_m:.2f}m",
+        plate_piece_weight_kg(thickness_mm, width_m, height_m),
+        "nominal plate area estimate from connection description",
+    )
+
+
+def normalize_bom_rows(rows: list[dict[str, object]]) -> list[dict[str, object]]:
+    normalized: list[dict[str, object]] = []
+    defaults: dict[str, object] = {
+        "unit": "ea",
+        "quantity_basis": "",
+        "total_area_m2": 0.0,
+        "volume_m3": 0.0,
+        "calculated_weight_kg": 0.0,
+        "waste_factor": 1.0,
+        "estimate_note": "",
+    }
+    for row in rows:
+        clean = {**defaults, **row}
+        for key in ("depth_m", "total_length_m", "total_area_m2", "volume_m3", "calculated_weight_kg", "waste_factor", "estimated_weight_kg"):
+            if isinstance(clean.get(key), float):
+                clean[key] = round(float(clean[key]), 3 if key in {"depth_m", "volume_m3", "waste_factor"} else 2)
+        normalized.append(clean)
+    return normalized
+
+
 def build_cladding_bom(spec: BuildingSpec) -> list[dict[str, object]]:
     roof = get_cladding_option(spec.roof_sheet_option)
     wall = get_cladding_option(spec.wall_sheet_option)
     roof_area = roof_surface_area(spec)
     wall_area = wall_surface_area(spec)
+    roof_fastener_count = math.ceil(roof_area * 5 * FASTENER_ALLOWANCE_FACTOR)
+    wall_fastener_count = math.ceil(wall_area * 4 * FASTENER_ALLOWANCE_FACTOR)
+    roof_fastener_id, roof_fastener_weight, roof_fastener_note = bolt_piece_estimate(5.5, 35, "")
+    wall_fastener_id, wall_fastener_weight, wall_fastener_note = bolt_piece_estimate(5.5, 25, "")
     rows = [
         {
             "role": "Roof sheeting area",
@@ -1444,8 +1555,14 @@ def build_cladding_bom(spec: BuildingSpec) -> list[dict[str, object]]:
             "profile": roof.panel_type,
             "depth_m": roof.rib_height_mm / 1000,
             "quantity": roof_panel_count(spec, roof),
-            "total_length_m": roof_area,
-            "estimated_weight_kg": roof_area * roof.weight_kg_m2,
+            "unit": "m2",
+            "quantity_basis": "panel count is based on coverage width; weight is by roof slope area",
+            "total_length_m": 0.0,
+            "total_area_m2": roof_area,
+            "calculated_weight_kg": roof_area * roof.weight_kg_m2,
+            "waste_factor": CLADDING_WASTE_FACTOR,
+            "estimated_weight_kg": roof_area * roof.weight_kg_m2 * CLADDING_WASTE_FACTOR,
+            "estimate_note": f"{roof.weight_kg_m2:g} kg/m2 with {round((CLADDING_WASTE_FACTOR - 1) * 100)}% lap/cut allowance",
         },
         {
             "role": "Wall cladding area",
@@ -1453,26 +1570,42 @@ def build_cladding_bom(spec: BuildingSpec) -> list[dict[str, object]]:
             "profile": wall.panel_type,
             "depth_m": wall.rib_height_mm / 1000,
             "quantity": wall_panel_count(spec, wall),
-            "total_length_m": wall_area,
-            "estimated_weight_kg": wall_area * wall.weight_kg_m2,
+            "unit": "m2",
+            "quantity_basis": "panel count is based on coverage width; weight is by gross wall area",
+            "total_length_m": 0.0,
+            "total_area_m2": wall_area,
+            "calculated_weight_kg": wall_area * wall.weight_kg_m2,
+            "waste_factor": CLADDING_WASTE_FACTOR,
+            "estimated_weight_kg": wall_area * wall.weight_kg_m2 * CLADDING_WASTE_FACTOR,
+            "estimate_note": f"{wall.weight_kg_m2:g} kg/m2 with {round((CLADDING_WASTE_FACTOR - 1) * 100)}% lap/cut allowance",
         },
         {
             "role": "Roof sheet fasteners",
-            "section": roof.fastening_pattern,
+            "section": roof_fastener_id,
             "profile": "FASTENERS",
             "depth_m": 0.0,
-            "quantity": math.ceil(roof_area * 5),
+            "quantity": roof_fastener_count,
+            "unit": "ea",
+            "quantity_basis": roof.fastening_pattern,
             "total_length_m": 0.0,
-            "estimated_weight_kg": "Fastener count is conceptual",
+            "calculated_weight_kg": roof_fastener_count * roof_fastener_weight,
+            "waste_factor": 1.0,
+            "estimated_weight_kg": roof_fastener_count * roof_fastener_weight,
+            "estimate_note": roof_fastener_note,
         },
         {
             "role": "Wall sheet fasteners",
-            "section": wall.fastening_pattern,
+            "section": wall_fastener_id,
             "profile": "FASTENERS",
             "depth_m": 0.0,
-            "quantity": math.ceil(wall_area * 4),
+            "quantity": wall_fastener_count,
+            "unit": "ea",
+            "quantity_basis": wall.fastening_pattern,
             "total_length_m": 0.0,
-            "estimated_weight_kg": "Fastener count is conceptual",
+            "calculated_weight_kg": wall_fastener_count * wall_fastener_weight,
+            "waste_factor": 1.0,
+            "estimated_weight_kg": wall_fastener_count * wall_fastener_weight,
+            "estimate_note": wall_fastener_note,
         },
     ]
     return rows
@@ -1491,17 +1624,28 @@ def build_bom(members: list[Member], spec: BuildingSpec) -> list[dict[str, objec
                 "profile": section.family if section else "BOX",
                 "depth_m": section.depth_m if section else member.size_m,
                 "quantity": 0,
+                "unit": "m",
+                "quantity_basis": "member count with centerline member lengths",
                 "total_length_m": 0.0,
+                "total_area_m2": 0.0,
+                "volume_m3": 0.0,
+                "calculated_weight_kg": 0.0,
+                "waste_factor": STEEL_CUT_ALLOWANCE_FACTOR,
                 "estimated_weight_kg": 0.0,
+                "estimate_note": f"{round((STEEL_CUT_ALLOWANCE_FACTOR - 1) * 100)}% cut/splice allowance applied to catalog kg/m",
             },
         )
         row["quantity"] = int(row["quantity"]) + 1
         row["total_length_m"] = float(row["total_length_m"]) + member.length_m
-        row["estimated_weight_kg"] = float(row["estimated_weight_kg"]) + member.steel_weight_kg
+        row["calculated_weight_kg"] = float(row["calculated_weight_kg"]) + member.steel_weight_kg
+        row["estimated_weight_kg"] = float(row["calculated_weight_kg"]) * STEEL_CUT_ALLOWANCE_FACTOR
 
     rows = list(grouped.values())
     rows.extend(build_cladding_bom(spec))
     rows.extend(build_hardware_bom(members, spec))
+    slab_area = spec.length_m * spec.width_m
+    slab_volume = slab_area * spec.slab_thickness_m
+    slab_weight = slab_volume * CONCRETE_DENSITY_KG_M3
     rows.append(
         {
             "role": "Concrete slab allowance",
@@ -1509,17 +1653,19 @@ def build_bom(members: list[Member], spec: BuildingSpec) -> list[dict[str, objec
             "profile": "CONCRETE",
             "depth_m": spec.slab_thickness_m,
             "quantity": 1,
-            "total_length_m": round(spec.length_m * spec.width_m, 2),
-            "estimated_weight_kg": "Review by concrete supplier",
+            "unit": "m3",
+            "quantity_basis": "plan area x slab thickness",
+            "total_length_m": 0.0,
+            "total_area_m2": slab_area,
+            "volume_m3": slab_volume,
+            "calculated_weight_kg": slab_weight,
+            "waste_factor": 1.0,
+            "estimated_weight_kg": slab_weight,
+            "estimate_note": f"normal-weight concrete at {CONCRETE_DENSITY_KG_M3} kg/m3; supplier/engineer to confirm",
         }
     )
 
-    for row in rows:
-        if isinstance(row["total_length_m"], float):
-            row["total_length_m"] = round(row["total_length_m"], 2)
-        if isinstance(row["estimated_weight_kg"], float):
-            row["estimated_weight_kg"] = round(row["estimated_weight_kg"], 1)
-    return rows
+    return normalize_bom_rows(rows)
 
 
 def member_angle_to_horizontal(member: Member) -> float:
@@ -1549,7 +1695,16 @@ def select_brace_rule(member: Member) -> BraceConnectionRule:
 def build_hardware_bom(members: list[Member], spec: BuildingSpec) -> list[dict[str, object]]:
     hardware: dict[str, dict[str, object]] = {}
 
-    def add_hardware(role: str, section: str, quantity: int) -> None:
+    def add_hardware(
+        role: str,
+        section: str,
+        quantity: int,
+        unit_weight_kg: float,
+        *,
+        basis: str,
+        note: str,
+        waste_factor: float = FASTENER_ALLOWANCE_FACTOR,
+    ) -> None:
         row = hardware.setdefault(
             (role, section),
             {
@@ -1558,23 +1713,91 @@ def build_hardware_bom(members: list[Member], spec: BuildingSpec) -> list[dict[s
                 "profile": "HARDWARE",
                 "depth_m": 0.0,
                 "quantity": 0,
+                "unit": "ea",
+                "quantity_basis": basis,
                 "total_length_m": 0.0,
-                "estimated_weight_kg": "Connection hardware - engineer quantity/grade",
+                "total_area_m2": 0.0,
+                "volume_m3": 0.0,
+                "calculated_weight_kg": 0.0,
+                "waste_factor": waste_factor,
+                "estimated_weight_kg": 0.0,
+                "estimate_note": note,
             },
         )
         row["quantity"] = int(row["quantity"]) + quantity
+        row["calculated_weight_kg"] = float(row["calculated_weight_kg"]) + quantity * unit_weight_kg
+        row["estimated_weight_kg"] = float(row["calculated_weight_kg"]) * float(row["waste_factor"])
 
     frame_count = spec.bay_count + 1
-    add_hardware("Anchor rods", "Typical 4 per column base", frame_count * 2 * 4)
-    add_hardware("Primary frame bolts", "M20 class 8.8 placeholder", frame_count * 18)
+    column_base_count = frame_count * 2
+    anchor_weight = steel_cylinder_weight_kg(24, 450)
+    add_hardware(
+        "Anchor rods",
+        "M24x450 anchor rod placeholder",
+        column_base_count * 4,
+        anchor_weight,
+        basis="typical 4 anchor rods per column base",
+        note="estimated as solid M24 steel rod at 450mm embed/projection length",
+    )
+    base_plate_section, base_plate_weight, base_plate_note = plate_piece_estimate("20mm base plate", "column base")
+    add_hardware(
+        "Base plates",
+        base_plate_section,
+        column_base_count,
+        base_plate_weight,
+        basis="one base plate per column",
+        note=base_plate_note,
+    )
+    frame_bolt_section, frame_bolt_weight, frame_bolt_note = bolt_piece_estimate(20, 70, "8.8")
+    add_hardware(
+        "Primary frame bolts",
+        frame_bolt_section,
+        frame_count * 18,
+        frame_bolt_weight,
+        basis="typical 18 bolts per portal frame for eave/ridge/splice placeholders",
+        note=frame_bolt_note,
+    )
+    frame_plate_section, frame_plate_weight, frame_plate_note = plate_piece_estimate("12mm end plate", "primary frame")
+    add_hardware(
+        "Primary frame connection plates",
+        frame_plate_section,
+        frame_count * 3,
+        frame_plate_weight,
+        basis="nominal eave and ridge/splice plates per frame",
+        note=frame_plate_note,
+    )
 
     for member in members:
         if member.role in {"Roof purlins", "Wall girts"}:
-            add_hardware(f"{member.role} fasteners", "M12 self-drilling/bolted clip placeholder", max(2, spec.bay_count * 2))
+            fastener_section, fastener_weight, fastener_note = bolt_piece_estimate(12, 40, "8.8")
+            add_hardware(
+                f"{member.role} fasteners",
+                fastener_section,
+                max(2, spec.bay_count * 2),
+                fastener_weight,
+                basis="two M12 clip fasteners per primary frame support line",
+                note=fastener_note,
+            )
         if "bracing" in member.role.lower() or "brace" in member.role.lower():
             rule = select_brace_rule(member)
-            add_hardware(f"{member.role} bolts", rule.bolt_spec, rule.bolts_per_end * 2)
-            add_hardware(f"{member.role} plates", rule.connection_plate, 2)
+            bolt_section, bolt_weight, bolt_note = bolt_piece_estimate(rule.bolt_diameter_mm, 60, "8.8")
+            plate_section, plate_weight, plate_note = plate_piece_estimate(rule.connection_plate, member.role)
+            add_hardware(
+                f"{member.role} bolts",
+                bolt_section,
+                rule.bolts_per_end * 2,
+                bolt_weight,
+                basis=rule.bolt_spec,
+                note=bolt_note,
+            )
+            add_hardware(
+                f"{member.role} plates",
+                plate_section,
+                2,
+                plate_weight,
+                basis=rule.connection_plate,
+                note=plate_note,
+            )
 
     return list(hardware.values())
 
@@ -1728,6 +1951,7 @@ def export_json(package: ModelPackage) -> bytes:
         ],
         "bom": package.bom_rows,
         "connections": package.connection_rows,
+        "catalog_load_summary": CATALOG_LOAD_SUMMARY,
         "section_catalog_used": {key: asdict(value) for key, value in SECTION_CATALOG.items()},
         "cladding_catalog_used": {key: asdict(value) for key, value in CLADDING_CATALOG.items()},
     }
@@ -1788,9 +2012,9 @@ def export_sketchup_bundle(package: ModelPackage) -> bytes:
 
 def export_bom_csv(package: ModelPackage) -> bytes:
     output = io.StringIO()
-    writer = csv.DictWriter(output, fieldnames=["role", "section", "profile", "depth_m", "quantity", "total_length_m", "estimated_weight_kg"])
+    writer = csv.DictWriter(output, fieldnames=BOM_FIELDNAMES, extrasaction="ignore")
     writer.writeheader()
-    writer.writerows(package.bom_rows)
+    writer.writerows(normalize_bom_rows(package.bom_rows))
     return output.getvalue().encode("utf-8")
 
 
@@ -4220,8 +4444,14 @@ def render_preview_tab(spec: BuildingSpec) -> None:
                     with metric_cols[1]:
                         render_metric("Members", str(len(package.members)))
                     with metric_cols[2]:
-                        steel_weight = sum(member.steel_weight_kg for member in package.members)
-                        render_metric("Visual steel estimate", f"{steel_weight / 1000:.1f} t")
+                        steel_weight = sum(
+                            float(row["estimated_weight_kg"])
+                            for row in package.bom_rows
+                            if row.get("profile") not in {"CONCRETE", "FASTENERS", "HARDWARE"}
+                            and "cladding" not in str(row.get("role", "")).lower()
+                            and "sheet" not in str(row.get("role", "")).lower()
+                        )
+                        render_metric("Steel estimate", f"{steel_weight / 1000:.1f} t")
                     with metric_cols[3]:
                         roof_peak = max(vertex[2] for vertex in package.vertices)
                         render_metric("Peak height", f"{roof_peak:.1f} m")
