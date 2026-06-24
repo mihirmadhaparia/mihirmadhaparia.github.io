@@ -1,0 +1,7 @@
+# Jekyll / local preview build output
+_site/
+.jekyll-cache/
+.sass-cache/
+
+# Local AI-assistant project notes (not part of the public site)
+CLAUDE.md
