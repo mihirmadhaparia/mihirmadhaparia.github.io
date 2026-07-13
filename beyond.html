@@ -1,0 +1,86 @@
+---
+layout: default
+title: Beyond Work
+permalink: /beyond/
+ticker: "BEYOND WORK / DISTANCE RUNNING / TRAIL HIKING / TRAVEL / THE LONG WAY THERE /&nbsp;&nbsp;"
+---
+
+{% comment %}
+  ============================================================
+  BEYOND — YOUR EDITING GUIDE
+  ------------------------------------------------------------
+  PHOTOS: each .photo figure has a commented <img>. To add a photo,
+    1. drop the file in /assets/images/  (e.g. summit.jpg)
+    2. uncomment the <img> line and set its src
+    3. edit data-cap="..." for the sentence shown on hover
+  The dashed "ADD PHOTO" box disappears automatically once an <img> is present.
+
+  WEEKLY MILEAGE: paste your 52 weekly totals (oldest first) into the
+  <script id="week-data"> block below, e.g. [12, 18, 22, ...].
+  Leave it empty to keep the sample shape until you have real numbers.
+
+  MAP: replace the .places__map placeholder with your Google My Maps /
+  Strava heatmap embed or a screenshot <img> when ready.
+  ============================================================
+{% endcomment %}
+
+<section class="b-frame">
+    <div class="beyond-hero">
+        <div class="beyond-hero__main" data-reveal>
+            <p class="eyebrow">[ OFF THE CLOCK ]</p>
+            <h1 class="beyond-hero__title">Running, hiking &amp; the long way there</h1>
+            <p class="hero__lead">When I'm not designing devices or running experiments, I'm usually on a trail or a flight somewhere new. Distance running keeps me patient, hiking keeps me curious, and travel keeps the engineering brain a little humble.</p>
+            <div class="chips" style="margin-top:24px;"><span class="tag">Distance running</span><span class="tag">Trail hiking</span><span class="tag">Travel</span></div>
+        </div>
+
+        <div class="beyond-photos" data-reveal>
+            <figure class="photo photo--tall" data-cap="Caption 1 — e.g. summit push at sunrise.">
+                <!-- <img src="{{ '/assets/images/beyond-1.jpg' | relative_url }}" alt="Trail / summit"> -->
+                <div class="photo__empty"><span>&#9968;</span><small>ADD PHOTO</small></div>
+            </figure>
+            <figure class="photo photo--a" data-cap="Caption 2 — e.g. race-day finish line.">
+                <!-- <img src="{{ '/assets/images/beyond-2.jpg' | relative_url }}" alt="Race day"> -->
+                <div class="photo__empty"><span>&#127939;</span><small>ADD PHOTO</small></div>
+            </figure>
+            <figure class="photo photo--b" data-cap="Caption 3 — e.g. somewhere new abroad.">
+                <!-- <img src="{{ '/assets/images/beyond-3.jpg' | relative_url }}" alt="Travel"> -->
+                <div class="photo__empty"><span>&#9992;</span><small>ADD PHOTO</small></div>
+            </figure>
+        </div>
+    </div>
+
+    <div class="simple-head" data-reveal>
+        <h2>This year, roughly</h2>
+        <span class="note">// PLACEHOLDER — FROM STRAVA</span>
+    </div>
+    <div class="twostat" data-reveal>
+        <article><div class="twostat__tag">MILEAGE &middot; YTD</div><strong class="twostat__big" data-count="842">0</strong><span class="twostat__label">Miles run this year</span></article>
+        <article style="border-right:0;"><div class="twostat__tag">VERTICAL &middot; YTD</div><strong class="twostat__big" data-count="61400">0</strong><span class="twostat__label">Elevation gained (ft)</span></article>
+    </div>
+
+    <div class="simple-head" data-reveal style="border-top:3px solid var(--ink);">
+        <h2>Weekly mileage &mdash; last 52 weeks</h2>
+        <span class="note" id="wk-readout">HOVER A BAR &rarr;</span>
+    </div>
+    <div class="chartwrap" data-reveal>
+        <div id="week-chart"></div>
+        <div class="chart-axis"><span>52 WEEKS AGO</span><span>26</span><span>THIS WEEK</span></div>
+        <p class="chart-note">Placeholder shape &mdash; paste your real weekly totals into the week-data block in this file.</p>
+    </div>
+
+    <!-- Paste 52 weekly mileage numbers (oldest first) between the brackets, e.g. [12,18,22,...] -->
+    <script id="week-data" type="application/json">[]</script>
+
+    <div class="places" data-reveal>
+        <div class="places__map">
+            <div class="photo__empty"><span>&#128506;</span><small>ADD MAP — GOOGLE MY MAPS / STRAVA HEATMAP</small></div>
+        </div>
+        <div class="places__panel">
+            <h2>Places</h2>
+            <p>A running list of trails run, peaks hiked, and cities wandered.</p>
+            <div class="chips">
+                <span class="tag">Minneapolis, MN</span><span class="tag">Superior Hiking Trail</span><span class="tag">Rocky Mtn NP</span><span class="tag">Nairobi, KE</span><span class="tag">Zion NP</span><span class="tag">Lisbon, PT</span><span class="tag">Banff, CA</span><span class="tag">Kyoto, JP</span>
+            </div>
+        </div>
+    </div>
+</section>

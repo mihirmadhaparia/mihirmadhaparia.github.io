@@ -3,11 +3,16 @@
 
 Renders the Jekyll pages into a static `_site/` folder using plain Python so the
 site can be previewed in a browser via file:// without installing Jekyll/Ruby.
-Supports only the subset of Liquid this site uses (relative_url, content,
-site/page vars, and simple page.url == '...' conditionals).
+Supports the subset of Liquid this site uses:
+  - {{ '/path' | relative_url }}
+  - {{ content }}, {{ site.title }}, {{ site.description }}
+  - {{ page.title }}, {{ page.excerpt | ... }}
+  - {{ page.ticker | default: "..." }}
+  - {% if page.url == '/x/' %}..{% else %}..{% endif %}
+  - {% if page.title %} / {% if page.excerpt %} / {% if page.needs_model %}
+  - {% comment %}..{% endcomment %}
 
-Usage:  python3 tools/preview.py
-Output: ./_site/  (open _site/index.html in a browser)
+Usage:  python3 tools/preview.py      Output: ./_site/ (open _site/index.html)
 """
 import os, re, shutil
 
@@ -44,23 +49,33 @@ def rel_prefix(page_url):
 
 def resolve_liquid(text, ctx):
     prefix = ctx["prefix"]
+    # strip {% comment %}..{% endcomment %}
+    text = re.sub(r"\{%\s*comment\s*%\}.*?\{%\s*endcomment\s*%\}", "", text, flags=re.S)
+    # {{ '/x' | relative_url }}
     def relurl(m):
         resolved = prefix + m.group(1).lstrip("/")
         if resolved.endswith("/"):
             resolved += "index.html"
         return resolved
     text = re.sub(r"\{\{\s*'([^']*)'\s*\|\s*relative_url\s*\}\}", relurl, text)
+    # {{ page.ticker | default: "..." }}
+    def ticker(m):
+        return ctx.get("page_ticker") or m.group(1)
+    text = re.sub(r'\{\{\s*page\.ticker\s*\|\s*default:\s*"(.*?)"\s*\}\}', ticker, text, flags=re.S)
+    # {% if page.url == '/x/' %}A{% else %}B{% endif %}
     def ifeq(m):
         target, a, b = m.group(1), m.group(2), m.group(3) or ""
         return a if ctx["page_url"] == target else b
     text = re.sub(r"\{%\s*if page\.url == '([^']*)'\s*%\}(.*?)(?:\{%\s*else\s*%\}(.*?))?\{%\s*endif\s*%\}", ifeq, text, flags=re.S)
-    has_title = bool(ctx.get("page_title"))
-    text = re.sub(r"\{%\s*if page\.title\s*%\}(.*?)\{%\s*endif\s*%\}", (lambda m: m.group(1) if has_title else ""), text, flags=re.S)
-    text = re.sub(r"\{%\s*if page\.excerpt\s*%\}(.*?)\{%\s*else\s*%\}(.*?)\{%\s*endif\s*%\}", (lambda m: m.group(2)), text, flags=re.S)
+    # boolean front-matter conditionals
+    for key in ("title", "excerpt", "needs_model", "ticker"):
+        truthy = bool(ctx.get("page_" + key))
+        text = re.sub(r"\{%\s*if page\." + key + r"\s*%\}(.*?)\{%\s*endif\s*%\}",
+                      (lambda a=truthy: (lambda m: m.group(1) if a else ""))(), text, flags=re.S)
+    # scalars
     text = text.replace("{{ content }}", ctx.get("content", ""))
     text = text.replace("{{ site.title }}", ctx["site"]["title"])
     text = text.replace("{{ site.description }}", ctx["site"]["description"])
-    text = text.replace("{{ site.baseurl }}", prefix.rstrip("/") or ".")
     text = text.replace("{{ page.title }}", ctx.get("page_title", ""))
     return text
 
@@ -72,16 +87,19 @@ def main():
     cfg = load_config()
     with open(LAYOUT, encoding="utf-8") as f:
         layout = f.read()
-    pages = [fn for fn in os.listdir(ROOT) if fn.endswith(".html") and fn != "README.html"]
-    pages.append("README.html")
+    pages = sorted(fn for fn in os.listdir(ROOT) if fn.endswith(".html"))
     os.makedirs(OUT, exist_ok=True)
     built = []
     for fn in pages:
         with open(os.path.join(ROOT, fn), encoding="utf-8") as f:
             fm, body = split_front_matter(f.read())
-        permalink = fm.get("permalink", "/" + fn.replace(".html", "/"))
+        if "permalink" not in fm:
+            continue  # skip non-page html (safety)
+        permalink = fm["permalink"]
         prefix = rel_prefix(permalink)
-        ctx = {"site": cfg, "prefix": prefix, "page_url": permalink, "page_title": fm.get("title", "")}
+        ctx = {"site": cfg, "prefix": prefix, "page_url": permalink,
+               "page_title": fm.get("title", ""), "page_excerpt": fm.get("excerpt", ""),
+               "page_needs_model": fm.get("needs_model", ""), "page_ticker": fm.get("ticker", "")}
         ctx["content"] = resolve_liquid(body, ctx)
         html = resolve_liquid(layout, ctx)
         dest = out_path_for(permalink)

@@ -1,0 +1,63 @@
+---
+layout: default
+title: Home
+permalink: /
+---
+
+<section class="fontbar b-frame" aria-label="Typeface switcher">
+    <span class="fontbar__label">TYPEFACE</span>
+    <div class="fontbar__btns">
+        <button type="button" data-font="archivo">ARCHIVO</button>
+        <button type="button" data-font="anton">ANTON</button>
+        <button type="button" data-font="syne">SYNE</button>
+        <button type="button" data-font="space">SPACE</button>
+    </div>
+    <span class="fontbar__hint">&#8627; CHANGES HEADLINES SITE-WIDE</span>
+</section>
+
+<section class="b-frame">
+    <div class="hero">
+        <div class="hero__main" data-reveal>
+            <p class="eyebrow">[ MEDICAL TECHNOLOGY &middot; RESEARCH &middot; ENGINEERING ]</p>
+            <h1 class="hero__title">Mihir<br>Madhaparia</h1>
+            <p class="hero__lead">Mechanical engineer focused on medical devices, regenerative medicine, bioprinting, and translational research. M.S. Mechanical Engineering, University of Minnesota.</p>
+            <div class="btns">
+                <a class="btn btn--dark" href="{{ '/work/' | relative_url }}">VIEW WORK &rarr;</a>
+                <a class="btn btn--light" href="{{ '/projects/' | relative_url }}">PROJECTS</a>
+                <a class="btn btn--light" href="{{ '/publications/' | relative_url }}">PUBS</a>
+            </div>
+        </div>
+
+        <div class="viz" data-reveal>
+            <div class="viz__bar">
+                <span>FIELD.01 &mdash; VECTOR FLOW</span><span class="live">&#9679; MOVE CURSOR</span>
+            </div>
+            <div class="viz__stage">
+                <canvas id="home-flow"></canvas>
+                <div class="viz__cap">MAGNETIC FIELD SIM &middot; CLICK TO PULSE</div>
+            </div>
+        </div>
+    </div>
+
+    <div class="metrics">
+        <div class="metric" data-reveal><span class="metric__idx">01</span><strong class="metric__big">6+ YRS</strong><span class="metric__small">Across R&amp;D, clinical research, and product development.</span></div>
+        <div class="metric" data-reveal><span class="metric__idx">02</span><strong class="metric__big">M.S.</strong><span class="metric__small">Thesis published and indexed on ProQuest, 2026.</span></div>
+        <div class="metric" data-reveal><span class="metric__idx">03</span><strong class="metric__big">FE</strong><span class="metric__small">Licensed Fundamentals of Engineering &mdash; Mechanical, NCEES.</span></div>
+    </div>
+</section>
+
+<section class="b-frame">
+    <div class="index-head" data-reveal>
+        <div>
+            <p class="kicker">// INDEX</p>
+            <h2>Work &middot; Research &middot; Publications</h2>
+        </div>
+        <span class="count">[ 04 ENTRIES ]</span>
+    </div>
+    <div class="cards">
+        <a class="card" href="{{ '/work/' | relative_url }}" data-reveal><div class="card__top"><span class="card__num">01</span><span class="card__icon">&#9635;</span></div><h3>Work</h3><p>Industry R&amp;D, clinical research, startup co-founding, and teaching.</p></a>
+        <a class="card" href="{{ '/projects/' | relative_url }}" data-reveal><div class="card__top"><span class="card__num">02</span><span class="card__icon">&#9672;</span></div><h3>Projects</h3><p>Research builds, device inventions, and engineering initiatives.</p></a>
+        <a class="card" href="{{ '/publications/' | relative_url }}" data-reveal><div class="card__top"><span class="card__num">03</span><span class="card__icon">&#8801;</span></div><h3>Pubs</h3><p>Thesis, posters, and academic papers with abstracts and downloads.</p></a>
+        <a class="card" href="{{ '/skills/' | relative_url }}" data-reveal><div class="card__top"><span class="card__num">04</span><span class="card__icon">&#9881;</span></div><h3>Skills</h3><p>CAD, simulation, regulatory frameworks, programming, quality.</p></a>
+    </div>
+</section>
