@@ -14,7 +14,7 @@ Supports the subset of Liquid this site uses:
 
 Usage:  python3 tools/preview.py      Output: ./_site/ (open _site/index.html)
 """
-import os, re, shutil, sys
+import os, re, shutil, sys, base64
 
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 OUT = os.path.join(ROOT, "_site")
@@ -83,6 +83,23 @@ def out_path_for(permalink):
     p = permalink.strip("/")
     return os.path.join(OUT, "index.html") if not p else os.path.join(OUT, p, "index.html")
 
+def embed_models(html):
+    """Inline .glb files referenced by model-viewer as base64 data URIs, so
+    models render over file:// (no server needed) in the local preview."""
+    def rep(m):
+        rel = m.group(1)
+        idx = rel.find("assets/")
+        if idx < 0:
+            return m.group(0)
+        fp = os.path.join(ROOT, rel[idx:])
+        try:
+            with open(fp, "rb") as f:
+                data = f.read()
+        except OSError:
+            return m.group(0)
+        return 'src="data:model/gltf-binary;base64,' + base64.b64encode(data).decode() + '"'
+    return re.sub(r'src="([^"]*\.glb)"', rep, html)
+
 def sync_assets(src, dst):
     """Copy assets, skipping files already present with the same size (fast rebuilds)."""
     if not os.path.isdir(src):
@@ -119,6 +136,7 @@ def main():
                "page_needs_model": fm.get("needs_model", ""), "page_ticker": fm.get("ticker", "")}
         ctx["content"] = resolve_liquid(body, ctx)
         html = resolve_liquid(layout, ctx)
+        html = embed_models(html)
         dest = out_path_for(permalink)
         os.makedirs(os.path.dirname(dest), exist_ok=True)
         with open(dest, "w", encoding="utf-8") as f:
@@ -129,8 +147,8 @@ def main():
     for b in sorted(built):
         print("  ", b)
     print("\nOpen this in a browser:\n  ", os.path.join(OUT, "index.html"))
-    print("\nNOTE: 3D models (.glb) will NOT load over file:// (browser blocks it).")
-    print("      To preview models, run:  python3 tools/preview.py --serve")
+    print("3D models are inlined, so they render on a plain double-click (file://).")
+    print("Optional http server (also fine):  python3 tools/preview.py --serve")
 
 def serve(port=8000):
     import http.server, socketserver
