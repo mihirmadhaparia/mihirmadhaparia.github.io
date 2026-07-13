@@ -14,7 +14,7 @@ Supports the subset of Liquid this site uses:
 
 Usage:  python3 tools/preview.py      Output: ./_site/ (open _site/index.html)
 """
-import os, re, shutil
+import os, re, shutil, sys
 
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 OUT = os.path.join(ROOT, "_site")
@@ -83,6 +83,23 @@ def out_path_for(permalink):
     p = permalink.strip("/")
     return os.path.join(OUT, "index.html") if not p else os.path.join(OUT, p, "index.html")
 
+def sync_assets(src, dst):
+    """Copy assets, skipping files already present with the same size (fast rebuilds)."""
+    if not os.path.isdir(src):
+        return
+    for root, _dirs, files in os.walk(src):
+        rel = os.path.relpath(root, src)
+        outdir = dst if rel == "." else os.path.join(dst, rel)
+        os.makedirs(outdir, exist_ok=True)
+        for fn in files:
+            sp, dp = os.path.join(root, fn), os.path.join(outdir, fn)
+            try:
+                if os.path.exists(dp) and os.path.getsize(dp) == os.path.getsize(sp):
+                    continue
+            except OSError:
+                pass
+            shutil.copyfile(sp, dp)
+
 def main():
     cfg = load_config()
     with open(LAYOUT, encoding="utf-8") as f:
@@ -107,13 +124,34 @@ def main():
         with open(dest, "w", encoding="utf-8") as f:
             f.write(html)
         built.append(os.path.relpath(dest, ROOT))
-    src_assets = os.path.join(ROOT, "assets")
-    if os.path.isdir(src_assets):
-        shutil.copytree(src_assets, os.path.join(OUT, "assets"), dirs_exist_ok=True)
+    sync_assets(os.path.join(ROOT, "assets"), os.path.join(OUT, "assets"))
     print("Built %d pages into %s" % (len(built), OUT))
     for b in sorted(built):
         print("  ", b)
     print("\nOpen this in a browser:\n  ", os.path.join(OUT, "index.html"))
+    print("\nNOTE: 3D models (.glb) will NOT load over file:// (browser blocks it).")
+    print("      To preview models, run:  python3 tools/preview.py --serve")
+
+def serve(port=8000):
+    import http.server, socketserver
+    os.chdir(OUT)
+    handler = http.server.SimpleHTTPRequestHandler
+    for p in range(port, port + 20):
+        try:
+            httpd = socketserver.TCPServer(("", p), handler)
+        except OSError:
+            continue
+        url = "http://localhost:%d/" % p
+        print("\nServing preview (models will load) at:\n  ", url)
+        print("Press Ctrl+C to stop.")
+        try:
+            httpd.serve_forever()
+        except KeyboardInterrupt:
+            print("\nstopped.")
+        return
+    print("Could not bind a port in range %d-%d." % (port, port + 19))
 
 if __name__ == "__main__":
     main()
+    if "--serve" in sys.argv:
+        serve()

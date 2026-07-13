@@ -4,42 +4,6 @@
 (function () {
   'use strict';
 
-  var TYPEFACES = {
-    archivo: "'Archivo', sans-serif",
-    anton:   "'Anton', sans-serif",
-    syne:    "'Syne', sans-serif",
-    space:   "'Space Grotesk', sans-serif"
-  };
-  var KEY = 'mm-typeface';
-  var DEFAULT = 'space';
-
-  function savedTypeface() {
-    try { return localStorage.getItem(KEY) || DEFAULT; } catch (e) { return DEFAULT; }
-  }
-  function applyTypeface(name) {
-    var stack = TYPEFACES[name] || TYPEFACES[DEFAULT];
-    document.documentElement.style.setProperty('--font-display', stack);
-    try { localStorage.setItem(KEY, name); } catch (e) {}
-    paintFontButtons(name);
-  }
-  function paintFontButtons(active) {
-    var bar = document.querySelector('.fontbar__btns');
-    if (!bar) return;
-    var btns = bar.querySelectorAll('button');
-    for (var i = 0; i < btns.length; i++) {
-      btns[i].classList.toggle('is-active', btns[i].getAttribute('data-font') === active);
-    }
-  }
-  function initFontSwitcher() {
-    applyTypeface(savedTypeface());
-    var bar = document.querySelector('.fontbar__btns');
-    if (!bar) return;
-    bar.addEventListener('click', function (e) {
-      var btn = e.target.closest('button[data-font]');
-      if (btn) applyTypeface(btn.getAttribute('data-font'));
-    });
-  }
-
   /* reveal on scroll */
   function initReveal() {
     var els = document.querySelectorAll('[data-reveal]');
@@ -202,8 +166,91 @@
     });
   }
 
+  /* ---------- skills: unique playful click reaction per skill ---------- */
+  function initSkillReactions() {
+    var grid = document.querySelector('.skillgrid');
+    if (!grid) return;
+    var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    var canAnim = typeof Element !== 'undefined' && Element.prototype.animate;
+    var PALETTE = ['#ff3b1d', '#111111', '#e9e7e1', '#f4b400', '#1d6dff'];
+    var WORDS = ['POW', 'ZAP', 'BAM', 'BOOM', 'WHAM', 'ZING', 'YEAH', 'NICE'];
+    // themed glyph for recognizable skills; others fall back to a fun set
+    var THEME = {
+      'python':'🐍','r':'📈','matlab':'📉','javascript':'⚡','java':'☕',
+      'html':'</>','ruby':'💎','c and c++':'⚙️','g-code':'⟿','solidworks':'🔧',
+      'ansys':'🔥','autocad':'📐','ptc creo':'🛠️','siemens nx':'🧩',
+      'autodesk fusion':'🧊','tekla structures':'🏗️','civil3d':'🛣️',
+      'epanet':'🚰','arcgis':'🗺️','power bi':'📊','minitab':'📉',
+      'imagej':'🔬','materialise mimics':'🦴','ptc windchill':'🌀','mts elite':'🧪',
+      'microsoft suite':'🪟','fmea & risk analysis':'⚠️','iso 13485':'✅','iso 14971':'✅',
+      'eu mdr':'🇪🇺','fda 21 cfr part 820':'§','design verification':'✔️',
+      'test method validation':'🧾','design assurance':'🛡️','complaint investigation':'🔎',
+      'design of experiments':'🧫'
+    };
+    var FUN = ['✦','✵','◈','▲','●','❖','✻','✹'];
+
+    function hash(str){var h=0;for(var i=0;i<str.length;i++){h=(h*31+str.charCodeAt(i))>>>0;}return h;}
+    function spark(css){var d=document.createElement('div');d.style.cssText='position:fixed;left:0;top:0;pointer-events:none;z-index:9998;'+css;document.body.appendChild(d);return d;}
+    function end(d){return function(){ if(d&&d.remove) d.remove(); };}
+
+    function confetti(cx,cy){for(var i=0;i<20;i++){var col=PALETTE[i%PALETTE.length];var d=spark('width:7px;height:11px;background:'+col+';');var ang=Math.random()*Math.PI*2,sp=70+Math.random()*150;var dx=Math.cos(ang)*sp,dy=Math.sin(ang)*sp-70;d.animate([{transform:'translate('+cx+'px,'+cy+'px) rotate(0)',opacity:1},{transform:'translate('+(cx+dx)+'px,'+(cy+dy+200)+'px) rotate('+(720*(Math.random()-0.5))+'deg)',opacity:0}],{duration:900+Math.random()*500,easing:'cubic-bezier(.2,.6,.2,1)'}).onfinish=end(d);}}
+    function shockwave(cx,cy){var d=spark('width:24px;height:24px;border:3px solid #ff3b1d;border-radius:50%;');d.animate([{transform:'translate('+(cx-12)+'px,'+(cy-12)+'px) scale(.2)',opacity:.9},{transform:'translate('+(cx-12)+'px,'+(cy-12)+'px) scale(6)',opacity:0}],{duration:600,easing:'ease-out'}).onfinish=end(d);}
+    function firework(cx,cy){for(var i=0;i<16;i++){var a=(i/16)*Math.PI*2,sp=90+Math.random()*40;var d=spark('width:6px;height:6px;border-radius:50%;background:'+PALETTE[i%PALETTE.length]+';');d.animate([{transform:'translate('+cx+'px,'+cy+'px) scale(1)',opacity:1},{transform:'translate('+(cx+Math.cos(a)*sp)+'px,'+(cy+Math.sin(a)*sp+40)+'px) scale(.3)',opacity:0}],{duration:800,easing:'cubic-bezier(.15,.7,.3,1)'}).onfinish=end(d);}}
+    function squares(cx,cy){for(var i=0;i<12;i++){var a=Math.random()*Math.PI*2,sp=50+Math.random()*90;var d=spark('width:9px;height:9px;background:#111;');d.animate([{transform:'translate('+cx+'px,'+cy+'px) rotate(0)',opacity:1},{transform:'translate('+(cx+Math.cos(a)*sp)+'px,'+(cy+Math.sin(a)*sp)+'px) rotate(180deg)',opacity:0}],{duration:520,easing:'ease-out'}).onfinish=end(d);}}
+    function glyphPop(cx,cy,g){for(var i=0;i<3;i++){var d=spark('font-size:'+(18+Math.random()*16)+'px;line-height:1;');d.textContent=g;var dx=(Math.random()-.5)*90;d.animate([{transform:'translate('+cx+'px,'+cy+'px) scale(.6)',opacity:0},{transform:'translate('+(cx+dx)+'px,'+(cy-90-Math.random()*60)+'px) scale(1.2)',opacity:1,offset:.3},{transform:'translate('+(cx+dx*1.4)+'px,'+(cy-170)+'px) scale(1)',opacity:0}],{duration:1100,easing:'ease-out'}).onfinish=end(d);}}
+    function stamp(cx,cy,g){var d=spark('font-size:46px;font-weight:800;color:#ff3b1d;');d.textContent=g||'✓';var base='translate('+(cx-22)+'px,'+(cy-34)+'px) rotate(-12deg) ';d.animate([{transform:base+'scale(2.6)',opacity:0},{transform:base+'scale(1)',opacity:1,offset:.25},{transform:base+'scale(1)',opacity:1,offset:.7},{transform:base+'scale(1.12)',opacity:0}],{duration:820}).onfinish=end(d);}
+    function wordPop(cx,cy,w){var d=spark('font-family:var(--font-display),sans-serif;font-weight:800;font-size:30px;color:#111;-webkit-text-stroke:2px #ff3b1d;letter-spacing:-.02em;');d.textContent=w;d.animate([{transform:'translate('+cx+'px,'+(cy-20)+'px) scale(.3) rotate(-8deg)',opacity:0},{transform:'translate('+cx+'px,'+(cy-46)+'px) scale(1.2) rotate(-8deg)',opacity:1,offset:.3},{transform:'translate('+cx+'px,'+(cy-78)+'px) scale(1) rotate(-8deg)',opacity:0}],{duration:900,easing:'cubic-bezier(.2,.7,.2,1)'}).onfinish=end(d);}
+    function spin(pill){pill.animate([{transform:'rotate(0) scale(1)'},{transform:'rotate(360deg) scale(1.18)',offset:.6},{transform:'rotate(360deg) scale(1)'}],{duration:620,easing:'cubic-bezier(.2,.7,.2,1)'});}
+    function glitch(pill){var kf=[];for(var i=0;i<6;i++)kf.push({transform:'translate('+((Math.random()-.5)*9)+'px,'+((Math.random()-.5)*5)+'px)',filter:'hue-rotate('+(i*50)+'deg) saturate(2)'});kf.push({transform:'none',filter:'none'});pill.animate(kf,{duration:420,easing:'steps(6)'});}
+    function ripple(pill){pill.animate([{backgroundColor:'#e9e7e1',color:'#111'},{backgroundColor:'#ff3b1d',color:'#fff',offset:.3},{backgroundColor:'#111',color:'#fff',offset:.6},{backgroundColor:'#e9e7e1',color:'#111'}],{duration:640,easing:'ease-in-out'});}
+
+    // effects that spawn particles (need coords), and effects that transform the pill
+    var particleFx = [
+      function(p,x,y,g){confetti(x,y);},
+      function(p,x,y,g){shockwave(x,y);},
+      function(p,x,y,g){firework(x,y);},
+      function(p,x,y,g){squares(x,y);},
+      function(p,x,y,g){glyphPop(x,y,g);},
+      function(p,x,y,g){stamp(x,y,g);},
+      function(p,x,y,g,w){wordPop(x,y,w);}
+    ];
+    var pillFx = [spin, glitch, ripple];
+
+    function pressPop(pill){ if(canAnim) pill.animate([{transform:'scale(.92)'},{transform:'scale(1)'}],{duration:180,easing:'ease-out'}); }
+
+    function react(pill){
+      var label = (pill.textContent||'').trim();
+      var key = label.toLowerCase();
+      var h = hash(label);
+      var r = pill.getBoundingClientRect();
+      var cx = r.left + r.width/2, cy = r.top + r.height/2;
+      var glyph = THEME[key] || FUN[h % FUN.length];
+      var word = WORDS[h % WORDS.length];
+      pressPop(pill);
+      if (reduce || !canAnim) { ripple(pill); return; }
+      // combine a pill effect + a particle effect, chosen deterministically per skill
+      pillFx[h % pillFx.length](pill);
+      particleFx[(h >> 3) % particleFx.length](pill, cx, cy, glyph, word);
+    }
+
+    var pills = grid.querySelectorAll('.pill');
+    for (var i = 0; i < pills.length; i++) {
+      var pill = pills[i];
+      pill.setAttribute('tabindex', '0');
+      pill.setAttribute('role', 'button');
+    }
+    grid.addEventListener('click', function (e) {
+      var pill = e.target.closest('.pill');
+      if (pill) react(pill);
+    });
+    grid.addEventListener('keydown', function (e) {
+      if (e.key !== 'Enter' && e.key !== ' ') return;
+      var pill = e.target.closest('.pill');
+      if (pill) { e.preventDefault(); react(pill); }
+    });
+  }
+
   function init() {
-    initFontSwitcher();
     initNav();
     initReveal();
     initCursorTrail();
@@ -211,6 +258,7 @@
     initCounts();
     initWeekChart();
     initPhotoCaps();
+    initSkillReactions();
   }
 
   if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', init);
