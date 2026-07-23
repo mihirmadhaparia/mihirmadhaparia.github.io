@@ -2,6 +2,7 @@
 layout: default
 title: Work Experience
 permalink: /work/
+needs_model: true
 ---
 
 <section class="b-frame">
@@ -33,7 +34,13 @@ permalink: /work/
                 </ul>
             </div>
             <aside class="entry__aside">
-                <div class="ph"><span class="ph__icon">&#129504;</span><strong>Translational neural engineering</strong><p>Implantable device design, in vivo experimentation, biological sensing, wet-lab execution, and computational validation for spinal cord repair.</p></div>
+                <div class="model">
+                    <div class="model__bar"><span>CSF EXTRACTION &mdash; STEREOTAXIC RIG</span><span class="live">&#9679; LIVE 3D</span></div>
+                    <div class="model__view">
+                        <model-viewer src="{{ '/assets/models/csf/StereotaxicCSF.glb' | relative_url }}" alt="Stereotaxic rig for robotic CSF extraction, interactive 3D playing its procedure animation" camera-controls autoplay animation-name="Procedure" environment-image="neutral" shadow-intensity="1" shadow-softness="0.7" exposure="1.1" camera-orbit="40deg 72deg auto" max-camera-orbit="auto 89deg auto" interaction-prompt="none"></model-viewer>
+                    </div>
+                    <div class="model__cap">Stereotaxic rig for robotic CSF collection from live rat models, running its programmed procedure. Drag to orbit.</div>
+                </div>
                 <div class="chips"><span class="chip">Bioprinting</span><span class="chip">Neural devices</span><span class="chip">FEA</span></div>
             </aside>
         </article>
