@@ -114,33 +114,58 @@
 
   /* weekly mileage chart (Beyond). Reads JSON from #week-data if present,
      otherwise renders placeholder data. Replace #week-data with your Strava totals. */
-  function initWeekChart() {
+  /* daily mileage chart (Beyond): reads JSON from #week-data (miles per day,
+     oldest first) plus data-end="YYYY-MM-DD". Pointer tracks the nearest day
+     and a large tooltip shows the value. */
+  function initMileageChart() {
     var host = document.getElementById('week-chart');
     if (!host) return;
+    var el = document.getElementById('week-data');
+    var data = null;
+    if (el) { try { data = JSON.parse(el.textContent); } catch (e) { data = null; } }
+    if (!data || !data.length) return;
+    var N = data.length, max = Math.max.apply(null, data) || 1;
+    var endStr = (el.getAttribute('data-end') || '').trim();
+    var endDate = endStr ? new Date(endStr + 'T00:00:00') : new Date();
+    var MONTHS = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
     var readout = document.getElementById('wk-readout');
-    var data;
-    var dataEl = document.getElementById('week-data');
-    if (dataEl) {
-      try { data = JSON.parse(dataEl.textContent); } catch (e) { data = null; }
+
+    var bars = [];
+    for (var i = 0; i < N; i++) {
+      var b = document.createElement('div');
+      var v = data[i];
+      b.className = 'bar' + (v > 0 ? '' : ' bar--zero');
+      b.style.height = (v > 0 ? Math.max(4, (v / max) * 100) : 0) + '%';
+      host.appendChild(b); bars.push(b);
     }
-    if (!data || !data.length) {
-      data = [];
-      for (var i = 0; i < 52; i++) {
-        var base = 18 + 14 * Math.sin(i / 6) + (i / 52) * 12;
-        var noise = (Math.sin(i * 2.3) + Math.cos(i * 1.7)) * 4;
-        var v = Math.max(0, base + noise);
-        if (i % 13 === 12) v *= 0.45;
-        data.push(Math.round(v));
-      }
+    var tip = document.createElement('div');
+    tip.className = 'chart-tip';
+    host.appendChild(tip);
+
+    function dateFor(i) { var d = new Date(endDate.getTime()); d.setDate(d.getDate() - (N - 1 - i)); return d; }
+    var hot = -1;
+    function show(i) {
+      if (i < 0 || i >= N) return;
+      if (hot >= 0 && bars[hot]) bars[hot].classList.remove('is-hot');
+      hot = i; bars[i].classList.add('is-hot');
+      var d = dateFor(i), v = data[i], label = MONTHS[d.getMonth()] + ' ' + d.getDate();
+      tip.innerHTML = '<span class="chart-tip__val">' + (v > 0 ? v.toFixed(1) : '0') + '<em>MI</em></span>' +
+                      '<span class="chart-tip__date">' + (v > 0 ? label : label + ' · rest') + '</span>';
+      tip.style.left = (((i + 0.5) / N) * 100) + '%';
+      tip.classList.add('is-on');
+      if (readout) readout.textContent = (v > 0 ? v.toFixed(1) + ' MI · ' + label : 'REST · ' + label);
     }
-    var max = Math.max.apply(null, data);
-    data.forEach(function (v, i) {
-      var bar = document.createElement('div');
-      bar.className = 'bar';
-      bar.style.height = (max ? (v / max) * 100 : 0) + '%';
-      bar.addEventListener('pointerenter', function () { if (readout) readout.textContent = 'WEEK -' + (52 - i) + ' \u00b7 ' + v + ' MI'; });
-      host.appendChild(bar);
+    function clear() {
+      if (hot >= 0 && bars[hot]) bars[hot].classList.remove('is-hot');
+      hot = -1; tip.classList.remove('is-on');
+      if (readout) readout.textContent = 'HOVER THE CHART →';
+    }
+    host.addEventListener('pointermove', function (e) {
+      var r = host.getBoundingClientRect();
+      var i = Math.floor((e.clientX - r.left) / r.width * N);
+      show(i < 0 ? 0 : (i >= N ? N - 1 : i));
     });
+    host.addEventListener('pointerleave', clear);
   }
 
   /* photo hover captions (Beyond) — caption text lives in data-cap */
@@ -266,7 +291,7 @@
     initCursorTrail();
     initFlow();
     initCounts();
-    initWeekChart();
+    initMileageChart();
     initPhotoCaps();
     initSkillReactions();
   }

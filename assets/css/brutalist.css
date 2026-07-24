@@ -269,9 +269,18 @@ h1, h2, h3 { font-family: var(--font-display); }
 .twostat__label { display: block; margin-top: 10px; font-size: 0.82rem; color: #2a2a28; }
 
 .chartwrap { padding: 22px 24px 16px; border-top: 1px solid var(--ink); }
-#week-chart { position: relative; display: flex; align-items: flex-end; gap: 2px; height: 190px; border-bottom: 2px solid var(--ink); border-left: 2px solid var(--ink); padding-left: 6px; }
-#week-chart .bar { flex: 1; min-width: 0; background: var(--ink); transition: background 0.1s; }
-#week-chart .bar:hover { background: var(--red); }
+#week-chart { position: relative; display: flex; align-items: flex-end; gap: 1px; height: 210px; border-bottom: 2px solid var(--ink); border-left: 2px solid var(--ink); padding-left: 6px; touch-action: none; }
+#week-chart .bar { flex: 1 1 0; min-width: 0; background: var(--ink); transition: background 0.08s, box-shadow 0.08s, transform 0.08s; }
+#week-chart .bar--zero { height: 2px !important; background: #d8d5cd; align-self: flex-end; }
+#week-chart .bar.is-hot { background: var(--red); box-shadow: 0 0 12px 2px rgba(255,59,29,0.55); transform: scaleX(2.4); z-index: 2; }
+#week-chart .bar--zero.is-hot { height: 7px !important; transform: scaleX(3); }
+/* big hover tooltip */
+.chart-tip { position: absolute; top: 8px; transform: translateX(-50%) translateY(-4px); pointer-events: none; z-index: 6; background: var(--ink); color: var(--paper); border: 2px solid var(--red); padding: 7px 12px 8px; text-align: center; white-space: nowrap; opacity: 0; transition: opacity 0.09s ease, transform 0.09s ease; box-shadow: 0 6px 18px rgba(0,0,0,0.25); }
+.chart-tip.is-on { opacity: 1; transform: translateX(-50%) translateY(0); }
+.chart-tip__val { display: block; font-family: var(--font-display); font-size: 2.1rem; font-weight: 800; line-height: 1; letter-spacing: -0.03em; }
+.chart-tip__val em { font-style: normal; font-size: 0.72rem; font-weight: 700; margin-left: 4px; color: var(--red); letter-spacing: 0.06em; }
+.chart-tip__date { display: block; margin-top: 4px; font-size: 0.6rem; letter-spacing: 0.1em; text-transform: uppercase; color: #bdbab3; }
+#wk-readout { font-size: 0.82rem; font-weight: 700; color: var(--ink); letter-spacing: 0.02em; }
 .chart-axis { display: flex; justify-content: space-between; margin-top: 8px; font-size: 0.62rem; color: #888; letter-spacing: 0.06em; }
 .chart-note { margin: 12px 0 0; font-size: 0.68rem; color: #888; }
 
