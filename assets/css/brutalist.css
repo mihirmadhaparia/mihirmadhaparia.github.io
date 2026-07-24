@@ -269,7 +269,7 @@ h1, h2, h3 { font-family: var(--font-display); }
 .twostat__label { display: block; margin-top: 10px; font-size: 0.82rem; color: #2a2a28; }
 
 .chartwrap { padding: 22px 24px 16px; border-top: 1px solid var(--ink); }
-#week-chart { position: relative; display: flex; align-items: flex-end; gap: 1px; height: 210px; border-bottom: 2px solid var(--ink); border-left: 2px solid var(--ink); padding-left: 6px; touch-action: none; }
+#week-chart { position: relative; display: flex; align-items: flex-end; gap: 3px; height: 210px; border-bottom: 2px solid var(--ink); border-left: 2px solid var(--ink); padding-left: 6px; touch-action: none; }
 #week-chart .bar { flex: 1 1 0; min-width: 0; background: var(--ink); transition: background 0.08s, box-shadow 0.08s, transform 0.08s; }
 #week-chart .bar--zero { height: 2px !important; background: #d8d5cd; align-self: flex-end; }
 #week-chart .bar.is-hot { background: var(--red); box-shadow: 0 0 12px 2px rgba(255,59,29,0.55); transform: scaleX(2.4); z-index: 2; }
@@ -281,7 +281,8 @@ h1, h2, h3 { font-family: var(--font-display); }
 .chart-tip__val em { font-style: normal; font-size: 0.72rem; font-weight: 700; margin-left: 4px; color: var(--red); letter-spacing: 0.06em; }
 .chart-tip__date { display: block; margin-top: 4px; font-size: 0.6rem; letter-spacing: 0.1em; text-transform: uppercase; color: #bdbab3; }
 #wk-readout { font-size: 0.82rem; font-weight: 700; color: var(--ink); letter-spacing: 0.02em; }
-.chart-axis { display: flex; justify-content: space-between; margin-top: 8px; font-size: 0.62rem; color: #888; letter-spacing: 0.06em; }
+.chart-axis { position: relative; height: 15px; margin-top: 10px; font-size: 0.6rem; color: #888; letter-spacing: 0.04em; }
+.chart-axis span { position: absolute; top: 0; white-space: nowrap; }
 .chart-note { margin: 12px 0 0; font-size: 0.68rem; color: #888; }
 
 .places { display: grid; grid-template-columns: minmax(0,1fr) minmax(280px,0.66fr); border-top: 3px solid var(--ink); }

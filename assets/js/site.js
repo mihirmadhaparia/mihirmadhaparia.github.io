@@ -143,6 +143,23 @@
     host.appendChild(tip);
 
     function dateFor(i) { var d = new Date(endDate.getTime()); d.setDate(d.getDate() - (N - 1 - i)); return d; }
+
+    // x-axis date labels at fixed increments
+    var axis = document.getElementById('chart-axis');
+    if (axis) {
+      axis.innerHTML = '';
+      var step = Math.max(1, Math.round((N - 1) / 6)), idxs = [], t;
+      for (t = 0; t < N; t += step) idxs.push(t);
+      if (idxs[idxs.length - 1] !== N - 1) idxs.push(N - 1);
+      idxs.forEach(function (ix) {
+        var d = dateFor(ix), sp = document.createElement('span');
+        sp.textContent = MONTHS[d.getMonth()] + ' ' + d.getDate();
+        var pct = (ix / (N - 1)) * 100;
+        sp.style.left = pct + '%';
+        sp.style.transform = pct < 4 ? 'translateX(0)' : (pct > 96 ? 'translateX(-100%)' : 'translateX(-50%)');
+        axis.appendChild(sp);
+      });
+    }
     var hot = -1;
     function show(i) {
       if (i < 0 || i >= N) return;

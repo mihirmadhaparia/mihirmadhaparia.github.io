@@ -59,17 +59,17 @@ ticker: "BEYOND WORK / DISTANCE RUNNING / TRAIL HIKING / TRAVEL / THE LONG WAY T
     </div>
 
     <div class="simple-head" data-reveal style="border-top:3px solid var(--ink);">
-        <h2>Daily mileage &mdash; last 26 weeks</h2>
+        <h2>Daily mileage &mdash; last 18 weeks</h2>
         <span class="note" id="wk-readout">HOVER THE CHART &rarr;</span>
     </div>
     <div class="chartwrap" data-reveal>
         <div id="week-chart"></div>
-        <div class="chart-axis"><span>26 WEEKS AGO</span><span>13 WEEKS</span><span>7/23/26</span></div>
-        <p class="chart-note">Daily running miles, last 26 weeks &mdash; synced from Strava, updated 7/23/26.</p>
+        <div class="chart-axis" id="chart-axis"></div>
+        <p class="chart-note">Daily running miles, last 18 weeks &mdash; synced from Strava, updated 7/23/26.</p>
     </div>
 
     <!-- Paste 52 weekly mileage numbers (oldest first) between the brackets, e.g. [12,18,22,...] -->
-    <script id="week-data" type="application/json" data-end="2026-07-23">[0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 5.1, 0.0, 0.0, 0.0, 2.3, 3.1, 3.5, 4.8, 3.5, 3.4, 0.0, 6.8, 0.0, 0.0, 2.8, 0.0, 0.0, 6.5, 0.0, 0.0, 0.0, 0.0, 0.0, 6.3, 0.0, 5.4, 0.0, 2.1, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 4.6, 0.0, 0.0, 3.1, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 6.2, 0.0, 10.2, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 3.2, 5.0, 6.5, 0.0, 4.7, 0.0, 3.0, 0.0, 0.0, 4.9, 0.0, 3.2, 0.0, 0.0, 0.0, 0.0, 2.3, 5.0, 0.0, 0.0, 0.0, 0.0, 0.0, 5.1, 0.0, 6.2, 0.0, 5.0, 0.0, 0.9, 0.0, 3.4, 10.0, 0.0, 0.0, 4.9, 5.0, 0.0]</script>
+    <script id="week-data" type="application/json" data-end="2026-07-23">[0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 5.1, 0.0, 0.0, 0.0, 2.3, 3.1, 3.5, 4.8, 3.5, 3.4, 0.0, 6.8, 0.0, 0.0, 2.8, 0.0, 0.0, 6.5, 0.0, 0.0, 0.0, 0.0, 0.0, 6.3, 0.0, 5.4, 0.0, 2.1, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 4.6, 0.0, 0.0, 3.1, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 6.2, 0.0, 10.2, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 3.2, 5.0, 6.5, 0.0, 4.7, 0.0, 3.0, 0.0, 0.0, 4.9, 0.0, 3.2, 0.0, 0.0, 0.0, 0.0, 2.3, 5.0, 0.0, 0.0, 0.0, 0.0, 0.0, 5.1, 0.0, 6.2, 0.0, 5.0, 0.0, 0.9, 0.0, 3.4, 10.0, 0.0, 0.0, 4.9, 5.0, 0.0]</script>
 
     <div class="places" data-reveal>
         <div class="places__map">
