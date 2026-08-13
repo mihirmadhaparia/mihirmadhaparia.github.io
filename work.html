@@ -26,7 +26,9 @@ needs_model: true
                     <li>Directed end-to-end development of an implantable spinal window imaging device, leading CAD design, biocompatible material selection, and rapid prototyping of the frame, window, and implantation methodology for in vivo spinal-cord imaging in live animals.</li>
                     <li>Validated device safety and structural integrity using ANSYS finite element analysis, simulating physiological muscle loads to prevent post-implantation buckling and translating results into regulatory-ready technical reports for design review.</li>
                     <li>Increased scaffold fabrication precision 62 percent by developing a machine-learning routine to detect and correct extrusion error during large-scale printing, validated through SEM imaging (JEOL NeoScope, Thermo Fisher Axia ChemiSEM).</li>
-                    <li>Built and programmed a robotic manufacturing line to automate large-scale neural-scaffold fabrication and robotic CSF collection from live rat models, improving throughput and repeatability.</li>
+                    <li>Designed the scaffolds for manufacturability through iterative design of experiments (DOE) and statistical analysis to reduce print defects, and sustained precise, repeatable fabrication using statistical process control (SPC) and process-capability analysis in JMP.</li>
+                    <li>Built and programmed a robotic manufacturing line to automate large-scale neural-scaffold fabrication, improving throughput and repeatability.</li>
+                    <li>Automated cerebrospinal fluid (CSF) collection from live rat models using the 6-DOF robotic arm shown in the interactive model: a highly precise, well-calibrated end-effector force sensor detected the slight force change the instant the needle pierced the dura mater and signaled the arm to stop advancing. The trigger threshold was characterized across repeated benchtop studies and trials so the arm never over-inserts, yielding consistent, fully automated extractions.</li>
                     <li>Perform brain and spinal surgeries on live animals, including implantations, perfusions, CSF extraction, laminectomies, and contusion injuries.</li>
                     <li>Designed and built a NeuroNexus closed-loop EEG/stimulation system, running neuromodulation protocols to validate neural-pathway restoration.</li>
                     <li>Led development of pulse and regional oximetry devices for vascular-flow detection, validating optical-sensor fidelity in low-perfusion conditions.</li>
@@ -39,7 +41,7 @@ needs_model: true
                     <div class="model__view">
                         <model-viewer src="{{ '/assets/models/csf/StereotaxicCSF.glb' | relative_url }}" alt="Stereotaxic rig for robotic CSF extraction, interactive 3D playing its procedure animation" camera-controls autoplay animation-name="Procedure" environment-image="neutral" shadow-intensity="1" shadow-softness="0.7" exposure="1.1" camera-orbit="40deg 72deg auto" max-camera-orbit="auto 89deg auto" interaction-prompt="none"></model-viewer>
                     </div>
-                    <div class="model__cap">Stereotaxic rig for robotic CSF collection from live rat models, running its programmed procedure. Drag to orbit.</div>
+                    <div class="model__cap">Force-sensing 6-DOF rig for robotic CSF collection: the arm halts needle insertion the instant it senses the dura mater pierce. Running its programmed procedure &mdash; drag to orbit.</div>
                 </div>
                 <div class="chips"><span class="chip">Bioprinting</span><span class="chip">Neural devices</span><span class="chip">FEA</span></div>
             </aside>
