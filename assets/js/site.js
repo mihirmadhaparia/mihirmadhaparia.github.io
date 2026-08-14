@@ -279,7 +279,19 @@
       'iso 13485':['flip','✅','#17a06b'],
       'iso 14971':['firework','🎯','#ff3b1d'],
       'eu mdr':['firework','🇪🇺','#1d6dff'],
-      'design of experiments':['glitch','🧫','#7b3ff2']
+      'design of experiments':['glitch','🧫','#7b3ff2'],
+      'classical & modern servo control':['spin','🎛️','#ff3b1d'],
+      'pid & feedback control':['orbit','🔁','#1d6dff'],
+      'real-time control':['ring','⏱️','#17a06b'],
+      'mechatronic integration':['squares','🤖','#7b3ff2'],
+      'embedded systems':['firework','🔌','#f4b400'],
+      'hardware/software integration':['confetti','🔩','#111111'],
+      'system dynamics':['glitch','〰️','#1d6dff'],
+      'embedded c':['beam','🖥️','#ff3b1d'],
+      'clear communication':['floatUp','🗣️','#1d6dff'],
+      'independent & collaborative':['stamp','🤝','#17a06b'],
+      'continuous improvement':['spin','♻️','#17a06b'],
+      'ships to completion':['firework','🚀','#ff3b1d']
     };
 
     function hash(str){var h=0;for(var i=0;i<str.length;i++){h=(h*31+str.charCodeAt(i))>>>0;}return h;}
