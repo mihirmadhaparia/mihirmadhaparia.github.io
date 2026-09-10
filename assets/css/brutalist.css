@@ -324,3 +324,20 @@ a.b-footer__cell:hover { background: var(--red); color: #fff; }
   .metric { grid-template-columns: 48px 100px 1fr; }
   .b-footer { grid-template-columns: 1fr 1fr; }
 }
+
+/* ---------- Beyond: work-in-progress banner ---------- */
+.wip-banner {
+  display: flex; align-items: center; flex-wrap: wrap; gap: 8px 14px;
+  padding: 12px 24px; background: var(--ink); color: var(--paper);
+  border-bottom: 3px solid var(--red);
+  background-image: repeating-linear-gradient(45deg, rgba(255,59,29,0.16) 0 12px, transparent 12px 24px);
+}
+.wip-banner__dot { width: 10px; height: 10px; border-radius: 50%; background: var(--red); box-shadow: 0 0 0 0 rgba(255,59,29,0.7); animation: wipPulse 1.6s ease-out infinite; flex: 0 0 auto; }
+.wip-banner__text { font-family: var(--font-display); font-weight: 800; font-size: 0.9rem; letter-spacing: 0.04em; }
+.wip-banner__sub { font-family: var(--font-mono); font-size: 0.7rem; color: #cfccc4; letter-spacing: 0.02em; }
+@keyframes wipPulse {
+  0% { box-shadow: 0 0 0 0 rgba(255,59,29,0.7); }
+  70% { box-shadow: 0 0 0 9px rgba(255,59,29,0); }
+  100% { box-shadow: 0 0 0 0 rgba(255,59,29,0); }
+}
+@media (prefers-reduced-motion: reduce) { .wip-banner__dot { animation: none; } }
