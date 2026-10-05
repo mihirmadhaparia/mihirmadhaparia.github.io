@@ -1,4 +1,4 @@
-name: Strava sync (Beyond page)
+name: Beyond sync (Strava via Google Sheet)
 
 # Weekly on Monday 09:00 UTC, plus a manual "Run workflow" button for testing.
 on:
@@ -10,7 +10,7 @@ permissions:
   contents: write
 
 concurrency:
-  group: strava-sync
+  group: beyond-sync
   cancel-in-progress: false
 
 jobs:
@@ -25,21 +25,20 @@ jobs:
         with:
           python-version: "3.11"
 
-      - name: Sync Strava data
+      - name: Sync from Google Sheet
         env:
-          STRAVA_CLIENT_ID: ${{ secrets.STRAVA_CLIENT_ID }}
-          STRAVA_CLIENT_SECRET: ${{ secrets.STRAVA_CLIENT_SECRET }}
-          STRAVA_REFRESH_TOKEN: ${{ secrets.STRAVA_REFRESH_TOKEN }}
+          # Repo variable (Settings -> Secrets and variables -> Actions -> Variables):
+          BEYOND_SHEET_CSV: ${{ vars.BEYOND_SHEET_CSV }}
         run: python tools/strava_sync.py
 
       - name: Commit updated data
         run: |
-          git config user.name "strava-sync-bot"
+          git config user.name "beyond-sync-bot"
           git config user.email "actions@github.com"
           git add assets/data/beyond.json assets/images/strava/ || true
           if git diff --cached --quiet; then
             echo "No changes to commit."
           else
-            git commit -m "Auto: sync Beyond page from Strava"
+            git commit -m "Auto: sync Beyond page from Strava (Google Sheet)"
             git push
           fi

@@ -1,81 +1,176 @@
 #!/usr/bin/env python3
-"""Strava -> Beyond page sync (runs in GitHub Actions, weekly).
+"""Beyond page sync from a published Google Sheet (no Strava API needed).
 
-Refreshes the Strava token, pulls activities + recent photos, and writes:
-  - assets/data/beyond.json   (stats + 18-week daily run mileage + photo manifest)
-  - assets/images/strava/photoN.jpg  (downloaded recent activity photos)
+A free automation (Zapier / Make / IFTTT) logs each new Strava activity as a row
+in a Google Sheet; that Sheet is "published to the web" as CSV. This script reads
+that CSV and writes:
+  - assets/data/beyond.json              (18-week daily run miles + YTD stats + maps)
+  - assets/images/strava/mapN.svg        (self-contained route-trace images)
 
-The Beyond page reads beyond.json at load time; the chart itself is unchanged.
-Stdlib only (no pip installs needed).
+No API keys, no secrets: the sheet is public-read and route maps are drawn locally
+from each activity's Strava summary polyline. Stdlib only.
 
-Env vars (set as GitHub repo secrets):
-  STRAVA_CLIENT_ID, STRAVA_CLIENT_SECRET, STRAVA_REFRESH_TOKEN
+Env:
+  BEYOND_SHEET_CSV   published Google Sheet CSV URL (…/pub?output=csv)
 """
-import os, json, time, datetime, urllib.request, urllib.parse, urllib.error
+import os, io, csv, json, math, datetime, urllib.request
 
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 DATA_DIR = os.path.join(ROOT, "assets", "data")
 IMG_DIR = os.path.join(ROOT, "assets", "images", "strava")
-WINDOW_DAYS = 126          # 18 weeks (matches the existing chart)
-MAX_PHOTOS = 3             # recent activity photos to show
-PHOTO_TYPES = {"Run", "TrailRun", "Hike", "Walk"}
+WINDOW_DAYS = 126           # 18 weeks (matches the existing chart)
+MAX_MAPS = 3
+RUN_TYPES = {"run"}
+MAP_TYPES = {"run", "trailrun", "hike", "walk"}
 M2MI = 1.0 / 1609.344
 M2FT = 3.28084
-UA = {"User-Agent": "mihirmadhaparia.com-strava-sync"}
+UA = {"User-Agent": "mihirmadhaparia.com-beyond-sync"}
 
 
-def _req(url, data=None, headers=None):
-    h = dict(UA)
-    if headers:
-        h.update(headers)
-    body = urllib.parse.urlencode(data).encode() if data else None
-    req = urllib.request.Request(url, data=body, headers=h)
+# ---------- input ----------
+def fetch_csv(url):
+    req = urllib.request.Request(url, headers=UA)
     with urllib.request.urlopen(req, timeout=30) as r:
-        return json.loads(r.read().decode())
+        return r.read().decode("utf-8", "replace")
 
 
-def refresh_token():
-    cid = os.environ["STRAVA_CLIENT_ID"]
-    secret = os.environ["STRAVA_CLIENT_SECRET"]
-    refresh = os.environ["STRAVA_REFRESH_TOKEN"]
-    tok = _req("https://www.strava.com/oauth/token", data={
-        "client_id": cid, "client_secret": secret,
-        "grant_type": "refresh_token", "refresh_token": refresh,
-    })
-    return tok["access_token"]
+def find_col(headers, *needles):
+    low = [h.strip().lower() for h in headers]
+    for i, h in enumerate(low):
+        if all(n in h for n in needles):
+            return i
+    return -1
 
 
-def get_activities(access_token, after_epoch):
-    hdr = {"Authorization": "Bearer " + access_token}
-    out, page = [], 1
-    while True:
-        q = urllib.parse.urlencode({"after": after_epoch, "per_page": 200, "page": page})
-        batch = _req("https://www.strava.com/api/v3/athlete/activities?" + q, headers=hdr)
-        if not batch:
-            break
-        out.extend(batch)
-        if len(batch) < 200:
-            break
-        page += 1
-        if page > 10:
-            break
+def parse_date(s):
+    s = (s or "").strip()
+    if not s:
+        return None
+    # ISO first (2026-10-02T07:00:00Z or 2026-10-02)
+    try:
+        return datetime.date.fromisoformat(s[:10])
+    except ValueError:
+        pass
+    for fmt in ("%B %d, %Y", "%b %d, %Y", "%m/%d/%Y", "%m/%d/%y", "%Y/%m/%d",
+                "%B %d, %Y at %I:%M%p", "%b %d, %Y, %I:%M:%S %p"):
+        try:
+            return datetime.datetime.strptime(s[:40], fmt).date()
+        except ValueError:
+            continue
+    # last resort: leading YYYY-MM-DD anywhere
+    import re
+    m = re.search(r"(\d{4})-(\d{2})-(\d{2})", s)
+    if m:
+        return datetime.date(int(m.group(1)), int(m.group(2)), int(m.group(3)))
+    return None
+
+
+def to_float(x):
+    try:
+        return float(str(x).replace(",", "").strip())
+    except (TypeError, ValueError):
+        return 0.0
+
+
+def read_rows(csv_text):
+    rd = csv.reader(io.StringIO(csv_text))
+    rows = [r for r in rd if any(c.strip() for c in r)]
+    if not rows:
+        return []
+    headers = rows[0]
+    ci = {
+        "date": find_col(headers, "date"),
+        "type": find_col(headers, "type"),
+        "dist_mi": find_col(headers, "distance", "mi"),
+        "dist_m": find_col(headers, "distance"),         # meters fallback
+        "elev_ft": find_col(headers, "elev", "f"),       # feet
+        "elev_m": find_col(headers, "elev"),             # meters fallback
+        "poly": find_col(headers, "poly"),
+        "mapurl": find_col(headers, "map"),
+        "name": find_col(headers, "name"),
+    }
+    out = []
+    for r in rows[1:]:
+        def g(i):
+            return r[i] if 0 <= i < len(r) else ""
+        d = parse_date(g(ci["date"]))
+        if not d:
+            continue
+        typ = (g(ci["type"]) or "").strip().lower().replace(" ", "")
+        if ci["dist_mi"] >= 0 and "mi" in headers[ci["dist_mi"]].lower():
+            miles = to_float(g(ci["dist_mi"]))
+        else:
+            miles = to_float(g(ci["dist_m"])) * M2MI
+        if ci["elev_ft"] >= 0 and ("ft" in headers[ci["elev_ft"]].lower() or "feet" in headers[ci["elev_ft"]].lower()):
+            feet = to_float(g(ci["elev_ft"]))
+        else:
+            feet = to_float(g(ci["elev_m"])) * M2FT
+        out.append({
+            "date": d, "type": typ, "miles": miles, "feet": feet,
+            "poly": g(ci["poly"]).strip(), "mapurl": g(ci["mapurl"]).strip(),
+            "name": (g(ci["name"]) or "Activity").strip(),
+        })
     return out
 
 
-def get_primary_photo_url(access_token, activity_id):
-    hdr = {"Authorization": "Bearer " + access_token}
-    q = urllib.parse.urlencode({"size": 1024, "photo_sources": "true"})
-    try:
-        photos = _req("https://www.strava.com/api/v3/activities/%d/photos?%s" % (activity_id, q), headers=hdr)
-    except urllib.error.HTTPError:
+# ---------- route map ----------
+def decode_polyline(s):
+    coords, i, lat, lng, n = [], 0, 0, 0, len(s)
+    while i < n:
+        for axis in (0, 1):
+            shift, result = 0, 0
+            while True:
+                b = ord(s[i]) - 63
+                i += 1
+                result |= (b & 0x1f) << shift
+                shift += 5
+                if b < 0x20:
+                    break
+            d = ~(result >> 1) if (result & 1) else (result >> 1)
+            if axis == 0:
+                lat += d
+            else:
+                lng += d
+        coords.append((lat * 1e-5, lng * 1e-5))
+    return coords
+
+
+def polyline_svg(poly):
+    pts = decode_polyline(poly)
+    if len(pts) < 2:
         return None
-    for p in photos or []:
-        urls = p.get("urls") or {}
-        # prefer the largest available size
-        for key in sorted(urls.keys(), key=lambda k: int(k) if str(k).isdigit() else 0, reverse=True):
-            if urls[key]:
-                return urls[key]
-    return None
+    lats = [p[0] for p in pts]
+    lngs = [p[1] for p in pts]
+    mlat = math.radians(sum(lats) / len(lats))
+    xs = [lng * math.cos(mlat) for lng in lngs]
+    ys = [-lat for lat in lats]
+    minx, maxx = min(xs), max(xs)
+    miny, maxy = min(ys), max(ys)
+    w = maxx - minx or 1e-6
+    h = maxy - miny or 1e-6
+    VB = 400.0
+    pad = 28.0
+    scale = (VB - 2 * pad) / max(w, h)
+    ox = (VB - w * scale) / 2
+    oy = (VB - h * scale) / 2
+    def px(x, y):
+        return (ox + (x - minx) * scale, oy + (y - miny) * scale)
+    d = ""
+    for j, (x, y) in enumerate(zip(xs, ys)):
+        X, Y = px(x, y)
+        d += ("M" if j == 0 else "L") + "%.1f %.1f" % (X, Y)
+    sX, sY = px(xs[0], ys[0])
+    eX, eY = px(xs[-1], ys[-1])
+    return (
+        '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 400" '
+        'preserveAspectRatio="xMidYMid meet">'
+        '<rect width="400" height="400" fill="#e9e7e1"/>'
+        '<path d="%s" fill="none" stroke="#111111" stroke-width="4" '
+        'stroke-linejoin="round" stroke-linecap="round"/>'
+        '<circle cx="%.1f" cy="%.1f" r="7" fill="#111111"/>'
+        '<circle cx="%.1f" cy="%.1f" r="7" fill="#ff3b1d"/>'
+        '</svg>' % (d, sX, sY, eX, eY)
+    )
 
 
 def download(url, dest):
@@ -84,61 +179,56 @@ def download(url, dest):
         f.write(r.read())
 
 
-def parse_dt(a):
-    s = a.get("start_date_local") or a.get("start_date")
-    return datetime.datetime.strptime(s[:19], "%Y-%m-%dT%H:%M:%S")
-
-
+# ---------- main ----------
 def main():
+    url = os.environ.get("BEYOND_SHEET_CSV", "").strip()
+    if not url:
+        raise SystemExit("Set BEYOND_SHEET_CSV to your published Google Sheet CSV URL.")
     os.makedirs(DATA_DIR, exist_ok=True)
     os.makedirs(IMG_DIR, exist_ok=True)
 
-    access = refresh_token()
+    rows = read_rows(fetch_csv(url))
     today = datetime.date.today()
-    start_window = today - datetime.timedelta(days=WINDOW_DAYS - 1)
-    year_start = datetime.date(today.year, 1, 1)
-    after = int(time.mktime(min(start_window, year_start).timetuple())) - 86400
-    acts = get_activities(access, after)
+    start = today - datetime.timedelta(days=WINDOW_DAYS - 1)
 
-    # --- 18-week daily run mileage (oldest first), matches the chart's format ---
     daily = [0.0] * WINDOW_DAYS
     ytd_mi = ytd_ft = 0.0
-    for a in acts:
-        if a.get("type") != "Run" and a.get("sport_type") != "Run":
+    for a in rows:
+        if a["type"] not in RUN_TYPES:
             continue
-        d = parse_dt(a).date()
-        dist_m = float(a.get("distance") or 0)
-        elev_m = float(a.get("total_elevation_gain") or 0)
-        if start_window <= d <= today:
-            daily[(d - start_window).days] += dist_m * M2MI
-        if d.year == today.year:
-            ytd_mi += dist_m * M2MI
-            ytd_ft += elev_m * M2FT
+        if start <= a["date"] <= today:
+            daily[(a["date"] - start).days] += a["miles"]
+        if a["date"].year == today.year:
+            ytd_mi += a["miles"]
+            ytd_ft += a["feet"]
     days = [round(x, 1) for x in daily]
 
-    # --- recent activity photos ---
     photos = []
-    for a in sorted(acts, key=parse_dt, reverse=True):
-        if len(photos) >= MAX_PHOTOS:
+    for a in sorted(rows, key=lambda r: r["date"], reverse=True):
+        if len(photos) >= MAX_MAPS:
             break
-        if (a.get("type") in PHOTO_TYPES or a.get("sport_type") in PHOTO_TYPES) and (a.get("total_photo_count") or 0) > 0:
-            url = get_primary_photo_url(access, a["id"])
-            if not url:
+        if a["type"] not in MAP_TYPES:
+            continue
+        idx = len(photos) + 1
+        cap = "%s · %s" % (a["name"], a["date"].strftime("%b %d, %Y"))
+        if a["poly"]:
+            svg = polyline_svg(a["poly"])
+            if not svg:
                 continue
-            idx = len(photos) + 1
-            fname = "photo%d.jpg" % idx
+            fname = "map%d.svg" % idx
+            with open(os.path.join(IMG_DIR, fname), "w", encoding="utf-8") as f:
+                f.write(svg)
+            photos.append({"file": "/assets/images/strava/" + fname, "cap": cap})
+        elif a["mapurl"].startswith("http"):
+            fname = "map%d.jpg" % idx
             try:
-                download(url, os.path.join(IMG_DIR, fname))
+                download(a["mapurl"], os.path.join(IMG_DIR, fname))
             except Exception:
                 continue
-            d = parse_dt(a).date()
-            photos.append({
-                "file": "/assets/images/strava/" + fname,
-                "cap": "%s · %s" % (a.get("name", "Activity"), d.strftime("%b %d, %Y")),
-            })
+            photos.append({"file": "/assets/images/strava/" + fname, "cap": cap})
 
     out = {
-        "updated": today.strftime("%-m/%-d/%y") if os.name != "nt" else today.strftime("%m/%d/%y"),
+        "updated": "%d/%d/%s" % (today.month, today.day, today.strftime("%y")),
         "updated_iso": today.isoformat(),
         "end": today.isoformat(),
         "days": days,
@@ -148,7 +238,7 @@ def main():
     }
     with open(os.path.join(DATA_DIR, "beyond.json"), "w", encoding="utf-8") as f:
         json.dump(out, f, indent=2)
-    print("Wrote beyond.json: %d days, YTD %d mi / %d ft, %d photos" % (
+    print("Wrote beyond.json: %d days, YTD %d mi / %d ft, %d route maps" % (
         len(days), out["ytd_miles"], out["ytd_elev_ft"], len(photos)))
 
 
