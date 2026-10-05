@@ -356,22 +356,47 @@
     } catch (e) { finish(); }
   }
 
-  /* Beyond: multi-city route-map tab switcher */
+  /* Beyond: multi-city route maps over a real (CARTO) basemap, filtered to match */
   function initRouteMap() {
-    var tabs = document.querySelectorAll('.routemap__tab');
-    if (!tabs.length) return;
-    var panels = document.querySelectorAll('.routemap__panel');
-    function sel(i) {
-      for (var t = 0; t < tabs.length; t++)
-        tabs[t].classList.toggle('is-active', +tabs[t].getAttribute('data-city') === i);
-      for (var p = 0; p < panels.length; p++) {
-        var on = +panels[p].getAttribute('data-city') === i;
-        panels[p].classList.toggle('is-active', on);
-        if (on) panels[p].removeAttribute('hidden'); else panels[p].setAttribute('hidden', '');
-      }
+    var host = document.getElementById('routemap-canvas');
+    var dataEl = document.getElementById('routemap-data');
+    var tabsEl = document.getElementById('routemap-tabs');
+    if (!host || !dataEl || !tabsEl) return;
+    var data; try { data = JSON.parse(dataEl.textContent); } catch (e) { return; }
+    if (!data.cities || !data.cities.length) return;
+    if (typeof L === 'undefined') {
+      host.innerHTML = '<div class="routemap__empty"><span>&#128506;</span><small>Map needs an internet connection</small></div>';
+      return;
     }
-    for (var k = 0; k < tabs.length; k++)
-      tabs[k].addEventListener('click', (function (el) { return function () { sel(+el.getAttribute('data-city')); }; })(tabs[k]));
+    var map = L.map(host, { scrollWheelZoom: true });
+    L.tileLayer('https://{s}.basemaps.cartocdn.com/rastertiles/light_nolabels/{z}/{x}/{y}{r}.png',
+      { subdomains: 'abcd', maxZoom: 19, attribution: '&copy; OpenStreetMap, &copy; CARTO | Powered by Strava' }).addTo(map);
+    var layer = L.layerGroup().addTo(map);
+    var btns = [];
+    data.cities.forEach(function (c, i) {
+      var b = document.createElement('button');
+      b.type = 'button'; b.className = 'routemap__tab' + (i === 0 ? ' is-active' : '');
+      b.innerHTML = c.name.toUpperCase() + ' <span class="routemap__n">' + c.runs + '</span>';
+      b.addEventListener('click', function () { show(i); });
+      tabsEl.appendChild(b); btns.push(b);
+    });
+    var leg = document.createElement('span');
+    leg.className = 'routemap__legend'; leg.innerHTML = '&#9679; RECENT RUNS IN RED';
+    tabsEl.appendChild(leg);
+    function show(i) {
+      for (var t = 0; t < btns.length; t++) btns[t].classList.toggle('is-active', t === i);
+      layer.clearLayers();
+      var c = data.cities[i], all = [];
+      c.routes.forEach(function (r, idx) {
+        if (r.length < 2) return;
+        var recent = idx >= c.routes.length - c.recent;
+        L.polyline(r, { color: recent ? '#ff3b1d' : '#1a1a1a', weight: recent ? 3 : 2, opacity: recent ? 0.9 : 0.5 }).addTo(layer);
+        all = all.concat(r);
+      });
+      if (all.length) map.fitBounds(L.latLngBounds(all).pad(0.08));
+      setTimeout(function () { map.invalidateSize(); }, 60);
+    }
+    show(0);
   }
 
   function init() {

@@ -354,3 +354,9 @@ a.b-footer__cell:hover { background: var(--red); color: #fff; }
 .routemap__svg { width: 100%; height: auto; display: block; }
 .routemap__empty { min-height: 300px; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 8px; color: #8a857c; font-family: var(--font-mono); font-size: 0.7rem; }
 .routemap__empty span { font-size: 2rem; }
+
+/* route map: real basemap (CARTO) filtered to brutalist palette */
+.routemap__canvas { height: 460px; background: #e9e7e1; }
+.routemap__canvas .leaflet-container { background: #e9e7e1; font-family: var(--font-mono); }
+.routemap__canvas .leaflet-tile-pane { filter: grayscale(1) sepia(0.45) saturate(0.7) brightness(1.04) contrast(0.9); }
+.routemap__canvas .leaflet-control-attribution { font-size: 0.58rem; background: rgba(233,231,225,0.8); }

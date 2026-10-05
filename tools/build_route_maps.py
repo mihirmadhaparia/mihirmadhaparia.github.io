@@ -228,18 +228,20 @@ def build_inner(export):
             shutil.rmtree(cleanup, ignore_errors=True)
     if not cities:
         return None, 0
-    tabs = ['<div class="routemap__tabs">']
-    panels = ['<div class="routemap__stage">']
-    for i, (name, rs) in enumerate(cities):
-        act = " is-active" if i == 0 else ""
-        tabs.append('<button type="button" class="routemap__tab%s" data-city="%d">%s <span class="routemap__n">%d</span></button>'
-                    % (act, i, html.escape(name.upper()), len(rs)))
-        hid = "" if i == 0 else " hidden"
-        panels.append('<div class="routemap__panel%s" data-city="%d"%s>%s</div>'
-                      % (act, i, hid, render_svg(rs)))
-    tabs.append('<span class="routemap__legend">&#9679; RECENT RUNS IN RED</span></div>')
-    panels.append('</div>')
-    return "\n            " + "".join(tabs) + "\n            " + "".join(panels) + "\n            ", len(cities)
+    import json
+    data = {"cities": []}
+    for name, rs in cities:
+        rs = sorted(rs, key=lambda r: r["date"])  # oldest..newest
+        routes = [[[round(p[0], 5), round(p[1], 5)] for p in r["pts"]] for r in rs]
+        data["cities"].append({
+            "name": name, "runs": len(rs),
+            "recent": min(RECENT_RED, len(rs)), "routes": routes,
+        })
+    js = json.dumps(data, separators=(',', ':'))
+    inner = ('\n            <div class="routemap__tabs" id="routemap-tabs"></div>'
+             '\n            <div id="routemap-canvas" class="routemap__canvas"></div>'
+             '\n            <script type="application/json" id="routemap-data">' + js + '</script>\n            ')
+    return inner, len(cities)
 
 
 def inject(export):

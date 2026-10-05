@@ -68,7 +68,7 @@ def resolve_liquid(text, ctx):
         return a if ctx["page_url"] == target else b
     text = re.sub(r"\{%\s*if page\.url == '([^']*)'\s*%\}(.*?)(?:\{%\s*else\s*%\}(.*?))?\{%\s*endif\s*%\}", ifeq, text, flags=re.S)
     # boolean front-matter conditionals
-    for key in ("title", "excerpt", "needs_model", "ticker"):
+    for key in ("title", "excerpt", "needs_model", "needs_map", "ticker"):
         truthy = bool(ctx.get("page_" + key))
         text = re.sub(r"\{%\s*if page\." + key + r"\s*%\}(.*?)\{%\s*endif\s*%\}",
                       (lambda a=truthy: (lambda m: m.group(1) if a else ""))(), text, flags=re.S)
@@ -133,7 +133,7 @@ def main():
         prefix = rel_prefix(permalink)
         ctx = {"site": cfg, "prefix": prefix, "page_url": permalink,
                "page_title": fm.get("title", ""), "page_excerpt": fm.get("excerpt", ""),
-               "page_needs_model": fm.get("needs_model", ""), "page_ticker": fm.get("ticker", "")}
+               "page_needs_model": fm.get("needs_model", ""), "page_needs_map": fm.get("needs_map", ""), "page_ticker": fm.get("ticker", "")}
         ctx["content"] = resolve_liquid(body, ctx)
         html = resolve_liquid(layout, ctx)
         html = embed_models(html)
