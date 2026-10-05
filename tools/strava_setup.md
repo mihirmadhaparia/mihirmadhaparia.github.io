@@ -1,78 +1,49 @@
-# Beyond page auto-sync — setup (no Strava API)
+# Updating the Beyond page from Strava (manual, one step)
 
-Since Strava's API isn't open to you, we pull data a different way: a free
-automation service logs each new Strava activity into a **Google Sheet**, and a
-weekly GitHub Action reads that (public) sheet and updates the Beyond page.
-No API keys, no subscription, no secrets.
+Strava locked down its API (and the automation tools that relied on it), so the
+Beyond page updates from a **Strava data export** instead — no API, no account
+connection, and it includes your **real posted photos** and full GPS.
 
-Flow:  **Strava → (Zapier / Make / IFTTT) → Google Sheet → GitHub Action → site**
+Do this whenever you want to refresh the page (every few weeks is plenty):
 
-The Action (`.github/workflows/strava-sync.yml` → `tools/strava_sync.py`) computes
-the 18‑week daily mileage + YTD stats and draws route‑map traces from each run's
-Strava polyline. The chart itself is unchanged; if the sheet is ever unreachable,
-the page falls back to the values baked into `beyond.html`.
+## 1. Request your Strava archive
+1. On Strava (web): **Settings → My Account →** scroll to **"Download or Delete
+   Your Account" → Get Started**.
+2. Under **"Download Request (optional)"**, click **Request Your Archive**.
+3. Strava emails you a download link (can take a few minutes up to a few hours).
+   Download the `.zip` (named like `export_1234567.zip`).
 
----
+## 2. Update the page (one command)
+From the repo folder, run:
 
-## 1. Make the Google Sheet
-1. Create a new Google Sheet. In row 1, add these **exact-ish** headers
-   (matching is fuzzy/case-insensitive, but these are safest):
+```
+python tools/beyond_from_export.py  path/to/export_1234567.zip
+```
 
-   | date | type | distance_m | elevation_m | polyline | name |
-   |------|------|-----------|-------------|----------|------|
+(You can drag the zip into the terminal to paste its path.) It reads the export,
+recomputes the last-18-week daily mileage + YTD stats, copies your 3 most recent
+activity photos into `assets/images/strava/`, and writes `assets/data/beyond.json`.
+You'll see a summary like `Updated beyond.json: 126 days, YTD 158 mi / 4,927 ft, 3 photos`.
 
-   - `distance_m` / `elevation_m` are **meters** (what Zapier/Make give). If your
-     tool only gives miles/feet, name the columns `distance_mi` / `elevation_ft`
-     instead — the script detects the unit from the header.
-   - `polyline` is the activity's **map summary polyline** (used to draw the route
-     trace). Leave blank for treadmill runs.
-
-## 2. Connect Strava with a free automation
-Pick whichever has Strava on its free plan (Make and Zapier both do):
-
-**Make.com (recommended):** New scenario → **Strava › Watch Activities** →
-**Google Sheets › Add a Row**. Map fields:
-- Start Date → `date`
-- Type → `type`
-- Distance → `distance_m`
-- Total Elevation Gain → `elevation_m`
-- Map: Summary Polyline → `polyline`
-- Name → `name`
-
-**Zapier:** Trigger **Strava › New Activity** → Action **Google Sheets › Create
-Spreadsheet Row**, same mapping (Zapier's Distance / Total Elevation Gain are in
-meters; use **Map Summary Polyline** for `polyline`).
-
-**IFTTT:** Strava "New activity by you" → Google Sheets "Add row". IFTTT gives
-miles (use `distance_mi`) and generally **no polyline**, so route maps won't draw —
-prefer Make or Zapier if you want the route traces.
-
-> Tip: run one activity (or re-save an old one) so a test row appears.
-
-## 3. Publish the sheet to the web (read-only CSV)
-In the Sheet: **File → Share → Publish to web → Link → (whole document) → CSV →
-Publish**. Copy the URL (ends in `/pub?output=csv`).
-
-## 4. Add the URL as a repo variable
-GitHub repo → **Settings → Secrets and variables → Actions → Variables tab →
-New repository variable**:
-- Name: `BEYOND_SHEET_CSV`
-- Value: the published CSV URL from step 3
-
-(It's a *variable*, not a secret — the sheet is public-read.)
-
-## 5. Test
-Repo → **Actions → "Beyond sync (Strava via Google Sheet)" → Run workflow**.
-Check the run log and that `assets/data/beyond.json` updated. After that it runs
-every Monday automatically.
+## 3. Publish
+```
+git add -A
+git commit -m "Update Beyond from Strava"
+git push
+```
+GitHub Pages redeploys in ~1 minute and the page reflects the new data. The chart
+is unchanged — only its numbers, the stats, the "updated" date, and the photos refresh.
 
 ---
 
-## Notes
-- **Schedule:** weekly (Mondays 09:00 UTC). Edit the `cron` to change it.
-- **Route maps:** the 3 most recent run/hike/walk activities with a polyline are
-  drawn as self-contained SVG traces (`assets/images/strava/mapN.svg`), overwritten
-  each run so the repo doesn't grow. No maps API / key needed.
-- **Attribution:** keep the "Powered by Strava" link on the page (Strava's terms).
-- **Privacy:** only the columns you map leave Strava; the sheet is read-only public.
-  Don't add anything to it you don't want public.
+### Even easier
+If you'd rather not run anything: just **send me the export zip** and I'll process
+it, update the page, and hand it back for you to push. (That's what we did before.)
+
+### Notes
+- Only **Run** activities count toward the mileage/stats; treadmill runs count for
+  distance but produce no map.
+- Photos come straight from your Strava uploads in the export's `media/` folder.
+- If the page ever can't load `beyond.json`, it falls back to the values baked into
+  `beyond.html`, so it never breaks.
+- Keep the "Powered by Strava" link on the page (Strava's terms).
