@@ -314,13 +314,55 @@
     grid.addEventListener('keydown',function(e){ if(e.key!=='Enter'&&e.key!==' ')return; var p=e.target.closest('.pill'); if(p){e.preventDefault();react(p);} });
   }
 
+  /* Beyond: load auto-synced Strava data (assets/data/beyond.json) and feed the
+     EXISTING chart + stats + photos. Chart rendering is unchanged; inline values
+     in beyond.html act as the fallback when the JSON is absent (e.g. file://). */
+  function applyBeyond(d) {
+    try {
+      if (Array.isArray(d.days) && d.days.length) {
+        var el = document.getElementById('week-data');
+        if (el) { el.textContent = JSON.stringify(d.days); if (d.end) el.setAttribute('data-end', d.end); }
+      }
+      var mi = document.getElementById('stat-miles');
+      if (mi && d.ytd_miles != null) { mi.setAttribute('data-count', d.ytd_miles); mi.textContent = Number(d.ytd_miles).toLocaleString(); }
+      var ft = document.getElementById('stat-elev');
+      if (ft && d.ytd_elev_ft != null) { ft.setAttribute('data-count', d.ytd_elev_ft); ft.textContent = Number(d.ytd_elev_ft).toLocaleString(); }
+      if (d.updated) {
+        var u = document.getElementById('beyond-updated'); if (u) u.textContent = '// SYNCED FROM STRAVA \u00b7 UPDATED ' + d.updated;
+        var cu = document.getElementById('chart-updated'); if (cu) cu.textContent = 'Daily running miles, last 18 weeks \u2014 synced from Strava, updated ' + d.updated + '.';
+      }
+      if (Array.isArray(d.photos)) {
+        for (var i = 0; i < d.photos.length; i++) {
+          var fig = document.querySelector('.photo[data-slot="' + i + '"]'); if (!fig) continue;
+          var ph = d.photos[i];
+          var empty = fig.querySelector('.photo__empty'); if (empty) empty.parentNode.removeChild(empty);
+          var oldimg = fig.querySelector('img'); if (oldimg) oldimg.parentNode.removeChild(oldimg);
+          var img = document.createElement('img'); img.src = ph.file; img.alt = ph.cap || 'Strava activity photo'; img.loading = 'lazy';
+          fig.insertBefore(img, fig.firstChild);
+          if (ph.cap) { fig.setAttribute('data-cap', ph.cap); var cap = fig.querySelector('.photo__cap'); if (cap) cap.textContent = ph.cap; }
+        }
+      }
+    } catch (e) {}
+  }
+  function initBeyond() {
+    if (!document.getElementById('week-chart')) return; // only the Beyond page
+    var done = false;
+    function finish() { if (done) return; done = true; initMileageChart(); }
+    try {
+      fetch('/assets/data/beyond.json', { cache: 'no-store' })
+        .then(function (r) { return r.ok ? r.json() : null; })
+        .then(function (d) { if (d) applyBeyond(d); finish(); })
+        .catch(function () { finish(); });
+    } catch (e) { finish(); }
+  }
+
   function init() {
     initNav();
     initReveal();
     initCursorTrail();
     initFlow();
     initCounts();
-    initMileageChart();
+    initBeyond();
     initPhotoCaps();
     initSkillReactions();
   }
