@@ -109,6 +109,7 @@ def main():
     I_DIST = col(hdr, "Distance")           # last exact match = raw meters
     I_ELEV = col(hdr, "Elevation Gain")
     I_MEDIA = col(hdr, "Media")
+    I_NAME = col(hdr, "Activity Name")
 
     media_map = load_media_map(exp)
     today = datetime.date.today()
@@ -136,6 +137,7 @@ def main():
         acts.append({
             "id": r[I_ID].strip() if 0 <= I_ID < len(r) else "",
             "date": d, "type": typ,
+            "name": (r[I_NAME].strip() if 0 <= I_NAME < len(r) else ""),
             "media_raw": r[I_MEDIA].strip() if (0 <= I_MEDIA < len(r)) else "",
         })
     days = [round(x, 1) for x in daily]
@@ -161,7 +163,7 @@ def main():
             shutil.copyfile(src, dest)
         except Exception:
             continue
-        name = a["type"]
+        name = a["name"] or a["type"]
         photos.append({
             "file": "/assets/images/strava/" + os.path.basename(dest),
             "cap": "%s · %s" % (name, a["date"].strftime("%b %d, %Y")),
