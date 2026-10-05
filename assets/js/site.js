@@ -356,6 +356,24 @@
     } catch (e) { finish(); }
   }
 
+  /* Beyond: multi-city route-map tab switcher */
+  function initRouteMap() {
+    var tabs = document.querySelectorAll('.routemap__tab');
+    if (!tabs.length) return;
+    var panels = document.querySelectorAll('.routemap__panel');
+    function sel(i) {
+      for (var t = 0; t < tabs.length; t++)
+        tabs[t].classList.toggle('is-active', +tabs[t].getAttribute('data-city') === i);
+      for (var p = 0; p < panels.length; p++) {
+        var on = +panels[p].getAttribute('data-city') === i;
+        panels[p].classList.toggle('is-active', on);
+        if (on) panels[p].removeAttribute('hidden'); else panels[p].setAttribute('hidden', '');
+      }
+    }
+    for (var k = 0; k < tabs.length; k++)
+      tabs[k].addEventListener('click', (function (el) { return function () { sel(+el.getAttribute('data-city')); }; })(tabs[k]));
+  }
+
   function init() {
     initNav();
     initReveal();
@@ -365,6 +383,7 @@
     initBeyond();
     initPhotoCaps();
     initSkillReactions();
+    initRouteMap();
   }
 
   if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', init);

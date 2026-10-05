@@ -22,7 +22,8 @@ python tools/beyond_from_export.py  path/to/export_1234567.zip
 
 (You can drag the zip into the terminal to paste its path.) It reads the export,
 recomputes the last-18-week daily mileage + YTD stats, copies your 3 most recent
-activity photos into `assets/images/strava/`, and writes `assets/data/beyond.json`.
+activity photos into `assets/images/strava/`, writes `assets/data/beyond.json`, and
+regenerates the multi-city route map (your run GPS, grouped by city) in `beyond.html`.
 You'll see a summary like `Updated beyond.json: 126 days, YTD 158 mi / 4,927 ft, 3 photos`.
 
 ## 3. Publish

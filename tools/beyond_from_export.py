@@ -180,6 +180,12 @@ def main():
     }
     with open(os.path.join(DATA_DIR, "beyond.json"), "w", encoding="utf-8") as f:
         json.dump(out, f, indent=2)
+    # regenerate the multi-city route-map module in beyond.html
+    try:
+        import build_route_maps
+        build_route_maps.inject(exp)
+    except Exception as e:
+        print("Route-map build skipped:", e)
     if cleanup:
         shutil.rmtree(cleanup, ignore_errors=True)
     print("Updated beyond.json: %d days, YTD %d mi / %d ft, %d photos" % (
