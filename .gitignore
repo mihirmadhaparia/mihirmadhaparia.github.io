@@ -5,3 +5,7 @@ _site/
 
 # Local AI-assistant project notes (not part of the public site)
 CLAUDE.md
+
+# Python cache
+__pycache__/
+*.pyc
