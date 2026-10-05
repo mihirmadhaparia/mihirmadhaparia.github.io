@@ -356,7 +356,7 @@
     } catch (e) { finish(); }
   }
 
-  /* Beyond: multi-city route maps over a real (CARTO) basemap, filtered to match */
+  /* Beyond: multi-city route maps on a keyless OpenFreeMap basemap (MapLibre GL) */
   function initRouteMap() {
     var host = document.getElementById('routemap-canvas');
     var dataEl = document.getElementById('routemap-data');
@@ -364,39 +364,62 @@
     if (!host || !dataEl || !tabsEl) return;
     var data; try { data = JSON.parse(dataEl.textContent); } catch (e) { return; }
     if (!data.cities || !data.cities.length) return;
-    if (typeof L === 'undefined') {
+    if (typeof maplibregl === 'undefined') {
       host.innerHTML = '<div class="routemap__empty"><span>&#128506;</span><small>Map needs an internet connection</small></div>';
       return;
     }
-    var map = L.map(host, { scrollWheelZoom: true });
-    L.tileLayer('https://{s}.basemaps.cartocdn.com/rastertiles/light_nolabels/{z}/{x}/{y}{r}.png',
-      { subdomains: 'abcd', maxZoom: 19, attribution: '&copy; OpenStreetMap, &copy; CARTO | Powered by Strava' }).addTo(map);
-    var layer = L.layerGroup().addTo(map);
+    function fc(city) {
+      var feats = [];
+      city.routes.forEach(function (r, idx) {
+        if (r.length < 2) return;
+        feats.push({ type: 'Feature',
+          properties: { recent: idx >= city.routes.length - city.recent ? 1 : 0 },
+          geometry: { type: 'LineString', coordinates: r.map(function (p) { return [p[1], p[0]]; }) } });
+      });
+      return { type: 'FeatureCollection', features: feats };
+    }
+    function bounds(city) {
+      var mnx = 180, mny = 90, mxx = -180, mxy = -90;
+      city.routes.forEach(function (r) { r.forEach(function (p) {
+        if (p[1] < mnx) mnx = p[1]; if (p[1] > mxx) mxx = p[1];
+        if (p[0] < mny) mny = p[0]; if (p[0] > mxy) mxy = p[0];
+      }); });
+      return [[mnx, mny], [mxx, mxy]];
+    }
+    var map = new maplibregl.Map({
+      container: host,
+      style: 'https://tiles.openfreemap.org/styles/positron',
+      bounds: bounds(data.cities[0]), fitBoundsOptions: { padding: 30 },
+      attributionControl: { compact: true, customAttribution: 'Powered by Strava' }
+    });
+    map.on('load', function () {
+      try { map.setPaintProperty('background', 'background-color', '#e9e7e1'); } catch (e) {}
+      try { map.setPaintProperty('water', 'fill-color', '#d6d3cb'); } catch (e) {}
+      map.addSource('routes', { type: 'geojson', data: fc(data.cities[0]) });
+      map.addLayer({ id: 'routes-base', type: 'line', source: 'routes',
+        filter: ['==', ['get', 'recent'], 0], layout: { 'line-join': 'round', 'line-cap': 'round' },
+        paint: { 'line-color': '#1a1a1a', 'line-width': 2, 'line-opacity': 0.5 } });
+      map.addLayer({ id: 'routes-recent', type: 'line', source: 'routes',
+        filter: ['==', ['get', 'recent'], 1], layout: { 'line-join': 'round', 'line-cap': 'round' },
+        paint: { 'line-color': '#ff3b1d', 'line-width': 3, 'line-opacity': 0.9 } });
+    });
     var btns = [];
+    function show(i) {
+      for (var t = 0; t < btns.length; t++) btns[t].classList.toggle('is-active', t === i);
+      var src = map.getSource('routes');
+      if (src) src.setData(fc(data.cities[i]));
+      map.fitBounds(bounds(data.cities[i]), { padding: 30, duration: 600 });
+    }
     data.cities.forEach(function (c, i) {
-      var b = document.createElement('button');
-      b.type = 'button'; b.className = 'routemap__tab' + (i === 0 ? ' is-active' : '');
-      b.innerHTML = c.name.toUpperCase() + ' <span class="routemap__n">' + c.runs + '</span>';
-      b.addEventListener('click', function () { show(i); });
-      tabsEl.appendChild(b); btns.push(b);
+      var bt = document.createElement('button');
+      bt.type = 'button'; bt.className = 'routemap__tab' + (i === 0 ? ' is-active' : '');
+      bt.innerHTML = c.name.toUpperCase() + ' <span class="routemap__n">' + c.runs + '</span>';
+      bt.addEventListener('click', function () { show(i); });
+      tabsEl.appendChild(bt); btns.push(bt);
     });
     var leg = document.createElement('span');
     leg.className = 'routemap__legend'; leg.innerHTML = '&#9679; RECENT RUNS IN RED';
     tabsEl.appendChild(leg);
-    function show(i) {
-      for (var t = 0; t < btns.length; t++) btns[t].classList.toggle('is-active', t === i);
-      layer.clearLayers();
-      var c = data.cities[i], all = [];
-      c.routes.forEach(function (r, idx) {
-        if (r.length < 2) return;
-        var recent = idx >= c.routes.length - c.recent;
-        L.polyline(r, { color: recent ? '#ff3b1d' : '#1a1a1a', weight: recent ? 3 : 2, opacity: recent ? 0.9 : 0.5 }).addTo(layer);
-        all = all.concat(r);
-      });
-      if (all.length) map.fitBounds(L.latLngBounds(all).pad(0.08));
-      setTimeout(function () { map.invalidateSize(); }, 60);
-    }
-    show(0);
   }
 
   function init() {
