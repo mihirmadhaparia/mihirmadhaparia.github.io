@@ -23,6 +23,8 @@ PHOTO_TYPES = {"Run", "Trail Run", "Hike", "Walk"}
 M2MI = 1.0 / 1609.344
 M2FT = 3.28084
 IMG_EXT = (".jpg", ".jpeg", ".png", ".webp", ".heic")
+# Specific photos to never use (e.g. the sweaty-arm shot), by media filename.
+SKIP_MEDIA = {"F381FC56-F2FA-4891-9DB0-42290068AA76.jpg"}
 
 
 def resolve_export(path):
@@ -153,7 +155,7 @@ def main():
         if a["media_raw"]:
             cands += re.split(r"[|,\s]+", a["media_raw"])
         cands += media_map.get(a["id"], [])
-        cands = [c for c in cands if c and c.lower().endswith(IMG_EXT)]
+        cands = [c for c in cands if c and c.lower().endswith(IMG_EXT) and os.path.basename(c) not in SKIP_MEDIA]
         src = next((find_file(exp, c) for c in cands if find_file(exp, c)), None)
         if not src:
             continue
