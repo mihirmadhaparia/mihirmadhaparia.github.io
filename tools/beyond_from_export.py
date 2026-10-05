@@ -11,7 +11,7 @@ the last-18-week daily run mileage + YTD stats (same format the chart uses), cop
 your most recent posted photos into assets/images/strava/, and writes
 assets/data/beyond.json. Then commit + push. Stdlib only.
 """
-import os, sys, csv, json, io, zipfile, shutil, datetime, tempfile, re
+import os, sys, csv, json, io, zipfile, shutil, datetime, tempfile, re, hashlib
 
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 DATA_DIR = os.path.join(ROOT, "assets", "data")
@@ -166,8 +166,9 @@ def main():
         except Exception:
             continue
         name = a["name"] or a["type"]
+        ver = hashlib.md5(open(dest, "rb").read()).hexdigest()[:8]
         photos.append({
-            "file": "/assets/images/strava/" + os.path.basename(dest),
+            "file": "/assets/images/strava/" + os.path.basename(dest) + "?v=" + ver,
             "cap": "%s · %s" % (name, a["date"].strftime("%b %d, %Y")),
         })
 

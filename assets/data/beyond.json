@@ -134,15 +134,15 @@
   "ytd_elev_ft": 7880,
   "photos": [
     {
-      "file": "/assets/images/strava/photo1.jpg",
+      "file": "/assets/images/strava/photo1.jpg?v=f4dd3910",
       "cap": "Evening Walk \u00b7 Sep 04, 2026"
     },
     {
-      "file": "/assets/images/strava/photo2.jpg",
+      "file": "/assets/images/strava/photo2.jpg?v=0105674f",
       "cap": "Evening Walk \u00b7 Aug 30, 2026"
     },
     {
-      "file": "/assets/images/strava/photo3.jpg",
+      "file": "/assets/images/strava/photo3.jpg?v=03c163ff",
       "cap": "Morning Run \u00b7 Aug 29, 2026"
     }
   ]
