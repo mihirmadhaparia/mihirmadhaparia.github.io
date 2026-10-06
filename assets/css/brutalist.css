@@ -359,3 +359,11 @@ a.b-footer__cell:hover { background: var(--red); color: #fff; }
 .routemap__canvas { height: 460px; background: #e9e7e1; position: relative; }
 .routemap__canvas .maplibregl-canvas { outline: none; }
 .routemap__canvas .maplibregl-ctrl-attrib { font-size: 0.56rem; background: rgba(233,231,225,0.82); }
+
+/* ---------- Publications: paper/poster thumbnail ---------- */
+.pub__thumb { display: block; position: relative; border: 3px solid var(--ink); margin-bottom: 18px; overflow: hidden; background: #fff; line-height: 0; }
+.pub__thumb img { width: 100%; height: auto; display: block; transition: transform 0.3s cubic-bezier(.2,.7,.2,1); }
+.pub__thumb:hover img, .pub__thumb:focus-visible img { transform: scale(1.03); }
+.pub__thumb__cue { position: absolute; left: 0; right: 0; bottom: 0; display: flex; justify-content: space-between; padding: 7px 10px; background: var(--ink); color: var(--paper); font-family: var(--font-mono); font-size: 0.64rem; letter-spacing: 0.1em; opacity: 0; transform: translateY(100%); transition: opacity 0.2s, transform 0.2s; }
+.pub__thumb:hover .pub__thumb__cue, .pub__thumb:focus-visible .pub__thumb__cue { opacity: 1; transform: translateY(0); }
+.pub__thumb:focus-visible { outline: 3px solid var(--red); outline-offset: 2px; }
