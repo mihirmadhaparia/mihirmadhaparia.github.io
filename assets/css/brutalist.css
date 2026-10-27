@@ -367,3 +367,10 @@ a.b-footer__cell:hover { background: var(--red); color: #fff; }
 .pub__thumb__cue { position: absolute; left: 0; right: 0; bottom: 0; display: flex; justify-content: space-between; padding: 7px 10px; background: var(--ink); color: var(--paper); font-family: var(--font-mono); font-size: 0.64rem; letter-spacing: 0.1em; opacity: 0; transform: translateY(100%); transition: opacity 0.2s, transform 0.2s; }
 .pub__thumb:hover .pub__thumb__cue, .pub__thumb:focus-visible .pub__thumb__cue { opacity: 1; transform: translateY(0); }
 .pub__thumb:focus-visible { outline: 3px solid var(--red); outline-offset: 2px; }
+
+/* ---------- Beyond: fun-fact callout ---------- */
+.funfact { display: flex; align-items: center; gap: 20px; padding: 22px 24px; border-top: 3px solid var(--ink); border-bottom: 3px solid var(--ink); background: var(--panel); }
+.funfact__icon { font-size: 2.6rem; line-height: 1; flex: 0 0 auto; }
+.funfact__label { display: block; font-family: var(--font-mono); font-size: 0.66rem; letter-spacing: 0.1em; color: var(--red); }
+.funfact__text p { margin: 5px 0 0; font-size: 0.95rem; line-height: 1.55; color: var(--ink); }
+@media (max-width: 760px){ .funfact__icon { font-size: 2rem; } .funfact__text p { font-size: 0.88rem; } }
